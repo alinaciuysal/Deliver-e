@@ -33,6 +33,8 @@ jwtConfig(passport);
  * routing
  */
 var userRoutes = require("./user/userRoutes");
+var shopRoutes = require("./shop/shopRoutes");
 app.use('/api/user', userRoutes(passport));
+app.use('/api/shop', shopRoutes(passport));
 module.exports = app;
 

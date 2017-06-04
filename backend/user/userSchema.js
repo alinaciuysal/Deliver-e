@@ -18,7 +18,11 @@ var userSchema = mongoose.Schema({
     phone: String,
     maxWeight: Number,
     preferredLocations: [String],
-    type: String
+    type: String,
+    shop: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Shop'
+    }
 
 });
 
