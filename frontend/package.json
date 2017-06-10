@@ -48,6 +48,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.config.js",
     "prestart": "npm install",
-    "start": "http-server -a localhost -p 8080 -c-1 ./dist"
+    "start": "webpack-dev-server --host 127.0.0.1 --port 8080"
   }
 }

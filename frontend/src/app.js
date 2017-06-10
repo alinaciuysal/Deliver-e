@@ -3,6 +3,8 @@
 import angular from 'angular';
 import uiRouter from '@uirouter/angularjs';
 
+import uiBootstrap from 'angular-ui-bootstrap';
+
 import angularMaterial from 'angular-material';
 import 'angular-material/angular-material.css';
 
@@ -22,6 +24,7 @@ import ViewMovieCreate from './components/view-movie-create/view-movie-create';
 import ViewLogin from './components/view-login/view-login';
 
 let app = angular.module('app', [
+    uiBootstrap,
     uiRouter,
     angularMaterial,
     ngMdIcons,
