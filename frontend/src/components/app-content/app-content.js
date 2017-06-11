@@ -7,7 +7,6 @@ import AppFooter from './../app-footer/app-footer';
 
 import AppContentComponent from './app-content.component';
 
-
 export default angular.module('AppView', [
         AppHeader.name,
         AppFooter.name

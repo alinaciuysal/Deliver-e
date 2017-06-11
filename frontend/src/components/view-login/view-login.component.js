@@ -10,13 +10,11 @@ class ViewLoginComponent {
     constructor(){
         this.controller = ViewLoginComponentController;
         this.template = template;
-
     }
 
     static get name() {
         return 'viewLogin';
     }
-
 
 }
 
@@ -42,8 +40,6 @@ class ViewLoginComponentController{
     static get $inject(){
         return ['$state', UserService.name];
     }
-
 }
-
 
 export default ViewLoginComponent;

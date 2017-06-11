@@ -11,21 +11,17 @@ class AppHeaderComponent {
     constructor(){
         this.controller = AppHeaderComponentController;
         this.template = template;
-
     }
 
     static get name() {
         return 'appHeader';
     }
-
-
 }
 
 class AppHeaderComponentController{
     constructor($state,UserService){
         this.$state = $state;
         this.UserService = UserService;
-
     }
 
     openMenu($mdMenu, ev) {
@@ -41,9 +37,8 @@ class AppHeaderComponentController{
         return user.username;
     }
 
-
     goHome(){
-        this.$state.go('movies',{});
+        this.$state.go('mainPage',{});
     }
 
     login(){
@@ -52,14 +47,12 @@ class AppHeaderComponentController{
 
     logout(){
         this.UserService.logout();
-        this.$state.go('movies',{});
+        this.$state.go('mainPage',{});
     }
 
     static get $inject(){
         return ['$state', UserService.name];
     }
-
 }
-
 
 export default AppHeaderComponent;

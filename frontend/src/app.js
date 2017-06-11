@@ -23,19 +23,22 @@ import ViewMovieEdit from './components/view-movie-edit/view-movie-edit';
 import ViewMovieCreate from './components/view-movie-create/view-movie-create';
 import ViewLogin from './components/view-login/view-login';
 
+import ViewMainPage from './components/view-mainpage/view-mainpage';
+
 let app = angular.module('app', [
     uiBootstrap,
     uiRouter,
     angularMaterial,
     ngMdIcons,
     UserService.name,
-    MoviesService.name,
+    // MoviesService.name,
     AppContent.name,
-    ViewMovies.name,
-    ViewMovie.name,
-    ViewMovieEdit.name,
-    ViewMovieCreate.name,
-    ViewLogin.name
+    // ViewMovies.name,
+    // ViewMovie.name,
+    // ViewMovieEdit.name,
+    // ViewMovieCreate.name,
+    ViewLogin.name,
+    ViewMainPage.name
 ]);
 
 app.constant('API_URL', 'http://5aee6f28.ngrok.io/api');
