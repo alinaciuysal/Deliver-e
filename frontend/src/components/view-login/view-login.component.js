@@ -33,7 +33,7 @@ class ViewLoginComponentController{
         let password = this.login.password;
 
         this.UserService.login(email,password).then(()=> {
-            this.$state.go('movies',{});
+            this.$state.go('mainPage',{});
         });
     }
 
