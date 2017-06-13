@@ -11,6 +11,8 @@ class AppHeaderComponent {
     constructor(){
         this.controller = AppHeaderComponentController;
         this.template = template;
+
+
     }
 
     static get name() {
