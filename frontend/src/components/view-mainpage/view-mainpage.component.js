@@ -3,7 +3,7 @@
 
 import template from './view-mainpage.template.html';
 //import MoviesService from './../../services/movies/movies.service';
-//import UserService from './../../services/user/user.service';
+import UserService from './../../services/user/user.service';
 import MainPageService from './../../services/main/main.service';
 
 
