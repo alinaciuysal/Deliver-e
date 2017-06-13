@@ -22,9 +22,8 @@ class ViewMainPageComponent {
 }
 
 class ViewMainPageComponentController{
-    constructor($state, MainPageService, UserService){
+    constructor($state, UserService){
         this.$state = $state;
-        this.MainPageService = MainPageService; //?
         this.UserService = UserService;
 
     }
@@ -71,7 +70,7 @@ class ViewMainPageComponentController{
     // }
 
     static get $inject(){
-        return ['$state', MainPageService.name, UserService.name];
+        return ['$state', UserService.name];
     }
 }
 

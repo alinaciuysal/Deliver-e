@@ -2,9 +2,11 @@
     <div class="md-toolbar-tools" style="background-color: #ab0012; min-height: 70px">
 
         <a ui-sref="mainPage" layout="row">
+<!--
             <md-icon class="md-icon-2" md-svg-src='../../../dist/logo2.svg'></md-icon>
+-->
 
-            <!--<h2>Deliver-e  </h2>-->
+            <h2>Deliver-e  </h2>
         </a>
 
         <!--<span flex></span>-->
@@ -32,6 +34,12 @@
                     <md-button ng-click="$ctrl.login($event)">
                         <md-icon md-menu-align-target><ng-md-icon icon="login" ></ng-md-icon></md-icon>
                         Login
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item ng-if="!$ctrl.isAuthenticated()">
+                    <md-button ng-click="$ctrl.register($event)">
+                        <md-icon md-menu-align-target><ng-md-icon icon="register" ></ng-md-icon></md-icon>
+                        Register
                     </md-button>
                 </md-menu-item>
             </md-menu-content>
