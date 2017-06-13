@@ -19,8 +19,8 @@ import ViewMovieEdit from './components/view-movie-edit/view-movie-edit';
 import ViewMovieCreate from './components/view-movie-create/view-movie-create';
 import ViewLogin from './components/view-login/view-login';
 import ViewRegister from './components/view-register/view-register';
-
 import ViewMainPage from './components/view-mainpage/view-mainpage';
+import LeftMenu from './components/left-menu/left-menu.component';
 
 let app = angular.module('app', [
     uiRouter,
@@ -34,7 +34,8 @@ let app = angular.module('app', [
     // ViewMovieEdit.name,
     ViewRegister.name,
     ViewLogin.name,
-    ViewMainPage.name
+    ViewMainPage.name,
+    LeftMenu.name
 ]).run(() => {
     console.log(`Starting the angular module`);
 });
