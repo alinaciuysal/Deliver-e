@@ -109,6 +109,23 @@ module.exports.unregister = function(req, res) {
     });
 };
 
+module.exports.getUser = function(req, res) {
+    user = req.user;
+    delete user._doc.password;
+    res.status(200).json(user);
+    return;
+};
+
+module.exports.editUser = function(req, res) {
+    req.user.update(req.body, function(err, user) {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+        res.status(200).json(user);
+    });
+};
+
 function createToken(user) {
     var tokenPayload = {
         user: {

@@ -4,15 +4,17 @@ var Product = require('./productSchema');
 
 exports.postShop = function(req, res) {
     var shop = new Shop(req.body);
+    if (req.user.type == "shop") {
+        res.status(400).send("User is already a shop owner.");
+        return;
+    }
 
     shop.save(function(err, shop) {
         if (err) {
             res.status(400).send(err);
             return;
         }
-        req.user.type = "shop";
-        req.user.shop = shop;
-        req.user.save(function(err) {
+        User.update(req.user, {$set: { type: 'shop', shop: shop }}, function(err){
             if (err) {
                 shop.remove();
                 res.status(400).send(err);
@@ -117,9 +119,21 @@ exports.putProduct = function(req, res) {
 };
 
 exports.deleteShop = function(req, res) {
-
-    Shop.findByIdAndRemove(req.user.shop);
-    res.sendStatus(200);
+    Shop.findByIdAndRemove(req.user.shop, function(err, shop){
+        if (err) {
+            res.status(400).send(err);
+        }
+        req.user.update(
+            { $unset: { shop: 1 },
+             $set: { type: "customer" }},
+            function (err, user){
+                if (err) {
+                    res.status(400).send(err);
+                    return;
+                }
+                res.sendStatus(200);
+            });
+    });
 
 };
 
