@@ -31,7 +31,7 @@ class ViewRegisterComponentController{
         this.register = {};
     }
 
-    submit(){
+    submitUserRegistrationRequest(){
         let email = this.login.email;
         let password = this.login.password;
 

@@ -11,6 +11,7 @@ import ngMdIcons from 'angular-material-icons';
 import UserService from './services/user/user';
 import Routes from './config/routes';
 import Middlewares from './config/middlewares';
+import Icons from './config/icons';
 
 import AppContent from './components/app-content/app-content';
 import ViewMovies from './components/view-movies/view-movies';
@@ -43,6 +44,7 @@ let app = angular.module('app', [
 app.constant('API_URL', 'http://localhost:3000/api');
 app.config(Routes);
 app.config(Middlewares);
+app.config(Icons);
 
 
 angular.element(document).ready(function() {

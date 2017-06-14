@@ -2,9 +2,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registration Page</title>
+    <title>Register for Deliver-e</title>
 </head>
 <body>
-    <h1>Registration Page Test</h1>
+    <div>&nbsp;</div>
+    <div layout="row" layout-align="center center" layout-margin>
+
+        <md-content>
+            <md-tabs class="md-primary" md-dynamic-height="" md-border-bottom="" md-selected="selectedIndex" md-center-tabs="true">
+                <md-tab label="Register as User">
+                    <md-content class="md-padding">
+                        <form name="UserRegisterForm">
+
+                            <md-input-container class="md-block">
+                                <label>Email</label>
+                                <input type="text" name="userEmail" ng-model="$ctrl.userRegister.email" placeholder="email" required="" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"//>
+                                <div ng-messages="UserRegisterForm.userEmail.$error" ng-hide="UserRegisterForm.userEmail.$valid">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Password</label>
+                                <input type="password" name="userPassword" ng-model="$ctrl.userRegister.password" placeholder="password" required="" minlength="5" md-maxlength="64"/>
+                                <div ng-messages="UserRegisterForm.userPassword.$error" ng-hide="UserRegisterForm.userPassword.$valid">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Your password must be between 5 and 64 characters long.
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-button ng-disabled="!UserRegisterForm.$valid" ng-click="$ctrl.submitUserRegistrationRequest()" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
+                        </form>
+                    </md-content>
+                </md-tab>
+
+                <md-tab label="Register as Deliverer">
+                    <p> Your application will be forwarded to us for an interview after following form is submitted.</p>
+                    <md-content class="md-padding">
+                        <form name="DelivererRegisterForm">
+
+                            <md-input-container class="md-block">
+                                <label>Name</label>
+                                <md-icon md-svg-icon="face"></md-icon>
+                                <input type="text" name="delivererName" ng-model="$ctrl.delivererRegister.name" placeholder="name" required=""/>
+                                <div ng-message="required">Please enter your name.</div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Surname</label>
+                                <input type="text" name="delivererSurname" ng-model="$ctrl.delivererRegister.surname" placeholder="surname" required=""/>
+                                <div ng-message="required">Please enter your surname.</div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Email</label>
+                                <input type="email" name="delivererEmail" ng-model="$ctrl.delivererRegister.email" placeholder="email" required="" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
+                                <div ng-messages="DelivererRegisterForm.delivererEmail.$error" ng-hide="DelivererRegisterForm.delivererEmail.$valid">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Password</label>
+                                <input type="password" name="delivererPassword" ng-model="$ctrl.delivererRegister.password" placeholder="password" required=""/>
+                                <div ng-messages="DelivererRegisterForm.delivererPassword.$error" ng-hide="DelivererRegisterForm.delivererPassword.$valid">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Your password must be between 5 and 64 characters long.
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Birthday</label>
+                                <md-datepicker name="delivererBirthday" ng-model="$ctrl.delivererRegister.birthday" required=""></md-datepicker>
+                                <div ng-message="required">Please enter your birthday.</div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Phone Number</label>
+                                <input type="text" name="delivererPhoneNumber" ng-model="$ctrl.delivererRegister.phoneNumber" required=""/>
+                                <div ng-message="required">Please enter your phone number.</div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Max Delivery Weight (in kg)</label>
+                                <input type="text" name="delivererMaxWeight" ng-model="$ctrl.delivererRegister.delivererMaxWeight" required="" ng-pattern="/^[0-9]+$/"/>
+                                <div ng-messages="DelivererRegisterForm.delivererMaxWeight.$error" ng-hide="DelivererRegisterForm.delivererMaxWeight.$valid">
+                                    <div ng-message-exp="['required', 'pattern']">
+                                        Please enter maximum amount that you can carry for a delivery.
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <md-button ng-disabled="!DelivererRegisterForm.$valid" ng-click="$ctrl.submitDelivererRegistrationRequest()" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
+                        </form>
+                    </md-content>
+                </md-tab>
+
+                <md-tab label="Register as Shop">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Tab Three</h1>
+                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    </md-content>
+                </md-tab>
+
+            </md-tabs>
+
+        </md-content>
+    </div>
 </body>
 </html>
