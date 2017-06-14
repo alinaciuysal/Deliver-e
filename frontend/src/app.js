@@ -3,16 +3,12 @@
 import angular from 'angular';
 import uiRouter from '@uirouter/angularjs';
 
-import uiBootstrap from 'angular-ui-bootstrap';
-
 import angularMaterial from 'angular-material';
 import 'angular-material/angular-material.css';
 
 import ngMdIcons from 'angular-material-icons';
 
-import MoviesService from './services/movies/movies';
 import UserService from './services/user/user';
-
 import Routes from './config/routes';
 import Middlewares from './config/middlewares';
 
@@ -22,11 +18,11 @@ import ViewMovie from './components/view-movie/view-movie';
 import ViewMovieEdit from './components/view-movie-edit/view-movie-edit';
 import ViewMovieCreate from './components/view-movie-create/view-movie-create';
 import ViewLogin from './components/view-login/view-login';
-
+import ViewRegister from './components/view-register/view-register';
 import ViewMainPage from './components/view-mainpage/view-mainpage';
+import LeftMenu from './components/left-menu/left-menu.component';
 
 let app = angular.module('app', [
-    uiBootstrap,
     uiRouter,
     angularMaterial,
     ngMdIcons,
@@ -36,10 +32,13 @@ let app = angular.module('app', [
     // ViewMovies.name,
     // ViewMovie.name,
     // ViewMovieEdit.name,
-    // ViewMovieCreate.name,
+    ViewRegister.name,
     ViewLogin.name,
-    ViewMainPage.name
-]);
+    ViewMainPage.name,
+    LeftMenu.name
+]).run(() => {
+    console.log(`Starting the angular module`);
+});
 
 app.constant('API_URL', 'http://localhost:3000/api');
 app.config(Routes);

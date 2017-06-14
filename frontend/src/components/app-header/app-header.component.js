@@ -11,6 +11,8 @@ class AppHeaderComponent {
     constructor(){
         this.controller = AppHeaderComponentController;
         this.template = template;
+
+
     }
 
     static get name() {
@@ -43,6 +45,10 @@ class AppHeaderComponentController{
 
     login(){
         this.$state.go('login',{});
+    }
+
+    register(){
+        this.$state.go('register',{});
     }
 
     logout(){
