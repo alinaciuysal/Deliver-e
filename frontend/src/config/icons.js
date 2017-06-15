@@ -6,5 +6,7 @@
 Icons.$inject = ['$mdIconProvider'];
 
 export default function Icons ($mdIconProvider){
-    $mdIconProvider.defaultIconSet("src/mdi.svg")
+    $mdIconProvider
+        .icon('logoD', 'src/assets/logo.svg')
+        .defaultIconSet("src/assets/mdi.svg");
 }
