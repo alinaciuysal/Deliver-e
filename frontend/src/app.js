@@ -19,16 +19,19 @@ import ViewRegister from './components/view-register/view-register';
 import ViewMainPage from './components/view-mainpage/view-mainpage';
 import LeftMenu from './components/left-menu/left-menu.component';
 
+import jkCarousel from 'angular-jk-carousel';
+
 let app = angular.module('app', [
-    uiRouter,
-    angularMaterial,
-    ngMdIcons,
-    UserService.name,
-    AppContent.name,
-    ViewRegister.name,
-    ViewLogin.name,
-    ViewMainPage.name,
-    LeftMenu.name
+        uiRouter,
+        angularMaterial,
+        ngMdIcons,
+        UserService.name,
+        AppContent.name,
+        ViewRegister.name,
+        ViewLogin.name,
+        ViewMainPage.name,
+        LeftMenu.name,
+        jkCarousel
 ]).run(() => {
     console.log(`Starting the angular module`);
 });
@@ -37,7 +40,6 @@ app.constant('API_URL', 'http://localhost:3000/api');
 app.config(Routes);
 app.config(Middlewares);
 app.config(Icons);
-
 
 angular.element(document).ready(function() {
     return angular.bootstrap(document.body, [app.name], {
