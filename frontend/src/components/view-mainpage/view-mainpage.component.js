@@ -11,9 +11,9 @@ class ViewMainPageComponent {
     constructor(){
         this.controller = ViewMainPageComponentController;
         this.template = template;
-        // this.bindings = {
-        //     movie: '<',
-        // }
+        bindings: {
+            slides: '='
+        }
     }
 
     static get name() {
@@ -21,12 +21,16 @@ class ViewMainPageComponent {
     }
 }
 
-class ViewMainPageComponentController{
+class ViewMainPageComponentController {
     constructor($state, UserService){
         this.$state = $state;
         this.UserService = UserService;
-
     }
+
+    $onInit() {
+        console.log("ViewMainPageComponentController onInit works");
+    }
+
 
     // edit () {
     //
@@ -68,6 +72,8 @@ class ViewMainPageComponentController{
     //     }
     //     return posterURL;
     // }
+
+
 
     static get $inject(){
         return ['$state', UserService.name];
