@@ -1,7 +1,8 @@
 <div layout="row" layout-align="left" layout-fill ng-cloak>
     <left-menu></left-menu>
+
     <md-content flex layout-gt-sm="row">
-        <md-card style="width: 960px">>
+        <md-card style="width: 960px">
             <md-card-title>
                 <md-card-title-media>
                     <div layout="row" layout-align="center center" layout-padding>
@@ -28,8 +29,10 @@
 
             <md-card-content>
                 Burayi yelpaze yapmaya calisiyorum
-                <!--<p>{{$ctrl.movie.mpaa_rating}}</p>-->
-                <!--<p>{{$ctrl.movie.synopsis}}</p>-->
+                <!--data="{{$ctrl.arrayData}}"-->
+                <jk-carousel data="ctrl.arrayData" item-template-url="'item-template.html'" max-width="700" max-height="400" >
+                </jk-carousel>
+
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </md-card-content>
         </md-card>
