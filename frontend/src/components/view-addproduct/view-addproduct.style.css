@@ -1,3 +1,7 @@
+/**
+ * Created by Melih Berçin on 6/16/2017.
+ */
+
 h1 {
     color: darkorange;
 }
@@ -18,12 +22,3 @@ h1 {
     margin-top: 10;
 }
 
-#inputCont{
-    display:inline-block;
-    margin-right:10px;
-}
-
-#select{
-    display:inline-block;
-    vertical-align: super;
-}

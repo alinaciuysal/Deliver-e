@@ -8,6 +8,7 @@ import MovieCreateComponent from './../components/view-movie-create/view-movie-c
 import MainPageComponent from './../components/view-mainpage/view-mainpage.component';
 import LoginComponent from './../components/view-login/view-login.component';
 import RegisterComponent from './../components/view-register/view-register.component';
+import AddProductComponent from './../components/view-addproduct/view-addproduct.component';
 
 import MoviesService from './../services/movies/movies.service';
 
@@ -39,6 +40,10 @@ export default function config ($stateProvider, $urlRouterProvider){
         .state('register', {
             url: '/register',
             component: RegisterComponent.name
+        })
+        .state('addproduct', {
+            url: '/addproduct',
+            component: AddProductComponent.name
         })
         // .state('movies', {
         //     url: '/movies',

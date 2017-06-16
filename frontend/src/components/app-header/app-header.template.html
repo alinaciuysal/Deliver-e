@@ -1,19 +1,19 @@
 <md-toolbar>
     <div class="md-toolbar-tools" style="background-color: #ab0012; min-height: 70px">
-
         <a ui-sref="mainPage" layout="row">
             <md-icon class="md-icon-2" md-svg-src='logoD'></md-icon>
-
-            <!--<h2>Deliver-e  </h2>-->
         </a>
-
-        <!--<span flex></span>-->
-
         <span flex="5"></span>
-        <md-menu>
+        <md-input-container layout="row" ng-model="search" flex>
+            <input  ng-model="search" placeholder="Search products" placeholder="enter search">
+        </md-input-container>
+        <md-button layout="row" aria-label="Search" ng-click="$ctrl.search()">
+            <ng-md-icon icon="search"></ng-md-icon>
+        </md-button>
+        <span flex="5"></span>
+        <md-menu  md-offset="0 70">
             <md-button aria-label="More" class="md-button" ng-click="$ctrl.openMenu($mdMenu, $event)">
                 Welcome Jane Doe!
-                <!--<md-icon><ng-md-icon icon="more_vert" ></ng-md-icon></md-icon>-->
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item ng-if="$ctrl.isAuthenticated()">

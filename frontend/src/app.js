@@ -14,29 +14,23 @@ import Middlewares from './config/middlewares';
 import Icons from './config/icons';
 
 import AppContent from './components/app-content/app-content';
-import ViewMovies from './components/view-movies/view-movies';
-import ViewMovie from './components/view-movie/view-movie';
-import ViewMovieEdit from './components/view-movie-edit/view-movie-edit';
-import ViewMovieCreate from './components/view-movie-create/view-movie-create';
 import ViewLogin from './components/view-login/view-login';
 import ViewRegister from './components/view-register/view-register';
+import ViewAddProduct from './components/view-addproduct/view-addproduct';
 import ViewMainPage from './components/view-mainpage/view-mainpage';
 import LeftMenu from './components/left-menu/left-menu.component';
 
 let app = angular.module('app', [
-    uiRouter,
-    angularMaterial,
-    ngMdIcons,
-    UserService.name,
-    // MoviesService.name,
-    AppContent.name,
-    // ViewMovies.name,
-    // ViewMovie.name,
-    // ViewMovieEdit.name,
-    ViewRegister.name,
-    ViewLogin.name,
-    ViewMainPage.name,
-    LeftMenu.name
+        uiRouter,
+        angularMaterial,
+        ngMdIcons,
+        UserService.name,
+        AppContent.name,
+        ViewRegister.name,
+        ViewLogin.name,
+        ViewMainPage.name,
+        LeftMenu.name,
+        ViewAddProduct.name
 ]).run(() => {
     console.log(`Starting the angular module`);
 });
@@ -45,7 +39,6 @@ app.constant('API_URL', 'http://localhost:3000/api');
 app.config(Routes);
 app.config(Middlewares);
 app.config(Icons);
-
 
 angular.element(document).ready(function() {
     return angular.bootstrap(document.body, [app.name], {

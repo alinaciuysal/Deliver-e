@@ -11,8 +11,6 @@ class AppHeaderComponent {
     constructor(){
         this.controller = AppHeaderComponentController;
         this.template = template;
-
-
     }
 
     static get name() {
@@ -28,6 +26,10 @@ class AppHeaderComponentController{
 
     openMenu($mdMenu, ev) {
         $mdMenu.open(ev);
+    }
+
+    search() {
+        //Search func
     }
 
     isAuthenticated(){
