@@ -20,8 +20,6 @@ import ViewAddProduct from './components/view-addproduct/view-addproduct';
 import ViewMainPage from './components/view-mainpage/view-mainpage';
 import LeftMenu from './components/left-menu/left-menu.component';
 
-import jkCarousel from 'angular-jk-carousel';
-
 let app = angular.module('app', [
         uiRouter,
         angularMaterial,
@@ -32,8 +30,7 @@ let app = angular.module('app', [
         ViewLogin.name,
         ViewMainPage.name,
         ViewAddProduct.name,
-        LeftMenu.name,
-        jkCarousel
+        LeftMenu.name
 ]).run(() => {
     console.log(`Starting the angular module`);
 });

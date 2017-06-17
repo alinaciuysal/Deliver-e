@@ -55,7 +55,7 @@ class ViewRegisterComponentController{
         let date = new Date(birthday);
         console.log("date: " + date);
 
-        var date = new Date(timestamp).getDate();
+        //var date = new Date(timestamp).getDate();
         var month = new Date(timestamp).getMonth()+1;
         var year = new Date(timestamp).getFullYear();
         var original_date =  date + '-' + month+ '-' + year;
