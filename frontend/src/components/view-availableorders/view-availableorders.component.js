@@ -12,6 +12,7 @@ class ViewAvailableOrdersComponent {
     constructor(){
         this.controller = ViewAvailableOrdersComponentController;
         this.template = template;
+        angular.module('tabsDemoDynamicHeight', ['ngMaterial']);
     }
 
     static get name() {
@@ -24,10 +25,19 @@ class ViewAvailableOrdersComponentController{
     constructor($state,UserService){
         this.$state = $state;
         this.UserService = UserService;
+        angular.module('tabsDemoDynamicHeight', ['ngMaterial']);
     }
 
     $onInit() {
         this.register = {};
+    }
+
+    rejectOrder(orderNo){
+        // TODO: API calls
+    }
+
+    acceptOrder(orderNo){
+        // TODO: API calls
     }
 
     static get $inject(){
