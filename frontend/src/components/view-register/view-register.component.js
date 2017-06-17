@@ -37,7 +37,6 @@ class ViewRegisterComponentController{
 
         console.log(email + " " + password);
         this.UserService.register(email, password).then(()=> {
-            // TODO: application logic goes here after submitting registration request
             this.$state.go('mainPage',{});
         });
     }
@@ -48,36 +47,41 @@ class ViewRegisterComponentController{
         let surname = this.delivererRegister.surname;
         let email = this.delivererRegister.email;
         let birthday = this.delivererRegister.birthday;
-        let phoneNumber = this.delivererRegister.phoneNumber;
+        let phone = this.delivererRegister.phoneNumber;
         let maxWeight = this.delivererRegister.maxWeight;
+        let address = this.delivererRegister.address;
+        let preferredLocations = ["Marienplatz", "Odeonsplatz"];
 
         // Ref: https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
         let date = new Date(birthday);
         console.log("date: " + date);
 
-        //var date = new Date(timestamp).getDate();
-        var month = new Date(timestamp).getMonth()+1;
+        /*var month = new Date(timestamp).getMonth() + 1;
         var year = new Date(timestamp).getFullYear();
         var original_date =  date + '-' + month+ '-' + year;
-        console.log(original_date);
+        console.log(original_date);*/
 
         // https://stackoverflow.com/questions/43277458/how-to-specify-timestamp-format-when-converting-to-human-readable-string-in-js
         // https://momentjs.com/
 
-        console.log(name + " " + password + " " + surname + " " + email + " " + date + " " + phoneNumber + " " + maxWeight);
-
-        // TODO: API CALLS
+        console.log(name + " " + password + " " + surname + " " + email + " " + date + " " + phone + " " + address + " " + maxWeight);
+        this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, preferredLocations).then(()=> {
+            this.$state.go('mainPage',{});
+        });
     }
 
     submitShopRegistrationRequest() {
-        let name = this.shopRegisterer.name;
+        let shopName = this.shopRegisterer.name;
         let address = this.shopRegisterer.address;
         let email = this.shopRegisterer.email;
         let password = this.shopRegisterer.password;
         let phoneNumber = this.shopRegisterer.phoneNumber;
+
         console.log(name + " " + address + " " + email + " " + password + " " + phoneNumber);
 
-        // TODO: API CALLS
+        this.UserService.registerShop(email, password, shopName, phoneNumber, address).then(()=> {
+            this.$state.go('mainPage',{});
+        });
     }
 
 

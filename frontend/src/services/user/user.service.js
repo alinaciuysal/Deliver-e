@@ -20,9 +20,35 @@ export default class UserService {
 
     register(email, pass) {
         console.log("UserService register works");
-        return this.$http.post(`${ this.API_URL }/user/register`, {
+        return this.$http.post(`${ this.API_URL }/user/signup/user`, {
             email: email,
             password: pass
+        });
+    }
+
+    registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, preferredLocations) {
+        console.log("UserService registerDeliverer works");
+        return this.$http.post(`${ this.API_URL }/user/signup/deliverer`, {
+            email: email,
+            password: password,
+            maxWeight: maxWeight,
+            preferredLocations: preferredLocations,
+            name: name,
+            surname: surname,
+            address: address,
+            phone: phone,
+            birthday: birthday
+        });
+    }
+
+    registerShop(email, password, shopName, phoneNumber, address) {
+        console.log("UserService registerShop works");
+        return this.$http.post(`${ this.API_URL }/user/signup/shop`, {
+            email: email,
+            password: password,
+            shopName: shopName,
+            address: address,
+            phone: phoneNumber,
         });
     }
 

@@ -47,14 +47,22 @@
                             <md-input-container class="md-block">
                                 <label>Name</label>
                                 <md-icon md-svg-icon="face"></md-icon>
-                                <input type="text" name="delivererName" ng-model="$ctrl.delivererRegister.name" placeholder="name" required=""/>
-                                <div ng-message="required">Please enter your name.</div>
+                                <input type="text" name="delivererName" ng-model="$ctrl.delivererRegister.name" placeholder="name" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
+                                <div ng-messages="DelivererRegisterForm.delivererName.$error" ng-hide="DelivererRegisterForm.delivererName.$valid">
+                                    <div ng-message-exp="['required', 'pattern']">
+                                        Please enter your name.
+                                    </div>
+                                </div>
                             </md-input-container>
 
                             <md-input-container class="md-block">
                                 <label>Surname</label>
-                                <input type="text" name="delivererSurname" ng-model="$ctrl.delivererRegister.surname" placeholder="surname" required=""/>
-                                <div ng-message="required">Please enter your surname.</div>
+                                <input type="text" name="delivererSurname" ng-model="$ctrl.delivererRegister.surname" placeholder="surname" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
+                                <div ng-messages="DelivererRegisterForm.delivererSurname.$error" ng-hide="DelivererRegisterForm.delivererSurname.$valid">
+                                    <div ng-message-exp="['required', 'pattern']">
+                                        Please enter your surname.
+                                    </div>
+                                </div>
                             </md-input-container>
 
                             <md-input-container class="md-block">
@@ -62,7 +70,7 @@
                                 <input type="email" name="delivererEmail" ng-model="$ctrl.delivererRegister.email" placeholder="email" required="" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
                                 <div ng-messages="DelivererRegisterForm.delivererEmail.$error" ng-hide="DelivererRegisterForm.delivererEmail.$valid">
                                     <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                                        Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                        Your email must be between 10 and 100 characters long and be a valid e-mail address.
                                     </div>
                                 </div>
                             </md-input-container>
@@ -84,9 +92,19 @@
                             </md-input-container>
 
                             <md-input-container class="md-block">
+                                <label>Address</label>
+                                <input type="text" name="delivererAddress" ng-model="$ctrl.delivererRegister.address" required=""/>
+                                <div ng-message="required">Please enter your address.</div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
                                 <label>Phone Number</label>
-                                <input type="text" name="delivererPhoneNumber" ng-model="$ctrl.delivererRegister.phoneNumber" required=""/>
-                                <div ng-message="required">Please enter your phone number.</div>
+                                <input type="text" name="delivererPhoneNumber" ng-model="$ctrl.delivererRegister.phoneNumber" required="" minlength="10" maxlength="15" ng-pattern="/^[0-9]*$/"/>
+                                <div ng-messages="DelivererRegisterForm.delivererPhoneNumber.$error" ng-hide="delivererPhoneNumber.delivererEmail.$valid">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Your phone number must be between 10 and 15 characters long and be a valid phone number.
+                                    </div>
+                                </div>
                             </md-input-container>
 
                             <md-input-container class="md-block">
@@ -108,19 +126,23 @@
                     <md-content class="md-padding">
                         <form name="ShopRegisterForm">
                             <md-input-container class="md-block">
-                                <label>Name</label>
-                                <input type="text" name="shopName" ng-model="$ctrl.shopRegisterer.name" required=""/>
-                                <div ng-message="required">Please enter shop name.</div>
+                                <label>Shop Name</label>
+                                <input type="text" name="shopName" ng-model="$ctrl.shopRegisterer.name" required="" ng-pattern="/^[a-zA-Z0-9 -]*$/"/>
+                                <div ng-messages="ShopRegisterForm.shopName.$error" ng-hide="ShopRegisterForm.shopName.$valid">
+                                    <div ng-message-exp="['required', 'pattern']">
+                                        Please enter shop name.
+                                    </div>
+                                </div>
                             </md-input-container>
 
                             <md-input-container class="md-block">
-                                <label>Address</label>
+                                <label>Shop Address</label>
                                 <input type="text" name="shopAddress" ng-model="$ctrl.shopRegisterer.address" required=""/>
                                 <div ng-message="required">Please enter your surname.</div>
                             </md-input-container>
 
                             <md-input-container class="md-block">
-                                <label>Email</label>
+                                <label>Shop Email</label>
                                 <input type="email" name="shopEmail" ng-model="$ctrl.shopRegisterer.email" required="" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
                                 <div ng-messages="ShopRegisterForm.shopEmail.$error" ng-hide="ShopRegisterForm.shopEmail.$valid">
                                     <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
@@ -140,9 +162,13 @@
                             </md-input-container>
 
                             <md-input-container class="md-block">
-                                <label>Phone Number</label>
-                                <input type="text" name="shopPhoneNumber" ng-model="$ctrl.shopRegisterer.phoneNumber" required=""/>
-                                <div ng-message="required">Please enter shop's phone number.</div>
+                                <label>Shop Phone Number</label>
+                                <input type="text" name="shopPhoneNumber" ng-model="$ctrl.shopRegisterer.phoneNumber" required="" ng-pattern="/^[0-9]*$/"/>
+                                <div ng-messages="ShopRegisterForm.shopPhoneNumber.$error" ng-hide="ShopRegisterForm.shopPhoneNumber.$valid">
+                                    <div ng-message-exp="['required', 'pattern']">
+                                        Please enter shop's phone number.
+                                    </div>
+                                </div>
                             </md-input-container>
                             <md-button ng-disabled="!ShopRegisterForm.$valid" ng-click="$ctrl.submitShopRegistrationRequest()" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
                         </form>
