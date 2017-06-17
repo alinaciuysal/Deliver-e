@@ -9,6 +9,7 @@ import MainPageComponent from './../components/view-mainpage/view-mainpage.compo
 import LoginComponent from './../components/view-login/view-login.component';
 import RegisterComponent from './../components/view-register/view-register.component';
 import AddProductComponent from './../components/view-addproduct/view-addproduct.component';
+import AvailableOrdersComponent from './../components/view-availableorders/view-availableorders.component';
 
 import MoviesService from './../services/movies/movies.service';
 
@@ -44,6 +45,10 @@ export default function config ($stateProvider, $urlRouterProvider){
         .state('addproduct', {
             url: '/addproduct',
             component: AddProductComponent.name
+        })
+        .state('availableorders', {
+            url: '/availableorders',
+            component: AvailableOrdersComponent.name
         })
         // .state('movies', {
         //     url: '/movies',
