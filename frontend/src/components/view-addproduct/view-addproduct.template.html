@@ -19,14 +19,14 @@
                 <label layout-align="center center">Product Name</label><br>
                 <md-input-container layout-align="center center">
                     <label>Name</label>
-                    <input name="productName" required ng-model="product.name">
+                    <input name="productName" required ng-model="$ctrl.product.name">
                     <div ng-messages="SubmitProduct.productName.$error" ng-hide="SubmitProduct.productName.$valid">
                         <div ng-message="required">Product name is required.</div>
                     </div>
                 </md-input-container><br>
 
                 <label layout-align="center center">Product Category</label><br>
-                <md-select name="productCategory" required ng-model="product.category" placeholder="Category" layout-align="center center">
+                <md-select name="productCategory" required ng-model="$ctrl.product.category" placeholder="Category" layout-align="center center">
                     <md-option value="axe">Axe</md-option>
                     <md-option value="sword">Sword</md-option>
                     <md-option value="wand">Wand</md-option>
@@ -37,12 +37,12 @@
                 <div>
                     <md-input-container id="inputCont">
                         <label>Weight</label>
-                        <input type="number" name="productWeight" required ng-model="product.weight">
+                        <input type="number" name="productWeight" required ng-model="$ctrl.product.weight">
                         <div ng-messages="SubmitProduct.productWeight.$error" ng-hide="SubmitProduct.productWeight.$valid">
                             <div ng-message="required">Product weight is required.</div>
                         </div>
                     </md-input-container>
-                    <md-select id="select" name="weightType" required ng-model="product.weightType" placeholder="unit">
+                    <md-select id="select" name="weightType" required ng-model="$ctrl.product.weightType" placeholder="unit">
                         <md-option value="gram">gram</md-option>
                         <md-option value="kilogram">kilogram</md-option>
                     </md-select>
@@ -51,7 +51,7 @@
                 <label layout-align="center center">Product Price (€)</label><br>
                 <md-input-container layout-align="center center">
                     <label>Price</label>
-                    <input type="number" name="productPrice" required ng-model="product.price">
+                    <input type="number" name="productPrice" required ng-model="$ctrl.product.price">
                     <div ng-messages="SubmitProduct.productPrice.$error" ng-hide="SubmitProduct.productPrice.$valid">
                         <div ng-message="required">Product price is required.</div>
                     </div>
@@ -60,7 +60,7 @@
                 <label layout-align="center center">Product Stock</label><br>
                 <md-input-container layout-align="center center">
                     <label>Stock</label>
-                    <input type="number" name="productStock" required ng-model="product.stock">
+                    <input type="number" name="productStock" required ng-model="$ctrl.product.stock">
                     <div ng-messages="SubmitProduct.productStock.$error" ng-hide="SubmitProduct.productStock.$valid">
                         <div ng-message="required">Product stock is required.</div>
                     </div>
@@ -68,24 +68,24 @@
 
                 &nbsp;&nbsp;<span>or</span>&nbsp;&nbsp;
 
-                <md-checkbox name="productStockInf" ng-model="data.stockInf" aria-label="Infinite" layout-align="center center">
+                <md-checkbox name="productStockInf" ng-model="$ctrl.product.selected" layout-align="center center">
                     Infinite
                 </md-checkbox><br>
 
                 <label layout-align="center center">Product Details</label><br>
                 <md-input-container layout-align="center center">
                     <label>Details</label>
-                    <input name="productDetails" md-maxlength="200" ng-model="product.details">
+                    <input name="productDetails" ng-model="$ctrl.product.productDetails" md-maxlength="200">
                     <div ng-messages="SubmitProduct.productDetails.$error">
                         <div ng-message="md-maxlength">Product description must be less than 200 characters long.</div>
                     </div>
                 </md-input-container><br>
 
-                <md-button class="md-raised" layout-align="center center"><md-icon md-svg-icon="upload"></md-icon>&nbsp;Add Photo&nbsp;</md-button>
+                <md-button class="md-raised" layout-align="center center"><md-icon md-svg-icon="upload" ng-click="$ctrl.uploadProductPic()"></md-icon>&nbsp;Add Photo&nbsp;</md-button>
 
                 <br><br><br>
 
-                <md-button class="md-raised" ng-disabled="!SubmitProduct.$valid" layout-align="center center">&nbsp;&nbsp;Submit&nbsp;&nbsp;</md-button>
+                <md-button class="md-raised" ng-disabled="!SubmitProduct.$valid" layout-align="center center" ng-click="$ctrl.submitNewProduct()">&nbsp;&nbsp;Submit&nbsp;&nbsp;</md-button>
 
             </md-list>
         </form>
