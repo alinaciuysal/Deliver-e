@@ -1,51 +1,47 @@
-<script src="../../assets/angular-carousel.min.js"></script>
-
 <!--
 given ng-controller name here must be same with the one in respective component's js file
 -->
-<div layout="row" layout-align="left" layout-fill ng-cloak ng-controller="mainPageCtrl">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+<div layout="row" layout-align="left" layout-fill ng-cloak >
+     <!--ng-controller="CarouselController">-->
     <left-menu></left-menu>
     <md-content flex layout-gt-sm="row">
         <md-card style="width: 960px">
             <md-card-title>
-                <md-card-title-media>
-                    <div layout="row" layout-align="center center" layout-padding>
-                        Secili storeun adi
-                    </div>
-                </md-card-title-media>
-                <md-card-title-text>
-                    <md-card-actions layout="row" layout-align="end center">
-                        <!--<md-button class="md-icon-button" aria-label="Edit Item" ng-click="$ctrl.edit()" >-->
-                        <!--<md-icon><ng-md-icon icon="mode_edit"></ng-md-icon></md-icon>-->
-                        <!--</md-button>-->
+                <!--<md-card-title-media>-->
+                    <!--<div layout="row" layout-align="center center" layout-padding>-->
+                      <!---->
+                    <!--</div>-->
+                <!--</md-card-title-media>-->
 
-                        <!--<md-button class="md-icon-button"aria-label="Delete Item" ng-click="$ctrl.delete()" >-->
-                        <!--<md-icon><ng-md-icon icon="delete" ></ng-md-icon></md-icon>-->
-                        </md-button>
+                <md-card-title-text >
+
+                    <md-card-actions layout="row" layout-align="center center">
+                        <jk-carousel
+                                data="$ctrl.dataArray"
+                                current-index="$ctrl.currentIndex"
+
+                                item-template-url="'carousel.html'"
+                                max-width="415"
+                                max-height="220"
+                                auto-slide="true"
+                                auto-slide-time="2000" >
+                        </jk-carousel>
                     </md-card-actions>
 
-                    <!--<span class="md-headline">{{$ctrl.movie.title}}</span>-->
-                    <!--<span class="md-subhead">{{$ctrl.movie.year}}</span>-->
+                    Selected Store?
 
                 </md-card-title-text>
-
             </md-card-title>
 
-            <md-card-content layout="row" layout-align="center center" layout-padding>
-                <carousel interval="myInterval">
-                    <slide ng-repeat="slide in slides" active="slide.active">
-                        <img ng-src="{{slide.image}}">
-                        <div class="carousel-caption">
-                            <h4>Slide {{$index+1}}</h4>
-                        </div>
-                    </slide>
-                </carousel>
-                <!--<ul rn-carousel class="image">
-                    <li ng-repeat="slide in slides">
-                        <div class="layer">{{ slide.image }}</div>
-                    </li>
-                </ul>-->
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+            <md-card-content layout="row" layout-align="center start" layout-padding>
+
+
+
+                <br/><br/><br/><br/><br/><br/><br/>
             </md-card-content>
         </md-card>
     </md-content>

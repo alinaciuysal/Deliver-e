@@ -21,6 +21,8 @@ import ViewAvailableOrders from './components/view-availableorders/view-availabl
 import ViewMainPage from './components/view-mainpage/view-mainpage';
 import LeftMenu from './components/left-menu/left-menu.component';
 
+import jkAngularCarousel from 'angular-jk-carousel'
+
 let app = angular.module('app', [
         uiRouter,
         angularMaterial,
@@ -32,7 +34,8 @@ let app = angular.module('app', [
         ViewMainPage.name,
         ViewAddProduct.name,
         ViewAvailableOrders.name,
-        LeftMenu.name
+        LeftMenu.name,
+        jkAngularCarousel
 ]).run(() => {
     console.log(`Starting the angular module`);
 });

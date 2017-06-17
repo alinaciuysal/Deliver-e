@@ -5,11 +5,12 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
     entry: {
-        'vendor': ['angular','angular-animate','angular-aria','angular-messages','angular-material','angular-material-icons','@uirouter/angularjs'],
+        'vendor': ['angular','angular-animate','angular-aria','angular-messages','angular-material','angular-material-icons','@uirouter/angularjs','angular-jk-carousel'],
         'app': path.resolve(__dirname,'src/app.js')
     },
     output: {
@@ -48,5 +49,14 @@ module.exports = {
         }),
 
         new ExtractTextPlugin("styles/[name].css"),
+
+        new HtmlWebpackPlugin({  // Also generate a test.html
+            filename: 'carousel.html',
+            template: 'src/assets/carousel.html'
+        }),
+
+        new CopyWebpackPlugin([
+            { from: 'src/assets/img', to: 'img' }
+        ])
     ]
 };
