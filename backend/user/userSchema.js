@@ -18,10 +18,17 @@ var userSchema = mongoose.Schema({
     phone: String,
     maxWeight: Number,
     preferredLocations: [String],
-    type: String,
+    type: {
+        type: String,
+        enum: ['deliverer', 'shop', 'customer'],
+        required: true
+    },
     shop: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Shop'
+        ref: 'Shop',
+        required: function() {
+            return this.type == 'shop';
+        }
     }
 
 });

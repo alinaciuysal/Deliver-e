@@ -5,13 +5,10 @@ function userRoutes(passport) {
     var userController = require('./userController');
     var router = require('express').Router();
 
-    var mw = passport.authenticate('jwt', {session: false});
-
-    router.use('/', mw);
 
     router.route('/')
-    	.get(userController.getUser)
-    	.put(userController.editUser);
+    	.get(passport.authenticate('jwt', {session: false}), userController.getUser)
+    	.put(passport.authenticate('jwt', {session: false}), userController.editUser);
     router.post('/login', userController.login);
     router.post('/signup/customer', userController.customerSignup);
     router.post('/signup/deliverer', userController.delivererSignup);
