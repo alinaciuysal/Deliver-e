@@ -20,7 +20,7 @@ export default class UserService {
 
     register(email, pass) {
         console.log("UserService register works");
-        return this.$http.post(`${ this.API_URL }/user/signup/user`, {
+        return this.$http.post(`${ this.API_URL }/user/signup/customer`, {
             email: email,
             password: pass
         });
