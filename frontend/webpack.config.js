@@ -6,11 +6,10 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-
 module.exports = {
 
     entry: {
-        'vendor': ['angular','angular-animate','angular-aria','angular-messages','angular-material','angular-material-icons','@uirouter/angularjs'],
+        'vendor': ['angular','angular-animate','angular-aria','angular-messages','angular-material','angular-material-icons','@uirouter/angularjs','angular-jk-carousel'],
         'app': path.resolve(__dirname,'src/app.js')
     },
     output: {
