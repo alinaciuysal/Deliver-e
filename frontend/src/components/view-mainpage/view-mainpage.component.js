@@ -12,9 +12,7 @@ class ViewMainPageComponent {
     constructor(){
         this.controller = ViewMainPageComponentController;
         this.template = template;
-        bindings: {
-            dataArray: '='
-        }
+
     }
 
     static get name() {
@@ -36,6 +34,7 @@ class ViewMainPageComponentController {
             {  src: 'http://lorempixel.com/400/200/food/6'  },
             {  src: 'http://lorempixel.com/400/200/food/7'  },
         ];
+        this.currentIndex = 0;
     }
 
     $onInit() {
