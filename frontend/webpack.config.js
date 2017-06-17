@@ -5,6 +5,7 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 
@@ -52,6 +53,10 @@ module.exports = {
         new HtmlWebpackPlugin({  // Also generate a test.html
             filename: 'carousel.html',
             template: 'src/assets/carousel.html'
-        })
+        }),
+
+        new CopyWebpackPlugin([
+            { from: 'src/assets/img', to: 'img' }
+        ])
     ]
 };

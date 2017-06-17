@@ -33,6 +33,7 @@ class ViewMainPageComponentController {
             {  src: 'http://lorempixel.com/400/200/food/5'  },
             {  src: 'http://lorempixel.com/400/200/food/6'  },
             {  src: 'http://lorempixel.com/400/200/food/7'  },
+            {  src: 'img/imgTest.png'  }
         ];
         this.currentIndex = 0;
     }
