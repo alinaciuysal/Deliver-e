@@ -9,12 +9,7 @@ given ng-controller name here must be same with the one in respective component'
     <left-menu></left-menu>
     <md-content flex layout-gt-sm="row">
         <md-card style="width: 960px">
-            <md-card-title>
-                <!--<md-card-title-media>-->
-                    <!--<div layout="row" layout-align="center center" layout-padding>-->
-                      <!---->
-                    <!--</div>-->
-                <!--</md-card-title-media>-->
+            <md-card-title style="max-height: 250px">
 
                 <md-card-title-text >
 
@@ -31,14 +26,21 @@ given ng-controller name here must be same with the one in respective component'
                         </jk-carousel>
                     </md-card-actions>
 
-                    All Shops
+                    <div class="pageShopTitle"><b>
+                        All Shops:
+                    </b></div>
 
                 </md-card-title-text>
             </md-card-title>
 
 
-            <md-card-content layout="row" layout-align="center start" layout-padding>
+            <md-card-content layout="row" layout-align="left start" layout-padding>
+                <div class='product' layout="column" layout-align="center center" ng-repeat="product in $ctrl.products">
 
+                    <img ng-src="{{product.src}}" height="60px" width="60px">
+                    explanation
+
+                </div>
 
 
                 <br/><br/><br/><br/><br/><br/><br/>

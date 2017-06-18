@@ -1,6 +1,10 @@
 h1 {
     color: navy;
 }
+.pageShopTitle{
+    color: #ab0012;
+
+}
 .jk-carousel {
     height: 100%;
     overflow: hidden;

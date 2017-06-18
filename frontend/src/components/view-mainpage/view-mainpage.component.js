@@ -36,6 +36,10 @@ class ViewMainPageComponentController {
             {  src: 'img/imgTest.png'  }
         ];
         this.currentIndex = 0;
+        this.products = [
+            {  src: 'img/asian/asian1.jpg'  },
+            {  src: 'img/asian/asian2.jpg'  }
+        ]
     }
 
     $onInit() {
