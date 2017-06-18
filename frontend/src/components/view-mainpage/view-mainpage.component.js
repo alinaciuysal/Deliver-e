@@ -26,13 +26,11 @@ class ViewMainPageComponentController {
         this.$state = $state;
         this.UserService = UserService;
         this.dataArray = [
-            {  src: 'http://lorempixel.com/400/200/food/1'  },
-            {  src: 'http://lorempixel.com/400/200/food/2'  },
-            {  src: 'http://lorempixel.com/400/200/food/3'  },
-            {  src: 'http://lorempixel.com/400/200/food/4'  },
-            {  src: 'http://lorempixel.com/400/200/food/5'  },
-            {  src: 'http://lorempixel.com/400/200/food/6'  },
-            {  src: 'http://lorempixel.com/400/200/food/7'  },
+            {  src: 'http://lorempixel.com/800/200/food/1'  },
+            {  src: 'http://lorempixel.com/800/200/food/2'  },
+            {  src: 'http://lorempixel.com/800/200/food/4'  },
+            {  src: 'http://lorempixel.com/800/200/food/5'  },
+            {  src: 'http://lorempixel.com/800/200/food/6'  },
             {  src: 'img/imgTest.png'  }
         ];
         this.currentIndex = 0;
