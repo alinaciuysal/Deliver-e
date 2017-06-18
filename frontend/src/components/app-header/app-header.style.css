@@ -40,6 +40,7 @@ md-nav-bar.md-default-theme md-nav-ink-bar, md-nav-bar md-nav-ink-bar {
     padding-right: 40px;
 }
 
+/*
 md-input-container label {
     color: white;
 }
@@ -50,4 +51,4 @@ md-input-container.md-default-theme .md-placeholder{
 md-input-container .md-input {
     color: white;
     border-color: white;
-}
+}*/
