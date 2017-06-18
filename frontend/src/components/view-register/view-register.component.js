@@ -32,16 +32,22 @@ class ViewRegisterComponentController{
     }
 
     submitUserRegistrationRequest(){
+        var ctrl = this;
+
         let email = this.userRegister.email;
         let password = this.userRegister.password;
 
         console.log(email + " " + password);
         this.UserService.register(email, password).then(()=> {
             this.$state.go('mainPage',{});
+        }).catch(function(obj){
+            ctrl.userRegistrationError = "Error: " + obj.data;
         });
     }
 
     submitDelivererRegistrationRequest() {
+        var ctrl = this;
+
         let name = this.delivererRegister.name;
         let password = this.delivererRegister.password;
         let surname = this.delivererRegister.surname;
@@ -67,10 +73,13 @@ class ViewRegisterComponentController{
         console.log(name + " " + password + " " + surname + " " + email + " " + date + " " + phone + " " + address + " " + maxWeight);
         this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, preferredLocations).then(()=> {
             this.$state.go('mainPage',{});
+        }).catch(function(obj){
+            ctrl.delivererRegistrationError = "Error: " + obj.data;
         });
     }
 
     submitShopRegistrationRequest() {
+        var ctrl = this;
         let shopName = this.shopRegisterer.name;
         let address = this.shopRegisterer.address;
         let email = this.shopRegisterer.email;
@@ -81,6 +90,8 @@ class ViewRegisterComponentController{
 
         this.UserService.registerShop(email, password, shopName, phoneNumber, address).then(()=> {
             this.$state.go('mainPage',{});
+        }).catch(function(obj){
+            ctrl.shopRegistrationError = "Error: " + obj.data;
         });
     }
 

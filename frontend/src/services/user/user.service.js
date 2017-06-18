@@ -46,7 +46,7 @@ export default class UserService {
         return this.$http.post(`${ this.API_URL }/user/signup/shop`, {
             email: email,
             password: password,
-            shopName: shopName,
+            shop: {"name": "shopTest"},
             address: address,
             phone: phoneNumber,
         });

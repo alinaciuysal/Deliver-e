@@ -48,7 +48,7 @@ module.exports.customerSignup = function(req, res){
 
     user.email = req.body.email;
     user.password = req.body.password;
-    user.type = "customer"
+    user.type = "customer";
     if(req.body.name) user.name = req.body.name;
     if(req.body.surname) user.surname = req.body.surname;
     if(req.body.address) user.address = req.body.address;
@@ -58,7 +58,7 @@ module.exports.customerSignup = function(req, res){
 
     user.save(function(err) {
         if (err) {
-            res.status(500).send(err);
+            res.status(500).send("User with provided information already exists");
             return;
         }
 
@@ -80,7 +80,7 @@ module.exports.delivererSignup = function(req, res){
 
     user.email = req.body.email;
     user.password = req.body.password;
-    user.type = "deliverer"
+    user.type = "deliverer";
     user.maxWeight = req.body.maxWeight;
     user.preferredLocations = req.body.preferredLocations;
     if(req.body.name) user.name = req.body.name;
@@ -93,7 +93,56 @@ module.exports.delivererSignup = function(req, res){
 
     user.save(function(err) {
         if (err) {
+            res.status(500).send("User with provided information already exists");
+            return;
+        }
+
+        res.status(201).json({token: createToken(user)});
+    });
+};
+
+module.exports.shopSignup = function(req, res){
+
+    if(!req.body.email){
+        res.status(400).send('email required');
+        return;
+    }
+    if(!req.body.password){
+        res.status(400).send('password required');
+        return;
+    }
+    if(!req.body.shop){
+        res.status(400).send('shop name required');
+        return;
+    }
+    if(!req.body.address){
+        res.status(400).send('shop address required');
+        return;
+    }
+    if(!req.body.phone){
+        res.status(400).send('phone number required');
+        return;
+    }
+
+    var user = new User();
+    user.email = req.body.email;
+    user.password = req.body.password;
+
+    var shop = new object();
+    user.shop = req.body.shop;
+    if(shop.shopName === null) {
+        res.status(400).send('shop name required');
+        return;
+    }
+
+    user.phone = req.body.phone;
+    user.address = req.body.address;
+    user.type = "shop";
+
+    user.save(function(err) {
+        if (err) {
             res.status(500).send(err);
+            //res.status(500).send("User with provided information already exists");
             return;
         }
 

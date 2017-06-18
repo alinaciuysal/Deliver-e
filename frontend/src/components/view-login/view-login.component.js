@@ -26,14 +26,18 @@ class ViewLoginComponentController{
 
     $onInit() {
         this.login = {};
+        this.loginError = {};
     }
 
     submit(){
         let email = this.login.email;
         let password = this.login.password;
+        var ctrl = this;
 
         this.UserService.login(email,password).then(()=> {
             this.$state.go('mainPage',{});
+        }).catch(function(obj){
+            ctrl.loginError = "Error: " + obj.data;
         });
     }
 

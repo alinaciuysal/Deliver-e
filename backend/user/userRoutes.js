@@ -12,6 +12,7 @@ function userRoutes(passport) {
     router.post('/login', userController.login);
     router.post('/signup/customer', userController.customerSignup);
     router.post('/signup/deliverer', userController.delivererSignup);
+    router.post('/signup/shop', userController.shopSignup);
     router.post('/unregister', passport.authenticate('jwt', {session: false}),userController.unregister)
 
     return router;

@@ -13,7 +13,6 @@
                 <md-tab label="Register as User">
                     <md-content class="md-padding">
                         <form name="UserRegisterForm">
-
                             <md-input-container class="md-block">
                                 <label>Email</label>
                                 <input type="text" name="userEmail" ng-model="$ctrl.userRegister.email" placeholder="email" required="" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"//>
@@ -32,9 +31,13 @@
                                         Your password must be between 5 and 64 characters long.
                                     </div>
                                 </div>
+                                <div ng-messages="$ctrl.userRegistrationError" ng-if="UserRegisterFormIsSubmitted && $ctrl.userRegistrationError">
+                                    <p>&nbsp;</p>
+                                    <div ng-message="userRegistrationError" class="error">{{$ctrl.userRegistrationError}}</div>
+                                </div>
                             </md-input-container>
 
-                            <md-button ng-disabled="!UserRegisterForm.$valid" ng-click="$ctrl.submitUserRegistrationRequest()" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
+                            <md-button ng-disabled="!UserRegisterForm.$valid" ng-click="$ctrl.submitUserRegistrationRequest(); UserRegisterFormIsSubmitted = true" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
                         </form>
                     </md-content>
                 </md-tab>
@@ -115,9 +118,14 @@
                                         Please enter maximum amount that you can carry for a delivery.
                                     </div>
                                 </div>
+
+                                <div ng-messages="$ctrl.delivererRegistrationError" ng-if="DelivererRegisterFormIsSubmitted && $ctrl.delivererRegistrationError">
+                                    <p>&nbsp;</p>
+                                    <div ng-message="delivererRegistrationError" class="error">{{$ctrl.delivererRegistrationError}}</div>
+                                </div>
                             </md-input-container>
 
-                            <md-button ng-disabled="!DelivererRegisterForm.$valid" ng-click="$ctrl.submitDelivererRegistrationRequest()" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
+                            <md-button ng-disabled="!DelivererRegisterForm.$valid" ng-click="$ctrl.submitDelivererRegistrationRequest(); DelivererRegisterFormIsSubmitted = true" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
                         </form>
                     </md-content>
                 </md-tab>
@@ -169,8 +177,13 @@
                                         Please enter shop's phone number.
                                     </div>
                                 </div>
+
+                                <div ng-messages="$ctrl.shopRegistrationError" ng-if="ShopRegisterFormIsSubmitted && $ctrl.shopRegistrationError">
+                                    <p>&nbsp;</p>
+                                    <div ng-message="shopRegistrationError" class="error">{{$ctrl.shopRegistrationError}}</div>
+                                </div>
                             </md-input-container>
-                            <md-button ng-disabled="!ShopRegisterForm.$valid" ng-click="$ctrl.submitShopRegistrationRequest()" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
+                            <md-button ng-disabled="!ShopRegisterForm.$valid" ng-click="$ctrl.submitShopRegistrationRequest(); ShopRegisterFormIsSubmitted = true" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
                         </form>
                     </md-content>
                 </md-tab>
