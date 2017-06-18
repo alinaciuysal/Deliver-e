@@ -3,45 +3,22 @@ given ng-controller name here must be same with the one in respective component'
 -->
 
 <div layout="row" layout-align="left" layout-fill ng-cloak >
-     <!--ng-controller="CarouselController">-->
     <left-menu></left-menu>
     <md-content flex layout-gt-sm="row">
         <md-card style="width: 960px">
-            <md-card-title>
-                <!--<md-card-title-media>-->
-                    <!--<div layout="row" layout-align="center center" layout-padding>-->
-                      <!---->
-                    <!--</div>-->
-                <!--</md-card-title-media>-->
+            <md-card-title style="max-height: 40px">
 
                 <md-card-title-text >
 
                     <!--<md-card-actions layout="row" layout-align="center center">-->
-                        <!--<jk-carousel-->
-                                <!--data="$ctrl.dataArray"-->
-                                <!--current-index="$ctrl.currentIndex"-->
 
-                                <!--item-template-url="'carousel.html'"-->
-                                <!--max-width="415"-->
-                                <!--max-height="220"-->
-                                <!--auto-slide="true"-->
-                                <!--auto-slide-time="2000" >-->
-                        <!--</jk-carousel>-->
                     <!--</md-card-actions>-->
 
                     {{$ctrl.name}}
 
-                    <md-card-title-media>
-                        <div layout="row" layout-align="center center" layout-padding ng-repeat="product in $ctrl.products" style="width: 120px; height: 120px">
-
-                            <!--<div ng-repeat="product in $ctrl.products" layout="cell" layout-align="left">-->
-                                <!--<div>-->
-                                    <img ng-src="{{product.src}}" height="40" width="40">
-                                    explanation
-                                <!--</div>-->
-                            <!--</div>-->
-                        </div>
-                    </md-card-title-media>
+                    <!--<md-card-title-media >-->
+                        <!---->
+                    <!--</md-card-title-media>-->
 
                 </md-card-title-text>
 
@@ -49,9 +26,14 @@ given ng-controller name here must be same with the one in respective component'
             </md-card-title>
 
 
-            <md-card-content layout="row" layout-align="center start" layout-padding>
+            <md-card-content layout="row" layout-align="left start" layout-padding>
 
+                <div class='product' layout="column" layout-align="center center" ng-repeat="product in $ctrl.products">
 
+                    <img ng-src="{{product.src}}" height="60px" width="60px">
+                    explanation
+
+                </div>
 
                 <br/><br/><br/><br/><br/><br/><br/>
             </md-card-content>

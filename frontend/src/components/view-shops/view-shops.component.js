@@ -3,6 +3,7 @@
 
 import template from './view-shops.template.html';
 import UserService from './../../services/user/user.service';
+import './view-shops.style.css';
 
 class ViewShopsComponent {
     constructor(){
