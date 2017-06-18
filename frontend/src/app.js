@@ -20,6 +20,7 @@ import ViewAddProduct from './components/view-addproduct/view-addproduct';
 import ViewAvailableOrders from './components/view-availableorders/view-availableorders';
 import ViewMainPage from './components/view-mainpage/view-mainpage';
 import LeftMenu from './components/left-menu/left-menu.component';
+import ViewShops from './components/view-shops/view-shops';
 
 import jkAngularCarousel from 'angular-jk-carousel'
 
@@ -35,6 +36,7 @@ let app = angular.module('app', [
         ViewAddProduct.name,
         ViewAvailableOrders.name,
         LeftMenu.name,
+        ViewShops.name,
         jkAngularCarousel
 ]).run(() => {
     console.log(`Starting the angular module`);

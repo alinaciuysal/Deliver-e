@@ -10,6 +10,7 @@ import LoginComponent from './../components/view-login/view-login.component';
 import RegisterComponent from './../components/view-register/view-register.component';
 import AddProductComponent from './../components/view-addproduct/view-addproduct.component';
 import AvailableOrdersComponent from './../components/view-availableorders/view-availableorders.component';
+import ShopsComponent from './../components/view-shops/view-shops.component';
 
 import MoviesService from './../services/movies/movies.service';
 
@@ -79,6 +80,16 @@ export default function config ($stateProvider, $urlRouterProvider){
         .state('login', {
             url: '/login',
             component: LoginComponent.name
+        })
+        .state('shops', {
+            url: '/shops/:type',
+            component: ShopsComponent.name,
+            params: { type: null },
+            resolve: {
+                type: ['$stateParams', function ($stateParams) {
+                    return $stateParams.type; //By putting this here... (STEP 1)
+                }]
+            }
         })
 
 

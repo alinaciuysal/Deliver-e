@@ -1,8 +1,6 @@
 <!--
 given ng-controller name here must be same with the one in respective component's js file
 -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
 
 <div layout="row" layout-align="left" layout-fill ng-cloak >
      <!--ng-controller="CarouselController">-->
@@ -18,20 +16,20 @@ given ng-controller name here must be same with the one in respective component'
 
                 <md-card-title-text >
 
-                    <md-card-actions layout="row" layout-align="center center">
-                        <jk-carousel
-                                data="$ctrl.dataArray"
-                                current-index="$ctrl.currentIndex"
+                    <!--<md-card-actions layout="row" layout-align="center center">-->
+                        <!--<jk-carousel-->
+                                <!--data="$ctrl.dataArray"-->
+                                <!--current-index="$ctrl.currentIndex"-->
 
-                                item-template-url="'carousel.html'"
-                                max-width="415"
-                                max-height="220"
-                                auto-slide="true"
-                                auto-slide-time="2000" >
-                        </jk-carousel>
-                    </md-card-actions>
+                                <!--item-template-url="'carousel.html'"-->
+                                <!--max-width="415"-->
+                                <!--max-height="220"-->
+                                <!--auto-slide="true"-->
+                                <!--auto-slide-time="2000" >-->
+                        <!--</jk-carousel>-->
+                    <!--</md-card-actions>-->
 
-                    All Shops
+                    {{$ctrl.name}}
 
                 </md-card-title-text>
             </md-card-title>
