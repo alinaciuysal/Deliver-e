@@ -24,14 +24,22 @@ class ViewShopsController {
 
         this.type = this.$state.params.type;
 
-        if(this.type == 'asian')
+        if(this.type == 'asian') {
             this.name = "Asian Shops"
-        else if(this.type == 'getranke')
+            this.products = [
+                {  src: 'img/asian/asian1.jpg'  },
+                {  src: 'img/asian/asian2.jpg'  }
+            ]
+        }
+        else if(this.type == 'getranke') {
             this.name = "Getrankemarkts"
-        else if(this.type == 'turkish')
+        }
+        else if(this.type == 'turkish') {
             this.name = "Turkish Shops"
-        else if(this.type == 'russian')
+        }
+        else if(this.type == 'russian') {
             this.name = "Russian Shops"
+        }
     }
 
     $onInit() {

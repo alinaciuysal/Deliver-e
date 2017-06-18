@@ -31,7 +31,21 @@ given ng-controller name here must be same with the one in respective component'
 
                     {{$ctrl.name}}
 
+                    <md-card-title-media>
+                        <div layout="row" layout-align="center center" layout-padding ng-repeat="product in $ctrl.products" style="width: 120px; height: 120px">
+
+                            <!--<div ng-repeat="product in $ctrl.products" layout="cell" layout-align="left">-->
+                                <!--<div>-->
+                                    <img ng-src="{{product.src}}" height="40" width="40">
+                                    explanation
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </md-card-title-media>
+
                 </md-card-title-text>
+
+
             </md-card-title>
 
 

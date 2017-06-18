@@ -12,19 +12,6 @@ import AddProductComponent from './../components/view-addproduct/view-addproduct
 import AvailableOrdersComponent from './../components/view-availableorders/view-availableorders.component';
 import ShopsComponent from './../components/view-shops/view-shops.component';
 
-import MoviesService from './../services/movies/movies.service';
-
-
-// resolveMovie.$inject = ['$stateParams', MoviesService.name];
-// function resolveMovie($stateParams,moviesService){
-//     return moviesService.get($stateParams.movieId);
-// }
-//
-// resolveMovies.$inject = [MoviesService.name];
-// function resolveMovies(moviesService){
-//     return moviesService.list();
-// }
-
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
 export default function config ($stateProvider, $urlRouterProvider){
 
@@ -35,9 +22,6 @@ export default function config ($stateProvider, $urlRouterProvider){
         .state('mainPage', {
             url: '/mainPage',
             component: MainPageComponent.name,
-            // resolve: {
-            //     movies : resolveMovies
-            // }
         })
         .state('register', {
             url: '/register',
@@ -51,32 +35,6 @@ export default function config ($stateProvider, $urlRouterProvider){
             url: '/availableorders',
             component: AvailableOrdersComponent.name
         })
-        // .state('movies', {
-        //     url: '/movies',
-        //     component: MoviesComponent.name,
-        //     resolve: {
-        //         movies : resolveMovies
-        //     }
-        // })
-        // .state('movieAdd', {
-        //     url: '/movies/new',
-        //     component: MovieCreateComponent.name
-        // })
-        // .state('movie', {
-        //     url: '/movies/:movieId',
-        //     component: MovieComponent.name,
-        //     resolve: {
-        //         movie : resolveMovie
-        //     }
-        //
-        // })
-        // .state('movieEdit', {
-        //     url: '/movies/:movieId/edit',
-        //     component: MovieEditComponent.name,
-        //     resolve: {
-        //         movie : resolveMovie
-        //     }
-        // })
         .state('login', {
             url: '/login',
             component: LoginComponent.name
