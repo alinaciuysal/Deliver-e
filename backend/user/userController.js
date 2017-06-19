@@ -59,7 +59,7 @@ module.exports.customerSignup = function(req, res){
 
     user.save(function(err) {
         if (err) {
-            res.status(500).send("User with provided information already exists");
+            res.status(500).send("User with provided information already exists.");
             return;
         }
 
@@ -94,7 +94,7 @@ module.exports.delivererSignup = function(req, res){
 
     user.save(function(err) {
         if (err) {
-            res.status(500).send("User with provided information already exists");
+            res.status(500).send("User with provided information already exists.");
             return;
         }
 
@@ -126,14 +126,14 @@ module.exports.shopSignup = function(req, res){
 
     shop.save(function(err, shop) {
         if (err) {
-            res.status(400).send(err);
+            res.status(400).send("Problem occurred while saving the shop.");
             return;
         }
         user.shop = shop;
         user.save(function(err){
             if (err) {
                 shop.remove();
-                res.status(400).send(err);
+                res.status(500).send("User with provided information already exists.");
                 return;
             }
             res.status(201).json({token: createToken(user)});

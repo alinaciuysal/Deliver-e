@@ -29,7 +29,7 @@ class ViewRegisterComponentController{
     }
 
     $onInit() {
-        var ctrl = this;
+        let ctrl = this;
         ctrl.register = {};
 
         // retrieve these from API
@@ -46,19 +46,20 @@ class ViewRegisterComponentController{
     }
 
     resetDistricts() {
-        var ctrl = this;
-        console.log("before change: ", ctrl.delivererRegister.selectedDistricts);
+        let ctrl = this;
         ctrl.delivererRegister.selectedDistricts = null;
     }
 
     submitUserRegistrationRequest(){
-        var ctrl = this;
+        let ctrl = this;
 
         let email = this.userRegister.email;
         let password = this.userRegister.password;
 
-        console.log(email + " " + password);
         this.UserService.register(email, password).then(()=> {
+/*
+            this.resetUserRegistrationForm();
+*/
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.userRegistrationError = "Error: " + obj.data;
@@ -66,7 +67,7 @@ class ViewRegisterComponentController{
     }
 
     submitDelivererRegistrationRequest() {
-        var ctrl = this;
+        let ctrl = this;
 
         let name = ctrl.delivererRegister.name;
         let password = ctrl.delivererRegister.password;
@@ -81,7 +82,9 @@ class ViewRegisterComponentController{
 
         // Ref: https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
         let date = new Date(birthday);
+/*
         console.log("date: " + date);
+*/
 
         /*var month = new Date(timestamp).getMonth() + 1;
         var year = new Date(timestamp).getFullYear();
@@ -93,6 +96,9 @@ class ViewRegisterComponentController{
         console.log(name + " " + password + " " + surname + " " + email + " " + date + " " + phone + " " + address + " " + maxWeight + " " + selectedDistricts);
 
         this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedDistricts).then(()=> {
+/*
+            this.resetDelivererRegistrationForm();
+*/
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.delivererRegistrationError = "Error: " + obj.data;
@@ -100,24 +106,68 @@ class ViewRegisterComponentController{
     }
 
     submitShopRegistrationRequest() {
-        var ctrl = this;
+        let ctrl = this;
 
-        let email = this.shopRegisterer.email;
-        let password = this.shopRegisterer.password;
+        let email = ctrl.shopRegister.email;
+        let password = ctrl.shopRegister.password;
 
-        let shopName = this.shopRegisterer.shopName;
-        let shopAddress = this.shopRegisterer.shopAddress;
-        let shopPhoneNumber = this.shopRegisterer.shopPhoneNumber;
+        let shopName = ctrl.shopRegister.shopName;
+        let shopAddress = ctrl.shopRegister.shopAddress;
+        let shopPhoneNumber = ctrl.shopRegister.shopPhoneNumber;
 
         console.log(email + " " + password + " " + shopName + " " + shopAddress + " " + shopPhoneNumber);
 
         this.UserService.registerShop(email, password, shopName, shopAddress, shopPhoneNumber).then(()=> {
+/*
+            this.resetShopRegistrationForm();
+*/
             this.$state.go('mainPage',{});
         }).catch(function(obj){
+            console.log(obj);
             ctrl.shopRegistrationError = "Error: " + obj.data;
         });
     }
 
+    resetShopRegistrationForm() {
+        let ctrl = this;
+        let form = ctrl.ShopRegisterForm;
+        form.email = '';
+        form.password = '';
+        form.shopName = '';
+        form.shopAddress = '';
+        form.shopPhoneNumber = '';
+
+        // Set back to pristine.
+        ctrl.ShopRegisterForm.$setPristine();
+        // Since Angular 1.3, set back to untouched state.
+        ctrl.ShopRegisterForm.$setUntouched();
+    }
+
+    resetDelivererRegistrationForm() {
+        let ctrl = this;
+        let form = ctrl.delivererRegister;
+        form.name = '';
+        form.password = '';
+        form.surname = '';
+        form.email = '';
+        form.birthday = '';
+        form.phoneNumber = '';
+        form.maxWeight = '';
+        form.address = '';
+        form.selectedDistricts = '';
+
+        // Set back to pristine.
+        ctrl.delivererRegister.$setPristine();
+        // Since Angular 1.3, set back to untouched state.
+        ctrl.delivererRegister.$setUntouched();
+    }
+
+    resetUserRegistrationForm() {
+        let ctrl = this;
+        let form = ctrl.userRegister;
+        form.email = {};
+        form.password = {};
+    }
 
     static get $inject(){
         return ['$state', '$element', UserService.name];

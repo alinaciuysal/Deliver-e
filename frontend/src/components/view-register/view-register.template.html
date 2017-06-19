@@ -10,6 +10,7 @@
 
     <md-content>
         <md-tabs class="md-primary" md-dynamic-height="" md-border-bottom="" md-selected="selectedIndex" md-center-tabs="true">
+
             <md-tab label="Register as User">
                 <md-content class="md-padding">
                     <form name="UserRegisterForm">
@@ -175,7 +176,7 @@
 
                         <md-input-container class="md-block">
                             <label>Account Email</label>
-                            <input type="email" name="shopEmail" ng-model="$ctrl.shopRegisterer.email" required="" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
+                            <input type="email" name="shopEmail" ng-model="$ctrl.shopRegister.email" required="" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
                             <div ng-messages="ShopRegisterForm.shopEmail.$error" ng-hide="ShopRegisterForm.shopEmail.$valid">
                                 <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
                                     Your email must be between 10 and 100 characters long and look like an e-mail address.
@@ -185,7 +186,7 @@
 
                         <md-input-container class="md-block">
                             <label>Account Password</label>
-                            <input type="password" name="shopPassword" ng-model="$ctrl.shopRegisterer.password" required=""/>
+                            <input type="password" name="shopPassword" ng-model="$ctrl.shopRegister.password" required=""/>
                             <div ng-messages="ShopRegisterForm.shopPassword.$error" ng-hide="ShopRegisterForm.shopPassword.$valid">
                                 <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
                                     Your password must be between 5 and 64 characters long.
@@ -198,7 +199,7 @@
                         </div>
                         <md-input-container class="md-block">
                             <label>Name</label>
-                            <input type="text" name="shopName" ng-model="$ctrl.shopRegisterer.shopName" required="" ng-pattern="/^[a-zA-Z0-9 -]*$/"/>
+                            <input type="text" name="shopName" ng-model="$ctrl.shopRegister.shopName" required="" ng-pattern="/^[a-zA-Z0-9 -]*$/"/>
                             <div ng-messages="ShopRegisterForm.shopName.$error" ng-hide="ShopRegisterForm.shopName.$valid">
                                 <div ng-message-exp="['required', 'pattern']">
                                     Please enter shop's name.
@@ -208,13 +209,13 @@
 
                         <md-input-container class="md-block">
                             <label>Address</label>
-                            <input type="text" name="shopAddress" ng-model="$ctrl.shopRegisterer.shopAddress" required=""/>
+                            <input type="text" name="shopAddress" ng-model="$ctrl.shopRegister.shopAddress" required=""/>
                             <div ng-message="required">Please enter shop's address.</div>
                         </md-input-container>
 
                         <md-input-container class="md-block">
                             <label>Phone Number</label>
-                            <input type="text" name="shopPhoneNumber" ng-model="$ctrl.shopRegisterer.shopPhoneNumber" required="" ng-pattern="/^[0-9]*$/"/>
+                            <input type="text" name="shopPhoneNumber" ng-model="$ctrl.shopRegister.shopPhoneNumber" required="" ng-pattern="/^[0-9]*$/"/>
                             <div ng-messages="ShopRegisterForm.shopPhoneNumber.$error" ng-hide="ShopRegisterForm.shopPhoneNumber.$valid">
                                 <div ng-message-exp="['required', 'pattern']">
                                     Please enter shop's phone number.

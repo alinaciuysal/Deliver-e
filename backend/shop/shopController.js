@@ -11,7 +11,7 @@ exports.postShop = function(req, res) {
 
     shop.save(function(err, shop) {
         if (err) {
-            res.status(400).send(err);
+            res.status(400).send("Cannot save shop");
             return;
         }
         User.update(req.user, {$set: { type: 'shop', shop: shop }}, function(err){
