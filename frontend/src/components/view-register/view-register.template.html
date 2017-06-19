@@ -118,6 +118,24 @@
                                         Please enter maximum amount that you can carry for a delivery.
                                     </div>
                                 </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Preferred Locations</label>
+                                <md-select ng-model="selectedLocation">
+                                    <md-optgroup label="locations">
+                                        <md-option ng-value="location" ng-repeat="location in $ctrl.availableLocations">{{location.name}}</md-option>
+                                    </md-optgroup>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>Preferred Districts</label>
+                                <md-select ng-model="selectedDistrict">
+                                    <md-optgroup label="districts">
+                                        <md-option ng-value="district" ng-repeat="district in selectedLocation.districts">{{district}}</md-option>
+                                    </md-optgroup>
+                                </md-select>
 
                                 <div ng-messages="$ctrl.delivererRegistrationError" ng-if="DelivererRegisterFormIsSubmitted && $ctrl.delivererRegistrationError">
                                     <p>&nbsp;</p>
@@ -125,7 +143,9 @@
                                 </div>
                             </md-input-container>
 
-                            <md-button ng-disabled="!DelivererRegisterForm.$valid" ng-click="$ctrl.submitDelivererRegistrationRequest(); DelivererRegisterFormIsSubmitted = true" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
+                            <md-input-container class="md-block">
+                                <md-button ng-disabled="!DelivererRegisterForm.$valid" ng-click="$ctrl.submitDelivererRegistrationRequest(); DelivererRegisterFormIsSubmitted = true" class="md-raised md-primary">&nbsp Register &nbsp</md-button>
+                            </md-input-container>
                         </form>
                     </md-content>
                 </md-tab>
