@@ -1,5 +1,6 @@
 var Config = require('../config/config.js');
 var User = require('./userSchema');
+var Shop = require('../shop/shopSchema');
 var jwt = require('jwt-simple');
 
 module.exports.login = function(req, res){
@@ -128,25 +129,26 @@ module.exports.shopSignup = function(req, res){
     user.email = req.body.email;
     user.password = req.body.password;
 
-    var shop = new object();
-    user.shop = req.body.shop;
-    if(shop.shopName === null) {
-        res.status(400).send('shop name required');
-        return;
-    }
+    var shop = new Shop(req.body.shop);
 
     user.phone = req.body.phone;
     user.address = req.body.address;
     user.type = "shop";
 
-    user.save(function(err) {
+    shop.save(function(err, shop) {
         if (err) {
-            res.status(500).send(err);
-            //res.status(500).send("User with provided information already exists");
+            res.status(400).send(err);
             return;
         }
-
-        res.status(201).json({token: createToken(user)});
+        user.shop = shop;
+        user.save(function(err){
+            if (err) {
+                shop.remove();
+                res.status(400).send(err);
+                return;
+            }
+            res.status(201).json({token: createToken(user)});
+        });
     });
 };
 
