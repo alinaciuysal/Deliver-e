@@ -22,7 +22,8 @@ class ViewRegisterComponent {
 }
 
 class ViewRegisterComponentController{
-    constructor($state,UserService){
+    constructor($state, $element, UserService){
+        this.$element = $element;
         this.$state = $state;
         this.UserService = UserService;
     }
@@ -44,6 +45,12 @@ class ViewRegisterComponentController{
         ctrl.availableLocations = availableLocations;
     }
 
+    resetDistricts() {
+        var ctrl = this;
+        console.log("before change: ", ctrl.delivererRegister.selectedDistricts);
+        ctrl.delivererRegister.selectedDistricts = null;
+    }
+
     submitUserRegistrationRequest(){
         var ctrl = this;
 
@@ -61,15 +68,16 @@ class ViewRegisterComponentController{
     submitDelivererRegistrationRequest() {
         var ctrl = this;
 
-        let name = this.delivererRegister.name;
-        let password = this.delivererRegister.password;
-        let surname = this.delivererRegister.surname;
-        let email = this.delivererRegister.email;
-        let birthday = this.delivererRegister.birthday;
-        let phone = this.delivererRegister.phoneNumber;
-        let maxWeight = this.delivererRegister.maxWeight;
-        let address = this.delivererRegister.address;
-        let preferredLocations = ["Marienplatz", "Odeonsplatz"];
+        let name = ctrl.delivererRegister.name;
+        let password = ctrl.delivererRegister.password;
+        let surname = ctrl.delivererRegister.surname;
+        let email = ctrl.delivererRegister.email;
+        let birthday = ctrl.delivererRegister.birthday;
+        let phone = ctrl.delivererRegister.phoneNumber;
+        let maxWeight = ctrl.delivererRegister.maxWeight;
+        let address = ctrl.delivererRegister.address;
+        let selectedDistricts = ctrl.delivererRegister.selectedDistricts;
+
 
         // Ref: https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
         let date = new Date(birthday);
@@ -82,8 +90,9 @@ class ViewRegisterComponentController{
         // https://stackoverflow.com/questions/43277458/how-to-specify-timestamp-format-when-converting-to-human-readable-string-in-js
         // https://momentjs.com/
 
-        console.log(name + " " + password + " " + surname + " " + email + " " + date + " " + phone + " " + address + " " + maxWeight);
-        this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, preferredLocations).then(()=> {
+        console.log(name + " " + password + " " + surname + " " + email + " " + date + " " + phone + " " + address + " " + maxWeight + " " + selectedDistricts);
+
+        this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedDistricts).then(()=> {
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.delivererRegistrationError = "Error: " + obj.data;
@@ -109,7 +118,7 @@ class ViewRegisterComponentController{
 
 
     static get $inject(){
-        return ['$state', UserService.name];
+        return ['$state', '$element', UserService.name];
     }
 }
 
