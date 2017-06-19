@@ -28,7 +28,20 @@ class ViewRegisterComponentController{
     }
 
     $onInit() {
-        this.register = {};
+        var ctrl = this;
+        ctrl.register = {};
+
+        // retrieve these from API
+        let availableLocations = [
+            {
+                name: 'Munich',
+                districts: ["Ludwigsvorstadt-Isarvorstadt", "Schwabing-West", "Am-Hart", "Schwanthalerhöhe", "Sendling", "Am Laim"]
+            }, {
+                name: 'Berlin',
+                districts: ["Mitte", "Kreuzberg", "Schönerberg"]
+            }
+        ];
+        ctrl.availableLocations = availableLocations;
     }
 
     submitUserRegistrationRequest(){
@@ -66,7 +79,6 @@ class ViewRegisterComponentController{
         var year = new Date(timestamp).getFullYear();
         var original_date =  date + '-' + month+ '-' + year;
         console.log(original_date);*/
-
         // https://stackoverflow.com/questions/43277458/how-to-specify-timestamp-format-when-converting-to-human-readable-string-in-js
         // https://momentjs.com/
 
