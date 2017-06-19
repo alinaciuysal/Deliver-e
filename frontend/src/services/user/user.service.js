@@ -41,14 +41,16 @@ export default class UserService {
         });
     }
 
-    registerShop(email, password, shopName, phoneNumber, address) {
+    registerShop(email, password, shopName, shopAddress, shopPhoneNumber) {
         console.log("UserService registerShop works");
         return this.$http.post(`${ this.API_URL }/user/signup/shop`, {
             email: email,
             password: password,
-            shop: {"name": "shopTest"},
-            address: address,
-            phone: phoneNumber,
+            shop: {
+                "name": shopName,
+                "address": shopAddress,
+                "phone": shopPhoneNumber
+            }
         });
     }
 

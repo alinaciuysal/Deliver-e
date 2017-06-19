@@ -113,27 +113,16 @@ module.exports.shopSignup = function(req, res){
         return;
     }
     if(!req.body.shop){
-        res.status(400).send('shop name required');
-        return;
-    }
-    if(!req.body.address){
-        res.status(400).send('shop address required');
-        return;
-    }
-    if(!req.body.phone){
-        res.status(400).send('phone number required');
+        res.status(400).send('shop details are required');
         return;
     }
 
     var user = new User();
     user.email = req.body.email;
     user.password = req.body.password;
+    user.type = "shop";
 
     var shop = new Shop(req.body.shop);
-
-    user.phone = req.body.phone;
-    user.address = req.body.address;
-    user.type = "shop";
 
     shop.save(function(err, shop) {
         if (err) {

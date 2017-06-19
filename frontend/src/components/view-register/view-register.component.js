@@ -101,15 +101,17 @@ class ViewRegisterComponentController{
 
     submitShopRegistrationRequest() {
         var ctrl = this;
-        let shopName = this.shopRegisterer.name;
-        let address = this.shopRegisterer.address;
+
         let email = this.shopRegisterer.email;
         let password = this.shopRegisterer.password;
-        let phoneNumber = this.shopRegisterer.phoneNumber;
 
-        console.log(name + " " + address + " " + email + " " + password + " " + phoneNumber);
+        let shopName = this.shopRegisterer.shopName;
+        let shopAddress = this.shopRegisterer.shopAddress;
+        let shopPhoneNumber = this.shopRegisterer.shopPhoneNumber;
 
-        this.UserService.registerShop(email, password, shopName, phoneNumber, address).then(()=> {
+        console.log(email + " " + password + " " + shopName + " " + shopAddress + " " + shopPhoneNumber);
+
+        this.UserService.registerShop(email, password, shopName, shopAddress, shopPhoneNumber).then(()=> {
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.shopRegistrationError = "Error: " + obj.data;
