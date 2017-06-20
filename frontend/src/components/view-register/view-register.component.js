@@ -58,10 +58,15 @@ class ViewRegisterComponentController{
     submitUserRegistrationRequest(){
         let ctrl = this;
 
+        let name = this.userRegister.name;
+        let surname = this.userRegister.surname;
         let email = this.userRegister.email;
         let password = this.userRegister.password;
 
-        this.UserService.register(email, password).then(()=> {
+        this.UserService.register(name, surname, email, password).then(()=> {
+            /*
+             this.resetUserRegistrationForm();
+             */
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.userRegistrationError = "Error: " + obj.data;
@@ -109,14 +114,15 @@ class ViewRegisterComponentController{
 
         let email = ctrl.shopRegister.email;
         let password = ctrl.shopRegister.password;
+        let name = ctrl.shopRegister.shopName;
 
-        let shopName = ctrl.shopRegister.shopName;
+        // let shopName = ctrl.shopRegister.shopName;
         let shopAddress = ctrl.shopRegister.shopAddress;
         let shopPhoneNumber = ctrl.shopRegister.shopPhoneNumber;
 
-        console.log(email + " " + password + " " + shopName + " " + shopAddress + " " + shopPhoneNumber);
+        console.log(email + " " + password + " " + name + " " + shopAddress + " " + shopPhoneNumber);
 
-        this.UserService.registerShop(email, password, shopName, shopAddress, shopPhoneNumber).then(()=> {
+        this.UserService.registerShop(email, password, name, shopAddress, shopPhoneNumber).then(()=> {
 /*
             this.resetShopRegistrationForm();
 */
@@ -164,8 +170,10 @@ class ViewRegisterComponentController{
     resetUserRegistrationForm() {
         let ctrl = this;
         let form = ctrl.userRegister;
-        form.email = {};
-        form.password = {};
+        form.name = '';
+        form.password = '';
+        form.email = '';
+        form.password = '';
     }
 
     static get $inject(){

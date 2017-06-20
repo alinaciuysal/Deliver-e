@@ -1,10 +1,5 @@
 'use strict';
 
-import MoviesComponent from './../components/view-movies/view-movies.component';
-import MovieComponent from './../components/view-movie/view-movie.component';
-import MovieEditComponent from './../components/view-movie-edit/view-movie-edit.component';
-import MovieCreateComponent from './../components/view-movie-create/view-movie-create.component';
-
 import MainPageComponent from './../components/view-mainpage/view-mainpage.component';
 import LoginComponent from './../components/view-login/view-login.component';
 import RegisterComponent from './../components/view-register/view-register.component';

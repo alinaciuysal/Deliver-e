@@ -13,7 +13,12 @@
         <span flex="5"></span>
         <md-menu  layout="row" md-offset="0 70">
             <md-button aria-label="More" class="md-button menuButton" ng-click="$ctrl.openMenu($mdMenu, $event)">
-                {{$ctrl.menuName}}
+                <md-menu-item ng-if="$ctrl.isAuthenticated()">
+                    Welcome {{$ctrl.getCurrentUserName()}}!
+                </md-menu-item>
+                <md-menu-item ng-if="!$ctrl.isAuthenticated()">
+                    Welcome!
+                </md-menu-item>
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item ng-if="$ctrl.isAuthenticated()">

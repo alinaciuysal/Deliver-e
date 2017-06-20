@@ -13,8 +13,13 @@ module.exports.login = function(req, res){
         res.status(400).send('password required');
         return;
     }
+    // if(!req.body.name){
+    //     res.status(400).send('name required');
+    //     return;
+    // }
 
     User.findOne({email: req.body.email}, function(err, user){
+
         if (err) {
             res.status(500).send(err);
             return
@@ -36,6 +41,7 @@ module.exports.login = function(req, res){
 };
 
 module.exports.customerSignup = function(req, res){
+
     if(!req.body.email){
         res.status(400).send('email required');
         return;
@@ -45,12 +51,17 @@ module.exports.customerSignup = function(req, res){
         return;
     }
 
+    if(!req.body.name){
+        res.status(400).send('name required');
+        return;
+    }
+
     var user = new User();
 
     user.email = req.body.email;
     user.password = req.body.password;
     user.type = "customer";
-    if(req.body.name) user.name = req.body.name;
+    user.name = req.body.name;
     if(req.body.surname) user.surname = req.body.surname;
     if(req.body.address) user.address = req.body.address;
     if(req.body.phone) user.phone = req.body.phone;
@@ -77,6 +88,11 @@ module.exports.delivererSignup = function(req, res){
         return;
     }
 
+    if(!req.body.name){
+        res.status(400).send('name required');
+        return;
+    }
+
     var user = new User();
 
     user.email = req.body.email;
@@ -84,7 +100,7 @@ module.exports.delivererSignup = function(req, res){
     user.type = "deliverer";
     user.maxWeight = req.body.maxWeight;
     user.preferredLocations = req.body.preferredLocations;
-    if(req.body.name) user.name = req.body.name;
+    user.name = req.body.name;
     if(req.body.surname) user.surname = req.body.surname;
     if(req.body.address) user.address = req.body.address;
     if(req.body.phone) user.phone = req.body.phone;
@@ -117,7 +133,13 @@ module.exports.shopSignup = function(req, res){
         return;
     }
 
+    if(!req.body.name){
+        res.status(400).send('name required');
+        return;
+    }
+
     var user = new User();
+    user.name = req.body.name;
     user.email = req.body.email;
     user.password = req.body.password;
     user.type = "shop";
@@ -171,7 +193,8 @@ function createToken(user) {
     var tokenPayload = {
         user: {
             _id: user._id,
-            email: user.email
+            email: user.email,
+            name: user.getUserName()
         }
 
     };

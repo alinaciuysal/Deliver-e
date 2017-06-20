@@ -18,9 +18,11 @@ export default class UserService {
         return 'UserService';
     }
 
-    register(email, pass) {
+    register(name, surname, email, pass) {
         console.log("UserService register works");
         return this.$http.post(`${ this.API_URL }/user/signup/customer`, {
+            name: name,
+            surname: surname,
             email: email,
             password: pass
         });
@@ -46,8 +48,9 @@ export default class UserService {
         return this.$http.post(`${ this.API_URL }/user/signup/shop`, {
             email: email,
             password: password,
+            name: shopName,
             shop: {
-                "name": shopName,
+                // "name": shopName,
                 "address": shopAddress,
                 "phone": shopPhoneNumber
             }
@@ -57,7 +60,8 @@ export default class UserService {
     login(mail, pass) {
         return this.$http.post(`${ this.API_URL }/user/login`, {
             email: mail,
-            password: pass
+            password: pass,
+            // name: "test"
         });
     }
 
@@ -66,6 +70,7 @@ export default class UserService {
     }
 
     getCurrentUser() {
+
         let token = this.$window.localStorage['jwtToken'];
         if (!token) return {};
 

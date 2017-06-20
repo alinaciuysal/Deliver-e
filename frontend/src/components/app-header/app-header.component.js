@@ -22,13 +22,6 @@ class AppHeaderComponentController{
     constructor($state,UserService){
         this.$state = $state;
         this.UserService = UserService;
-
-        if(this.isAuthenticated()){
-            this.menuName = this.getCurrentUser()
-        }
-        else{
-            this.menuName = 'Welcome!'
-        }
     }
 
     openMenu($mdMenu, ev) {
@@ -46,6 +39,11 @@ class AppHeaderComponentController{
     getCurrentUser(){
         let user = this.UserService.getCurrentUser();
         return user.email;
+    }
+
+    getCurrentUserName(){
+        let user = this.UserService.getCurrentUser();
+        return user.name;
     }
 
     goHome(){

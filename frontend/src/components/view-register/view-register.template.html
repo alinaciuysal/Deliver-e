@@ -15,6 +15,27 @@
                 <md-content class="md-padding">
                     <form name="UserRegisterForm">
                         <md-input-container class="md-block">
+                            <label>Name</label>
+                            <md-icon md-svg-icon="face"></md-icon>
+                            <input type="text" name="customerName" ng-model="$ctrl.userRegister.name" placeholder="name" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
+                            <div ng-messages="UserRegisterForm.customerName.$error" ng-hide="UserRegisterForm.customerName.$valid">
+                                <div ng-message-exp="['required', 'pattern']">
+                                    Please enter your name.
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <label>Surname</label>
+                            <input type="text" name="customerSurname" ng-model="$ctrl.userRegister.surname" placeholder="surname" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
+                            <div ng-messages="UserRegisterForm.customerSurname.$error" ng-hide="UserRegisterForm.customerSurname.$valid">
+                                <div ng-message-exp="['required', 'pattern']">
+                                    Please enter your surname.
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
                             <label>Email</label>
                             <input type="text" name="userEmail" ng-model="$ctrl.userRegister.email" placeholder="email" required="" required minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"//>
                             <div ng-messages="UserRegisterForm.userEmail.$error" ng-hide="UserRegisterForm.userEmail.$valid">
