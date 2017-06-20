@@ -47,7 +47,12 @@ class ViewRegisterComponentController{
 
     resetDistricts() {
         let ctrl = this;
-        ctrl.delivererRegister.selectedDistricts = null;
+        // reset if there are previously-selected districts on UI
+        if(ctrl.hasOwnProperty("delivererRegister")) {
+            if(ctrl.delivererRegister.hasOwnProperty("selectedDistricts")) {
+                ctrl.delivererRegister.selectedDistricts = null;
+            }
+        }
     }
 
     submitUserRegistrationRequest(){
@@ -57,9 +62,6 @@ class ViewRegisterComponentController{
         let password = this.userRegister.password;
 
         this.UserService.register(email, password).then(()=> {
-/*
-            this.resetUserRegistrationForm();
-*/
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.userRegistrationError = "Error: " + obj.data;
@@ -93,12 +95,9 @@ class ViewRegisterComponentController{
         // https://stackoverflow.com/questions/43277458/how-to-specify-timestamp-format-when-converting-to-human-readable-string-in-js
         // https://momentjs.com/
 
-        console.log(name + " " + password + " " + surname + " " + email + " " + date + " " + phone + " " + address + " " + maxWeight + " " + selectedDistricts);
+        //console.log(name + " " + password + " " + surname + " " + email + " " + date + " " + phone + " " + address + " " + maxWeight + " " + selectedDistricts);
 
         this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedDistricts).then(()=> {
-/*
-            this.resetDelivererRegistrationForm();
-*/
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.delivererRegistrationError = "Error: " + obj.data;

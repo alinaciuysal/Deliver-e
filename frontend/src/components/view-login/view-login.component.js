@@ -29,13 +29,14 @@ class ViewLoginComponentController{
         this.loginError = {};
     }
 
-    submit(){
+    submit() {
         let email = this.login.email;
         let password = this.login.password;
         var ctrl = this;
 
-        this.UserService.login(email,password).then(()=> {
-            this.$state.go('mainPage',{});
+        this.UserService.login(email,password).then( function (response) {
+            ctrl.UserService.$window.localStorage['jwtToken'] = response.data.token;
+            ctrl.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.loginError = "Error: " + obj.data;
         });
