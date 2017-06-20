@@ -24,7 +24,7 @@ class AppHeaderComponentController{
         this.UserService = UserService;
 
         if(this.isAuthenticated()){
-            this.menuName = 'Welcome!' + this.getCurrentUserName()
+            this.menuName = this.getCurrentUser()
         }
         else{
             this.menuName = 'Welcome!'
@@ -46,11 +46,6 @@ class AppHeaderComponentController{
     getCurrentUser(){
         let user = this.UserService.getCurrentUser();
         return user.email;
-    }
-
-    getCurrentUserName(){
-        let user = this.UserService.getCurrentUser();
-        return user.name;
     }
 
     goHome(){
