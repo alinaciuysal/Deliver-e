@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 var Shop   = new mongoose.Schema({
-    // name: String,
+    name: String,
     address: String,
     photo: String,
     phone: String,
