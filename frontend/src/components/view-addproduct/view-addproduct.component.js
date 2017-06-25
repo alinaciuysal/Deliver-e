@@ -4,7 +4,7 @@
 
 'use strict';
 
-import UserService from './../../services/user/user.service';
+import ShopService from './../../services/shop/shop.service';
 
 import template from './view-addproduct.template.html';
 import './view-addproduct.style.css';
@@ -18,21 +18,23 @@ class ViewAddProductComponent {
     static get name() {
         return 'viewAddProduct';
     }
-
 }
 
 class ViewAddProductComponentController{
-    constructor($state,UserService){
+    constructor($state, $element, ShopService){
+        this.$element = $element;
         this.$state = $state;
-        this.UserService = UserService;
+        this.ShopService = ShopService;
     }
 
     $onInit() {
-        this.register = {};
+        let ctrl = this;
+        ctrl.register = {};
     }
 
     uploadProductPic(){
         // TODO: Upload pic
+        return "";
     }
 
     submitNewProduct(){
@@ -42,16 +44,24 @@ class ViewAddProductComponentController{
         let weightType = this.product.weightType;
         let productPrice = this.product.price;
         let productStock = this.product.stock;
-        let productStockInf = this.product.selected;
+        //let productStockInf = this.product.selected;
         let productDetails = this.product.productDetails;
+        let productPhoto = this.uploadProductPic();
 
-        console.log(productName + "   " + productCategory + "   " + productWeight + "   " + weightType + "   " + productPrice + "    " + productStock + "   " + productStockInf + "   " + productDetails);
+        console.log(productName + "   " + productCategory + "   " + productWeight + "   " + weightType + "   " + productPrice + "    " + productStock + "   " + productDetails);
 
+        if(weightType == "gram")
+            productWeight = productWeight / 1000;
         // TODO: API call
+        this.ShopService.addProduct(productName, productPrice, productCategory, productWeight, productStock, productDetails, productPhoto).then(()=> {
+            this.$state.go('mainPage',{});
+        }).catch(function(obj){
+            ctrl.addProductError = "Error: " + obj.data;
+        });
     }
 
     static get $inject(){
-        return ['$state', UserService.name];
+        return ['$state', '$element', ShopService.name];
     }
 }
 

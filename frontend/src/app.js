@@ -9,6 +9,7 @@ import 'angular-material/angular-material.css';
 import ngMdIcons from 'angular-material-icons';
 
 import UserService from './services/user/user';
+import ShopService from './services/shop/shop';
 import Routes from './config/routes';
 import Middlewares from './config/middlewares';
 import Icons from './config/icons';
@@ -29,6 +30,7 @@ let app = angular.module('app', [
         angularMaterial,
         ngMdIcons,
         UserService.name,
+        ShopService.name,
         AppContent.name,
         ViewRegister.name,
         ViewLogin.name,

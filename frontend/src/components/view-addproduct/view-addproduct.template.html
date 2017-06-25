@@ -66,11 +66,14 @@
                     </div>
                 </md-input-container>
 
+                <!--
                 &nbsp;&nbsp;<span>or</span>&nbsp;&nbsp;
 
                 <md-checkbox name="productStockInf" ng-model="$ctrl.product.selected" layout-align="center center">
                     Infinite
                 </md-checkbox><br>
+                -->
+                <br>
 
                 <label layout-align="center center">Product Details</label><br>
                 <md-input-container layout-align="center center">
@@ -85,7 +88,12 @@
 
                 <br><br><br>
 
-                <md-button class="md-raised" ng-disabled="!SubmitProduct.$valid" layout-align="center center" ng-click="$ctrl.submitNewProduct()">&nbsp;&nbsp;Submit&nbsp;&nbsp;</md-button>
+                <md-button class="md-raised" ng-disabled="!SubmitProduct.$valid" layout-align="center center" ng-click="$ctrl.submitNewProduct(); addProductSubmitted = true;">&nbsp;&nbsp;Submit&nbsp;&nbsp;</md-button><br>
+
+                <div ng-messages="$ctrl.addProductError" ng-if="addProductSubmitted && $ctrl.addProductError">
+                    <p>&nbsp;</p>
+                    <div ng-message="addProductError" class="error">{{$ctrl.addProductError}}</div>
+                </div>
 
             </md-list>
         </form>
