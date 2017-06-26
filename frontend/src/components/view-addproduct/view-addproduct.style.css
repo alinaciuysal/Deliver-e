@@ -8,6 +8,9 @@ h1 {
 .md-tab{
     text-transform: none
 }
+.md-card{
+    width: 700px;
+}
 .tabsdemoDynamicHeight md-content {
     background-color: transparent !important;
 }
