@@ -1,7 +1,16 @@
 footer {
-    max-height: 35px ;
+    /*
+    max-height: 50px;
+    */
+    background-color: #ab0012;
+/*
+    position: absolute;
+    bottom: 0;
+    width: 100%;*/
+    /* Set the fixed height of the footer here */
+    height: 30px;
 }
-
-footer > div > p {
-    margin-top: 4px;
+a {
+    color: ghostwhite;
+    text-decoration: underline;
 }

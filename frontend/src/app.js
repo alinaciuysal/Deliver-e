@@ -22,8 +22,9 @@ import ViewAvailableOrders from './components/view-availableorders/view-availabl
 import ViewMainPage from './components/view-mainpage/view-mainpage';
 import LeftMenu from './components/left-menu/left-menu.component';
 import ViewShops from './components/view-shops/view-shops';
-
-import jkAngularCarousel from 'angular-jk-carousel'
+import AboutUs from './components/aboutUs/aboutUs';
+import jkAngularCarousel from 'angular-jk-carousel';
+import Faq from './components/faq/faq';
 
 let app = angular.module('app', [
         uiRouter,
@@ -38,7 +39,9 @@ let app = angular.module('app', [
         ViewAddProduct.name,
         ViewAvailableOrders.name,
         LeftMenu.name,
+        AboutUs.name,
         ViewShops.name,
+        Faq.name,
         jkAngularCarousel
 ]).run(() => {
     console.log(`Starting the angular module`);

@@ -5,7 +5,9 @@ import template from './app-footer.template.html';
 import './app-footer.style.css';
 
 class AppFooterComponent {
-    constructor(){
+
+    constructor($state) {
+        this.$state = $state;
         this.controller = AppFooterComponentController;
         this.template = template;
     }
@@ -15,9 +17,24 @@ class AppFooterComponent {
     }
 }
 
-class AppFooterComponentController{
-    constructor(){
-        this.year = new Date().getFullYear();
+class AppFooterComponentController {
+
+    constructor($state){
+        this.$state = $state;
+    }
+
+    static get $inject(){
+        return ['$state', '$element'];
+    }
+
+    faqPage() {
+        var ctrl = this;
+        ctrl.$state.go('faq');
+    }
+
+    aboutPage() {
+        var ctrl = this;
+        ctrl.$state.go('about');
     }
 }
 

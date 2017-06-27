@@ -6,6 +6,10 @@ import RegisterComponent from './../components/view-register/view-register.compo
 import AddProductComponent from './../components/view-addproduct/view-addproduct.component';
 import AvailableOrdersComponent from './../components/view-availableorders/view-availableorders.component';
 import ShopsComponent from './../components/view-shops/view-shops.component';
+import AboutUsComponent from './../components/aboutUs/aboutUs.component';
+import FaqComponent from './../components/faq/faq.component';
+
+
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
 export default function config ($stateProvider, $urlRouterProvider){
@@ -43,6 +47,14 @@ export default function config ($stateProvider, $urlRouterProvider){
                     return $stateParams.type; //By putting this here... (STEP 1)
                 }]
             }
+        })
+        .state('about', {
+            url: '/about',
+            component: AboutUsComponent.name
+        })
+        .state('faq', {
+            url: '/faq',
+            component: FaqComponent.name
         })
 
 

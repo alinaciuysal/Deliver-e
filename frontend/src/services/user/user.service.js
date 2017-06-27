@@ -76,7 +76,8 @@ export default class UserService {
 
         let base64Url = token.split('.')[1];
         let base64 = base64Url.replace('-', '+').replace('_', '/');
-        return JSON.parse(this.$window.atob(base64)).user;
+        let user = JSON.parse(this.$window.atob(base64)).user;
+        return user;
     }
 
     isAuthenticated() {

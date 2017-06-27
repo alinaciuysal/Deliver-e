@@ -1,12 +1,15 @@
 <div layout="row" layout-fill ng-cloak>
-    <div layout="column" flex>
+    <div layout="column" layout-fill flex>
         <app-header></app-header>
-        <md-content flex layout-gt-sm="row">
-            <span flex="10"></span>
+
+        <md-content flex layout="column">
+            <span flex="6">
+                <nav-menu></nav-menu>
+            </span>
             <span flex="4"></span>
             <ui-view flex></ui-view>
             <span flex="10"></span>
         </md-content>
-        <app-footer></app-footer>
+        <app-footer flex="none"></app-footer>
     </div>
 </div>
