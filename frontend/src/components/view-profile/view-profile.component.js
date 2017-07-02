@@ -29,7 +29,10 @@ class ViewProfileController{
 
     $onInit() {
         let ctrl = this;
-        ctrl.register = {};
+        ctrl.user = {};
+        ctrl.user.name = "Test";
+        ctrl.user.surname = "Test";
+        ctrl.user.email = "test@gmail.com"
     }
 
 

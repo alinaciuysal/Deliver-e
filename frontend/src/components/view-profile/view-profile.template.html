@@ -11,7 +11,51 @@
     <md-content>
         <md-card class="md-card" layout-align="center center">
             <h2>Profile</h2>
+            <div id="userProfile">
+                <md-list>
+                    <b layout-align="center center" >Name:</b>
+                    <md-input-container style="padding-left: 2em"id="userNameField">
+                        <input type="text" name="userName" ng-disabled="true" ng-model="$ctrl.user.name">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Surname: </b>
+                    <md-input-container style="padding-left: 2em" id="userSurnameField">
+                        <input type="text" name="userSurname" ng-disabled="true" ng-model="$ctrl.user.surname">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">E-mail: </b>
+                    <md-input-container style="padding-left: 2em" id="userEmailField">
+                        <input type="email" name="userEmail" ng-disabled="true" ng-model="$ctrl.user.email">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Old Password: </b>
+                    <md-input-container style="padding-left: 2em" id="userOldPasswordField">
+                        <input type="password" name="userOldPassword" ng-model="$ctrl.user.oldPassword">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">New Password </b>
+                    <md-input-container style="padding-left: 2em" id="userNewPasswordField">
+                        <input type="password" name="userNewPassword" ng-model="$ctrl.user.newPassword">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">New Password (Again): </b>
+                    <md-input-container style="padding-left: 2em" id="userNewPasswordAgainField">
+                        <input type="password" name="userNewPasswordAgain" ng-model="$ctrl.user.newPasswordAgain">
+                    </md-input-container>
+                    <br><br>
+                </md-list>
+                <md-button class="md-raised" ng-click="$ctrl.changePassword()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button>
+            </div>
+            <div id="delivererProfile">
+                <md-list>
 
+                </md-list>
+            </div>
+            <div id="shopProfile">
+                <md-list>
+
+                </md-list>
+            </div>
         </md-card>
     </md-content>
 </div>
