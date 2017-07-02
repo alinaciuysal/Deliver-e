@@ -76,6 +76,13 @@ module.exports.customerSignup = function(req, res){
 
         res.status(201).json({token: createToken(user)});
     });
+
+    var basket = new Order({
+        totalPrice: 0,
+        status: "Basket",
+        orderer: user
+    });
+    basket.save();
 };
 
 module.exports.delivererSignup = function(req, res){

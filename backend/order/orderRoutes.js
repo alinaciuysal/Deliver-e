@@ -14,13 +14,7 @@ function orderRoutes(passport) {
     router.route('/')
     	.post(orderController.makeOrder)
     	.get(orderController.getAvailableOrders);
-
-    router.route('/:order_id')
-    	.get(orderController.getOrder);
-
-    router.route('/:order_id/accept')
-    	.post(orderController.acceptOrder)
-
+    	
     router.route('/basket')
     	.post(orderController.addBasket)
     	.delete(orderController.deleteBasket)
@@ -28,6 +22,13 @@ function orderRoutes(passport) {
 
 
     router.route('/history')
+
+    router.route('/:order_id')
+    	.get(orderController.getOrder);
+
+    router.route('/:order_id/accept')
+    	.post(orderController.acceptOrder)
+
     	.get(orderController.getOrderHistory);
 
 

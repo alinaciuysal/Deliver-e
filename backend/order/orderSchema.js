@@ -32,7 +32,7 @@ class OrderClass {
 		return this;
 	}
 	removeItem(item, amount) {
-        this.update({ "items.$.product": item }, { $substract: { "items.amount": amount }, $substract: { totalAmount: item.price } });
+        this.update({ "items.$.product": item }, { $substract : { "items.amount": amount }, $substract: { totalAmount: item.price } });
 		return this;
 	}
 }
