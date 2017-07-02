@@ -35,7 +35,10 @@ class ViewLoginComponentController{
         var ctrl = this;
 
         this.UserService.login(email,password).then( function (response) {
-            ctrl.UserService.$window.localStorage['jwtToken'] = response.data.token;
+            
+            ctrl.UserService.getCurrentUserDetails().then( function(response) {
+                ctrl.user = response.data;
+            });
             ctrl.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.loginError = "Error: " + obj.data;

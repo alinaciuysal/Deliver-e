@@ -1,4 +1,4 @@
-var User = require('../user/userSchema')
+var User = require('../user/userSchema');
 var Shop = require('./shopSchema');
 var Product = require('./productSchema');
 
