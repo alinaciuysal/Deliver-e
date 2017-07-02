@@ -6,6 +6,15 @@ var orderSchema   = new mongoose.Schema({
     	type: String,
     	enum: ["Basket", "Ordered", "Assigned", "Done"]
     },
+    totalWeight: {
+        type: Number,
+        default: 0
+    },
+    shop: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Shop'
+    },
+    deliveryTime: String,
     items: [{
         amount: { 
             type: Number,
