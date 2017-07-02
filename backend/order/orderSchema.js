@@ -1,14 +1,20 @@
 var mongoose = require('mongoose');
 
 var orderSchema   = new mongoose.Schema({
-    totalAmount: Number,
+    totalPrice: Number,
     status: {
     	type: String,
     	enum: ["Basket", "Ordered", "Assigned", "Done"]
     },
     items: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
+        amount: { 
+            type: Number,
+            default: 0
+        },
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        }
   	}],
     orderer: {
         type: mongoose.Schema.Types.ObjectId,
@@ -21,12 +27,12 @@ var orderSchema   = new mongoose.Schema({
 });
 
 class OrderClass {
-	addItem(item){
-		this.update({ $push: { items: item }, $add: { totalAmount: item.price } });
+	addItem(item, amount){
+		this.update({ "items.product": item }, { $add: { "items.amount": amount }, $add: { totalAmount: item.price } }, { upsert: true });
 		return this;
 	}
-	removeItem(item) {
-		this.update({ $pull: { items: item }, $substract: { totalAmount: item.price } });
+	removeItem(item, amount) {
+        this.update({ "items.$.product": item }, { $substract: { "items.amount": amount }, $substract: { totalAmount: item.price } });
 		return this;
 	}
 }
