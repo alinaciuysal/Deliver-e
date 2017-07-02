@@ -1,0 +1,44 @@
+<!--
+given ng-controller name here must be same with the one in respective component's js file
+-->
+
+<div layout="row" layout-align="left" layout-fill ng-cloak >
+    <left-menu></left-menu>
+
+    <md-content layout="row" layout-margin layout-wrap layout-align="center start">
+        <md-card id="deneme" style="width: 960px; padding-bottom: 35px">
+
+            <md-card-title style="max-height: 120px; min-height: 120px;" >
+                <md-card-title-text >
+
+                    <md-card-actions layout="row" layout-align="center center">
+                        <md-input-container layout="row" ng-model="search" style="max-width:100%; width:100%" flex>
+                            <input  ng-model="search" placeholder="Search products" placeholder="enter search">
+                        </md-input-container>
+                        <md-button layout="row" aria-label="Search" ng-click="$ctrl.search()">
+                            <ng-md-icon icon="search" ></ng-md-icon>
+                        </md-button>
+                    </md-card-actions>
+
+                    <div class="pageShopTitle" style="padding-top: 35px"><b>
+                        {{$ctrl.name}}:
+                    </b></div>
+
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-card-content  layout="row" layout-align="left start" ng-if="$ctrl.shoplist" ng-repeat="col in [] | range:$ctrl.numCol" flex>
+
+                <md-card  flex="50" ng-repeat="row in [] | range:2" ng-if="$ctrl.shoplist[2*col+row]" ui-sref="shop({shopId:{{$ctrl.shoplist[2*col+row].shopId}} })">
+
+                    <md-card-content >
+                        <h2>{{$ctrl.shoplist[2*col+row].name}}</h2>
+                        {{$ctrl.shoplist[2*col+row].desc}}
+                    </md-card-content>
+                </md-card>
+
+            </md-card-content>
+
+        </md-card>
+    </md-content>
+</div>

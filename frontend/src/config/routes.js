@@ -6,7 +6,8 @@ import RegisterComponent from './../components/view-register/view-register.compo
 import AddProductComponent from './../components/view-addproduct/view-addproduct.component';
 import ProfileComponent from './../components/view-profile/view-profile.component';
 import AvailableOrdersComponent from './../components/view-availableorders/view-availableorders.component';
-import ShopsComponent from './../components/view-shops/view-shops.component';
+import ShopsListComponent from '../components/view-shops-list/view-shops-list.component';
+import ShopPageComponent from './../components/view-shop-page/view-shop-page.component';
 import AboutUsComponent from './../components/aboutUs/aboutUs.component';
 import FaqComponent from './../components/faq/faq.component';
 
@@ -45,11 +46,21 @@ export default function config ($stateProvider, $urlRouterProvider){
         })
         .state('shops', {
             url: '/shops/:type',
-            component: ShopsComponent.name,
+            component: ShopsListComponent.name,
             params: { type: null },
             resolve: {
                 type: ['$stateParams', function ($stateParams) {
-                    return $stateParams.type; //By putting this here... (STEP 1)
+                    return $stateParams.type;
+                }]
+            }
+        })
+        .state('shop', {
+            url: '/shop/:shopId',
+            component: ShopPageComponent.name,
+            params: { type: null },
+            resolve: {
+                type: ['$stateParams', function ($stateParams) {
+                    return $stateParams.shopId;
                 }]
             }
         })

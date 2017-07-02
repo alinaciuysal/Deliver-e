@@ -1,40 +1,33 @@
 
 'use strict';
 
-import template from './view-mainpage.template.html';
+import template from './view-shop-page.html';
 import UserService from './../../services/user/user.service';
-import MainPageService from './../../services/main/main.service';
 
-import './view-mainpage.style.css'
-
-
-class ViewMainPageComponent {
+class ViewShopPageComponent {
     constructor(){
-        this.controller = ViewMainPageComponentController;
+        this.controller = ViewShopPageController;
         this.template = template;
-
     }
 
     static get name() {
-        return 'viewMainPage';
+        return 'viewShopPage';
     }
 }
 
-class ViewMainPageComponentController {
+class ViewShopPageController {
 
-    constructor($state, UserService){
+    constructor($state, UserService, $stateParams){
         this.$state = $state;
         this.UserService = UserService;
-        this.dataArray = [
-            {  src: 'http://lorempixel.com/960/300/food/1'  },
-            {  src: 'http://lorempixel.com/960/300/food/2'  },
-            {  src: 'http://lorempixel.com/960/300/food/4'  },
-            {  src: 'http://lorempixel.com/960/300/food/5'  },
-            {  src: 'http://lorempixel.com/960/300/food/6'  }
-            // {  src: 'img/imgTest.png'  }
-        ];
-        this.currentIndex = 0;
 
+        this.shopId = this.$state.params.shopId;
+
+        console.log(this.shopId);
+
+        ///GET SHOP BY ID
+
+        this.name = "Dummy Shop Name"
         this.products = [
             {  name: "Product1", src: 'img/asian/asian1.jpg', desc:"description" },
             {  name: "Product2", src: 'img/asian/asian2.jpg', desc:"description"  },
@@ -43,19 +36,17 @@ class ViewMainPageComponentController {
             {  name: "Product5", src: 'img/asian/asian1.jpg', desc:"description"  },
             {  name: "Product6", src: 'img/asian/asian2.jpg', desc:"description"  }
         ];
-
         this.numCol = this.products.length/4;
         if(this.products.length%4!=0) this.numCol++;
-
     }
 
     $onInit() {
-        console.log("ViewMainPageComponentController onInit works");
+        console.log("ViewShopPageController onInit works");
     }
 
     static get $inject(){
-        return ['$state', UserService.name];
+        return ['$state', UserService.name, '$stateParams', '$http'];
     }
 }
 
-export default ViewMainPageComponent;
+export default ViewShopPageComponent;

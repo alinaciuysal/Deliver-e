@@ -1,14 +1,14 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<!--
+given ng-controller name here must be same with the one in respective component's js file
+-->
 
 <div layout="row" layout-align="left" layout-fill ng-cloak >
-     <!--ng-controller="CarouselController">-->
     <left-menu></left-menu>
 
     <md-content layout="row" layout-margin layout-wrap layout-align="center start">
         <md-card id="deneme" style="width: 960px; padding-bottom: 35px">
 
-            <md-card-title style="max-height: 360px; min-height: 360px;" >
+            <md-card-title style="max-height: 120px; min-height: 120px;" >
                 <md-card-title-text >
 
                     <md-card-actions layout="row" layout-align="center center">
@@ -20,28 +20,14 @@
                         </md-button>
                     </md-card-actions>
 
-                    <md-card-actions  layout="row" layout-align="center center" style="padding-top: 35px" >
-                        <jk-carousel
-                                style="width: 100%"
-                            data="$ctrl.dataArray"
-                            current-index="$ctrl.currentIndex"
-
-                            item-template-url="'carousel.html'"
-                            max-width="{{document.getElementById('deneme').clientWidth}}"
-                            max-height="300"
-                            auto-slide="true"
-                            auto-slide-time="2000" >
-                        </jk-carousel>
-                    </md-card-actions>
-
                     <div class="pageShopTitle" style="padding-top: 35px"><b>
-                        All Shops:
+                        {{$ctrl.name}}:
                     </b></div>
 
                 </md-card-title-text>
             </md-card-title>
 
-            <md-card-content  layout="row" layout-align="left start" ng-repeat="col in [] | range:$ctrl.numCol" flex>
+            <md-card-content  layout="row" layout-align="left start" ng-if="$ctrl.products" ng-repeat="col in [] | range:$ctrl.numCol" flex>
 
                 <md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="$ctrl.products[4*col+row]">
                     <img ng-src="{{$ctrl.products[4*col+row].src}}">
