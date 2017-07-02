@@ -15,4 +15,15 @@ export default angular.module('AppView', [
         LeftMenu.name,
         NavMenu.name
     ])
-    .component(AppContentComponent.name, new AppContentComponent);
+    .component(AppContentComponent.name, new AppContentComponent)
+    .filter('range', function() {
+        return function (input, total) {
+            total = parseInt(total);
+
+            for (var i = 0; i < total; i++) {
+                input.push(i);
+            }
+
+            return input;
+        }
+    });

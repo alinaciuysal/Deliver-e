@@ -45,3 +45,12 @@ h1 {
     outline: none; }
 .jk-carousel .radio-buttons-container md-radio-button .md-off {
     border-color: #ffffff; }
+
+.parent {
+    overflow: hidden;
+}
+.card img {
+    width: 80%;
+    height: auto;
+}
+

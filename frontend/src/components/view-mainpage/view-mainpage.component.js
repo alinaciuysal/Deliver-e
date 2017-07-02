@@ -26,18 +26,27 @@ class ViewMainPageComponentController {
         this.$state = $state;
         this.UserService = UserService;
         this.dataArray = [
-            {  src: 'http://lorempixel.com/800/200/food/1'  },
-            {  src: 'http://lorempixel.com/800/200/food/2'  },
-            {  src: 'http://lorempixel.com/800/200/food/4'  },
-            {  src: 'http://lorempixel.com/800/200/food/5'  },
-            {  src: 'http://lorempixel.com/800/200/food/6'  },
-            {  src: 'img/imgTest.png'  }
+            {  src: 'http://lorempixel.com/960/300/food/1'  },
+            {  src: 'http://lorempixel.com/960/300/food/2'  },
+            {  src: 'http://lorempixel.com/960/300/food/4'  },
+            {  src: 'http://lorempixel.com/960/300/food/5'  },
+            {  src: 'http://lorempixel.com/960/300/food/6'  }
+            // {  src: 'img/imgTest.png'  }
         ];
         this.currentIndex = 0;
+
         this.products = [
-            {  src: 'img/asian/asian1.jpg'  },
-            {  src: 'img/asian/asian2.jpg'  }
+            {  name: "Product1", src: 'img/asian/asian1.jpg', desc:"hhhhh" },
+            {  name: "Product2", src: 'img/asian/asian2.jpg', desc:"hhhhh"  },
+            {  name: "Product3", src: 'img/asian/asian1.jpg', desc:"hhhhh"  },
+            {  name: "Product4", src: 'img/asian/asian2.jpg', desc:"hhhhh"  },
+            {  name: "Product5", src: 'img/asian/asian1.jpg', desc:"hhhhh"  },
+            {  name: "Product6", src: 'img/asian/asian2.jpg', desc:"hhhhh"  }
         ]
+
+        this.numCol = this.products.length/4;
+        if(this.products.length%4!=0) this.numCol++;
+
     }
 
     $onInit() {
