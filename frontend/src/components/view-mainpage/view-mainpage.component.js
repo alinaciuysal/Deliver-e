@@ -36,12 +36,12 @@ class ViewMainPageComponentController {
         this.currentIndex = 0;
 
         this.products = [
-            {  name: "Product1", src: 'img/asian/asian1.jpg', desc:"description" },
-            {  name: "Product2", src: 'img/asian/asian2.jpg', desc:"description"  },
-            {  name: "Product3", src: 'img/asian/asian1.jpg', desc:"description"  },
-            {  name: "Product4", src: 'img/asian/asian2.jpg', desc:"description"  },
-            {  name: "Product5", src: 'img/asian/asian1.jpg', desc:"description"  },
-            {  name: "Product6", src: 'img/asian/asian2.jpg', desc:"description"  }
+            {  name: "Product1", id: "0001", src: 'img/asian/asian1.jpg', desc:"description" },
+            {  name: "Product2", id: "0002", src: 'img/asian/asian2.jpg', desc:"description"  },
+            {  name: "Product3", id: "0003", src: 'img/asian/asian1.jpg', desc:"description"  },
+            {  name: "Product4", id: "0004", src: 'img/asian/asian2.jpg', desc:"description"  },
+            {  name: "Product5", id: "0005", src: 'img/asian/asian1.jpg', desc:"description"  },
+            {  name: "Product6", id: "0006", src: 'img/asian/asian2.jpg', desc:"description"  }
         ];
 
         this.numCol = this.products.length/4;

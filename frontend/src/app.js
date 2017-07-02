@@ -24,6 +24,7 @@ import ViewMainPage from './components/view-mainpage/view-mainpage';
 import LeftMenu from './components/left-menu/left-menu';
 import ViewShopsList from './components/view-shops-list/view-shops-list';
 import ViewShopPage from './components/view-shop-page/view-shop-page';
+import ViewProductPage from './components/view-product-page/view-product-page';
 import AboutUs from './components/aboutUs/aboutUs';
 import jkAngularCarousel from 'angular-jk-carousel';
 import Faq from './components/faq/faq';
@@ -45,6 +46,7 @@ let app = angular.module('app', [
         AboutUs.name,
         ViewShopsList.name,
         ViewShopPage.name,
+        ViewProductPage.name,
         Faq.name,
         jkAngularCarousel
 ]).run(() => {

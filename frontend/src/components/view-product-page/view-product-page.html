@@ -8,7 +8,7 @@ given ng-controller name here must be same with the one in respective component'
     <md-content layout="row" layout-margin layout-wrap layout-align="center start">
         <md-card id="deneme" style="width: 960px; padding-bottom: 35px">
 
-            <md-card-title style="max-height: 150px; min-height: 150px;" >
+            <md-card-title style="max-height: 50px; min-height: 50px;" >
                 <md-card-title-text >
 
                     <md-card-actions layout="row" layout-align="center center">
@@ -20,24 +20,34 @@ given ng-controller name here must be same with the one in respective component'
                         </md-button>
                     </md-card-actions>
 
-                    <div class="pageShopTitle" style="padding-top: 25px"><b>
-                        {{$ctrl.name}}:
-                    </b></div>
-
-                    <div style="padding-top: 15px">
-                        {{$ctrl.desc}}
-                    </div>
-
                 </md-card-title-text>
             </md-card-title>
 
-            <md-card-content  layout="row" layout-align="left start" ng-if="$ctrl.products" ng-repeat="col in [] | range:$ctrl.numCol" flex>
+            <md-card-content  layout="row" layout-align="left start" >
 
-                <md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="$ctrl.products[4*col+row]" ui-sref="product({productId:{{$ctrl.products[4*col+row].id}} })">
-                    <img ng-src="{{$ctrl.products[4*col+row].src}}">
-                    <md-card-content >
-                        <h2>{{$ctrl.products[4*col+row].name}}</h2>
-                        {{$ctrl.products[4*col+row].desc}}
+                <md-card  flex="50" >
+                    <img ng-src="{{$ctrl.image}}">
+                </md-card>
+
+                <md-card  flex="50" >
+                    <md-card-content style="padding-bottom: 25px">
+
+                        <div class="pageShopTitle" style="padding-top: 5px"><b>
+                            {{$ctrl.name}}
+                        </b></div>
+
+                        <div style="padding-top: 15px">
+                            <b>Price:  </b> {{$ctrl.price}}
+                        </div>
+
+                        <div style="padding-top: 15px">
+                            <b>Category:  </b> {{$ctrl.category}}
+                        </div>
+
+                        <div style="padding-top: 15px">
+                            {{$ctrl.desc}}
+                        </div>
+
                     </md-card-content>
                 </md-card>
 

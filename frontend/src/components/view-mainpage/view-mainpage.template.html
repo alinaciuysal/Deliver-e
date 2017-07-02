@@ -43,7 +43,7 @@
 
             <md-card-content  layout="row" layout-align="left start" ng-repeat="col in [] | range:$ctrl.numCol" flex>
 
-                <md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="$ctrl.products[4*col+row]">
+                <md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="$ctrl.products[4*col+row]" ui-sref="product({productId:{{$ctrl.products[4*col+row].id}} })">
                     <img ng-src="{{$ctrl.products[4*col+row].src}}">
                     <md-card-content >
                         <h2>{{$ctrl.products[4*col+row].name}}</h2>

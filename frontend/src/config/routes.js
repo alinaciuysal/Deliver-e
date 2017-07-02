@@ -8,6 +8,7 @@ import ProfileComponent from './../components/view-profile/view-profile.componen
 import AvailableOrdersComponent from './../components/view-availableorders/view-availableorders.component';
 import ShopsListComponent from '../components/view-shops-list/view-shops-list.component';
 import ShopPageComponent from './../components/view-shop-page/view-shop-page.component';
+import ProductPageComponent from './../components/view-product-page/view-product-page.component';
 import AboutUsComponent from './../components/aboutUs/aboutUs.component';
 import FaqComponent from './../components/faq/faq.component';
 
@@ -59,8 +60,18 @@ export default function config ($stateProvider, $urlRouterProvider){
             component: ShopPageComponent.name,
             params: { type: null },
             resolve: {
-                type: ['$stateParams', function ($stateParams) {
+                shopId: ['$stateParams', function ($stateParams) {
                     return $stateParams.shopId;
+                }]
+            }
+        })
+        .state('product', {
+            url: '/product/:productId',
+            component: ProductPageComponent.name,
+            params: { type: null },
+            resolve: {
+                productId: ['$stateParams', function ($stateParams) {
+                    return $stateParams.productId;
                 }]
             }
         })
