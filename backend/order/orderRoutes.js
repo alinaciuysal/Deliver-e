@@ -11,8 +11,25 @@ function orderRoutes(passport) {
     //middleware
     router.use(mw);
 
+    router.route('/')
+    	.post(orderController.makeOrder)
+    	.get(orderController.getAvailableOrders);
+
+    router.route('/:order_id')
+    	.get(orderController.getOrder);
+
+    router.route('/:order_id/accept')
+    	.post(orderController.acceptOrder)
+
     router.route('/basket')
+    	.post(orderController.addBasket)
+    	.delete(orderController.deleteBasket)
         .get(orderController.getBasket);
+
+
+    router.route('/history')
+    	.get(orderController.getOrderHistory);
+
 
     return router;
 }
