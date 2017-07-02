@@ -66,8 +66,11 @@ export default class UserService {
         });
     }
 
-    logout(){
+    logout() {
         this.$window.localStorage.removeItem('jwtToken');
+        if (this.user) {
+            this.user = null;
+        }
     }
 
     getCurrentUser() {
@@ -82,8 +85,12 @@ export default class UserService {
     }
 
     getCurrentUserDetails() {
-        if (this.user) return this.user;
-        return this.$http.get(`${ this.API_URL }/user`);
+        if (!this.user) {
+            this.user = this.$http.get(`${ this.API_URL }/user`);
+            return this.user;
+        } else {
+            return this.user;
+        }
     }
 
     isAuthenticated() {
