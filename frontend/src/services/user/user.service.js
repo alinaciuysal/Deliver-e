@@ -11,6 +11,7 @@ export default class UserService {
         this.$http = $http;
         this.$window = $window;
         this.API_URL = API_URL;
+        this.user = null;
 
     }
 
@@ -65,8 +66,11 @@ export default class UserService {
         });
     }
 
-    logout(){
+    logout() {
         this.$window.localStorage.removeItem('jwtToken');
+        if (this.user) {
+            this.user = null;
+        }
     }
 
     getCurrentUser() {
@@ -78,6 +82,15 @@ export default class UserService {
         let base64 = base64Url.replace('-', '+').replace('_', '/');
         let user = JSON.parse(this.$window.atob(base64)).user;
         return user;
+    }
+
+    getCurrentUserDetails() {
+        if (!this.user) {
+            this.user = this.$http.get(`${ this.API_URL }/user`);
+            return this.user;
+        } else {
+            return this.user;
+        }
     }
 
     isAuthenticated() {

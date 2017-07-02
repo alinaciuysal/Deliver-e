@@ -21,7 +21,7 @@
             </md-button>
             <md-menu-content width="4">
                 <md-menu-item ng-if="$ctrl.isAuthenticated()">
-                    <md-button>
+                    <md-button ng-click="$ctrl.goToProfilePage()">
                         <md-icon md-menu-align-target><ng-md-icon icon="account_circle" ></ng-md-icon></md-icon>
                         {{$ctrl.getCurrentUser()}}
                     </md-button>

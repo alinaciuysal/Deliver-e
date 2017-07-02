@@ -1,0 +1,12 @@
+h1 {
+    color: darkorange;
+}
+.md-tab{
+    text-transform: none
+}
+.md-card{
+    width: 700px;
+}
+md-input-container{
+    margin: 0;
+}
