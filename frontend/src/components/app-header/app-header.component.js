@@ -63,6 +63,10 @@ class AppHeaderComponentController{
         this.$state.go('mainPage',{});
     }
 
+    goToProfilePage(){
+        this.$state.go('profile',{});
+    }
+
     static get $inject(){
         return ['$state', UserService.name];
     }
