@@ -13,10 +13,6 @@ module.exports.login = function(req, res){
         res.status(400).send('password required');
         return;
     }
-    // if(!req.body.name){
-    //     res.status(400).send('name required');
-    //     return;
-    // }
 
     User.findOne({email: req.body.email}, function(err, user){
 
@@ -183,6 +179,18 @@ module.exports.getUser = function(req, res) {
     delete user._doc.password;
     res.status(200).json(user);
     return;
+};
+
+module.exports.getUserById = function(req, res) {
+    User.findById(req.params.user_id, function (err, user) {
+        if (err) {
+            res.sendStatus(500);
+            return;
+        }
+        delete user._doc.password;
+        res.status(200).json(user);
+        return;
+    });
 };
 
 module.exports.editUser = function(req, res) {
