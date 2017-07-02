@@ -38,6 +38,7 @@ class ViewLoginComponentController{
             
             ctrl.UserService.getCurrentUserDetails().then( function(response) {
                 ctrl.user = response.data;
+                console.log("UserService getCurrentUserDetails ", ctrl.user);
             });
             ctrl.$state.go('mainPage',{});
         }).catch(function(obj){

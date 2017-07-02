@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Product</title>
+    <title>Profile Page</title>
 </head>
 <body>
 <div>&nbsp;</div>
-<div layout="row" layout-align="center center" layout-margin>
-
+<div layout="row" layout-align="center center" layout-margin ng-init="$ctrl.initializeController()">
     <md-content>
         <md-card class="md-card" layout-align="center center">
             <h2>Profile</h2>
-            <div id="userProfile" style="display: none">
+            <div id="userProfile" ng-show="$ctrl.user.type==='customer'">
                 <md-list>
                     <b layout-align="center center" >Name:</b>
                     <md-input-container style="padding-left: 2em"id="userNameField">
@@ -44,9 +43,9 @@
                     </md-input-container>
                     <br>
                 </md-list>
-                <md-button class="md-raised" ng-click="$ctrl.changePassword()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
+                <md-button class="md-raised" ng-click="$ctrl.changePasswordForUser()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
             </div>
-            <div id="delivererProfile">
+            <div id="delivererProfile" ng-show="$ctrl.user.type==='deliverer'">
                 <md-list>
                     <b layout-align="center center" >Name:</b>
                     <md-input-container style="padding-left: 2em"id="delivererNameField">
@@ -99,9 +98,9 @@
                     </md-input-container>
                     <br>
                 </md-list>
-                <md-button class="md-raised" ng-click="$ctrl.changePassword()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
+                <md-button class="md-raised" ng-click="$ctrl.changePasswordForDeliverer()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
             </div>
-            <div id="shopProfile" style="display: none">
+            <div id="shopProfile" ng-show="$ctrl.user.type==='shop'">
                 <md-list>
                     <b layout-align="center center" >Shop Name:</b>
                     <md-input-container style="padding-left: 2em"id="shopNameField">
@@ -110,7 +109,7 @@
                     <br>
                     <b layout-align="center center">Address: </b>
                     <md-input-container style="padding-left: 2em" id="shopAddressField">
-                        <input type="text" name="shopAddress" ng-disabled="true" ng-model="$ctrl.user.address">
+                        <input type="text" name="shopAddress" ng-disabled="true" ng-model="$ctrl.user.shopAddress">
                     </md-input-container>
                     <br>
                     <b layout-align="center center">E-mail: </b>
@@ -139,7 +138,7 @@
                     </md-input-container>
                     <br>
                 </md-list>
-                <md-button class="md-raised" ng-click="$ctrl.changePassword()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
+                <md-button class="md-raised" ng-click="$ctrl.changePasswordForShop()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
             </div>
         </md-card>
     </md-content>
