@@ -11,7 +11,7 @@
     <md-content>
         <md-card class="md-card" layout-align="center center">
             <h2>Profile</h2>
-            <div id="userProfile">
+            <div id="userProfile" style="display: none">
                 <md-list>
                     <b layout-align="center center" >Name:</b>
                     <md-input-container style="padding-left: 2em"id="userNameField">
@@ -42,19 +42,104 @@
                     <md-input-container style="padding-left: 2em" id="userNewPasswordAgainField">
                         <input type="password" name="userNewPasswordAgain" ng-model="$ctrl.user.newPasswordAgain">
                     </md-input-container>
-                    <br><br>
+                    <br>
                 </md-list>
-                <md-button class="md-raised" ng-click="$ctrl.changePassword()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button>
+                <md-button class="md-raised" ng-click="$ctrl.changePassword()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
             </div>
             <div id="delivererProfile">
                 <md-list>
-
+                    <b layout-align="center center" >Name:</b>
+                    <md-input-container style="padding-left: 2em"id="delivererNameField">
+                        <input type="text" name="delivererName" ng-disabled="true" ng-model="$ctrl.user.name">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Surname: </b>
+                    <md-input-container style="padding-left: 2em" id="delivererSurnameField">
+                        <input type="text" name="delivererSurname" ng-disabled="true" ng-model="$ctrl.user.surname">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Birth Date: </b>
+                    <md-input-container style="padding-left: 2em" id="delivererBirthDateField">
+                        <input type="date" name="delivererBirthDate" ng-disabled="true" ng-model="$ctrl.user.birthDate">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">E-mail: </b>
+                    <md-input-container style="padding-left: 2em" id="delivererEmailField">
+                        <input type="email" name="delivererEmail" ng-disabled="true" ng-model="$ctrl.user.email">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Address: </b>
+                    <md-input-container style="padding-left: 2em" id="delivererAddressField">
+                        <input type="text" name="delivererAddress" ng-model="$ctrl.user.address">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Phone Number: </b>
+                    <md-input-container style="padding-left: 2em" id="delivererPhoneNumberField">
+                        <input type="tel" name="delivererPhoneNumber" ng-model="$ctrl.user.phoneNumber">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Maximum Delivery Weight (kg): </b>
+                    <md-input-container style="padding-left: 2em" id="delivererMaxWeightField">
+                        <input type="number" name="delivererMaxWeight" ng-model="$ctrl.user.maxWeight">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Old Password: </b>
+                    <md-input-container style="padding-left: 2em" id="delivererOldPasswordField">
+                        <input type="password" name="delivererOldPassword" ng-model="$ctrl.user.oldPassword">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">New Password </b>
+                    <md-input-container style="padding-left: 2em" id="delivererNewPasswordField">
+                        <input type="password" name="delivererNewPassword" ng-model="$ctrl.user.newPassword">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">New Password (Again): </b>
+                    <md-input-container style="padding-left: 2em" id="delivererNewPasswordAgainField">
+                        <input type="password" name="delivererNewPasswordAgain" ng-model="$ctrl.user.newPasswordAgain">
+                    </md-input-container>
+                    <br>
                 </md-list>
+                <md-button class="md-raised" ng-click="$ctrl.changePassword()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
             </div>
-            <div id="shopProfile">
+            <div id="shopProfile" style="display: none">
                 <md-list>
-
+                    <b layout-align="center center" >Shop Name:</b>
+                    <md-input-container style="padding-left: 2em"id="shopNameField">
+                        <input type="text" name="shopName" ng-disabled="true" ng-model="$ctrl.user.name">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Address: </b>
+                    <md-input-container style="padding-left: 2em" id="shopAddressField">
+                        <input type="text" name="shopAddress" ng-disabled="true" ng-model="$ctrl.user.address">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">E-mail: </b>
+                    <md-input-container style="padding-left: 2em" id="shopEmailField">
+                        <input type="email" name="shopEmail" ng-disabled="true" ng-model="$ctrl.user.email">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Phone Number: </b>
+                    <md-input-container style="padding-left: 2em" id="shopPhoneNumberField">
+                        <input type="tel" name="shopPhoneNumber" ng-model="$ctrl.user.phoneNumber">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Old Password: </b>
+                    <md-input-container style="padding-left: 2em" id="shopOldPasswordField">
+                        <input type="password" name="shopOldPassword" ng-model="$ctrl.user.oldPassword">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">New Password </b>
+                    <md-input-container style="padding-left: 2em" id="shopNewPasswordField">
+                        <input type="password" name="shopNewPassword" ng-model="$ctrl.user.newPassword">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">New Password (Again): </b>
+                    <md-input-container style="padding-left: 2em" id="shopNewPasswordAgainField">
+                        <input type="password" name="shopNewPasswordAgain" ng-model="$ctrl.user.newPasswordAgain">
+                    </md-input-container>
+                    <br>
                 </md-list>
+                <md-button class="md-raised" ng-click="$ctrl.changePassword()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
             </div>
         </md-card>
     </md-content>

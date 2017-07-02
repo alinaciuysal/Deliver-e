@@ -32,7 +32,11 @@ class ViewProfileController{
         ctrl.user = {};
         ctrl.user.name = "Test";
         ctrl.user.surname = "Test";
-        ctrl.user.email = "test@gmail.com"
+        ctrl.user.email = "test@gmail.com";
+        ctrl.user.birthDate = new Date("23.04.1990");
+        ctrl.user.address = "Schellingstr. 18";
+        ctrl.user.phoneNumber = "+4917612349988";
+        ctrl.user.maxWeight = 29.99;
     }
 
 
