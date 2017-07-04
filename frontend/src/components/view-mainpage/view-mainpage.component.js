@@ -22,9 +22,12 @@ class ViewMainPageComponent {
 
 class ViewMainPageComponentController {
 
-    constructor($state, UserService){
+    constructor($state, $rootScope, $location, UserService){
         this.$state = $state;
+        this.$rootScope = $rootScope;
+        this.$location = $location;
         this.UserService = UserService;
+
         this.dataArray = [
             {  src: 'http://lorempixel.com/960/300/food/1'  },
             {  src: 'http://lorempixel.com/960/300/food/2'  },
@@ -50,11 +53,11 @@ class ViewMainPageComponentController {
     }
 
     $onInit() {
-        console.log("ViewMainPageComponentController onInit works");
+        this.$rootScope.$emit("menu-changed", this.$location.url());
     }
 
     static get $inject(){
-        return ['$state', UserService.name];
+        return ['$state', '$rootScope', '$location', UserService.name];
     }
 }
 

@@ -1,8 +1,9 @@
 <navmenu>
-    <div layout="row">
-        <div class="navElem">Main Page</div>
-        <div class="navElem">&nbsp; >> &nbsp;</div>
-        <div class="navElem">TEST TEST</div>
+    <div layout="row" ng-init="$ctrl.initializeNavBar()">
+        <div class="navElem" ng-repeat="element in $ctrl.navigationElements">
+            <span>{{element}}</span>
+            <span ng-show="!$last">&nbsp; >> &nbsp;</span>
+        </div>
     </div>
 </navmenu>
 

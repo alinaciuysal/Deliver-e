@@ -22,8 +22,10 @@ class ViewAvailableOrdersComponent {
 }
 
 class ViewAvailableOrdersComponentController{
-    constructor($state,UserService){
+    constructor($state, $rootScope, $location, UserService){
         this.$state = $state;
+        this.$rootScope = $rootScope;
+        this.$location = $location;
         this.UserService = UserService;
         angular.module('tabsDemoDynamicHeight', ['ngMaterial']);
     }
@@ -61,6 +63,9 @@ class ViewAvailableOrdersComponentController{
             }
         ];
         this.availableOrders = availableOrders;
+
+
+        this.$rootScope.$emit("menu-changed", this.$location.url());
     }
 
     rejectOrder(orderNo){
@@ -72,7 +77,7 @@ class ViewAvailableOrdersComponentController{
     }
 
     static get $inject(){
-        return ['$state', UserService.name];
+        return ['$state', '$rootScope', '$location', UserService.name];
     }
 }
 

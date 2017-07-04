@@ -19,14 +19,17 @@ class ViewLoginComponent {
 }
 
 class ViewLoginComponentController{
-    constructor($state,UserService){
+    constructor($state, $rootScope, $location, UserService){
         this.$state = $state;
         this.UserService = UserService;
+        this.$rootScope = $rootScope;
+        this.$location = $location;
     }
 
     $onInit() {
         this.login = {};
         this.loginError = {};
+        this.$rootScope.$emit("menu-changed", this.$location.url());
     }
 
     submit() {
@@ -47,7 +50,7 @@ class ViewLoginComponentController{
     }
 
     static get $inject(){
-        return ['$state', UserService.name];
+        return ['$state', '$rootScope', '$location', UserService.name];
     }
 }
 

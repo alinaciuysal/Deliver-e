@@ -17,8 +17,10 @@ class ViewProductPageComponent {
 
 class ViewProductPageController {
 
-    constructor($state, UserService, $stateParams){
+    constructor($state,  $rootScope, $location, UserService){
         this.$state = $state;
+        this.$rootScope = $rootScope;
+        this.$location = $location;
         this.UserService = UserService;
 
         this.productId = this.$state.params.productId;
@@ -37,11 +39,11 @@ class ViewProductPageController {
     }
 
     $onInit() {
-        console.log("ViewProductPageController onInit works");
+        this.$rootScope.$emit("menu-changed", this.$location.url());
     }
 
     static get $inject(){
-        return ['$state', UserService.name, '$stateParams', '$http'];
+        return ['$state', '$rootScope', '$location', UserService.name, '$http'];
     }
 }
 

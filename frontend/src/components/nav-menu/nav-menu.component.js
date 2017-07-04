@@ -5,6 +5,7 @@ import template from "./nav-menu.template.html";
 import './nav-menu.style.css';
 
 
+/* Reference: see last answer at https://stackoverflow.com/questions/36033940/how-to-pass-data-between-sibling-components-without-using-scope */
 class NavMenuComponent {
     constructor(){
         this.controller = NavMenuController;
@@ -17,17 +18,34 @@ class NavMenuComponent {
 }
 
 class NavMenuController {
-    constructor($state) {
+
+    constructor($state, $location, $rootScope) {
+        var ctrl = this;
         this.$state = $state;
+        this.$location = $location;
+        this.$rootScope = $rootScope;
+        this.$rootScope.$on("menu-changed", function(evt, arg) {
+            ctrl.initializeNavBar(arg);
+        });
     }
 
     static get $inject(){
-        return ['$state'];
+        return ['$state', '$location', '$rootScope'];
     }
 
-    $onInit() {
+    initializeNavBar(arg) {
         let ctrl = this;
-        ctrl.pages = ["Test", "Test2"];
+
+        if (arg !== undefined) {
+            arg = arg.substr(1);
+            if(arg !== "mainPage") {
+                ctrl.navigationElements = ["Main Page", arg];
+            } else {
+                ctrl.navigationElements = ["Main Page"];
+            }
+        } else {
+            ctrl.navigationElements = ["Main Page"];
+        }
     }
 }
 

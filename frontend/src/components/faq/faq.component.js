@@ -17,12 +17,18 @@ class FaqComponent {
 }
 
 class FaqController {
-    constructor($state) {
+    constructor($state, $rootScope, $location) {
         this.$state = $state;
+        this.$rootScope = $rootScope;
+        this.$location = $location;
+    }
+
+    $onInit() {
+        this.$rootScope.$emit("menu-changed", this.$location.url());
     }
 
     static get $inject(){
-        return ['$state'];
+        return ['$state', '$rootScope', '$location'];
     }
 }
 

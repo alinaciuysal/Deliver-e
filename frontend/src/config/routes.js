@@ -76,7 +76,7 @@ export default function config ($stateProvider, $urlRouterProvider){
             }
         })
         .state('about', {
-            url: '/about',
+            url: '/aboutUs',
             component: AboutUsComponent.name
         })
         .state('faq', {

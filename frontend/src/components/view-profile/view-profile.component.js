@@ -22,9 +22,11 @@ class ViewProfileComponent {
 
 class ViewProfileController {
 
-    constructor($state, $element, UserService){
+    constructor($state, $element, $rootScope, $location, UserService){
         this.$element = $element;
         this.$state = $state;
+        this.$rootScope = $rootScope;
+        this.$location = $location;
         this.UserService = UserService;
     }
 
@@ -59,8 +61,12 @@ class ViewProfileController {
         });
     }
 
+    $onInit() {
+        this.$rootScope.$emit("menu-changed", this.$location.url());
+    }
+
     static get $inject(){
-        return ['$state', '$element', UserService.name];
+        return ['$state', '$element', '$rootScope', '$location', UserService.name];
     }
 }
 

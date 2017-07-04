@@ -16,12 +16,17 @@ class AboutUsComponent {
 }
 
 class AboutUsComponentController{
-    constructor(){
-        this.text = "AboutUsComponentController TEXT";
+    constructor($rootScope, $location){
+        this.$rootScope = $rootScope;
+        this.$location = $location;
+    }
+
+    $onInit() {
+        this.$rootScope.$emit("menu-changed", this.$location.url());
     }
 
     static get $inject(){
-        return ['$state', '$element'];
+        return ['$rootScope', '$location'];
     }
 }
 

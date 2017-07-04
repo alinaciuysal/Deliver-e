@@ -22,10 +22,12 @@ class ViewRegisterComponent {
 }
 
 class ViewRegisterComponentController{
-    constructor($state, $element, UserService){
+    constructor($state, $element, $rootScope, $location, UserService){
         this.$element = $element;
         this.$state = $state;
         this.UserService = UserService;
+        this.$rootScope = $rootScope;
+        this.$location = $location;
     }
 
     $onInit() {
@@ -43,6 +45,10 @@ class ViewRegisterComponentController{
             }
         ];
         ctrl.availableLocations = availableLocations;
+
+
+        this.$rootScope.$emit("menu-changed", this.$location.url());
+
     }
 
     resetDistricts() {
@@ -177,7 +183,7 @@ class ViewRegisterComponentController{
     }
 
     static get $inject(){
-        return ['$state', '$element', UserService.name];
+        return ['$state', '$element', '$rootScope', '$location', UserService.name];
     }
 }
 
