@@ -152,6 +152,8 @@ module.exports.shopSignup = function(req, res){
     user.email = req.body.email;
     user.password = req.body.password;
     user.type = "shop";
+    if(req.body.shop.address) user.address = req.body.shop.address;
+    if(req.body.shop.phone) user.phone = req.body.shop.phone;
 
     var shop = new Shop(req.body.shop);
 
