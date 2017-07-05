@@ -1,5 +1,6 @@
 var User = require('../user/userSchema');
 var Order = require('./orderSchema');
+var Product = require('../shop/productSchema');
 
 exports.getBasket = function(req, res) {
 	Order.findOne({ orderer: req.user, status:'Basket'}, function(err, basket) {
@@ -28,7 +29,20 @@ exports.getBasket = function(req, res) {
 };
 
 exports.addBasket = function(req, res) {
-	res.sendStatus(501); 
+	Order.findOne({ orderer: req.user, status:'Basket'}, function(err, basket) {
+		if (err) {
+			res.sendStatus(500);
+			return;
+		}
+		Product.findById(req.body.product, function(err, product) {
+				basket.addItem(product, req.body.amount, function(err, basket) {
+					if (err) {
+						res.status(500).send(err);
+					}
+					res.status(200).json(basket);
+			});
+		});
+	});
 };
 
 exports.deleteBasket = function(req, res) {

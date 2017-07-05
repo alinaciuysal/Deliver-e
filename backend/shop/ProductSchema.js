@@ -2,11 +2,26 @@
 var mongoose = require('mongoose');
 
 var Product   = new mongoose.Schema({
-    name: String,
-    price: Number,
-    category: String,
-    weight: Number,
-    stock: Number,
+    name:  {
+        type: String,
+        required: true
+    },
+    price:  {
+        type: Number,
+        required: true
+    },
+    category:  {
+        type: String,
+        required: true
+    },
+    weight:  {
+        type: Number,
+        required: true
+    },
+    stock:  {
+        type: Number,
+        required: true
+    },
     details: String,
     photo: String,
 });
