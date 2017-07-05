@@ -47,7 +47,6 @@ var orderSchema   = new mongoose.Schema({
 
 class OrderClass {
 	addItem(product, amount, callback) {
-
         var item = this.items.find( function (item) {
             return String(item.product) == String(product._id);
         });
@@ -57,15 +56,22 @@ class OrderClass {
         } else {
             item.amount += amount;
         }
-		this.update( { $inc: { totalPrice: (amount * product.price) , totalWeight: (amount * product.weight) } },  function(err, order) {
+        this.totalPrice += (amount * product.price);
+        this.totalWeight += (amount * product.weight);
+        this.save(function(err, updated_order) {
+                console.log("aaa")
+                callback(err, updated_order);
+        });
+		/*order.update( { $inc: { totalPrice: (amount * product.price) , totalWeight: (amount * product.weight) } }, { "new": true},  function(err, updated_order) {
             if (err) {
-                callback(err, order);
+                callback(err, updated_order);
                 return;
             }
-        });
-        this.save(function(err, order) {
-            callback(err, order);
-        });
+            order.save(function(err, updated_order) {
+                console.log("aaa")
+                callback(err, updated_order);
+            });
+        });*/
 	}
 	removeItem(product, amount, callback) {
         var item = this.items.find( function (item) {
@@ -73,17 +79,18 @@ class OrderClass {
         });
         if (item == undefined) {
             callback("There is no such product in basket.", item)
+            return;
+        } else if ( item.amount <= amount ) {
+            amount = item.amount;
+            item.remove();
         } else {
-            item.amount = Math.max(item.amount - amount, 0);
-            if (item.amount == 0) {
-                item.remove();
-            }
+            item.amount -= amount;
         }
-        this.update( { $inc: { totalPrice: -(amount * product.price) , totalWeight: -(amount * product.weight) } },  function(err, order) {
-            if (err) callback(err, order);
-        });
-        this.save(function(err, order) {
-            callback(err, order);
+        this.totalPrice -= (amount * product.price);
+        this.totalWeight -= (amount * product.weight);
+        this.save(function(err, updated_order) {
+                console.log("aaa")
+                callback(err, updated_order);
         });
 	}
 }
