@@ -1,6 +1,7 @@
 var Config = require('../config/config.js');
 var User = require('./userSchema');
 var Shop = require('../shop/shopSchema');
+var Order = require('../order/orderSchema');
 var jwt = require('jwt-simple');
 
 module.exports.login = function(req, res){
@@ -69,16 +70,21 @@ module.exports.customerSignup = function(req, res){
             res.status(500).send("User with provided information already exists.");
             return;
         }
+        var basket = new Order({
+            totalPrice: 0,
+            status: "Basket",
+            orderer: user
+        });
+        basket.save(function(err) {
+            if (err) {
+                res.status.send(err);
+                return;
+            }
 
-        res.status(201).json({token: createToken(user)});
-    });
+            res.status(201).json({token: createToken(user)});
+        });
 
-    var basket = new Order({
-        totalPrice: 0,
-        status: "Basket",
-        orderer: user
-    });
-    basket.save();
+    });    
 };
 
 module.exports.delivererSignup = function(req, res){
