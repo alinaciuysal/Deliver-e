@@ -22,12 +22,13 @@ class ViewProfileComponent {
 
 class ViewProfileController {
 
-    constructor($state, $element, $rootScope, $location, UserService){
+    constructor($state, $element, $rootScope, $location, $filter, UserService){
         this.$element = $element;
         this.$state = $state;
         this.$rootScope = $rootScope;
         this.$location = $location;
         this.UserService = UserService;
+        this.$filter = $filter;
     }
 
     initializeController() {
@@ -45,16 +46,19 @@ class ViewProfileController {
                 ctrl.user.surname = retrievedUser.surname;
                 console.log("I'm a customer");
             } else if (retrievedUser.type === "deliverer") {
-                ctrl.user.birthDate = retrievedUser.birthDate;
+                ctrl.user.name = retrievedUser.name;
+                ctrl.user.surname = retrievedUser.surname;
+                let filteredDate = ctrl.$filter('date')(retrievedUser.birthday, "dd-MM-yyyy");
+                ctrl.user.birthday = filteredDate;
                 ctrl.user.address = retrievedUser.address;
-                ctrl.user.phoneNumber = retrievedUser.phoneNumber;
+                ctrl.user.phone = retrievedUser.phone;
                 ctrl.user.maxWeight = retrievedUser.maxWeight;
                 ctrl.user.preferredLocations = retrievedUser.preferredLocations;
-                ctrl.user.preferredDistricts = retrievedUser.preferredDistricts;
+                //ctrl.user.preferredDistricts = retrievedUser.preferredDistricts;
             } else if (retrievedUser.type === "shop") {
-                ctrl.user.shopName = retrievedUser.shopName;
-                ctrl.user.shopAddress = retrievedUser.shopAddress;
-                ctrl.user.phoneNumber = retrievedUser.phoneNumber;
+                ctrl.user.shopName = retrievedUser.name;
+                ctrl.user.shopAddress = retrievedUser.address;
+                ctrl.user.phone = retrievedUser.phone;
             } else {
                 console.log("Error occurred onInit profileCtrl");
             }
@@ -66,7 +70,7 @@ class ViewProfileController {
     }
 
     static get $inject(){
-        return ['$state', '$element', '$rootScope', '$location', UserService.name];
+        return ['$state', '$element', '$rootScope', '$location', '$filter', UserService.name];
     }
 }
 

@@ -184,6 +184,7 @@ module.exports.unregister = function(req, res) {
 
 module.exports.getUser = function(req, res) {
     user = req.user;
+    console.log(user);
     delete user._doc.password;
     res.status(200).json(user);
     return;

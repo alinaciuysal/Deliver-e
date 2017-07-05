@@ -59,7 +59,7 @@
                     <br>
                     <b layout-align="center center">Birth Date: </b>
                     <md-input-container style="padding-left: 2em" id="delivererBirthDateField">
-                        <input type="date" name="delivererBirthDate" ng-disabled="true" ng-model="$ctrl.user.birthDate">
+                        <input type="text" name="delivererBirthDate" ng-disabled="true" ng-model="$ctrl.user.birthday">
                     </md-input-container>
                     <br>
                     <b layout-align="center center">E-mail: </b>
@@ -74,12 +74,19 @@
                     <br>
                     <b layout-align="center center">Phone Number: </b>
                     <md-input-container style="padding-left: 2em" id="delivererPhoneNumberField">
-                        <input type="tel" name="delivererPhoneNumber" ng-model="$ctrl.user.phoneNumber">
+                        <input type="tel" name="delivererPhoneNumber" ng-model="$ctrl.user.phone">
                     </md-input-container>
                     <br>
                     <b layout-align="center center">Maximum Delivery Weight (kg): </b>
                     <md-input-container style="padding-left: 2em" id="delivererMaxWeightField">
                         <input type="number" name="delivererMaxWeight" ng-model="$ctrl.user.maxWeight">
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Selected Locations: </b>
+                    <md-input-container style="padding-left: 2em" id="delivererLocationsField">
+                        <div ng-repeat="location in $ctrl.user.preferredLocations">
+                            <span>{{location}}</span>
+                        </div>
                     </md-input-container>
                     <br>
                     <b layout-align="center center">Old Password: </b>
@@ -104,7 +111,7 @@
                 <md-list>
                     <b layout-align="center center" >Shop Name:</b>
                     <md-input-container style="padding-left: 2em"id="shopNameField">
-                        <input type="text" name="shopName" ng-disabled="true" ng-model="$ctrl.user.name">
+                        <input type="text" name="shopName" ng-disabled="true" ng-model="$ctrl.user.shopName">
                     </md-input-container>
                     <br>
                     <b layout-align="center center">Address: </b>
@@ -119,7 +126,7 @@
                     <br>
                     <b layout-align="center center">Phone Number: </b>
                     <md-input-container style="padding-left: 2em" id="shopPhoneNumberField">
-                        <input type="tel" name="shopPhoneNumber" ng-model="$ctrl.user.phoneNumber">
+                        <input type="tel" name="shopPhoneNumber" ng-model="$ctrl.user.phone">
                     </md-input-container>
                     <br>
                     <b layout-align="center center">Old Password: </b>

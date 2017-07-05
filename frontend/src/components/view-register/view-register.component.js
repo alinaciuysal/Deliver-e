@@ -63,16 +63,12 @@ class ViewRegisterComponentController{
 
     submitUserRegistrationRequest(){
         let ctrl = this;
-
         let name = this.userRegister.name;
         let surname = this.userRegister.surname;
         let email = this.userRegister.email;
         let password = this.userRegister.password;
 
         this.UserService.register(name, surname, email, password).then(()=> {
-            /*
-             this.resetUserRegistrationForm();
-             */
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.userRegistrationError = "Error: " + obj.data;
@@ -81,7 +77,6 @@ class ViewRegisterComponentController{
 
     submitDelivererRegistrationRequest() {
         let ctrl = this;
-
         let name = ctrl.delivererRegister.name;
         let password = ctrl.delivererRegister.password;
         let surname = ctrl.delivererRegister.surname;
@@ -91,22 +86,7 @@ class ViewRegisterComponentController{
         let maxWeight = ctrl.delivererRegister.maxWeight;
         let address = ctrl.delivererRegister.address;
         let selectedDistricts = ctrl.delivererRegister.selectedDistricts;
-
-
-        // Ref: https://stackoverflow.com/questions/5416920/timestamp-to-human-readable-format
         let date = new Date(birthday);
-/*
-        console.log("date: " + date);
-*/
-
-        /*var month = new Date(timestamp).getMonth() + 1;
-        var year = new Date(timestamp).getFullYear();
-        var original_date =  date + '-' + month+ '-' + year;
-        console.log(original_date);*/
-        // https://stackoverflow.com/questions/43277458/how-to-specify-timestamp-format-when-converting-to-human-readable-string-in-js
-        // https://momentjs.com/
-
-        //console.log(name + " " + password + " " + surname + " " + email + " " + date + " " + phone + " " + address + " " + maxWeight + " " + selectedDistricts);
 
         this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedDistricts).then(()=> {
             this.$state.go('mainPage',{});
@@ -121,17 +101,12 @@ class ViewRegisterComponentController{
         let email = ctrl.shopRegister.email;
         let password = ctrl.shopRegister.password;
         let name = ctrl.shopRegister.shopName;
-
-        // let shopName = ctrl.shopRegister.shopName;
         let shopAddress = ctrl.shopRegister.shopAddress;
         let shopPhoneNumber = ctrl.shopRegister.shopPhoneNumber;
 
         console.log(email + " " + password + " " + name + " " + shopAddress + " " + shopPhoneNumber);
 
         this.UserService.registerShop(email, password, name, shopAddress, shopPhoneNumber).then(()=> {
-/*
-            this.resetShopRegistrationForm();
-*/
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             console.log(obj);
