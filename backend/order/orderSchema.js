@@ -13,14 +13,19 @@ var itemSchema = new mongoose.Schema({
 
 
 var orderSchema   = new mongoose.Schema({
-    totalPrice: Number,
+    totalPrice: {
+        type: Number,
+        default: 0,
+        set: v => Math.max(v, 0)
+    },
     status: {
     	type: String,
     	enum: ["Basket", "Ordered", "Assigned", "Done"]
     },
     totalWeight: {
         type: Number,
-        default: 0
+        default: 0,
+        set: v => Math.max(v, 0)
     },
     shop: {
             type: mongoose.Schema.Types.ObjectId,
@@ -47,23 +52,39 @@ class OrderClass {
             return String(item.product) == String(product._id);
         });
         if (item == undefined) {
-            item = new Item({amount: amount, product: product});
-            this.update({ $push: { items: item }}, function (err, item) {
-                if (err) callback(err, item);
-            });
+            item = {amount: amount, product: product};
+            this.items.push(item);
         } else {
             item.amount += amount;
         }
-		this.update( { $inc: { totalAmount: product.price , totalWeight: product.weight } },  function(err, order) {
-            if (err) callback(err, order);
+		this.update( { $inc: { totalPrice: (amount * product.price) , totalWeight: (amount * product.weight) } },  function(err, order) {
+            if (err) {
+                callback(err, order);
+                return;
+            }
         });
         this.save(function(err, order) {
             callback(err, order);
         });
 	}
-	removeItem(product, amount) {
-        this.update({ "items.$.product": item }, { $substract : { "items.amount": amount }, $substract: { totalAmount: item.price } });
-		return this;
+	removeItem(product, amount, callback) {
+        var item = this.items.find( function (item) {
+            return String(item.product) == String(product._id);
+        });
+        if (item == undefined) {
+            callback("There is no such product in basket.", item)
+        } else {
+            item.amount = Math.max(item.amount - amount, 0);
+            if (item.amount == 0) {
+                item.remove();
+            }
+        }
+        this.update( { $inc: { totalPrice: -(amount * product.price) , totalWeight: -(amount * product.weight) } },  function(err, order) {
+            if (err) callback(err, order);
+        });
+        this.save(function(err, order) {
+            callback(err, order);
+        });
 	}
 }
 

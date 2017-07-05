@@ -46,7 +46,20 @@ exports.addBasket = function(req, res) {
 };
 
 exports.deleteBasket = function(req, res) {
-	res.sendStatus(501); 
+	Order.findOne({ orderer: req.user, status:'Basket'}, function(err, basket) {
+		if (err) {
+			res.sendStatus(500);
+			return;
+		}
+		Product.findById(req.body.product, function(err, product) {
+				basket.removeItem(product, req.body.amount, function(err, basket) {
+					if (err) {
+						res.status(500).send(err);
+					}
+					res.status(200).json(basket);
+			});
+		});
+	});
 };
 
 exports.makeOrder = function(req, res) {
