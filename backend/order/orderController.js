@@ -63,7 +63,7 @@ exports.deleteBasket = function(req, res) {
 };
 
 exports.makeOrder = function(req, res) {
-	Order.findOneAndUpdate({ orderer: req.user, status:'Basket'}, { $set: { status: 'Ordered' } }, { "new": true }, function(err, order) {
+	Order.findOneAndUpdate({ orderer: req.user, status:'Basket'}, { $set: { status: 'Ordered', district: req.user.district, location: req.user.location } }, { "new": true }, function(err, order) {
 		if (err) {
 			res.sendStatus(500);
 			return;
