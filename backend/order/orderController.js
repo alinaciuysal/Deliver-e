@@ -127,5 +127,11 @@ exports.getAvailableOrders = function(req, res) {
 };
 
 exports.getOrder = function(req, res) {
-	res.sendStatus(501); 
+	Order.findById(req.params.order_id, function (err, order) {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+        res.status(200).json(order);
+    });
 };
