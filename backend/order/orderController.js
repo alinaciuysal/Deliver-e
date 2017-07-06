@@ -88,6 +88,7 @@ exports.getOrderHistory = function(req, res) {
 	Order.find({ orderer: req.user, status: { '$ne': 'Basket' } }, function(err, orders) {
 		if (err) {
 			res.status(500).send(err);
+			return;
 		}
 		res.status(200).json(orders);
 	});
@@ -123,7 +124,17 @@ exports.acceptOrder = function(req, res) {
 };
 
 exports.getAvailableOrders = function(req, res) {
-	res.sendStatus(501); 
+	if (req.user.type != "deliverer" ){
+		res.status(403).send("You need to be a deliverer to get orders.")
+		return;
+	}
+	Order.find({ status: 'Ordered', totalWeight: { $lte: req.user.maxWeight } }, function(err, orders) {
+		if (err) {
+			res.status(500).send(err);
+			return;
+		}
+		res.status(200).json(orders);
+	});
 };
 
 exports.getOrder = function(req, res) {
