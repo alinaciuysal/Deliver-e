@@ -128,7 +128,7 @@ exports.getAvailableOrders = function(req, res) {
 		res.status(403).send("You need to be a deliverer to get orders.")
 		return;
 	}
-	Order.find({ status: 'Ordered', totalWeight: { $lte: req.user.maxWeight } }, function(err, orders) {
+	Order.find({ status: 'Ordered', totalWeight: { $lte: req.user.maxWeight }, location: req.user.preferredLocation, district: { $in: req.user.preferredDistricts } }, function(err, orders) {
 		if (err) {
 			res.status(500).send(err);
 			return;
