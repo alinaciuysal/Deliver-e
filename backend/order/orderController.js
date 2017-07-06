@@ -85,7 +85,12 @@ exports.makeOrder = function(req, res) {
 };
 
 exports.getOrderHistory = function(req, res) {
-	res.sendStatus(501); 
+	Order.find({ orderer: req.user, status: { '$ne': 'Basket' } }, function(err, orders) {
+		if (err) {
+			res.status(500).send(err);
+		}
+		res.status(200).json(orders);
+	});
 };
 
 exports.acceptOrder = function(req, res) {

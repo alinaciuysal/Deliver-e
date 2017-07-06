@@ -22,14 +22,13 @@ function orderRoutes(passport) {
 
 
     router.route('/history')
+        .get(orderController.getOrderHistory)
 
     router.route('/:order_id')
     	.get(orderController.getOrder);
 
     router.route('/:order_id/accept')
     	.post(orderController.acceptOrder)
-
-    	.get(orderController.getOrderHistory);
 
 
     return router;

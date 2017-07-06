@@ -19,8 +19,24 @@ var userSchema = mongoose.Schema({
     address: String,
     birthday: Date,
     phone: String,
-    maxWeight: Number,
-    preferredLocations: [String],
+    maxWeight: {
+        type: Number,
+        required: function() {
+            return this.type == 'deliverer';
+        }
+    },
+    preferredLocation: {
+        type: String,
+        required: function() {
+            return this.type == 'deliverer';
+        }
+    },
+    preferredDistricts: [{
+        type: String,
+        required: function() {
+            return this.type == 'deliverer';
+        }
+    }],
     type: {
         type: String,
         enum: ['deliverer', 'shop', 'customer'],
