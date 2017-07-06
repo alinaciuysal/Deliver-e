@@ -59,7 +59,9 @@ module.exports.customerSignup = function(req, res){
     user.password = req.body.password;
     user.type = "customer";
     user.name = req.body.name;
-    if(req.body.surname) user.surname = req.body.surname;
+    user.surname = req.body.surname;
+    user.district = req.body.district;
+    user.location = req.body.location;
     if(req.body.address) user.address = req.body.address;
     if(req.body.phone) user.phone = req.body.phone;
     if(req.body.birthday) user.birthday = Date(req.body.birthday);
@@ -157,6 +159,7 @@ module.exports.shopSignup = function(req, res){
     if(req.body.shop.phone) user.phone = req.body.shop.phone;
 
     var shop = new Shop(req.body.shop);
+    shop.name = req.body.name;
 
     shop.save(function(err, shop) {
         if (err) {

@@ -22,6 +22,15 @@ var orderSchema   = new mongoose.Schema({
     	type: String,
     	enum: ["Basket", "Ordered", "Assigned", "Done"]
     },
+    district: {
+        type: String,
+        required: function() {
+            return this.status != "Basket";
+        }
+    },
+    location: {
+        type: String,
+    },
     totalWeight: {
         type: Number,
         default: 0,

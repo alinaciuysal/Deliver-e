@@ -15,7 +15,12 @@ var userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    surname: String,
+    surname: {
+        type: String,
+        required: function() {
+            return this.type == 'customer';
+        }
+    }, 
     address: String,
     birthday: Date,
     phone: String,
@@ -23,6 +28,18 @@ var userSchema = mongoose.Schema({
         type: Number,
         required: function() {
             return this.type == 'deliverer';
+        }
+    },
+    location: {
+        type: String,
+        required: function() {
+            return this.type == 'customer';
+        }
+    },
+    district: {
+        type: String,
+        required: function() {
+            return this.type == 'customer';
         }
     },
     preferredLocation: {
