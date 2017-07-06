@@ -59,19 +59,8 @@ class OrderClass {
         this.totalPrice += (amount * product.price);
         this.totalWeight += (amount * product.weight);
         this.save(function(err, updated_order) {
-                console.log("aaa")
                 callback(err, updated_order);
         });
-		/*order.update( { $inc: { totalPrice: (amount * product.price) , totalWeight: (amount * product.weight) } }, { "new": true},  function(err, updated_order) {
-            if (err) {
-                callback(err, updated_order);
-                return;
-            }
-            order.save(function(err, updated_order) {
-                console.log("aaa")
-                callback(err, updated_order);
-            });
-        });*/
 	}
 	removeItem(product, amount, callback) {
         var item = this.items.find( function (item) {

@@ -120,7 +120,7 @@ module.exports.delivererSignup = function(req, res){
 
     user.save(function(err) {
         if (err) {
-            res.status(500).send("User with provided information already exists.");
+            res.status(500).send(err);
             return;
         }
 
@@ -185,7 +185,6 @@ module.exports.unregister = function(req, res) {
 
 module.exports.getUser = function(req, res) {
     user = req.user;
-    console.log(user);
     delete user._doc.password;
     res.status(200).json(user);
     return;
