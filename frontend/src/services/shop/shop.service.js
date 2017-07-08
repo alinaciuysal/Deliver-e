@@ -47,6 +47,14 @@ export default class ShopService {
          });
     }
 
+    getProductsList() {
+        return this.$http.get(`${ this.API_URL }/shop/product`).then(responce => {
+            return new Promise((resolve, reject) => {
+                resolve(responce.data);
+            });
+        });
+    }
+
     getProductById(id) { 
         return this.$http.get(`${ this.API_URL }/shop/product/${id}`, { 
             //params: { product_id: id } 
