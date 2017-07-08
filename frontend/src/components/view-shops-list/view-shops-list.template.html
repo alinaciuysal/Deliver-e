@@ -27,13 +27,13 @@ given ng-controller name here must be same with the one in respective component'
                 </md-card-title-text>
             </md-card-title>
 
-            <md-card-content  layout="row" layout-align="left start" ng-if="$ctrl.shoplist" ng-repeat="col in [] | range:$ctrl.numCol" flex>
+            <md-card-content  layout="row" layout-align="left start" ng-if="$ctrl.shopsList" ng-repeat="col in [] | range:$ctrl.numCol" flex>
 
-                <md-card  flex="50" ng-repeat="row in [] | range:2" ng-if="$ctrl.shoplist[2*col+row]" ui-sref="shop({shopId:{{$ctrl.shoplist[2*col+row].shopId}} })">
+                <md-card  flex="50" ng-repeat="row in [] | range:2" ng-if="$ctrl.shopsList[2*col+row]" ui-sref="shop({shopId:'{{$ctrl.shopsList[2*col+row]._id}}' })">
 
                     <md-card-content >
-                        <h2>{{$ctrl.shoplist[2*col+row].name}}</h2>
-                        {{$ctrl.shoplist[2*col+row].desc}}
+                        <h2>{{$ctrl.shopsList[2*col+row].name}}</h2>
+                        {{$ctrl.shopsList[2*col+row].address}}
                     </md-card-content>
                 </md-card>
 

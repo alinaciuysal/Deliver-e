@@ -28,4 +28,12 @@ export default class ShopService {
             photo: productPhoto
         });
     }
+
+    getShop() {
+        return this.$http.get(`${ this.API_URL }/shop`).then(responce => {
+                return new Promise((resolve, reject) => {
+                    resolve(responce.data);
+            });
+        })
+    }
 }

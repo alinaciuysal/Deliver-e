@@ -3,6 +3,7 @@
 
 import template from './view-shops-list.template.html';
 import UserService from './../../services/user/user.service';
+import ShopService from './../../services/shop/shop.service';
 
 class ViewShopsListComponent {
     constructor(){
@@ -17,28 +18,22 @@ class ViewShopsListComponent {
 
 class ViewShopsListController {
 
-    constructor($state, UserService, $stateParams){
+    constructor($state, UserService, ShopService, $stateParams){
         this.$state = $state;
         this.UserService = UserService;
+        this.ShopService = ShopService;
 
         this.type = this.$state.params.type;
 
+        this.name = "";
+        this.shopsList = [];
+        this.numCol = 0;
+
         /// GET SHOPS LIST
+        this.getShops();
 
         if(this.type == 'asian') {
             this.name = "Asian Shops";
-            this.shoplist = [
-                {  name: "AsianShop1", shopId:"12341", desc:"description" },
-                {  name: "AsianShop2", shopId:"12342", desc:"description"  },
-                {  name: "AsianShop3", shopId:"12343", desc:"description"  },
-                {  name: "AsianShop4", shopId:"12344", desc:"description"  },
-                {  name: "AsianShop5", shopId:"12345", desc:"description"  },
-                {  name: "AsianShop6", shopId:"12346", desc:"description"  },
-                {  name: "AsianShop7", shopId:"12347", desc:"description"  }
-            ];
-
-            this.numCol = this.shoplist.length/2;
-            if(this.shoplist.length%2!=0) this.numCol++;
         }
         else if(this.type == 'getranke') {
             this.name = "Getrankemarkts"
@@ -51,12 +46,25 @@ class ViewShopsListController {
         }
     }
 
+    getShops() {
+        this.ShopService.getShop().then(value => {
+            this.shopsList = value;
+            //this.name = "Asian Shops";
+            // this.shopsList = [
+            //     {  name: "AsianShop1", _id:"5960ebf5311f94032157c04c", address:"description" },
+            // ];s
+
+            this.numCol = this.shopsList.length/2;
+            if(this.shopsList.length%2!=0) this.numCol++;
+        });
+    }
+
     $onInit() {
         console.log("ViewShopsListController onInit works");
     }
 
     static get $inject(){
-        return ['$state', UserService.name, '$stateParams', '$http'];
+        return ['$state', UserService.name, ShopService.name, '$stateParams', '$http'];
     }
 }
 

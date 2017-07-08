@@ -3,7 +3,6 @@
 
 import template from './view-mainpage.template.html';
 import UserService from './../../services/user/user.service';
-import MainPageService from './../../services/main/main.service';
 
 import './view-mainpage.style.css'
 
@@ -50,6 +49,10 @@ class ViewMainPageComponentController {
         this.numCol = this.products.length/4;
         if(this.products.length%4!=0) this.numCol++;
 
+    }
+
+    search() {
+        //Search func
     }
 
     $onInit() {

@@ -28,10 +28,6 @@ class AppHeaderComponentController{
         $mdMenu.open(ev);
     }
 
-    search() {
-        //Search func
-    }
-
     isAuthenticated(){
         return this.UserService.isAuthenticated();
     }
