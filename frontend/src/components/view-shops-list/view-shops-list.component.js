@@ -30,7 +30,7 @@ class ViewShopsListController {
         this.numCol = 0;
 
         /// GET SHOPS LIST
-        this.getShops();
+        this.getShopsList();
 
         if(this.type == 'asian') {
             this.name = "Asian Shops";
@@ -46,13 +46,9 @@ class ViewShopsListController {
         }
     }
 
-    getShops() {
-        this.ShopService.getShop().then(value => {
+    getShopsList() {
+        this.ShopService.getShopsList().then(value => {
             this.shopsList = value;
-            //this.name = "Asian Shops";
-            // this.shopsList = [
-            //     {  name: "AsianShop1", _id:"5960ebf5311f94032157c04c", address:"description" },
-            // ];s
 
             this.numCol = this.shopsList.length/2;
             if(this.shopsList.length%2!=0) this.numCol++;

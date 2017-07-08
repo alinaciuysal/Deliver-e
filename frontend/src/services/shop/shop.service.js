@@ -29,11 +29,33 @@ export default class ShopService {
         });
     }
 
-    getShop() {
+    getShopsList() {
         return this.$http.get(`${ this.API_URL }/shop`).then(responce => {
                 return new Promise((resolve, reject) => {
                     resolve(responce.data);
             });
-        })
+        });
     }
+
+    getShopById(id) {
+        return this.$http.get(`${ this.API_URL }/shop/${id}`, {
+                //params: { shop_id: id }
+            }).then(responce => {
+                return new Promise((resolve, reject) => {
+                    resolve(responce.data);
+            });
+         });
+    }
+
+    getProductById(id) { 
+        return this.$http.get(`${ this.API_URL }/shop/product/${id}`, { 
+            //params: { product_id: id } 
+        }).then(responce => { 
+            return new Promise((resolve, reject) => { 
+                resolve(responce.data);
+            });
+        });
+     }
+
+
 }
