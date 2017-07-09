@@ -37,6 +37,16 @@ export default class ShopService {
         });
     }
 
+    getShopsListByType(type) {
+        return this.$http.get(`${ this.API_URL }/shop/`, {
+                params: { type: type }
+            }).then(responce => {
+                return new Promise((resolve, reject) => {
+                    resolve(responce.data);
+    });
+    });
+    }
+
     getShopById(id) {
         return this.$http.get(`${ this.API_URL }/shop/${id}`, {
                 //params: { shop_id: id }

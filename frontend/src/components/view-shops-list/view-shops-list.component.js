@@ -30,24 +30,27 @@ class ViewShopsListController {
         this.numCol = 0;
 
         /// GET SHOPS LIST
-        this.getShopsList();
 
         if(this.type == 'asian') {
             this.name = "Asian Shops";
+            this.getShopsListByType('asian');
         }
         else if(this.type == 'getranke') {
             this.name = "Getrankemarkts"
+            this.getShopsListByType('getranke');
         }
         else if(this.type == 'turkish') {
             this.name = "Turkish Shops"
+            this.getShopsListByType('turkish');
         }
         else if(this.type == 'russian') {
             this.name = "Russian Shops"
+            this.getShopsListByType('russian');
         }
     }
 
-    getShopsList() {
-        this.ShopService.getShopsList().then(value => {
+    getShopsListByType(type) {
+        this.ShopService.getShopsListByType(type).then(value => {
             this.shopsList = value;
 
             this.numCol = this.shopsList.length/2;
