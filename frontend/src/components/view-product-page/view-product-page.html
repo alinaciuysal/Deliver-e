@@ -26,7 +26,7 @@ given ng-controller name here must be same with the one in respective component'
             <md-card-content  layout="row" layout-align="left start" >
 
                 <md-card  flex="50" >
-                    <img ng-src="{{$ctrl.image}}">
+                    <img ng-src="{{$ctrl.photo}}">
                 </md-card>
 
                 <md-card  flex="50" >
@@ -37,15 +37,23 @@ given ng-controller name here must be same with the one in respective component'
                         </b></div>
 
                         <div style="padding-top: 15px">
-                            <b>Price:  </b> {{$ctrl.price}}
-                        </div>
-
-                        <div style="padding-top: 15px">
                             <b>Category:  </b> {{$ctrl.category}}
                         </div>
 
                         <div style="padding-top: 15px">
-                            {{$ctrl.desc}}
+                            <b>Price:  </b> {{$ctrl.price}} €
+                        </div>
+
+                        <div style="padding-top: 15px">
+                            <b>Stock:  </b> {{$ctrl.stock}}
+                        </div>
+
+                        <div style="padding-top: 15px">
+                            <b>Weight:  </b> {{$ctrl.weight}} kg
+                        </div>
+
+                        <div style="padding-top: 15px">
+                            <b>Details:  </b> {{$ctrl.details}}
                         </div>
 
                     </md-card-content>

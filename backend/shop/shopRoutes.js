@@ -19,6 +19,7 @@ function shopRoutes(passport) {
         .delete(shopController.deleteShop);
 
     router.route('/product')
+        .get(shopController.getProducts)
         .post(shopController.postProduct);
 
     router.route('/product/:product_id')
@@ -26,9 +27,16 @@ function shopRoutes(passport) {
         .put(shopController.putProduct)
         .delete(shopController.deleteProduct);
 
+    router.route('/type/:type')
+        .get(shopController.getShopsWithType);
+
     router.route('/:shop_id')
         .get(shopController.getShop)
         .put(shopController.putShop);
+
+    router.route('/:shop_id/details')
+        .get(shopController.getDetailedShop);
+
 
     return router;
 }

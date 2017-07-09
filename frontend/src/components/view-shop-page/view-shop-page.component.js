@@ -3,6 +3,7 @@
 
 import template from './view-shop-page.html';
 import UserService from './../../services/user/user.service';
+import ShopService from './../../services/shop/shop.service';
 
 class ViewShopPageComponent {
     constructor(){
@@ -17,29 +18,53 @@ class ViewShopPageComponent {
 
 class ViewShopPageController {
 
-    constructor($state, UserService, $stateParams){
+    constructor($state, UserService, ShopService, $stateParams){
         this.$state = $state;
         this.UserService = UserService;
+        this.ShopService = ShopService;
 
         this.shopId = this.$state.params.shopId;
 
-        console.log(this.shopId);
+        this.shop = [];
+        this.name = "";
+        this.address = "";
+        this.phone = "";
+        this.products = [];
+        this.numCol = 0;
 
+        this.photo = 'img/asian/asian1.jpg';
         ///GET SHOP BY ID
         /// /api/shop/:(shop_id)
+        this.getDetailedShopById(this.shopId)
 
-        this.name = "Dummy Shop Name";
-        this.desc = "Shop description...";
-        this.products = [
-            {  name: "Product1", id: "0001", src: 'img/asian/asian1.jpg', desc:"description" },
-            {  name: "Product2", id: "0002", src: 'img/asian/asian2.jpg', desc:"description"  },
-            {  name: "Product3", id: "0003", src: 'img/asian/asian1.jpg', desc:"description"  },
-            {  name: "Product4", id: "0004", src: 'img/asian/asian2.jpg', desc:"description"  },
-            {  name: "Product5", id: "0005", src: 'img/asian/asian1.jpg', desc:"description"  },
-            {  name: "Product6", id: "0006", src: 'img/asian/asian2.jpg', desc:"description"  }
-        ];
-        this.numCol = this.products.length/4;
-        if(this.products.length%4!=0) this.numCol++;
+        console.log(this);
+
+    }
+
+    getDetailedShopById(id) {
+        this.ShopService.getDetailedShopById(id).then(value => {
+            this.shop = value;
+            this.name = this.shop.name;
+            this.address = this.shop.address;
+            this.phone = this.shop.phone;
+
+            this.products = this.shop.catalogue;
+        console.log(this.products);
+
+            this.numCol = this.products.length/4;
+            if(this.products.length%4!=0) this.numCol++;
+
+        });
+    }
+
+    getProductById(id) {
+        this.ShopService.getProductById(id).then(value => {
+            this.products.push(value);
+
+            this.numCol = this.products.length/4;
+            if(this.products.length%4!=0) this.numCol++;
+
+        });
     }
 
     $onInit() {
@@ -47,7 +72,7 @@ class ViewShopPageController {
     }
 
     static get $inject(){
-        return ['$state', UserService.name, '$stateParams', '$http'];
+        return ['$state', UserService.name, ShopService.name, '$stateParams', '$http'];
     }
 }
 

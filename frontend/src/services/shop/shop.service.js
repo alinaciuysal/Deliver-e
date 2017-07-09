@@ -29,11 +29,53 @@ export default class ShopService {
         });
     }
 
-    getShop() {
+    getShopsList() {
         return this.$http.get(`${ this.API_URL }/shop`).then(responce => {
                 return new Promise((resolve, reject) => {
                     resolve(responce.data);
             });
-        })
+        });
     }
+
+    getShopsListByType(type) {
+        return this.$http.get(`${ this.API_URL }/shop/type/${type}`).then(responce => {
+                return new Promise((resolve, reject) => {
+                    resolve(responce.data);
+            });
+        });
+    }
+
+    getShopById(id) {
+        return this.$http.get(`${ this.API_URL }/shop/${id}`).then(responce => {
+                return new Promise((resolve, reject) => {
+                    resolve(responce.data);
+            });
+         });
+    }
+
+    getDetailedShopById(id) {
+        return this.$http.get(`${ this.API_URL }/shop/${id}/details`).then(responce => {
+                return new Promise((resolve, reject) => {
+                    resolve(responce.data);
+            });
+        });
+    }
+
+    getProductsList() {
+        return this.$http.get(`${ this.API_URL }/shop/product`).then(responce => {
+            return new Promise((resolve, reject) => {
+                resolve(responce.data);
+            });
+        });
+    }
+
+    getProductById(id) { 
+        return this.$http.get(`${ this.API_URL }/shop/product/${id}`).then(responce => { 
+            return new Promise((resolve, reject) => { 
+                resolve(responce.data);
+            });
+        });
+     }
+
+
 }

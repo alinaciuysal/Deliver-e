@@ -3,6 +3,7 @@
 
 import template from './view-mainpage.template.html';
 import UserService from './../../services/user/user.service';
+import ShopService from './../../services/shop/shop.service';
 
 import './view-mainpage.style.css'
 
@@ -21,11 +22,12 @@ class ViewMainPageComponent {
 
 class ViewMainPageComponentController {
 
-    constructor($state, $rootScope, $location, UserService){
+    constructor($state, $rootScope, $location, UserService, ShopService){
         this.$state = $state;
         this.$rootScope = $rootScope;
         this.$location = $location;
         this.UserService = UserService;
+        this.ShopService = ShopService;
 
         this.dataArray = [
             {  src: 'http://lorempixel.com/960/300/food/1'  },
@@ -37,19 +39,32 @@ class ViewMainPageComponentController {
         ];
         this.currentIndex = 0;
 
-        this.products = [
-            {  name: "Product1", id: "0001", src: 'img/asian/asian1.jpg', desc:"description" },
-            {  name: "Product2", id: "0002", src: 'img/asian/asian2.jpg', desc:"description"  },
-            {  name: "Product3", id: "0003", src: 'img/asian/asian1.jpg', desc:"description"  },
-            {  name: "Product4", id: "0004", src: 'img/asian/asian2.jpg', desc:"description"  },
-            {  name: "Product5", id: "0005", src: 'img/asian/asian1.jpg', desc:"description"  },
-            {  name: "Product6", id: "0006", src: 'img/asian/asian2.jpg', desc:"description"  }
-        ];
+        //this.productsList = [];
+        this.shopsList = [];
+        this.numCol = 0;
 
-        this.numCol = this.products.length/4;
-        if(this.products.length%4!=0) this.numCol++;
-
+        //this.photo = 'img/asian/asian1.jpg';
+        //this.getProductsList();
+        this.getShopsList()
     }
+
+    getShopsList() {
+        this.ShopService.getShopsList().then(value => {
+            this.shopsList = value;
+
+            this.numCol = this.shopsList.length/2;
+            if(this.shopsList.length%2!=0) this.numCol++;
+        });
+    }
+
+    // getProductsList() {
+    //     this.ShopService.getProductsList().then(value => {
+    //         this.productsList = value;
+    //
+    //         this.numCol = this.productsList.length/4;
+    //         if(this.productsList.length%4!=0) this.numCol++;
+    //     });
+    // }
 
     search() {
         //Search func
@@ -60,7 +75,7 @@ class ViewMainPageComponentController {
     }
 
     static get $inject(){
-        return ['$state', '$rootScope', '$location', UserService.name];
+        return ['$state', '$rootScope', '$location', UserService.name, ShopService.name];
     }
 }
 

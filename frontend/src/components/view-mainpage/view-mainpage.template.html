@@ -41,13 +41,30 @@
                 </md-card-title-text>
             </md-card-title>
 
-            <md-card-content  layout="row" layout-align="left start" ng-repeat="col in [] | range:$ctrl.numCol" flex>
+            <!--<md-card-content  layout="row" layout-align="left start" ng-repeat="col in [] | range:$ctrl.numCol" flex>-->
 
-                <md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="$ctrl.products[4*col+row]" ui-sref="product({productId:{{$ctrl.products[4*col+row].id}} })">
-                    <img ng-src="{{$ctrl.products[4*col+row].src}}">
+                <!--<md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="$ctrl.productsList[4*col+row]" ui-sref="product({productId:'{{$ctrl.productsList[4*col+row].id}}' })">-->
+                    <!--&lt;!&ndash;<img ng-src="{{$ctrl.productsList[4*col+row].photo}}">&ndash;&gt;-->
+                    <!--<img ng-src="{{$ctrl.photo}}">-->
+                    <!--<md-card-content >-->
+                        <!--<h2>{{$ctrl.productsList[4*col+row].name}}</h2>-->
+                        <!--<p><b>Category: </b>{{$ctrl.productsList[4*col+row].category}}</p>-->
+                        <!--<p><b>Price: </b>{{$ctrl.productsList[4*col+row].price}} €</p>-->
+                        <!--<p><b>Stock: </b>{{$ctrl.productsList[4*col+row].stock}}</p>-->
+                        <!--<p><b>Weight: </b>{{$ctrl.productsList[4*col+row].weight}} kg</p>-->
+                        <!--<p><b>Details: </b>{{$ctrl.productsList[4*col+row].details}}</p>-->
+                    <!--</md-card-content>-->
+                <!--</md-card>-->
+
+            <!--</md-card-content>-->
+
+            <md-card-content  layout="row" layout-align="left start" ng-if="$ctrl.shopsList" ng-repeat="col in [] | range:$ctrl.numCol" flex>
+
+                <md-card  flex="50" ng-repeat="row in [] | range:2" ng-if="$ctrl.shopsList[2*col+row]" ui-sref="shop({shopId:'{{$ctrl.shopsList[2*col+row]._id}}' })">
+
                     <md-card-content >
-                        <h2>{{$ctrl.products[4*col+row].name}}</h2>
-                        {{$ctrl.products[4*col+row].desc}}
+                        <h2>{{$ctrl.shopsList[2*col+row].name}}</h2>
+                        {{$ctrl.shopsList[2*col+row].address}}
                     </md-card-content>
                 </md-card>
 

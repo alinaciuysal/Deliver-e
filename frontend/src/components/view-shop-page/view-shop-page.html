@@ -25,7 +25,10 @@ given ng-controller name here must be same with the one in respective component'
                     </b></div>
 
                     <div style="padding-top: 15px">
-                        {{$ctrl.desc}}
+                        <b>Phone Number: </b>{{$ctrl.phone}}
+                    </div>
+                    <div style="padding-top: 15px">
+                        <b>Address: </b>{{$ctrl.address}}
                     </div>
 
                 </md-card-title-text>
@@ -33,11 +36,16 @@ given ng-controller name here must be same with the one in respective component'
 
             <md-card-content  layout="row" layout-align="left start" ng-if="$ctrl.products" ng-repeat="col in [] | range:$ctrl.numCol" flex>
 
-                <md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="$ctrl.products[4*col+row]" ui-sref="product({productId:{{$ctrl.products[4*col+row].id}} })">
-                    <img ng-src="{{$ctrl.products[4*col+row].src}}">
+                <md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="$ctrl.products[4*col+row]" ui-sref="product({productId:'{{$ctrl.products[4*col+row]._id}}' })">
+                    <!--<img ng-src="{{$ctrl.products[4*col+row].photo}}">-->
+                    <img ng-src="{{$ctrl.photo}}">
                     <md-card-content >
                         <h2>{{$ctrl.products[4*col+row].name}}</h2>
-                        {{$ctrl.products[4*col+row].desc}}
+                        <p><b>Category: </b>{{$ctrl.products[4*col+row].category}}</p>
+                        <p><b>Price: </b>{{$ctrl.products[4*col+row].price}} €</p>
+                        <p><b>Stock: </b>{{$ctrl.products[4*col+row].stock}}</p>
+                        <p><b>Weight: </b>{{$ctrl.products[4*col+row].weight}} kg</p>
+                        <p><b>Details: </b>{{$ctrl.products[4*col+row].details}}</p>
                     </md-card-content>
                 </md-card>
 
