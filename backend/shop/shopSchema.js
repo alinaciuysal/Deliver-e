@@ -6,6 +6,7 @@ var Shop   = new mongoose.Schema({
     address: String,
     photo: String,
     phone: String,
+    type: String,
     catalogue: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'

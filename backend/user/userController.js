@@ -159,6 +159,7 @@ module.exports.shopSignup = function(req, res){
     if(req.body.shop.phone) user.phone = req.body.shop.phone;
 
     var shop = new Shop(req.body.shop);
+    if(!req.body.shop.type) shop.type = "No Type";
     shop.name = req.body.name;
 
     shop.save(function(err, shop) {

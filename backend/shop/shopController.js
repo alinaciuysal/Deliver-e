@@ -14,7 +14,7 @@ exports.postShop = function(req, res) {
             res.status(400).send("Cannot save shop");
             return;
         }
-        User.update(req.user, {$set: { type: 'shop', shop: shop }}, function(err){
+        User.findByIdAndUpdate(req.user, {$set: { type: 'shop', shop: shop }}, function(err){
             if (err) {
                 shop.remove();
                 res.status(400).send(err);
@@ -58,9 +58,30 @@ exports.getShops = function(req, res) {
     });
 };
 
+exports.getShopsWithType = function(req, res) {
+    Shop.find({'type': req.params.type}, function(err, shops) {
+        if (err) {
+            res.status(400).send(err);
+            return;
+        }
+        res.json(shops);
+    });
+};
+
 exports.getShop = function(req, res) {
 
     Shop.findById(req.params.shop_id, function(err, shop) {
+        if (err) {
+            res.status(400).send(err)
+            return;
+        };
+
+        res.json(shop);
+    });
+};
+exports.getDetailedShop = function(req, res) {
+
+    Shop.findById(req.params.shop_id).populate('catalogue').exec(function(err, shop) {
         if (err) {
             res.status(400).send(err)
             return;
@@ -79,6 +100,16 @@ exports.getProduct = function(req, res) {
         };
 
         res.json(product);
+    });
+};
+
+exports.getProducts = function(req, res) {
+    Product.find(function(err, products) {
+        if (err) {
+            res.status(400).send(err);
+            return;
+        }
+        res.json(products);
     });
 };
 
