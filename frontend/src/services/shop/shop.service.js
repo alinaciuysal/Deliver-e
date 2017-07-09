@@ -38,23 +38,27 @@ export default class ShopService {
     }
 
     getShopsListByType(type) {
-        return this.$http.get(`${ this.API_URL }/shop/`, {
-                params: { type: type }
-            }).then(responce => {
+        return this.$http.get(`${ this.API_URL }/shop/type/${type}`).then(responce => {
                 return new Promise((resolve, reject) => {
                     resolve(responce.data);
-    });
-    });
+            });
+        });
     }
 
     getShopById(id) {
-        return this.$http.get(`${ this.API_URL }/shop/${id}`, {
-                //params: { shop_id: id }
-            }).then(responce => {
+        return this.$http.get(`${ this.API_URL }/shop/${id}`).then(responce => {
                 return new Promise((resolve, reject) => {
                     resolve(responce.data);
             });
          });
+    }
+
+    getDetailedShopById(id) {
+        return this.$http.get(`${ this.API_URL }/shop/${id}/details`).then(responce => {
+                return new Promise((resolve, reject) => {
+                    resolve(responce.data);
+            });
+        });
     }
 
     getProductsList() {
@@ -66,9 +70,7 @@ export default class ShopService {
     }
 
     getProductById(id) { 
-        return this.$http.get(`${ this.API_URL }/shop/product/${id}`, { 
-            //params: { product_id: id } 
-        }).then(responce => { 
+        return this.$http.get(`${ this.API_URL }/shop/product/${id}`).then(responce => { 
             return new Promise((resolve, reject) => { 
                 resolve(responce.data);
             });
