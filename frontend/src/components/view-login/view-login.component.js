@@ -41,12 +41,18 @@ class ViewLoginComponentController{
         var ctrl = this;
 
         this.UserService.login(email,password).then( function (response) {
-            
+
             ctrl.UserService.getCurrentUserDetails().then( function(response) {
                 ctrl.user = response.data;
+                if (ctrl.user.type === "customer")
+                    ctrl.$state.go('mainPage',{});
+                else if (ctrl.user.type === "deliverer")
+                    ctrl.$state.go('delivererHomePage', {});
+                else if (ctrl.user.type === "shop")
+                    ctrl.$state.go('shopHomePage', {});
                 console.log("UserService getCurrentUserDetails ", ctrl.user);
             });
-            ctrl.$state.go('mainPage',{});
+
         }).catch(function(obj){
             ctrl.loginError = "Error: " + obj.data;
         });

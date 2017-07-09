@@ -94,7 +94,7 @@ class ViewRegisterComponentController{
         let date = new Date(birthday);
 
         this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedLocation, selectedDistricts).then(()=> {
-            this.$state.go('mainPage',{});
+            this.$state.go('delivererHomePage',{});
         }).catch(function(obj){
             console.log(obj);
             ctrl.delivererRegistrationError = "Error: " + obj;
@@ -113,7 +113,7 @@ class ViewRegisterComponentController{
         console.log(email + " " + password + " " + name + " " + shopAddress + " " + shopPhoneNumber);
 
         this.UserService.registerShop(email, password, name, shopAddress, shopPhoneNumber).then(()=> {
-            this.$state.go('mainPage',{});
+            this.$state.go('shopHomePage',{});
         }).catch(function(obj){
             console.log(obj);
             ctrl.shopRegistrationError = "Error: " + obj.data;

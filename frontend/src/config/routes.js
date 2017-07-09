@@ -11,6 +11,7 @@ import ShopPageComponent from './../components/view-shop-page/view-shop-page.com
 import ProductPageComponent from './../components/view-product-page/view-product-page.component';
 import AboutUsComponent from './../components/aboutUs/aboutUs.component';
 import FaqComponent from './../components/faq/faq.component';
+import ViewAddProductComponent from './../components/view-addproduct/view-addproduct.component';
 
 
 
@@ -82,6 +83,15 @@ export default function config ($stateProvider, $urlRouterProvider){
         .state('faq', {
             url: '/faq',
             component: FaqComponent.name
+        })
+        .state('delivererHomePage', {
+            url: '/availableOrders',
+            component: AvailableOrdersComponent.name
+        })
+        // TODO: url in the following state can be changed
+        .state('shopHomePage', {
+            url: '/addProduct',
+            component: ViewAddProductComponent.name
         })
 
 
