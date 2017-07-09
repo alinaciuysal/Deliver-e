@@ -16,7 +16,6 @@
                     <form name="UserRegisterForm">
                         <md-input-container class="md-block">
                             <label>Name</label>
-                            <md-icon md-svg-icon="face"></md-icon>
                             <input type="text" name="customerName" ng-model="$ctrl.userRegister.name" placeholder="name" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
                             <div ng-messages="UserRegisterForm.customerName.$error" ng-hide="UserRegisterForm.customerName.$valid">
                                 <div ng-message-exp="['required', 'pattern']">
@@ -49,8 +48,51 @@
                             <label>Password</label>
                             <input type="password" name="userPassword" ng-model="$ctrl.userRegister.password" placeholder="password" required="" minlength="5" md-maxlength="64"/>
                             <div ng-messages="UserRegisterForm.userPassword.$error" ng-hide="UserRegisterForm.userPassword.$valid">
-                                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                <div ng-message-exp="['required', 'minlength', 'maxlength']">
                                     Your password must be between 5 and 64 characters long.
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <label>Address</label>
+                            <input type="text" name="customerAddress" ng-model="$ctrl.userRegister.address" required="" minlength="10"/>
+                            <div ng-messages="UserRegisterForm.customerAddress.$error" ng-hide="UserRegisterForm.customerAddress.$valid">
+                                <div ng-message-exp="['required', 'minlength']">
+                                    Addresses generally consist of at least 10 characters
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <label>Location</label>
+                            <md-select ng-model="$ctrl.userRegister.selectedLocationUser" name="selectedLocationUser" required="">
+                                <md-optgroup label="locations">
+                                    <md-option ng-value="location"
+                                               ng-repeat="location in $ctrl.availableLocations">{{location.name}}
+                                    </md-option>
+                                </md-optgroup>
+                            </md-select>
+                            <div ng-messages="UserRegisterForm.selectedLocationUser.$error" ng-hide="UserRegisterForm.selectedLocationUser.$valid">
+                                <div ng-message-exp="['required']">
+                                    Please select a city.
+                                </div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <label>District</label>
+                            <md-select name="selectedDistrictUser"
+                                       ng-model="$ctrl.userRegister.selectedDistrict"
+                                       data-md-container-class="selectdemoSelectHeader"
+                                       required="" single>
+                                <md-optgroup label="districts">
+                                    <md-option required ng-value="district" ng-repeat="district in $ctrl.userRegister.selectedLocationUser.districts">{{district}}</md-option>
+                                </md-optgroup>
+                            </md-select>
+                            <div ng-messages="UserRegisterForm.selectedDistrictUser.$error" ng-hide="UserRegisterForm.selectedDistrictUser.$valid">
+                                <div ng-message-exp="['required']">
+                                    Please select a district.
                                 </div>
                             </div>
                             <div ng-messages="$ctrl.userRegistrationError" ng-if="UserRegisterFormIsSubmitted && $ctrl.userRegistrationError">
@@ -120,8 +162,12 @@
 
                         <md-input-container class="md-block">
                             <label>Address</label>
-                            <input type="text" name="delivererAddress" ng-model="$ctrl.delivererRegister.address" required=""/>
-                            <div ng-message="required">Please enter your address.</div>
+                            <input type="text" name="delivererAddress" ng-model="$ctrl.delivererRegister.address" required="" minlength="10"/>
+                            <div ng-messages="DelivererRegisterForm.delivererAddress.$error" ng-hide="DelivererRegisterForm.delivererAddress.$valid">
+                                <div ng-message-exp="['required', 'minlength']">
+                                    Addresses generally consist of at least 10 characters
+                                </div>
+                            </div>
                         </md-input-container>
 
                         <md-input-container class="md-block">
@@ -146,7 +192,7 @@
 
                         <md-input-container class="md-block">
                             <label>Preferred Locations</label>
-                            <md-select ng-model="selectedLocation" name="selectedCity" required="" ng-change="$ctrl.resetDistricts()">
+                            <md-select ng-model="$ctrl.delivererRegister.selectedLocation" name="selectedCity" required="" ng-change="$ctrl.resetDistricts()">
                                 <md-optgroup label="locations">
                                     <md-option ng-value="location"
                                                ng-repeat="location in $ctrl.availableLocations">{{location.name}}
@@ -155,7 +201,7 @@
                             </md-select>
                             <div ng-messages="DelivererRegisterForm.selectedCity.$error" ng-hide="DelivererRegisterForm.selectedCity.$valid">
                                 <div ng-message-exp="['required']">
-                                    Please enter at least one city.
+                                    Please select a city.
                                 </div>
                             </div>
                         </md-input-container>
@@ -171,12 +217,12 @@
                                            class="demo-header-searchbox md-text">
                                 </md-select-header>-->
                                 <md-optgroup label="districts">
-                                    <md-option ng-value="district" ng-repeat="district in selectedLocation.districts | filter:searchTerm">{{district}}</md-option>
+                                    <md-option ng-value="district" ng-repeat="district in $ctrl.delivererRegister.selectedLocation.districts | filter:searchTerm">{{district}}</md-option>
                                 </md-optgroup>
                             </md-select>
                             <div ng-messages="DelivererRegisterForm.selectedDistrict.$error" ng-hide="DelivererRegisterForm.selectedDistrict.$valid">
                                 <div ng-message-exp="['required']">
-                                    Please enter at least one district.
+                                    Please select at least one district.
                                 </div>
                             </div>
 

@@ -69,7 +69,7 @@ module.exports.customerSignup = function(req, res){
 
     user.save(function(err) {
         if (err) {
-            res.status(500).send("User with provided information already exists.");
+            res.status(500).send(err);
             return;
         }
         var basket = new Order({
@@ -122,6 +122,7 @@ module.exports.delivererSignup = function(req, res){
 
     user.save(function(err) {
         if (err) {
+            console.log(err);
             res.status(500).send(err);
             return;
         }

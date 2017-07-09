@@ -29,7 +29,10 @@ class ViewLoginComponentController{
     $onInit() {
         this.login = {};
         this.loginError = {};
-        this.$rootScope.$emit("menu-changed", this.$location.url());
+        this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
+
+        if(this.loginError !== undefined)
+            this.loginError = undefined;
     }
 
     submit() {

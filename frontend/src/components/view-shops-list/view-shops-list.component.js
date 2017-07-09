@@ -18,10 +18,12 @@ class ViewShopsListComponent {
 
 class ViewShopsListController {
 
-    constructor($state, UserService, ShopService, $stateParams){
+    constructor($state, UserService, ShopService, $rootScope, $location, $stateParams){
         this.$state = $state;
         this.UserService = UserService;
         this.ShopService = ShopService;
+        this.$rootScope = $rootScope;
+        this.$location = $location;
 
         this.type = this.$state.params.type;
 
@@ -60,11 +62,20 @@ class ViewShopsListController {
     }
 
     $onInit() {
-        console.log("ViewShopsListController onInit works");
+        var array = [];
+        var wholeURL = this.$location.url().toString();
+        var smallURLs = wholeURL.split("/");
+
+        for(var i = 0; i < smallURLs.length; i++) {
+            if(smallURLs[i].length != 0) {
+                array.push(smallURLs[i]);
+            }
+        }
+        this.$rootScope.$emit("menu-changed", array);
     }
 
     static get $inject(){
-        return ['$state', UserService.name, ShopService.name, '$stateParams', '$http'];
+        return ['$state', UserService.name, ShopService.name, '$rootScope', '$location', '$stateParams', '$http'];
     }
 }
 

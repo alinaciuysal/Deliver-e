@@ -19,23 +19,26 @@ export default class UserService {
         return 'UserService';
     }
 
-    register(name, surname, email, pass) {
-        console.log("UserService register works");
+    register(name, surname, email, pass, address, location, district) {
+        console.log("UserService register: ", location, " ", district);
         return this.$http.post(`${ this.API_URL }/user/signup/customer`, {
             name: name,
             surname: surname,
             email: email,
-            password: pass
+            password: pass,
+            address: address,
+            location: location,
+            district: district
         });
     }
 
-    registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, preferredLocations) {
-        console.log("UserService registerDeliverer works");
+    registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, preferredLocation, preferredDistricts) {
         return this.$http.post(`${ this.API_URL }/user/signup/deliverer`, {
             email: email,
             password: password,
             maxWeight: maxWeight,
-            preferredLocations: preferredLocations,
+            preferredLocation: preferredLocation,
+            preferredDistricts: preferredDistricts,
             name: name,
             surname: surname,
             address: address,
@@ -95,6 +98,10 @@ export default class UserService {
 
     isAuthenticated() {
         return !!this.$window.localStorage['jwtToken'];
+    }
+
+    updateUser(user) {
+        return this.$http.put(`${ this.API_URL }/user/`, user);
     }
 
 

@@ -11,67 +11,190 @@
         <md-card class="md-card" layout-align="center center">
             <h2>Profile</h2>
             <div id="userProfile" ng-show="$ctrl.user.type==='customer'">
-                <md-list>
-                    <b layout-align="center center" >Name:</b>
-                    <md-input-container style="padding-left: 2em"id="userNameField">
-                        <input type="text" name="userName" ng-disabled="true" ng-model="$ctrl.user.name">
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">Surname: </b>
-                    <md-input-container style="padding-left: 2em" id="userSurnameField">
-                        <input type="text" name="userSurname" ng-disabled="true" ng-model="$ctrl.user.surname">
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">E-mail: </b>
-                    <md-input-container style="padding-left: 2em" id="userEmailField">
-                        <input type="email" name="userEmail" ng-disabled="true" ng-model="$ctrl.user.email">
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">Old Password: </b>
-                    <md-input-container style="padding-left: 2em" id="userOldPasswordField">
-                        <input type="password" name="userOldPassword" ng-model="$ctrl.user.oldPassword">
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">New Password </b>
-                    <md-input-container style="padding-left: 2em" id="userNewPasswordField">
-                        <input type="password" name="userNewPassword" ng-model="$ctrl.user.newPassword">
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">New Password (Again): </b>
-                    <md-input-container style="padding-left: 2em" id="userNewPasswordAgainField">
-                        <input type="password" name="userNewPasswordAgain" ng-model="$ctrl.user.newPasswordAgain">
-                    </md-input-container>
-                    <br>
-                </md-list>
-                <md-button class="md-raised" ng-click="$ctrl.changePasswordForUser()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
+                <form name="userProfileForm">
+                    <md-list>
+                        <b layout-align="center center" >Name:</b>
+                        <md-input-container style="padding-left: 2em">
+                            <input type="text" name="userName" ng-model="$ctrl.user.name" ng-pattern="/^[a-zA-Z\s]*$/" required/>
+                            <div ng-messages="userProfileForm.userName.$error" ng-hide="userProfileForm.userName.$valid">
+                                <div ng-message-exp="['required', 'pattern']">
+                                    Valid username is required for update.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <br>
+                        <b layout-align="center center">Surname: </b>
+                        <md-input-container style="padding-left: 2em" id="userSurnameField">
+                            <input type="text" name="userSurname" ng-model="$ctrl.user.surname" required="" ng-pattern="/^[a-zA-Z\s]*$/" required/>
+                            <div ng-messages="userProfileForm.userSurname.$error" ng-hide="userProfileForm.userSurname.$valid">
+                                <div ng-message-exp="['required', 'pattern']">
+                                    Valid surname is required for update.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <br>
+                        <b layout-align="center center">E-mail: </b>
+                        <md-input-container style="padding-left: 2em" id="userEmailField">
+                            <input type="email" name="userEmail" ng-model="$ctrl.user.email" required="" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
+                            <div ng-messages="userProfileForm.userEmail.$error" ng-hide="userProfileForm.userEmail.$valid">
+                                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                    Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <br>
+
+                        <b layout-align="center center">Address</b>
+                        <md-input-container style="padding-left: 2em" id="userAddress">
+                            <input type="text" name="userAddress" ng-model="$ctrl.user.address" required="" minlength="10"/>
+                            <div ng-messages="userProfileForm.userAddress.$error" ng-hide="userProfileForm.userAddress.$valid">
+                                <div ng-message-exp="['required', 'minlength']">
+                                    Addresses generally consist of at least 10 characters
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <br>
+
+                        <b layout-align="center center">Location</b>
+                        <md-input-container style="padding-left: 2em" id="previousLocationField">
+                            <input type="text" name="previousLocation" ng-disabled="true" ng-model="$ctrl.user.initialLocation">
+                        </md-input-container>
+                        <br>
+
+                        <b layout-align="center center"></b>
+                        <md-input-container class="md-block">
+                            <label>New Location</label>
+                            <md-select ng-model="$ctrl.userProfile.selectedLocationUser" name="selectedLocationUser"
+                            ng-change="$ctrl.changeUserLocationModel()">
+                                <md-optgroup>
+                                    <md-option ng-value="location"
+                                               ng-repeat="location in $ctrl.availableLocations">{{location.name}}
+                                    </md-option>
+                                </md-optgroup>
+                            </md-select>
+                        </md-input-container>
+                        <br>
+
+                        <b layout-align="center center">District</b>
+                        <md-input-container style="padding-left: 2em" id="previousDistrictField">
+                            <input type="text" name="previousDistrict" ng-disabled="true" ng-model="$ctrl.user.initialDistrict">
+                        </md-input-container>
+                        <br>
+
+                        <b layout-align="center center"></b>
+                        <md-input-container class="md-block">
+                            <label>New District</label>
+                            <md-select name="selectedDistrictUser"
+                                       ng-model="$ctrl.userProfile.selectedDistrictUser"
+                                       single>
+                                <md-optgroup>
+                                    <md-option ng-value="district" ng-repeat="district in $ctrl.userProfile.selectedLocationUser.districts">{{district}}</md-option>
+                                </md-optgroup>
+                            </md-select>
+                        </md-input-container>
+                        <br>
+
+
+                        <b layout-align="center center">Old Password: </b>
+                        <md-input-container style="padding-left: 2em" id="userOldPasswordField">
+                            <input type="password" name="delivererOldPassword" ng-model="$ctrl.user.oldPassword" minlength="5" md-maxlength="64">
+                            <div ng-messages="userProfileForm.delivererOldPassword.$error" ng-hide="userProfileForm.delivererOldPassword.$valid">
+                                <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                                    Your old password was between 5 and 64 characters long.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <br>
+                        <b layout-align="center center">New Password </b>
+                        <md-input-container style="padding-left: 2em" id="userNewPasswordField">
+                            <input type="password"
+                                   name="userNewPassword"
+                                   ng-model="$ctrl.user.newPassword"
+                                   minlength="5"
+                                   md-maxlength="64">
+                            <div ng-messages="userProfileForm.userNewPassword.$error" ng-hide="userProfileForm.userNewPassword.$valid">
+                                <div ng-message-exp="['minlength', 'maxlength']">
+                                    Your new password must be between 5 and 64 characters long.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <br>
+                        <b layout-align="center center">New Password (Again): </b>
+                        <md-input-container style="padding-left: 2em" id="userNewPasswordFieldAgain">
+                            <input type="password"
+                                   name="userNewPasswordAgain"
+                                   ng-model="$ctrl.user.newPasswordAgain"
+                                   minlength="5"
+                                   md-maxlength="64">
+                            <div ng-messages="userProfileForm.userNewPasswordAgain.$error" ng-hide="userProfileForm.userNewPasswordAgain.$valid">
+                                <div ng-message-exp="['minlength', 'maxlength']">
+                                    Your new password must be between 5 and 64 characters long.
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <br>
+                        <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorUser !== undefined">Error: </b>
+                            <span style="color: red">{{$ctrl.profileUpdateErrorUser}}</span>
+                        <br>
+
+                    </md-list>
+                </form>
+                <md-button type="submit" class="md-raised"
+                           ng-click="$ctrl.changeCustomerProfile() && customerFormSubmitted == true" style="display: block; margin: 0 auto;">
+                    &nbsp;Save Changes&nbsp;
+                </md-button>
             </div>
+
             <div id="delivererProfile" ng-show="$ctrl.user.type==='deliverer'">
+                <form name="delivererProfileForm">
                 <md-list>
                     <b layout-align="center center" >Name:</b>
                     <md-input-container style="padding-left: 2em"id="delivererNameField">
-                        <input type="text" name="delivererName" ng-disabled="true" ng-model="$ctrl.user.name">
+                        <input type="text" name="delivererName" ng-model="$ctrl.user.name" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
+                        <div ng-messages="delivererProfileForm.delivererName.$invalid   " ng-hide="delivererProfileForm.delivererName.$valid">
+                            <div ng-message-exp="['pattern']">
+                                Valid username is required for update.
+                            </div>
+                        </div>
                     </md-input-container>
                     <br>
                     <b layout-align="center center">Surname: </b>
                     <md-input-container style="padding-left: 2em" id="delivererSurnameField">
-                        <input type="text" name="delivererSurname" ng-disabled="true" ng-model="$ctrl.user.surname">
+                        <input type="text" name="delivererSurname" ng-model="$ctrl.user.surname" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
+                        <div ng-messages="delivererProfileForm.delivererSurname.$error" ng-hide="delivererProfileForm.delivererSurname.$valid">
+                            <div ng-message-exp="['required', 'pattern']">
+                                Valid surname is required for update.
+                            </div>
+                        </div>
                     </md-input-container>
                     <br>
+                    <b layout-align="center center">E-mail: </b>
+                    <md-input-container style="padding-left: 2em" id="delivererEmailField">
+                        <input type="email" name="delivererEmail" ng-model="$ctrl.user.email" required="" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
+                        <div ng-messages="delivererProfileForm.delivererEmail.$error" ng-hide="delivererProfileForm.delivererEmail.$valid">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                Your email must be between 10 and 100 characters long and look like an e-mail address.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <br>
+                    <b layout-align="center center">Address: </b>
+                    <md-input-container style="padding-left: 2em" id="delivererAddressField">
+                        <input type="text" name="delivererAddress" ng-model="$ctrl.user.address" required="" minlength="10"/>
+                        <div ng-messages="delivererProfileForm.delivererAddress.$error" ng-hide="delivererProfileForm.delivererAddress.$valid">
+                            <div ng-message-exp="['required', 'minlength']">
+                                Addresses generally consist of at least 10 characters
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <br>
+
                     <b layout-align="center center">Birth Date: </b>
                     <md-input-container style="padding-left: 2em" id="delivererBirthDateField">
                         <input type="text" name="delivererBirthDate" ng-disabled="true" ng-model="$ctrl.user.birthday">
                     </md-input-container>
                     <br>
-                    <b layout-align="center center">E-mail: </b>
-                    <md-input-container style="padding-left: 2em" id="delivererEmailField">
-                        <input type="email" name="delivererEmail" ng-disabled="true" ng-model="$ctrl.user.email">
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">Address: </b>
-                    <md-input-container style="padding-left: 2em" id="delivererAddressField">
-                        <input type="text" name="delivererAddress" ng-model="$ctrl.user.address">
-                    </md-input-container>
-                    <br>
+
                     <b layout-align="center center">Phone Number: </b>
                     <md-input-container style="padding-left: 2em" id="delivererPhoneNumberField">
                         <input type="tel" name="delivererPhoneNumber" ng-model="$ctrl.user.phone">
@@ -82,32 +205,102 @@
                         <input type="number" name="delivererMaxWeight" ng-model="$ctrl.user.maxWeight">
                     </md-input-container>
                     <br>
-                    <b layout-align="center center">Selected Locations: </b>
-                    <md-input-container style="padding-left: 2em" id="delivererLocationsField">
-                        <div ng-repeat="location in $ctrl.user.preferredLocations">
-                            <span>{{location}}</span>
-                        </div>
+
+
+                    <b layout-align="center center">Currently Preferred Location </b>
+                    <md-input-container style="padding-left: 2em" id="delivererOldLocationField">
+                        <input type="text" name="delivererInitialLocation" ng-disabled="true" ng-model="$ctrl.user.initialLocation">
                     </md-input-container>
                     <br>
+
+
+                    <b layout-align="center center"></b>
+                    <md-input-container class="md-block">
+                        <label>New Location</label>
+                        <md-select ng-model="$ctrl.userProfile.selectedLocationDeliverer"
+                                   name="selectedLocationDeliverer">
+                            <md-optgroup>
+                                <md-option ng-value="location" ng-repeat="location in $ctrl.availableLocations">
+                                    {{location.name}}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                    <br>
+
+                    <b layout-align="center center">Currently Preferred Districts </b>
+                        <div ng-repeat="district in $ctrl.user.initialDistricts">
+                            {{district}}
+                        </div>
+                    <br>
+
+                    <b layout-align="center center"></b>
+                    <md-input-container class="md-block">
+                        <label>New Districts</label>
+                        <md-select name="selectedDistrict"
+                                   ng-model="$ctrl.userProfile.selectedDistricts"
+                                   multiple>
+                            <md-optgroup label="districts">
+                                <md-option ng-value="district" ng-repeat="district in $ctrl.userProfile.selectedLocationDeliverer.districts">{{district}}</md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+                    <br>
+
                     <b layout-align="center center">Old Password: </b>
                     <md-input-container style="padding-left: 2em" id="delivererOldPasswordField">
-                        <input type="password" name="delivererOldPassword" ng-model="$ctrl.user.oldPassword">
+                        <input type="password" name="userPassword" ng-model="$ctrl.user.oldPassword" minlength="5" md-maxlength="64"/>
+                        <div ng-messages="delivererProfileForm.userPassword.$error" ng-hide="delivererProfileForm.userPassword.$valid">
+                            <div ng-message-exp="['minlength', 'maxlength']">
+                                Your old password was between 5 and 64 characters long.
+                            </div>
+                        </div>
                     </md-input-container>
+
                     <br>
                     <b layout-align="center center">New Password </b>
                     <md-input-container style="padding-left: 2em" id="delivererNewPasswordField">
-                        <input type="password" name="delivererNewPassword" ng-model="$ctrl.user.newPassword">
+                        <input type="password"
+                               name="delivererNewPassword"
+                               ng-model="$ctrl.user.newPassword"
+                               minlength="5"
+                               md-maxlength="64">
+                        <div ng-messages="delivererProfileForm.delivererNewPassword.$error" ng-hide="delivererProfileForm.delivererNewPassword.$valid">
+                            <div ng-message-exp="['minlength', 'maxlength']">
+                                Your new password must be between 5 and 64 characters long.
+                            </div>
+                        </div>
                     </md-input-container>
                     <br>
                     <b layout-align="center center">New Password (Again): </b>
-                    <md-input-container style="padding-left: 2em" id="delivererNewPasswordAgainField">
-                        <input type="password" name="delivererNewPasswordAgain" ng-model="$ctrl.user.newPasswordAgain">
+                    <md-input-container style="padding-left: 2em" id="delivererNewPasswordFieldAgain">
+                        <input type="password"
+                               name="delivererNewPasswordAgain"
+                               ng-model="$ctrl.user.newPasswordAgain"
+                               minlength="5"
+                               md-maxlength="64">
+                        <div ng-messages="delivererProfileForm.delivererNewPasswordAgain.$error" ng-hide="delivererProfileForm.delivererNewPasswordAgain.$valid">
+                            <div ng-message-exp="['minlength', 'maxlength']">
+                                Your new password must be between 5 and 64 characters long.
+                            </div>
+                        </div>
                     </md-input-container>
                     <br>
+                    <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorDeliverer !== undefined">Error: </b>
+                        <span style="color: red">{{$ctrl.profileUpdateErrorDeliverer}}</span>
+                    <br>
+
                 </md-list>
-                <md-button class="md-raised" ng-click="$ctrl.changePasswordForDeliverer()" style="display: block; margin: 0 auto;">&nbsp;Save Changes&nbsp;</md-button><br>
+                </form>
+                <md-button type="submit" class="md-raised"
+                           ng-click="$ctrl.changeDelivererProfile() && delivererFormSubmitted == true" style="display: block; margin: 0 auto;">
+                    &nbsp;Save Changes&nbsp;
+                </md-button>
+                <br>
             </div>
-            <div id="shopProfile" ng-show="$ctrl.user.type==='shop'">
+
+
+            <div id="shopProfile" ng-show="$ctrl.user.type==='shop'" name="shopProfileForm">
                 <md-list>
                     <b layout-align="center center" >Shop Name:</b>
                     <md-input-container style="padding-left: 2em"id="shopNameField">

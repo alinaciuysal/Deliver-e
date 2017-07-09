@@ -45,13 +45,11 @@ class ViewRegisterComponentController{
             }
         ];
         ctrl.availableLocations = availableLocations;
-
-
-        this.$rootScope.$emit("menu-changed", this.$location.url());
+        this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
 
     }
 
-    resetDistricts() {
+   /* resetDistricts() {
         let ctrl = this;
         // reset if there are previously-selected districts on UI
         if(ctrl.hasOwnProperty("delivererRegister")) {
@@ -59,18 +57,24 @@ class ViewRegisterComponentController{
                 ctrl.delivererRegister.selectedDistricts = null;
             }
         }
-    }
+    }*/
 
     submitUserRegistrationRequest(){
         let ctrl = this;
-        let name = this.userRegister.name;
-        let surname = this.userRegister.surname;
-        let email = this.userRegister.email;
-        let password = this.userRegister.password;
+        let name = ctrl.userRegister.name;
+        let surname = ctrl.userRegister.surname;
+        let email = ctrl.userRegister.email;
+        let password = ctrl.userRegister.password;
+        let address = ctrl.userRegister.address;
+        let location = ctrl.userRegister.selectedLocationUser.name;
+        let district = ctrl.userRegister.selectedDistrict;
 
-        this.UserService.register(name, surname, email, password).then(()=> {
+        console.log(location + " " + district);
+
+        this.UserService.register(name, surname, email, password, address, location, district).then(()=> {
             this.$state.go('mainPage',{});
         }).catch(function(obj){
+            console.log(obj);
             ctrl.userRegistrationError = "Error: " + obj.data;
         });
     }
@@ -86,12 +90,14 @@ class ViewRegisterComponentController{
         let maxWeight = ctrl.delivererRegister.maxWeight;
         let address = ctrl.delivererRegister.address;
         let selectedDistricts = ctrl.delivererRegister.selectedDistricts;
+        let selectedLocation = ctrl.delivererRegister.selectedLocation.name;
         let date = new Date(birthday);
 
-        this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedDistricts).then(()=> {
+        this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedLocation, selectedDistricts).then(()=> {
             this.$state.go('mainPage',{});
         }).catch(function(obj){
-            ctrl.delivererRegistrationError = "Error: " + obj.data;
+            console.log(obj);
+            ctrl.delivererRegistrationError = "Error: " + obj;
         });
     }
 
@@ -156,6 +162,16 @@ class ViewRegisterComponentController{
         form.email = '';
         form.password = '';
     }
+
+    userSelectedLocationChanged(val) {
+        var ctrl = this;
+        if (val && val.length > 1) {
+            ctrl.userRegister.selectedDistrict = ctrl.userRegister.prevModel;
+        } else {
+            ctrl.userRegister.prevModel = val;
+        }
+    }
+
 
     static get $inject(){
         return ['$state', '$element', '$rootScope', '$location', UserService.name];

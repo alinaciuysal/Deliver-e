@@ -65,7 +65,7 @@ class ViewAvailableOrdersComponentController{
         this.availableOrders = availableOrders;
 
 
-        this.$rootScope.$emit("menu-changed", this.$location.url());
+        this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
     }
 
     rejectOrder(orderNo){

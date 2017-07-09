@@ -22,18 +22,41 @@ class ViewProfileComponent {
 
 class ViewProfileController {
 
-    constructor($state, $element, $rootScope, $location, $filter, UserService){
+    constructor($state, $element, $rootScope, $location, $filter, $window, UserService){
         this.$element = $element;
         this.$state = $state;
         this.$rootScope = $rootScope;
         this.$location = $location;
         this.UserService = UserService;
         this.$filter = $filter;
+        this.$window = $window;
     }
 
     initializeController() {
         let ctrl = this;
+
+        // reset error messages
+        if (ctrl.profileUpdateErrorDeliverer !== undefined) {
+            ctrl.profileUpdateErrorDeliverer = undefined;
+        }
+
+        if (ctrl.profileUpdateErrorUser !== undefined) {
+            ctrl.profileUpdateErrorUser = undefined;
+        }
+
         ctrl.user = {};
+        // now populate the location table
+        // retrieve these from API
+        let availableLocations = [
+            {
+                name: 'Munich',
+                districts: ["Ludwigsvorstadt-Isarvorstadt", "Schwabing-West", "Am-Hart", "Schwanthalerhöhe", "Sendling", "Am Laim"]
+            }, {
+                name: 'Berlin',
+                districts: ["Mitte", "Kreuzberg", "Schönerberg"]
+            }
+        ];
+        ctrl.availableLocations = availableLocations;
 
         ctrl.UserService.getCurrentUserDetails().then( function(response) {
             let retrievedUser = response.data;
@@ -44,7 +67,10 @@ class ViewProfileController {
             if(retrievedUser.type === "customer") {
                 ctrl.user.name = retrievedUser.name;
                 ctrl.user.surname = retrievedUser.surname;
-                console.log("I'm a customer");
+                ctrl.user.location = retrievedUser.location;
+                ctrl.user.initialLocation = retrievedUser.location;
+                ctrl.user.initialDistrict = retrievedUser.district;
+                ctrl.user.address = retrievedUser.address;
             } else if (retrievedUser.type === "deliverer") {
                 ctrl.user.name = retrievedUser.name;
                 ctrl.user.surname = retrievedUser.surname;
@@ -53,8 +79,8 @@ class ViewProfileController {
                 ctrl.user.address = retrievedUser.address;
                 ctrl.user.phone = retrievedUser.phone;
                 ctrl.user.maxWeight = retrievedUser.maxWeight;
-                ctrl.user.preferredLocations = retrievedUser.preferredLocations;
-                //ctrl.user.preferredDistricts = retrievedUser.preferredDistricts;
+                ctrl.user.initialLocation = retrievedUser.preferredLocation;
+                ctrl.user.initialDistricts = retrievedUser.preferredDistricts;
             } else if (retrievedUser.type === "shop") {
                 ctrl.user.shopName = retrievedUser.name;
                 ctrl.user.shopAddress = retrievedUser.address;
@@ -65,12 +91,227 @@ class ViewProfileController {
         });
     }
 
+    changeUserLocationModel() {
+        let ctrl = this;
+        console.log(ctrl.userProfile.selectedLocationUser.name);
+    }
+
+    changeCustomerProfile() {
+        let ctrl = this;
+
+        // reset error msg
+        if(ctrl.profileUpdateErrorUser !== undefined) {
+            ctrl.profileUpdateErrorUser = undefined;
+        }
+
+        // reset confirmation msg
+        if(ctrl.profileUpdateSuccessUser !== undefined) {
+            ctrl.profileUpdateSuccessUser = undefined;
+        }
+
+        if (ctrl.user.newPassword !== undefined && ctrl.user.newPasswordAgain !== undefined && ctrl.user.oldPassword !== undefined) {
+            if(ctrl.user.newPassword !== ctrl.user.newPasswordAgain) {
+                ctrl.profileUpdateErrorUser = "New passwords should match";
+                return
+            }
+        }
+
+        if (ctrl.user.oldPassword !== undefined && (ctrl.user.newPassword === undefined || ctrl.user.newPasswordAgain === undefined) ) {
+            ctrl.profileUpdateErrorUser = "Please provide new password if you want to change the old one";
+            return
+        }
+
+        // ask use to provide respective information if they do not exist beforehand
+
+        if (ctrl.userProfile !== undefined) {
+            if(ctrl.userProfile.selectedDistrictUser === undefined) {
+                ctrl.profileUpdateErrorUser = "Please provide your new district";
+                return
+            }
+
+            if(ctrl.userProfile.selectedLocationUser === undefined) {
+                ctrl.profileUpdateErrorUser = "Please provide your location";
+                return
+            }
+
+        }
+
+        if (ctrl.user.address === undefined) {
+            ctrl.profileUpdateErrorUser = "Please provide your address";
+            return
+        }
+
+        if (ctrl.user.name === undefined) {
+            ctrl.profileUpdateErrorUser = "Please provide your name";
+            return
+        }
+
+        if (ctrl.user.surname === undefined) {
+            ctrl.profileUpdateErrorUser = "Please provide your surname";
+            return
+        }
+
+        if (ctrl.user.email === undefined) {
+            ctrl.profileUpdateErrorUser = "Please provide your email";
+            return
+        }
+
+
+        // now populate attributes
+        let user = {};
+        user.name = ctrl.user.name;
+        user.type = ctrl.user.type;
+        user.surname = ctrl.user.surname;
+        user.address = ctrl.user.address;
+        user.email = ctrl.user.email;
+        user.password = ctrl.user.oldPassword;
+        user.newPassword = ctrl.user.newPassword;
+        user.location = ctrl.user.initialLocation;
+        user.district = ctrl.user.initialDistrict;
+
+        // update if user changes respective fields
+        if(ctrl.userProfile !== undefined) {
+            if( ctrl.user.initialLocation !== ctrl.userProfile.selectedLocationUser) {
+                user.location = ctrl.userProfile.selectedLocationUser.name;
+            }
+            if( ctrl.user.initialDistrict !== ctrl.userProfile.selectedDistrictUser) {
+                user.district = ctrl.userProfile.selectedDistrictUser;
+            }
+        }
+
+        console.log("user to be submitted: ", user);
+
+        // send a request for update
+        ctrl.UserService.updateUser(user).then( function(response) {
+            if(response.status === 200) {
+                // now reflect the submitted changes in UI
+                ctrl.user.name = user.name;
+                ctrl.user.type = user.type;
+                ctrl.user.surname = user.surname;
+                ctrl.user.address = user.address;
+                ctrl.user.email = user.email;
+                ctrl.user.initiaLocation = user.location;
+                ctrl.user.initialDistrict = user.district;
+                ctrl.$window.location.reload();
+                alert("Changes have been made successfully");
+            } else {
+                // TODO: check if provided password match with the one in DB by using respective status codes
+                console.log(response);
+                ctrl.profileUpdateErrorUser = "Server error occurred or incorrect password, please try again later.";
+            }
+        });
+
+    }
+
+    changeDelivererProfile() {
+        let ctrl = this;
+
+        console.log("deliverer to be submitted: 1 ", ctrl.user);
+
+        // reset error msg
+        if(ctrl.profileUpdateErrorDeliverer !== undefined) {
+            ctrl.profileUpdateErrorDeliverer = undefined;
+        }
+
+        if (ctrl.user.newPassword !== undefined && ctrl.user.newPasswordAgain !== undefined && ctrl.user.oldPassword !== undefined) {
+            if(ctrl.user.newPassword !== ctrl.user.newPasswordAgain) {
+                ctrl.profileUpdateErrorDeliverer = "New passwords should match";
+                return
+            }
+        }
+
+        if (ctrl.user.oldPassword !== undefined && (ctrl.user.newPassword === undefined || ctrl.user.newPasswordAgain === undefined) ) {
+            ctrl.profileUpdateErrorDeliverer = "Please provide new & valid password if you want to change the old one";
+            return
+        }
+
+        if (ctrl.userProfile !== undefined) {
+            if(ctrl.userProfile.selectedDistricts === undefined) {
+                ctrl.profileUpdateErrorDeliverer = "Please provide preferred district(s) for delivery";
+                return
+            }
+
+            if(ctrl.userProfile.selectedLocationDeliverer === undefined) {
+                ctrl.profileUpdateErrorDeliverer = "Please provide preferred location for delivery";
+                return
+            }
+
+        }
+
+        if (ctrl.user.address === undefined) {
+            ctrl.profileUpdateErrorDeliverer = "Please provide your address";
+            return
+        }
+
+        if (ctrl.user.name === undefined) {
+            ctrl.profileUpdateErrorDeliverer = "Please provide your name";
+            return
+        }
+
+        if (ctrl.user.surname === undefined) {
+            ctrl.profileUpdateErrorDeliverer = "Please provide your surname";
+            return
+        }
+
+        if (ctrl.user.email === undefined) {
+            ctrl.profileUpdateErrorDeliverer = "Please provide your email";
+            return
+        }
+
+        // now populate attributes if everything is fine
+        let deliverer = {};
+        deliverer.name = ctrl.user.name;
+        deliverer.type = ctrl.user.type;
+        deliverer.surname = ctrl.user.surname;
+        deliverer.address = ctrl.user.address;
+        deliverer.email = ctrl.user.email;
+        deliverer.password = ctrl.user.oldPassword;
+        deliverer.newPassword = ctrl.user.newPassword;
+        deliverer.preferredLocation = ctrl.user.initialLocation;
+        deliverer.districts = ctrl.user.initialDistricts;
+        deliverer.maxWeight = ctrl.user.maxWeight;
+        deliverer.phone = ctrl.user.phone;
+
+        // update if user changes respective fields
+        if(ctrl.userProfile !== undefined) {
+            if( ctrl.user.initialLocation !== ctrl.userProfile.selectedLocationDeliverer) {
+                deliverer.preferredLocation = ctrl.userProfile.selectedLocationDeliverer.name;
+            }
+            if( ctrl.user.initialDistrict !== ctrl.userProfile.selectedDistricts) {
+                deliverer.preferredDistricts = ctrl.userProfile.selectedDistricts;
+            }
+        }
+
+        console.log("deliverer to be submitted ", deliverer);
+
+        // send a request for update
+        ctrl.UserService.updateUser(deliverer).then( function(response) {
+            if(response.status === 200) {
+                // now reflect the submitted changes in UI
+                ctrl.user.name = deliverer.name;
+                ctrl.user.type = deliverer.type;
+                ctrl.user.surname = deliverer.surname;
+                ctrl.user.address = deliverer.address;
+                ctrl.user.email = deliverer.email;
+                ctrl.user.initiaLocation = deliverer.location;
+                ctrl.user.initialDistricts = deliverer.districts;
+                ctrl.$window.location.reload();
+                alert("Changes have been made successfully");
+            } else {
+                // TODO: check if provided password match with the one in DB by using respective status codes
+                console.log(response);
+                ctrl.profileUpdateErrorDeliverer = "Server error occurred or incorrect password, please try again later.";
+            }
+        });
+
+    }
+
     $onInit() {
-        this.$rootScope.$emit("menu-changed", this.$location.url());
+        this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
     }
 
     static get $inject(){
-        return ['$state', '$element', '$rootScope', '$location', '$filter', UserService.name];
+        return ['$state', '$element', '$rootScope', '$location', '$filter', '$window', UserService.name];
     }
 }
 
