@@ -3,6 +3,7 @@ var User = require('./userSchema');
 var Shop = require('../shop/shopSchema');
 var Order = require('../order/orderSchema');
 var jwt = require('jwt-simple');
+var bcrypt = require('bcrypt-nodejs');
 
 module.exports.login = function(req, res){
 
@@ -29,6 +30,7 @@ module.exports.login = function(req, res){
         user.comparePassword(req.body.password, function(err, isMatch) {
             if(!isMatch || err){
                 res.status(401).send('Invalid Credentials');
+                return;
             } else {
                 res.status(200).json({token: createToken(user)});
             }
@@ -196,7 +198,7 @@ module.exports.getUser = function(req, res) {
 
 module.exports.getUserById = function(req, res) {
     User.findById(req.params.user_id, function (err, user) {
-        if (err) {
+        if(err) {
             res.sendStatus(500);
             return;
         }
@@ -207,13 +209,29 @@ module.exports.getUserById = function(req, res) {
 };
 
 module.exports.editUser = function(req, res) {
-    req.user.update(req.body, function(err, user) {
-        if (err) {
-            res.status(500).send(err);
+    req.user.comparePassword(req.body.old_password, function(err, isMatch) {
+        if(!isMatch || err){
+            res.status(401).send('Invalid Credentials');
             return;
         }
-        res.status(200).json(user);
-        return;
+        console.log(req.user)
+        console.log(req.body)
+        hashPassword(req.body.new_password, function(err, hash){
+            if(err) {
+                console.log(1)
+                res.status(500).send(err);
+                return;
+            }
+            console.log(2)
+            if(hash) req.body.password = hash;
+            console.log(req.body)
+            User.findByIdAndUpdate(req.user._id, req.body, function(err, user) {
+                delete user._doc.password;
+                console.log("kkkkk")
+                res.status(200).json(user);
+                return;
+            });
+        })
     });
 };
 
@@ -228,3 +246,31 @@ function createToken(user) {
     };
     return jwt.encode(tokenPayload,Config.auth.jwtSecret);
 };
+
+
+function hashPassword(password, cb) {
+    console.log("aaaa"+password)
+    if(!password) {
+        cb(null, null);
+        return;
+    }
+    console.log(password)
+    bcrypt.genSalt(10, function(err, salt) {
+        if(err){
+            cb(err, null);
+            return;
+        }
+
+        // hash the password using our new salt
+        bcrypt.hash(password, salt, null, function (err, hash) {
+            if (err) {
+                cb(err, null);
+                return;
+            }
+
+            // override the cleartext password with the hashed one
+            cb(err, hash);
+            return;
+        });
+    });
+}
