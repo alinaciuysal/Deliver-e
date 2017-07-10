@@ -69,9 +69,10 @@ class ViewRegisterComponentController{
         let location = ctrl.userRegister.selectedLocationUser.name;
         let district = ctrl.userRegister.selectedDistrict;
 
-        console.log(location + " " + district);
-
         this.UserService.register(name, surname, email, password, address, location, district).then(()=> {
+            alert("Registration is successful");
+            // this.$state.go('login',{});
+
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             console.log(obj);
@@ -94,6 +95,8 @@ class ViewRegisterComponentController{
         let date = new Date(birthday);
 
         this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedLocation, selectedDistricts).then(()=> {
+            alert("Registration is successful");
+            // this.$state.go('login',{});
             this.$state.go('delivererHomePage',{});
         }).catch(function(obj){
             console.log(obj);
@@ -110,9 +113,9 @@ class ViewRegisterComponentController{
         let shopAddress = ctrl.shopRegister.shopAddress;
         let shopPhoneNumber = ctrl.shopRegister.shopPhoneNumber;
 
-        console.log(email + " " + password + " " + name + " " + shopAddress + " " + shopPhoneNumber);
-
         this.UserService.registerShop(email, password, name, shopAddress, shopPhoneNumber).then(()=> {
+            alert("Registration is successful");
+            // this.$state.go('login',{});
             this.$state.go('shopHomePage',{});
         }).catch(function(obj){
             console.log(obj);

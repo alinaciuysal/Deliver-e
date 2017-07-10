@@ -41,9 +41,9 @@ class ViewLoginComponentController{
         var ctrl = this;
 
         this.UserService.login(email,password).then( function (response) {
-
-            ctrl.UserService.getCurrentUserDetails().then( function(response) {
-                ctrl.user = response.data;
+            ctrl.UserService.getCurrentUserDetails().then( function(resp) {
+                ctrl.user = resp.data;
+                ctrl.$rootScope.$emit("navbar-changed", {});
                 if (ctrl.user.type === "customer")
                     ctrl.$state.go('mainPage',{});
                 else if (ctrl.user.type === "deliverer")

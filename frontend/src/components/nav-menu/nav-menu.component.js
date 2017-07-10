@@ -20,7 +20,7 @@ class NavMenuComponent {
 class NavMenuController {
 
     constructor($state, $location, $rootScope) {
-        var ctrl = this;
+        let ctrl = this;
         this.$state = $state;
         this.$location = $location;
         this.$rootScope = $rootScope;

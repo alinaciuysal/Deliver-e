@@ -18,14 +18,53 @@ class AppHeaderComponent {
     }
 }
 
-class AppHeaderComponentController{
-    constructor($state,UserService){
+class AppHeaderComponentController {
+
+    constructor($rootScope, $state, UserService){
+        let ctrl = this;
         this.$state = $state;
         this.UserService = UserService;
+
+        this.$rootScope = $rootScope;
+        ctrl.$rootScope.$on("navbar-changed", function(evt, arg) {
+            ctrl.$onInit();
+        });
+    }
+
+    $onInit() {
+        let ctrl = this;
+
+        if(ctrl.isAuthenticated()) {
+            ctrl.UserService.getCurrentUserDetails().then(function(response) {
+                ctrl.initialUser = response.data;
+                let userType = ctrl.initialUser.type;
+                if (userType === "customer") {
+                    ctrl.userRedirectMsg = "My Orders";
+                } else if (userType === "deliverer") {
+                    ctrl.userRedirectMsg = "Available Orders";
+                } else if (userType === "shop") {
+                    ctrl.userRedirectMsg = "Add Product";
+                }
+            });
+        }
     }
 
     openMenu($mdMenu, ev) {
         $mdMenu.open(ev);
+    }
+
+    goToMainPage() {
+        let ctrl = this;
+        let userType = ctrl.initialUser.type;
+
+        if (userType === "customer") {
+            // TODO
+            //ctrl.$state.go('myOrders',{});
+        } else if (userType === "deliverer") {
+            ctrl.$state.go('delivererHomePage',{});
+        } else if (userType === "shop") {
+            ctrl.$state.go('shopHomePage',{});
+        }
     }
 
     isAuthenticated(){
@@ -64,7 +103,7 @@ class AppHeaderComponentController{
     }
 
     static get $inject(){
-        return ['$state', UserService.name];
+        return ['$rootScope', '$state', UserService.name];
     }
 }
 

@@ -13,7 +13,7 @@
         <md-menu  layout="row" md-offset="0 70">
             <md-button aria-label="More" class="md-button menuButton" ng-click="$ctrl.openMenu($mdMenu, $event)">
                 <md-menu-item ng-if="$ctrl.isAuthenticated()">
-                    Welcome {{$ctrl.getCurrentUserName()}}!
+                    Welcome {{$ctrl.initialUser.name}}!
                 </md-menu-item>
                 <md-menu-item ng-if="!$ctrl.isAuthenticated()">
                     Welcome!
@@ -23,7 +23,13 @@
                 <md-menu-item ng-if="$ctrl.isAuthenticated()">
                     <md-button ng-click="$ctrl.goToProfilePage()">
                         <md-icon md-menu-align-target><ng-md-icon icon="account_circle" ></ng-md-icon></md-icon>
-                        {{$ctrl.getCurrentUser()}}
+                        {{$ctrl.initialUser.email}}
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item ng-if="$ctrl.isAuthenticated()">
+                    <md-button ng-click="$ctrl.goToMainPage()">
+                        <md-icon md-menu-align-target><ng-md-icon icon="view_agenda" ></ng-md-icon></md-icon>
+                        {{$ctrl.userRedirectMsg}}
                     </md-button>
                 </md-menu-item>
                 <md-menu-divider ng-if="$ctrl.isAuthenticated()"></md-menu-divider>

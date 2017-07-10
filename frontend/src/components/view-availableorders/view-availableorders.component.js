@@ -31,7 +31,6 @@ class ViewAvailableOrdersComponentController{
     }
 
     $onInit() {
-        console.log("asdasdasd");
         this.register = {};
         let availableOrders = [
             {

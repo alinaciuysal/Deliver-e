@@ -36,12 +36,16 @@ class ViewProfileController {
         let ctrl = this;
 
         // reset error messages
+        if (ctrl.profileUpdateErrorUser !== undefined) {
+            ctrl.profileUpdateErrorUser = undefined;
+        }
+
         if (ctrl.profileUpdateErrorDeliverer !== undefined) {
             ctrl.profileUpdateErrorDeliverer = undefined;
         }
 
-        if (ctrl.profileUpdateErrorUser !== undefined) {
-            ctrl.profileUpdateErrorUser = undefined;
+        if (ctrl.profileUpdateErrorShop !== undefined) {
+            ctrl.profileUpdateErrorShop = undefined;
         }
 
         ctrl.user = {};
@@ -110,13 +114,20 @@ class ViewProfileController {
         }
 
         if (ctrl.user.newPassword !== undefined && ctrl.user.newPasswordAgain !== undefined && ctrl.user.oldPassword !== undefined) {
+
+            if (ctrl.user.oldPassword.length === 0) {
+                ctrl.profileUpdateErrorUser = "Please provide your old password";
+                return
+            }
+
             if(ctrl.user.newPassword !== ctrl.user.newPasswordAgain) {
                 ctrl.profileUpdateErrorUser = "New passwords should match";
                 return
             }
         }
 
-        if (ctrl.user.oldPassword !== undefined && (ctrl.user.newPassword === undefined || ctrl.user.newPasswordAgain === undefined) ) {
+
+        if (ctrl.user.oldPassword !== undefined && (ctrl.user.newPassword === undefined || ctrl.user.newPassword.length === 0 || ctrl.user.newPasswordAgain === undefined || ctrl.user.newPasswordAgain.length === 0 || ctrl.user.oldPassword.length !== 0)) {
             ctrl.profileUpdateErrorUser = "Please provide new password if you want to change the old one";
             return
         }
@@ -136,22 +147,22 @@ class ViewProfileController {
 
         }
 
-        if (ctrl.user.address === undefined) {
+        if (ctrl.user.address === undefined || ctrl.user.address.length === 0) {
             ctrl.profileUpdateErrorUser = "Please provide your address";
             return
         }
 
-        if (ctrl.user.name === undefined) {
+        if (ctrl.user.name === undefined || ctrl.user.name.length === 0) {
             ctrl.profileUpdateErrorUser = "Please provide your name";
             return
         }
 
-        if (ctrl.user.surname === undefined) {
+        if (ctrl.user.surname === undefined || ctrl.user.surname.length === 0) {
             ctrl.profileUpdateErrorUser = "Please provide your surname";
             return
         }
 
-        if (ctrl.user.email === undefined) {
+        if (ctrl.user.email === undefined || ctrl.user.email.length === 0) {
             ctrl.profileUpdateErrorUser = "Please provide your email";
             return
         }
@@ -194,6 +205,8 @@ class ViewProfileController {
                 ctrl.user.initialDistrict = user.district;
                 ctrl.$window.location.reload();
                 alert("Changes have been made successfully");
+                // refresh header component by broadcasting
+                this.$rootScope.$emit("navbar-changed", {});
             } else {
                 // TODO: check if provided password match with the one in DB by using respective status codes
                 console.log(response);
@@ -206,21 +219,26 @@ class ViewProfileController {
     changeDelivererProfile() {
         let ctrl = this;
 
-        console.log("deliverer to be submitted: 1 ", ctrl.user);
-
         // reset error msg
         if(ctrl.profileUpdateErrorDeliverer !== undefined) {
             ctrl.profileUpdateErrorDeliverer = undefined;
         }
 
+
         if (ctrl.user.newPassword !== undefined && ctrl.user.newPasswordAgain !== undefined && ctrl.user.oldPassword !== undefined) {
+
+            if (ctrl.user.oldPassword.length === 0) {
+                ctrl.profileUpdateErrorDeliverer = "Please provide your old password";
+                return
+            }
+
             if(ctrl.user.newPassword !== ctrl.user.newPasswordAgain) {
                 ctrl.profileUpdateErrorDeliverer = "New passwords should match";
                 return
             }
         }
 
-        if (ctrl.user.oldPassword !== undefined && (ctrl.user.newPassword === undefined || ctrl.user.newPasswordAgain === undefined) ) {
+        if (ctrl.user.oldPassword !== undefined && (ctrl.user.newPassword === undefined || ctrl.user.newPassword.length === 0 || ctrl.user.newPasswordAgain === undefined || ctrl.user.newPasswordAgain.length === 0 || ctrl.user.oldPassword.length !== 0)) {
             ctrl.profileUpdateErrorDeliverer = "Please provide new & valid password if you want to change the old one";
             return
         }
@@ -238,22 +256,22 @@ class ViewProfileController {
 
         }
 
-        if (ctrl.user.address === undefined) {
+        if (ctrl.user.address === undefined || ctrl.user.address.length === 0) {
             ctrl.profileUpdateErrorDeliverer = "Please provide your address";
             return
         }
 
-        if (ctrl.user.name === undefined) {
+        if (ctrl.user.name === undefined || ctrl.user.name.length === 0) {
             ctrl.profileUpdateErrorDeliverer = "Please provide your name";
             return
         }
 
-        if (ctrl.user.surname === undefined) {
+        if (ctrl.user.surname === undefined || ctrl.user.surname.length === 0) {
             ctrl.profileUpdateErrorDeliverer = "Please provide your surname";
             return
         }
 
-        if (ctrl.user.email === undefined) {
+        if (ctrl.user.email === undefined || ctrl.user.email.length === 0) {
             ctrl.profileUpdateErrorDeliverer = "Please provide your email";
             return
         }
@@ -297,13 +315,98 @@ class ViewProfileController {
                 ctrl.user.initialDistricts = deliverer.districts;
                 ctrl.$window.location.reload();
                 alert("Changes have been made successfully");
+                // refresh header component by broadcasting
+                this.$rootScope.$emit("navbar-changed", {});
             } else {
                 // TODO: check if provided password match with the one in DB by using respective status codes
                 console.log(response);
                 ctrl.profileUpdateErrorDeliverer = "Server error occurred or incorrect password, please try again later.";
             }
         });
+    }
 
+    changeShopProfile() {
+        let ctrl = this;
+        // reset error msg
+        if(ctrl.profileUpdateErrorShop !== undefined) {
+            ctrl.profileUpdateErrorShop = undefined;
+        }
+
+        if (ctrl.user.newPassword !== undefined && ctrl.user.newPasswordAgain !== undefined && ctrl.user.oldPassword !== undefined) {
+
+            if (ctrl.user.oldPassword.length === 0) {
+                ctrl.profileUpdateErrorShop = "Please provide your old password";
+                return
+            }
+
+            if(ctrl.user.newPassword !== ctrl.user.newPasswordAgain) {
+                ctrl.profileUpdateErrorShop = "New passwords should match";
+                return
+            }
+        }
+
+        if (ctrl.user.oldPassword !== undefined &&
+            (ctrl.user.newPassword === undefined ||
+                ctrl.user.newPassword.length === 0 ||
+                ctrl.user.newPasswordAgain === undefined ||
+                ctrl.user.newPasswordAgain.length === 0 ||
+                ctrl.user.oldPassword.length !== 0)
+            ) {
+
+                ctrl.profileUpdateErrorShop = "Please provide new & valid password if you want to change the old one";
+                return
+            }
+
+        if (ctrl.user.shopAddress === undefined || ctrl.user.shopAddress.length === 0) {
+            ctrl.profileUpdateErrorShop = "Please provide shop's address";
+            return
+        }
+
+        if (ctrl.user.shopName === undefined || ctrl.user.shopName.length === 0) {
+            ctrl.profileUpdateErrorShop = "Please provide shop's name";
+            return
+        }
+
+        if (ctrl.user.phone === undefined || ctrl.user.phone.length === 0) {
+            ctrl.profileUpdateErrorShop = "Please provide shop's phone number";
+            return
+        }
+
+        if (ctrl.user.email === undefined || ctrl.user.email.length === 0) {
+            ctrl.profileUpdateErrorShop = "Please provide account's email";
+            return
+        }
+
+        // now populate attributes if everything is fine
+        let shop = {};
+        shop.name = ctrl.user.shopName;
+        shop.type = ctrl.user.type;
+        shop.address = ctrl.user.shopAddress;
+        shop.email = ctrl.user.email;
+        shop.password = ctrl.user.oldPassword;
+        shop.newPassword = ctrl.user.newPassword;
+        shop.phone = ctrl.user.phone;
+
+        console.log("shop to be submitted ", shop);
+
+        // send a request for update
+        ctrl.UserService.updateUser(shop).then( function(response) {
+            if(response.status === 200) {
+                // now reflect the submitted changes in UI
+                ctrl.user.shopName = shop.name;
+                ctrl.user.type = shop.type;
+                ctrl.user.shopAddress = shop.address;
+                ctrl.user.email = shop.email;
+                ctrl.$window.location.reload();
+                alert("Changes have been made successfully");
+                // refresh header component by broadcasting
+                this.$rootScope.$emit("navbar-changed", {});
+            } else {
+                // TODO: check if provided password match with the one in DB by using respective status codes
+                console.log(response);
+                ctrl.profileUpdateErrorShop = "Server error occurred or incorrect password, please try again later.";
+            }
+        });
     }
 
     $onInit() {
