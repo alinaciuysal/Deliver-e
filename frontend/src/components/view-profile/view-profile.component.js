@@ -175,8 +175,10 @@ class ViewProfileController {
         user.surname = ctrl.user.surname;
         user.address = ctrl.user.address;
         user.email = ctrl.user.email;
-        user.password = ctrl.user.oldPassword;
-        user.newPassword = ctrl.user.newPassword;
+
+        // old_password & new_password are used to be consistent with API
+        user.old_password = ctrl.user.oldPassword;
+        user.new_password = ctrl.user.newPassword;
         user.location = ctrl.user.initialLocation;
         user.district = ctrl.user.initialDistrict;
 
@@ -283,8 +285,8 @@ class ViewProfileController {
         deliverer.surname = ctrl.user.surname;
         deliverer.address = ctrl.user.address;
         deliverer.email = ctrl.user.email;
-        deliverer.password = ctrl.user.oldPassword;
-        deliverer.newPassword = ctrl.user.newPassword;
+        deliverer.old_password = ctrl.user.oldPassword;
+        deliverer.new_password = ctrl.user.newPassword;
         deliverer.preferredLocation = ctrl.user.initialLocation;
         deliverer.districts = ctrl.user.initialDistricts;
         deliverer.maxWeight = ctrl.user.maxWeight;
@@ -383,8 +385,8 @@ class ViewProfileController {
         shop.type = ctrl.user.type;
         shop.address = ctrl.user.shopAddress;
         shop.email = ctrl.user.email;
-        shop.password = ctrl.user.oldPassword;
-        shop.newPassword = ctrl.user.newPassword;
+        shop.old_password = ctrl.user.oldPassword;
+        shop.new_password = ctrl.user.newPassword;
         shop.phone = ctrl.user.phone;
 
         console.log("shop to be submitted ", shop);
