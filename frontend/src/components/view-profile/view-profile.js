@@ -8,4 +8,4 @@ import angular from 'angular';
 import ViewProfileComponent from './view-profile.component.js';
 
 export default angular.module('ViewProfile', [])
-    .component(ViewProfileComponent.name, new ViewProfileComponent);
+    .component(ViewProfileComponent.name, new ViewProfileComponent)

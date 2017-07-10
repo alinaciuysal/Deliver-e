@@ -45,13 +45,11 @@ class ViewRegisterComponentController{
             }
         ];
         ctrl.availableLocations = availableLocations;
-
-
-        this.$rootScope.$emit("menu-changed", this.$location.url());
+        this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
 
     }
 
-    resetDistricts() {
+   /* resetDistricts() {
         let ctrl = this;
         // reset if there are previously-selected districts on UI
         if(ctrl.hasOwnProperty("delivererRegister")) {
@@ -59,18 +57,25 @@ class ViewRegisterComponentController{
                 ctrl.delivererRegister.selectedDistricts = null;
             }
         }
-    }
+    }*/
 
     submitUserRegistrationRequest(){
         let ctrl = this;
-        let name = this.userRegister.name;
-        let surname = this.userRegister.surname;
-        let email = this.userRegister.email;
-        let password = this.userRegister.password;
+        let name = ctrl.userRegister.name;
+        let surname = ctrl.userRegister.surname;
+        let email = ctrl.userRegister.email;
+        let password = ctrl.userRegister.password;
+        let address = ctrl.userRegister.address;
+        let location = ctrl.userRegister.selectedLocationUser.name;
+        let district = ctrl.userRegister.selectedDistrict;
 
-        this.UserService.register(name, surname, email, password).then(()=> {
+        this.UserService.register(name, surname, email, password, address, location, district).then(()=> {
+            alert("Registration is successful");
+            // this.$state.go('login',{});
             this.$state.go('mainPage',{});
+            this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
+            console.log(obj);
             ctrl.userRegistrationError = "Error: " + obj.data;
         });
     }
@@ -86,12 +91,17 @@ class ViewRegisterComponentController{
         let maxWeight = ctrl.delivererRegister.maxWeight;
         let address = ctrl.delivererRegister.address;
         let selectedDistricts = ctrl.delivererRegister.selectedDistricts;
+        let selectedLocation = ctrl.delivererRegister.selectedLocation.name;
         let date = new Date(birthday);
 
-        this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedDistricts).then(()=> {
-            this.$state.go('mainPage',{});
+        this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedLocation, selectedDistricts).then(()=> {
+            alert("Registration is successful");
+            // this.$state.go('login',{});
+            this.$state.go('delivererHomePage',{});
+            this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
-            ctrl.delivererRegistrationError = "Error: " + obj.data;
+            console.log(obj);
+            ctrl.delivererRegistrationError = "Error: " + obj;
         });
     }
 
@@ -104,57 +114,15 @@ class ViewRegisterComponentController{
         let shopAddress = ctrl.shopRegister.shopAddress;
         let shopPhoneNumber = ctrl.shopRegister.shopPhoneNumber;
 
-        console.log(email + " " + password + " " + name + " " + shopAddress + " " + shopPhoneNumber);
-
         this.UserService.registerShop(email, password, name, shopAddress, shopPhoneNumber).then(()=> {
-            this.$state.go('mainPage',{});
+            alert("Registration is successful");
+            // this.$state.go('login',{});
+            this.$state.go('shopHomePage',{});
+            this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
             console.log(obj);
             ctrl.shopRegistrationError = "Error: " + obj.data;
         });
-    }
-
-    resetShopRegistrationForm() {
-        let ctrl = this;
-        let form = ctrl.ShopRegisterForm;
-        form.email = '';
-        form.password = '';
-        form.shopName = '';
-        form.shopAddress = '';
-        form.shopPhoneNumber = '';
-
-        // Set back to pristine.
-        ctrl.ShopRegisterForm.$setPristine();
-        // Since Angular 1.3, set back to untouched state.
-        ctrl.ShopRegisterForm.$setUntouched();
-    }
-
-    resetDelivererRegistrationForm() {
-        let ctrl = this;
-        let form = ctrl.delivererRegister;
-        form.name = '';
-        form.password = '';
-        form.surname = '';
-        form.email = '';
-        form.birthday = '';
-        form.phoneNumber = '';
-        form.maxWeight = '';
-        form.address = '';
-        form.selectedDistricts = '';
-
-        // Set back to pristine.
-        ctrl.delivererRegister.$setPristine();
-        // Since Angular 1.3, set back to untouched state.
-        ctrl.delivererRegister.$setUntouched();
-    }
-
-    resetUserRegistrationForm() {
-        let ctrl = this;
-        let form = ctrl.userRegister;
-        form.name = '';
-        form.password = '';
-        form.email = '';
-        form.password = '';
     }
 
     static get $inject(){

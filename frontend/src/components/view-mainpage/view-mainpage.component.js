@@ -39,34 +39,39 @@ class ViewMainPageComponentController {
         ];
         this.currentIndex = 0;
 
-        this.productsList = [];
+        //this.productsList = [];
+        this.shopsList = [];
         this.numCol = 0;
 
-        this.photo = 'img/asian/asian1.jpg';
-        this.getProductsList();
+        //this.photo = 'img/asian/asian1.jpg';
+        //this.getProductsList();
+        this.getShopsList()
     }
 
-    getProductsList() {
-        // this.ShopService.getProductsList().then(value => {
-        //     this.productsList = value;
-        //
-        //     this.numCol = this.productsList.length/4;
-        //     if(this.productsList.length%4!=0) this.numCol++;
-        // });
+    getShopsList() {
+        this.ShopService.getShopsList().then(value => {
+            this.shopsList = value;
 
-        this.productsList = [
-            {"_id":"59610d87311f94032157c04d", "name":"Product Name", "price":13, "category":"axe", "weight":14, "stock":5, "details":"Product details", "photo":"", "__v":0}
-        ];
-        this.numCol = this.productsList.length/4;
-        if(this.productsList.length%4!=0) this.numCol++;
+            this.numCol = this.shopsList.length/2;
+            if(this.shopsList.length%2!=0) this.numCol++;
+        });
     }
+
+    // getProductsList() {
+    //     this.ShopService.getProductsList().then(value => {
+    //         this.productsList = value;
+    //
+    //         this.numCol = this.productsList.length/4;
+    //         if(this.productsList.length%4!=0) this.numCol++;
+    //     });
+    // }
 
     search() {
         //Search func
     }
 
     $onInit() {
-        this.$rootScope.$emit("menu-changed", this.$location.url());
+        this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
     }
 
     static get $inject(){

@@ -35,26 +35,24 @@ class ViewShopPageController {
         this.photo = 'img/asian/asian1.jpg';
         ///GET SHOP BY ID
         /// /api/shop/:(shop_id)
-        this.getShopById(this.shopId)
+        this.getDetailedShopById(this.shopId)
 
         console.log(this);
 
     }
 
-    getShopById(id) {
-        this.ShopService.getShopById(id).then(value => {
+    getDetailedShopById(id) {
+        this.ShopService.getDetailedShopById(id).then(value => {
             this.shop = value;
             this.name = this.shop.name;
             this.address = this.shop.address;
             this.phone = this.shop.phone;
 
-            //this.products = this.shop.catalogue;
-            for(var i in this.shop.catalogue){
-                this.getProductById( this.shop.catalogue[i] );
-            }
+            this.products = this.shop.catalogue;
+        console.log(this.products);
 
-            //this.numCol = this.products.length/4;
-            //if(this.products.length%4!=0) this.numCol++;
+            this.numCol = this.products.length/4;
+            if(this.products.length%4!=0) this.numCol++;
 
         });
     }

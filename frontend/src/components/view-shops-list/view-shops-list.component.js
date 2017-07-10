@@ -18,10 +18,12 @@ class ViewShopsListComponent {
 
 class ViewShopsListController {
 
-    constructor($state, UserService, ShopService, $stateParams){
+    constructor($state, UserService, ShopService, $rootScope, $location, $stateParams){
         this.$state = $state;
         this.UserService = UserService;
         this.ShopService = ShopService;
+        this.$rootScope = $rootScope;
+        this.$location = $location;
 
         this.type = this.$state.params.type;
 
@@ -30,24 +32,27 @@ class ViewShopsListController {
         this.numCol = 0;
 
         /// GET SHOPS LIST
-        this.getShopsList();
 
         if(this.type == 'asian') {
             this.name = "Asian Shops";
+            this.getShopsListByType('asian');
         }
         else if(this.type == 'getranke') {
             this.name = "Getrankemarkts"
+            this.getShopsListByType('getranke');
         }
         else if(this.type == 'turkish') {
             this.name = "Turkish Shops"
+            this.getShopsListByType('turkish');
         }
         else if(this.type == 'russian') {
             this.name = "Russian Shops"
+            this.getShopsListByType('russian');
         }
     }
 
-    getShopsList() {
-        this.ShopService.getShopsList().then(value => {
+    getShopsListByType(type) {
+        this.ShopService.getShopsListByType(type).then(value => {
             this.shopsList = value;
 
             this.numCol = this.shopsList.length/2;
@@ -56,11 +61,20 @@ class ViewShopsListController {
     }
 
     $onInit() {
-        console.log("ViewShopsListController onInit works");
+        var array = [];
+        var wholeURL = this.$location.url().toString();
+        var smallURLs = wholeURL.split("/");
+
+        for(var i = 0; i < smallURLs.length; i++) {
+            if(smallURLs[i].length != 0) {
+                array.push(smallURLs[i]);
+            }
+        }
+        this.$rootScope.$emit("menu-changed", array);
     }
 
     static get $inject(){
-        return ['$state', UserService.name, ShopService.name, '$stateParams', '$http'];
+        return ['$state', UserService.name, ShopService.name, '$rootScope', '$location', '$stateParams', '$http'];
     }
 }
 

@@ -24,7 +24,7 @@ class FaqController {
     }
 
     $onInit() {
-        this.$rootScope.$emit("menu-changed", this.$location.url());
+        this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
     }
 
     static get $inject(){

@@ -4,3 +4,6 @@
 .login-form md-card md-card-title {
     background-color: #ab0012;
 }
+.error {
+    color: red;
+}

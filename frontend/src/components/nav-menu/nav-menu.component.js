@@ -20,7 +20,7 @@ class NavMenuComponent {
 class NavMenuController {
 
     constructor($state, $location, $rootScope) {
-        var ctrl = this;
+        let ctrl = this;
         this.$state = $state;
         this.$location = $location;
         this.$rootScope = $rootScope;
@@ -35,16 +35,19 @@ class NavMenuController {
 
     initializeNavBar(arg) {
         let ctrl = this;
+        ctrl.navigationElements = [];
+        ctrl.navigationElements.push("Main Page");
 
         if (arg !== undefined) {
-            arg = arg.substr(1);
-            if(arg !== "mainPage") {
-                ctrl.navigationElements = ["Main Page", arg];
-            } else {
-                ctrl.navigationElements = ["Main Page"];
+            if(typeof arg === 'string') {
+                // do not push main page again
+                if(arg.toString() !== "mainPage")
+                    ctrl.navigationElements.push(arg);
+            } else if (Object.prototype.toString.call( arg ) === '[object Array]' ) {
+                for (var i = 0; i < arg.length; i++) {
+                    ctrl.navigationElements.push(arg[i]);
+                }
             }
-        } else {
-            ctrl.navigationElements = ["Main Page"];
         }
     }
 }

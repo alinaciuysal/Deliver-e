@@ -2,6 +2,7 @@
 
 import angular from 'angular';
 import uiRouter from '@uirouter/angularjs';
+import ngAria from 'angular-aria';
 
 import angularMaterial from 'angular-material';
 import 'angular-material/angular-material.css';
@@ -48,7 +49,8 @@ let app = angular.module('app', [
         ViewShopPage.name,
         ViewProductPage.name,
         Faq.name,
-        jkAngularCarousel
+        jkAngularCarousel,
+        ngAria
 ]).run(() => {
     console.log(`Starting the angular module`);
 });
