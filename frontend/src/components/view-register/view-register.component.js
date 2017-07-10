@@ -72,8 +72,8 @@ class ViewRegisterComponentController{
         this.UserService.register(name, surname, email, password, address, location, district).then(()=> {
             alert("Registration is successful");
             // this.$state.go('login',{});
-
             this.$state.go('mainPage',{});
+            this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
             console.log(obj);
             ctrl.userRegistrationError = "Error: " + obj.data;
@@ -98,6 +98,7 @@ class ViewRegisterComponentController{
             alert("Registration is successful");
             // this.$state.go('login',{});
             this.$state.go('delivererHomePage',{});
+            this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
             console.log(obj);
             ctrl.delivererRegistrationError = "Error: " + obj;
@@ -117,64 +118,12 @@ class ViewRegisterComponentController{
             alert("Registration is successful");
             // this.$state.go('login',{});
             this.$state.go('shopHomePage',{});
+            this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
             console.log(obj);
             ctrl.shopRegistrationError = "Error: " + obj.data;
         });
     }
-
-    resetShopRegistrationForm() {
-        let ctrl = this;
-        let form = ctrl.ShopRegisterForm;
-        form.email = '';
-        form.password = '';
-        form.shopName = '';
-        form.shopAddress = '';
-        form.shopPhoneNumber = '';
-
-        // Set back to pristine.
-        ctrl.ShopRegisterForm.$setPristine();
-        // Since Angular 1.3, set back to untouched state.
-        ctrl.ShopRegisterForm.$setUntouched();
-    }
-
-    resetDelivererRegistrationForm() {
-        let ctrl = this;
-        let form = ctrl.delivererRegister;
-        form.name = '';
-        form.password = '';
-        form.surname = '';
-        form.email = '';
-        form.birthday = '';
-        form.phoneNumber = '';
-        form.maxWeight = '';
-        form.address = '';
-        form.selectedDistricts = '';
-
-        // Set back to pristine.
-        ctrl.delivererRegister.$setPristine();
-        // Since Angular 1.3, set back to untouched state.
-        ctrl.delivererRegister.$setUntouched();
-    }
-
-    resetUserRegistrationForm() {
-        let ctrl = this;
-        let form = ctrl.userRegister;
-        form.name = '';
-        form.password = '';
-        form.email = '';
-        form.password = '';
-    }
-
-    userSelectedLocationChanged(val) {
-        var ctrl = this;
-        if (val && val.length > 1) {
-            ctrl.userRegister.selectedDistrict = ctrl.userRegister.prevModel;
-        } else {
-            ctrl.userRegister.prevModel = val;
-        }
-    }
-
 
     static get $inject(){
         return ['$state', '$element', '$rootScope', '$location', UserService.name];

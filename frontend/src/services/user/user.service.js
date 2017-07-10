@@ -20,7 +20,6 @@ export default class UserService {
     }
 
     register(name, surname, email, pass, address, location, district) {
-        console.log("UserService register: ", location, " ", district);
         return this.$http.post(`${ this.API_URL }/user/signup/customer`, {
             name: name,
             surname: surname,
@@ -48,7 +47,6 @@ export default class UserService {
     }
 
     registerShop(email, password, shopName, shopAddress, shopPhoneNumber) {
-        console.log("UserService registerShop works");
         return this.$http.post(`${ this.API_URL }/user/signup/shop`, {
             email: email,
             password: password,
@@ -88,6 +86,7 @@ export default class UserService {
     }
 
     getCurrentUserDetails() {
+
         if (!this.user) {
             this.user = this.$http.get(`${ this.API_URL }/user`);
             return this.user;
