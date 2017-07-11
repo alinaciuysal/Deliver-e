@@ -30,10 +30,9 @@ md-nav-bar.md-default-theme md-nav-ink-bar, md-nav-bar md-nav-ink-bar {
 }
 
 .md-icon-2{
-    font-size:45px;
-    height:80px;
-    width: 280px;
-    padding-left: 140px;
+    font-size:40px;
+    height: 50px;
+    width: 150px;
 }
 
 .menuButton{
