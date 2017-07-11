@@ -95,78 +95,38 @@ class ViewProfileController {
         });
     }
 
-    changeUserLocationModel() {
+    // remove previously-selected districts if user picks another location from dropdown menu
+    changeDistrictsUser() {
         let ctrl = this;
-        console.log(ctrl.userProfile.selectedLocationUser.name);
+        ctrl.userProfile.selectedDistrictUser = null;
+    }
+
+    // remove previously-selected districts if deliverer picks another location from dropdown menu
+    changeDistrictsDeliverer() {
+        let ctrl = this;
+        ctrl.userProfile.selectedDistricts = null;
     }
 
     changeCustomerProfile() {
         let ctrl = this;
-
-        // reset error msg
-        if(ctrl.profileUpdateErrorUser !== undefined) {
-            ctrl.profileUpdateErrorUser = undefined;
+        ctrl.resetMessages(ctrl);
+        let invalidPw = ctrl.checkPasswordValidity(ctrl.user);
+        if (invalidPw !== null) {
+            ctrl.profileUpdateErrorUser = invalidPw;
+            return;
         }
 
-        // reset confirmation msg
-        if(ctrl.profileUpdateSuccessUser !== undefined) {
-            ctrl.profileUpdateSuccessUser = undefined;
+        let locAndDistrictRequired = ctrl.checkLocationAndDistrictValidityUser(ctrl.userProfile);
+        if (locAndDistrictRequired !== null) {
+            ctrl.profileUpdateErrorUser = locAndDistrictRequired;
+            return;
         }
 
-        if (ctrl.user.newPassword !== undefined && ctrl.user.newPasswordAgain !== undefined && ctrl.user.oldPassword !== undefined) {
-
-            if (ctrl.user.oldPassword.length === 0) {
-                ctrl.profileUpdateErrorUser = "Please provide your old password";
-                return
-            }
-
-            if(ctrl.user.newPassword !== ctrl.user.newPasswordAgain) {
-                ctrl.profileUpdateErrorUser = "New passwords should match";
-                return
-            }
+        let fieldsAreRequired = ctrl.checkFields(ctrl.user);
+        if (fieldsAreRequired !== null) {
+            ctrl.profileUpdateErrorUser = fieldsAreRequired;
+            return;
         }
-
-
-        if (ctrl.user.oldPassword !== undefined && (ctrl.user.newPassword === undefined || ctrl.user.newPassword.length === 0 || ctrl.user.newPasswordAgain === undefined || ctrl.user.newPasswordAgain.length === 0 || ctrl.user.oldPassword.length !== 0)) {
-            ctrl.profileUpdateErrorUser = "Please provide new password if you want to change the old one";
-            return
-        }
-
-        // ask use to provide respective information if they do not exist beforehand
-
-        if (ctrl.userProfile !== undefined) {
-            if(ctrl.userProfile.selectedDistrictUser === undefined) {
-                ctrl.profileUpdateErrorUser = "Please provide your new district";
-                return
-            }
-
-            if(ctrl.userProfile.selectedLocationUser === undefined) {
-                ctrl.profileUpdateErrorUser = "Please provide your location";
-                return
-            }
-
-        }
-
-        if (ctrl.user.address === undefined || ctrl.user.address.length === 0) {
-            ctrl.profileUpdateErrorUser = "Please provide your address";
-            return
-        }
-
-        if (ctrl.user.name === undefined || ctrl.user.name.length === 0) {
-            ctrl.profileUpdateErrorUser = "Please provide your name";
-            return
-        }
-
-        if (ctrl.user.surname === undefined || ctrl.user.surname.length === 0) {
-            ctrl.profileUpdateErrorUser = "Please provide your surname";
-            return
-        }
-
-        if (ctrl.user.email === undefined || ctrl.user.email.length === 0) {
-            ctrl.profileUpdateErrorUser = "Please provide your email";
-            return
-        }
-
 
         // now populate attributes
         let user = {};
@@ -192,8 +152,6 @@ class ViewProfileController {
             }
         }
 
-        console.log("user to be submitted: ", user);
-
         // send a request for update
         ctrl.UserService.updateUser(user).then( function(response) {
             if(response.status === 200) {
@@ -209,11 +167,10 @@ class ViewProfileController {
                 alert("Changes have been made successfully");
                 // refresh header component by broadcasting
                 this.$rootScope.$emit("navbar-changed", {});
-            } else {
-                // TODO: check if provided password match with the one in DB by using respective status codes
-                console.log(response);
-                ctrl.profileUpdateErrorUser = "Server error occurred or incorrect password, please try again later.";
             }
+        }).catch(function(response) {
+            // ctrl.profileUpdateErrorUser = "Server error occurred or incorrect password, please try again later.";
+            ctrl.profileUpdateErrorUser = response.data;
         });
 
     }
@@ -221,28 +178,24 @@ class ViewProfileController {
     changeDelivererProfile() {
         let ctrl = this;
 
-        // reset error msg
-        if(ctrl.profileUpdateErrorDeliverer !== undefined) {
-            ctrl.profileUpdateErrorDeliverer = undefined;
+        ctrl.resetMessages(ctrl);
+
+        let invalidPw = ctrl.checkPasswordValidity(ctrl.user);
+        if (invalidPw !== null) {
+            ctrl.profileUpdateErrorDeliverer = invalidPw;
+            return;
         }
 
-
-        if (ctrl.user.newPassword !== undefined && ctrl.user.newPasswordAgain !== undefined && ctrl.user.oldPassword !== undefined) {
-
-            if (ctrl.user.oldPassword.length === 0) {
-                ctrl.profileUpdateErrorDeliverer = "Please provide your old password";
-                return
-            }
-
-            if(ctrl.user.newPassword !== ctrl.user.newPasswordAgain) {
-                ctrl.profileUpdateErrorDeliverer = "New passwords should match";
-                return
-            }
+        let locAndDistrictRequired = ctrl.checkLocationAndDistrictValidityDeliverer(ctrl.userProfile);
+        if (locAndDistrictRequired !== null) {
+            ctrl.profileUpdateErrorDeliverer = locAndDistrictRequired;
+            return;
         }
 
-        if (ctrl.user.oldPassword !== undefined && (ctrl.user.newPassword === undefined || ctrl.user.newPassword.length === 0 || ctrl.user.newPasswordAgain === undefined || ctrl.user.newPasswordAgain.length === 0 || ctrl.user.oldPassword.length !== 0)) {
-            ctrl.profileUpdateErrorDeliverer = "Please provide new & valid password if you want to change the old one";
-            return
+        let fieldsAreRequired = ctrl.checkFields(ctrl.user);
+        if (fieldsAreRequired !== null) {
+            ctrl.profileUpdateErrorDeliverer = fieldsAreRequired;
+            return;
         }
 
         if (ctrl.userProfile !== undefined) {
@@ -256,26 +209,6 @@ class ViewProfileController {
                 return
             }
 
-        }
-
-        if (ctrl.user.address === undefined || ctrl.user.address.length === 0) {
-            ctrl.profileUpdateErrorDeliverer = "Please provide your address";
-            return
-        }
-
-        if (ctrl.user.name === undefined || ctrl.user.name.length === 0) {
-            ctrl.profileUpdateErrorDeliverer = "Please provide your name";
-            return
-        }
-
-        if (ctrl.user.surname === undefined || ctrl.user.surname.length === 0) {
-            ctrl.profileUpdateErrorDeliverer = "Please provide your surname";
-            return
-        }
-
-        if (ctrl.user.email === undefined || ctrl.user.email.length === 0) {
-            ctrl.profileUpdateErrorDeliverer = "Please provide your email";
-            return
         }
 
         // now populate attributes if everything is fine
@@ -319,65 +252,32 @@ class ViewProfileController {
                 alert("Changes have been made successfully");
                 // refresh header component by broadcasting
                 this.$rootScope.$emit("navbar-changed", {});
-            } else {
-                // TODO: check if provided password match with the one in DB by using respective status codes
-                console.log(response);
-                ctrl.profileUpdateErrorDeliverer = "Server error occurred or incorrect password, please try again later.";
             }
-        });
+        }).catch(function(response) {
+            // ctrl.profileUpdateErrorUser = "Server error occurred or incorrect password, please try again later.";
+            ctrl.profileUpdateErrorDeliverer = response.data;
+        });;
     }
 
     changeShopProfile() {
         let ctrl = this;
-        // reset error msg
-        if(ctrl.profileUpdateErrorShop !== undefined) {
-            ctrl.profileUpdateErrorShop = undefined;
+        ctrl.resetMessages(ctrl);
+
+
+        let invalidPw = ctrl.checkPasswordValidity(ctrl.user);
+        if (invalidPw !== null) {
+            console.log("1");
+            ctrl.profileUpdateErrorShop = invalidPw;
+            return;
         }
 
-        if (ctrl.user.newPassword !== undefined && ctrl.user.newPasswordAgain !== undefined && ctrl.user.oldPassword !== undefined) {
-
-            if (ctrl.user.oldPassword.length === 0) {
-                ctrl.profileUpdateErrorShop = "Please provide your old password";
-                return
-            }
-
-            if(ctrl.user.newPassword !== ctrl.user.newPasswordAgain) {
-                ctrl.profileUpdateErrorShop = "New passwords should match";
-                return
-            }
+        let fieldsAreRequired = ctrl.checkFieldsShop(ctrl.user);
+        if (fieldsAreRequired !== null) {
+            console.log("2");
+            ctrl.profileUpdateErrorShop = fieldsAreRequired;
+            return;
         }
 
-        if (ctrl.user.oldPassword !== undefined &&
-            (ctrl.user.newPassword === undefined ||
-                ctrl.user.newPassword.length === 0 ||
-                ctrl.user.newPasswordAgain === undefined ||
-                ctrl.user.newPasswordAgain.length === 0 ||
-                ctrl.user.oldPassword.length !== 0)
-            ) {
-
-                ctrl.profileUpdateErrorShop = "Please provide new & valid password if you want to change the old one";
-                return
-            }
-
-        if (ctrl.user.shopAddress === undefined || ctrl.user.shopAddress.length === 0) {
-            ctrl.profileUpdateErrorShop = "Please provide shop's address";
-            return
-        }
-
-        if (ctrl.user.shopName === undefined || ctrl.user.shopName.length === 0) {
-            ctrl.profileUpdateErrorShop = "Please provide shop's name";
-            return
-        }
-
-        if (ctrl.user.phone === undefined || ctrl.user.phone.length === 0) {
-            ctrl.profileUpdateErrorShop = "Please provide shop's phone number";
-            return
-        }
-
-        if (ctrl.user.email === undefined || ctrl.user.email.length === 0) {
-            ctrl.profileUpdateErrorShop = "Please provide account's email";
-            return
-        }
 
         // now populate attributes if everything is fine
         let shop = {};
@@ -403,16 +303,179 @@ class ViewProfileController {
                 alert("Changes have been made successfully");
                 // refresh header component by broadcasting
                 this.$rootScope.$emit("navbar-changed", {});
-            } else {
-                // TODO: check if provided password match with the one in DB by using respective status codes
-                console.log(response);
-                ctrl.profileUpdateErrorShop = "Server error occurred or incorrect password, please try again later.";
             }
+        }).catch(function(response) {
+            // ctrl.profileUpdateErrorUser = "Server error occurred or incorrect password, please try again later.";
+            ctrl.profileUpdateErrorShop = response.data;
         });
     }
 
     $onInit() {
         this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
+    }
+
+    checkFieldsShop(user) {
+        let result = null;
+        if (user.shopAddress === undefined || user.shopAddress.length === 0) {
+            result = "Please provide a valid shop address";
+            return result;
+        }
+
+        if (user.shopName === undefined || user.shopName.length === 0) {
+            result = "Please provide a valid shop name";
+            return result;
+        }
+
+        if (user.phone === undefined || user.phone.length === 0) {
+            result = "Please provide a valid shop phone number";
+            return result;
+        }
+
+        if (user.email === undefined || user.email.length === 0) {
+            result = "Please provide a valid account email";
+            return result;
+        }
+        return result;
+    }
+
+    checkPasswordValidity(user) {
+        let result = null;
+        console.log("checkPasswordValidity ", user);
+
+        if (user.oldPassword === undefined || user.oldPassword.length === 0) {
+            result = "Please provide your old password to make changes";
+            return result;
+        }
+
+        if (user.newPassword !== undefined && user.newPasswordAgain !== undefined && user.oldPassword !== undefined) {
+            if (user.oldPassword.length === 0) {
+                result = "Please provide your old password";
+                return result;
+            }
+
+            if(user.newPassword !== user.newPasswordAgain) {
+                result = "New passwords should match";
+                return result;
+            }
+        }
+
+        if (user.oldPassword !== undefined) {
+            if (user.oldPassword.length < 5) {
+                result = "Old password length was at least 5 characters long";
+                return result;
+            }
+        }
+
+        if (user.newPassword !== undefined) {
+            if (user.newPassword.length < 5) {
+                result = "New password length should be at least 5 characters long";
+                return result;
+            }
+        }
+
+        if (user.newPasswordAgain !== undefined) {
+            if (user.newPasswordAgain.length < 5) {
+                result = "New password length should be at least 5 characters long";
+                return result;
+            }
+        }
+
+        if (user.newPassword !== undefined && user.newPassword.length !== 0) {
+            if(user.newPasswordAgain === undefined || user.newPasswordAgain.length === 0) {
+                result = "Please provide new password again if you want to change the old one";
+                return result;
+            }
+        }
+
+        if (user.newPasswordAgain !== undefined && user.newPasswordAgain.length !== 0) {
+            if(user.newPassword === undefined || user.newPassword.length === 0) {
+                result = "Please provide new password first if you want to change the old one";
+                return result;
+            }
+        }
+
+        return result;
+    }
+
+    checkLocationAndDistrictValidityUser(userProfile) {
+        let result = null;
+
+        // ask use to provide respective information if they do not exist beforehand
+        if (userProfile !== undefined) {
+            if(userProfile.selectedDistrictUser === undefined) {
+                result = "Please provide your new district";
+                return result;
+            }
+
+            if(userProfile.selectedLocationUser === undefined) {
+                result = "Please provide your location";
+                return result;
+            }
+        }
+        return result;
+    }
+
+    checkLocationAndDistrictValidityDeliverer(userProfile) {
+        let result = null;
+
+        // ask use to provide respective information if they do not exist beforehand
+        if (userProfile !== undefined) {
+            if(userProfile.selectedDistricts === undefined) {
+                result = "Please provide your new district";
+                return result;
+            }
+
+            if(userProfile.selectedLocationDeliverer === undefined) {
+                result = "Please provide your location";
+                return result;
+            }
+        }
+        return result;
+    }
+
+    resetMessages(ctrl) {
+
+        // reset error msg
+        if(ctrl.profileUpdateErrorUser !== undefined) {
+            ctrl.profileUpdateErrorUser = undefined;
+        }
+
+        if(ctrl.profileUpdateErrorShop !== undefined) {
+            ctrl.profileUpdateErrorShop = undefined;
+        }
+
+        if(ctrl.profileUpdateErrorDeliverer !== undefined) {
+            ctrl.profileUpdateErrorDeliverer = undefined;
+        }
+
+        // reset confirmation msg
+        if(ctrl.profileUpdateSuccessUser !== undefined) {
+            ctrl.profileUpdateSuccessUser = undefined;
+        }
+    }
+
+    checkFields(user) {
+        let result = null;
+        if (user.address === undefined || user.address.length === 0) {
+            result = "Please provide a valid address";
+            return result;
+        }
+
+        if (user.name === undefined || user.name.length === 0) {
+            result = "Please provide a valid name";
+            return result;
+        }
+
+        if (user.surname === undefined || user.surname.length === 0) {
+            result = "Please provide a valid surname";
+            return result;
+        }
+
+        if (user.email === undefined || user.email.length === 0) {
+            result = "Please provide a valid email";
+            return result;
+        }
+        return result;
     }
 
     static get $inject(){

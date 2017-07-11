@@ -65,7 +65,7 @@
                         <md-input-container class="md-block">
                             <label>New Location</label>
                             <md-select ng-model="$ctrl.userProfile.selectedLocationUser" name="selectedLocationUser"
-                            ng-change="$ctrl.changeUserLocationModel()">
+                            ng-change="$ctrl.changeDistrictsUser()">
                                 <md-optgroup>
                                     <md-option ng-value="location"
                                                ng-repeat="location in $ctrl.availableLocations">{{location.name}}
@@ -97,12 +97,7 @@
 
                         <b layout-align="center center">Old Password: </b>
                         <md-input-container style="padding-left: 2em" id="userOldPasswordField">
-                            <input aria-label="userOldPasswordField" type="password" name="delivererOldPassword" ng-model="$ctrl.user.oldPassword" minlength="5" md-maxlength="64">
-                            <div ng-messages="userProfileForm.delivererOldPassword.$error" ng-hide="userProfileForm.delivererOldPassword.$valid">
-                                <div ng-message-exp="['required', 'minlength', 'maxlength']">
-                                    Your old password was between 5 and 64 characters long.
-                                </div>
-                            </div>
+                            <input aria-label="userOldPasswordField" type="password" name="delivererOldPassword" ng-model="$ctrl.user.oldPassword">
                         </md-input-container>
                         <br>
                         <b layout-align="center center">New Password </b>
@@ -110,14 +105,7 @@
                             <input aria-label="userNewPasswordField"
                                    type="password"
                                    name="userNewPassword"
-                                   ng-model="$ctrl.user.newPassword"
-                                   minlength="5"
-                                   md-maxlength="64">
-                            <div ng-messages="userProfileForm.userNewPassword.$error" ng-hide="userProfileForm.userNewPassword.$valid">
-                                <div ng-message-exp="['minlength', 'maxlength']">
-                                    Your new password must be between 5 and 64 characters long.
-                                </div>
-                            </div>
+                                   ng-model="$ctrl.user.newPassword">
                         </md-input-container>
                         <br>
                         <b layout-align="center center">New Password (Again): </b>
@@ -125,14 +113,7 @@
                             <input aria-label="userNewPasswordFieldAgain"
                                    type="password"
                                    name="userNewPasswordAgain"
-                                   ng-model="$ctrl.user.newPasswordAgain"
-                                   minlength="5"
-                                   md-maxlength="64">
-                            <div ng-messages="userProfileForm.userNewPasswordAgain.$error" ng-hide="userProfileForm.userNewPasswordAgain.$valid">
-                                <div ng-message-exp="['minlength', 'maxlength']">
-                                    Your new password must be between 5 and 64 characters long.
-                                </div>
-                            </div>
+                                   ng-model="$ctrl.user.newPasswordAgain">
                         </md-input-container>
                         <br>
                         <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorUser !== undefined">Error: </b>
@@ -220,7 +201,8 @@
                     <md-input-container class="md-block">
                         <label>New Location</label>
                         <md-select ng-model="$ctrl.userProfile.selectedLocationDeliverer"
-                                   name="selectedLocationDeliverer">
+                                   name="selectedLocationDeliverer"
+                                    ng-change="$ctrl.changeDistrictsDeliverer()">
                             <md-optgroup>
                                 <md-option ng-value="location" ng-repeat="location in $ctrl.availableLocations">
                                     {{location.name}}
@@ -251,12 +233,7 @@
 
                     <b layout-align="center center">Old Password: </b>
                     <md-input-container style="padding-left: 2em" id="delivererOldPasswordField">
-                        <input aria-label="delivererOldPasswordField" type="password" name="userPassword" ng-model="$ctrl.user.oldPassword" minlength="5" md-maxlength="64"/>
-                        <div ng-messages="delivererProfileForm.userPassword.$error" ng-hide="delivererProfileForm.userPassword.$valid">
-                            <div ng-message-exp="['minlength', 'maxlength']">
-                                Your old password was between 5 and 64 characters long.
-                            </div>
-                        </div>
+                        <input aria-label="delivererOldPasswordField" type="password" name="userPassword" ng-model="$ctrl.user.oldPassword"/>
                     </md-input-container>
 
                     <br>
@@ -265,14 +242,7 @@
                         <input aria-label="delivererNewPasswordField"
                                type="password"
                                name="delivererNewPassword"
-                               ng-model="$ctrl.user.newPassword"
-                               minlength="5"
-                               md-maxlength="64">
-                        <div ng-messages="delivererProfileForm.delivererNewPassword.$error" ng-hide="delivererProfileForm.delivererNewPassword.$valid">
-                            <div ng-message-exp="['minlength', 'maxlength']">
-                                Your new password must be between 5 and 64 characters long.
-                            </div>
-                        </div>
+                               ng-model="$ctrl.user.newPassword">
                     </md-input-container>
                     <br>
                     <b layout-align="center center">New Password (Again): </b>
@@ -280,14 +250,7 @@
                         <input aria-label="delivererNewPasswordFieldAgain"
                                type="password"
                                name="delivererNewPasswordAgain"
-                               ng-model="$ctrl.user.newPasswordAgain"
-                               minlength="5"
-                               md-maxlength="64">
-                        <div ng-messages="delivererProfileForm.delivererNewPasswordAgain.$error" ng-hide="delivererProfileForm.delivererNewPasswordAgain.$valid">
-                            <div ng-message-exp="['minlength', 'maxlength']">
-                                Your new password must be between 5 and 64 characters long.
-                            </div>
-                        </div>
+                               ng-model="$ctrl.user.newPasswordAgain">
                     </md-input-container>
                     <br>
                     <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorDeliverer !== undefined">Error: </b>
@@ -345,12 +308,7 @@
 
                         <b layout-align="center center">Old Password: </b>
                         <md-input-container style="padding-left: 2em" id="shopOldPasswordField">
-                            <input aria-label="shopOldPasswordField" type="password" name="shopOldPassword" ng-model="$ctrl.user.oldPassword" minlength="5" md-maxlength="64">
-                            <div ng-messages="shopProfileForm.shopOldPassword.$error" ng-hide="shopProfileForm.shopOldPassword.$valid">
-                                <div ng-message-exp="['required', 'minlength', 'maxlength']">
-                                    Your old password was between 5 and 64 characters long.
-                                </div>
-                            </div>
+                            <input aria-label="shopOldPasswordField" type="password" name="shopOldPassword" ng-model="$ctrl.user.oldPassword" >
                         </md-input-container>
                         <br>
                         <b layout-align="center center">New Password </b>
@@ -358,14 +316,7 @@
                             <input aria-label="shopNewPasswordField"
                                    type="password"
                                    name="shopNewPassword"
-                                   ng-model="$ctrl.user.newPassword"
-                                   minlength="5"
-                                   md-maxlength="64">
-                            <div ng-messages="shopProfileForm.shopNewPassword.$error" ng-hide="shopProfileForm.shopNewPassword.$valid">
-                                <div ng-message-exp="['minlength', 'maxlength']">
-                                    Your new password must be between 5 and 64 characters long.
-                                </div>
-                            </div>
+                                   ng-model="$ctrl.user.newPassword">
                         </md-input-container>
                         <br>
                         <b layout-align="center center">New Password (Again): </b>
@@ -374,13 +325,7 @@
                                    type="password"
                                    name="shopNewPasswordAgain"
                                    ng-model="$ctrl.user.newPasswordAgain"
-                                   minlength="5"
-                                   md-maxlength="64">
-                            <div ng-messages="shopProfileForm.shopNewPasswordAgain.$error" ng-hide="shopProfileForm.shopNewPasswordAgain.$valid">
-                                <div ng-message-exp="['minlength', 'maxlength']">
-                                    Your new password must be between 5 and 64 characters long.
-                                </div>
-                            </div>
+                            >
                         </md-input-container>
                         <br>
                         <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorShop !== undefined">Error: </b>

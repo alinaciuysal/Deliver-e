@@ -124,7 +124,6 @@ module.exports.delivererSignup = function(req, res){
 
     user.save(function(err) {
         if (err) {
-            console.log(err);
             res.status(500).send(err);
             return;
         }
@@ -212,23 +211,17 @@ module.exports.getUserById = function(req, res) {
 module.exports.editUser = function(req, res) {
     req.user.comparePassword(req.body.old_password, function(err, isMatch) {
         if(!isMatch || err){
-            res.status(401).send('Invalid Credentials');
+            res.status(422).send('Invalid Credentials');
             return;
         }
-        console.log(req.user)
-        console.log(req.body)
         hashPassword(req.body.new_password, function(err, hash){
             if(err) {
-                console.log(1)
                 res.status(500).send(err);
                 return;
             }
-            console.log(2)
             if(hash) req.body.password = hash;
-            console.log(req.body)
             User.findByIdAndUpdate(req.user._id, req.body, function(err, user) {
                 delete user._doc.password;
-                console.log("kkkkk")
                 res.status(200).json(user);
                 return;
             });
@@ -250,12 +243,10 @@ function createToken(user) {
 
 
 function hashPassword(password, cb) {
-    console.log("aaaa"+password)
     if(!password) {
         cb(null, null);
         return;
     }
-    console.log(password)
     bcrypt.genSalt(10, function(err, salt) {
         if(err){
             cb(err, null);
