@@ -50,9 +50,14 @@ module.exports = {
 
         new ExtractTextPlugin("styles/[name].css"),
 
-        new HtmlWebpackPlugin({  // Also generate a test.html
+        new HtmlWebpackPlugin({
             filename: 'carousel.html',
             template: 'src/assets/carousel.html'
+        }),
+
+        new HtmlWebpackPlugin({
+            filename: 'dialog.html',
+            template: 'src/assets/dialog.html'
         }),
 
         new CopyWebpackPlugin([
