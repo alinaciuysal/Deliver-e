@@ -3,7 +3,7 @@ var Order = require('./orderSchema');
 var Product = require('../shop/productSchema');
 
 exports.getBasket = function(req, res) {
-	Order.findOne({ orderer: req.user, status:'Basket'}, function(err, basket) {
+	Order.findOne({ orderer: req.user, status:'Basket'}).populate('items.product').exec(function(err, basket) {
 		if (err) {
 			res.sendStatus(500);
 			return;
