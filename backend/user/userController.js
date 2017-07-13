@@ -190,10 +190,15 @@ module.exports.unregister = function(req, res) {
 };
 
 module.exports.getUser = function(req, res) {
-    user = req.user;
-    delete user._doc.password;
-    res.status(200).json(user);
-    return;
+    User.findById(req.user._id).populate('shop').exec(function(err, user) {
+        if(err) {
+            res.status(500).send(err);
+            return;
+        }
+        delete user._doc.password;
+        res.status(200).json(user);
+        return;
+    });
 };
 
 module.exports.getUserById = function(req, res) {
