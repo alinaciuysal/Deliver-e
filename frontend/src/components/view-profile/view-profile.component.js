@@ -86,6 +86,7 @@ class ViewProfileController {
                 ctrl.user.initialLocation = retrievedUser.preferredLocation;
                 ctrl.user.initialDistricts = retrievedUser.preferredDistricts;
             } else if (retrievedUser.type === "shop") {
+                ctrl.shopType = retrievedUser.shop.type;
                 ctrl.user.shopName = retrievedUser.name;
                 ctrl.user.shopAddress = retrievedUser.address;
                 ctrl.user.phone = retrievedUser.phone;

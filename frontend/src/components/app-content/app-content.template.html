@@ -7,12 +7,19 @@
                 <nav-menu></nav-menu>
             </span>
             <span flex="4"></span>
-            <ui-view flex></ui-view>
+            <md-content flex layout="row">
+                <ui-view flex="80"></ui-view>
+                <view-basket flex="20"></view-basket>
+            </md-content>
+
             <span flex="4"></span>
         </md-content>
+
         <app-footer flex="none"></app-footer>
 
     </div>
+<!--
     <app-landing-page></app-landing-page>
+-->
 </div>
 

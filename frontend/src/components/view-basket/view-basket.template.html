@@ -1,0 +1,39 @@
+<div ng-show="$ctrl.isAuthenticatedAndIsUser" style="width: auto; height: auto;">
+<md-content layout="row" layout-align="start" layout-wrap layout-margin>
+    <md-card style="width: 100%; min-width: 1%; height: 80%"  layout="column" layout-align="start start">
+        <div style="width: 100%; min-width: 1%; height: 15%; background-color: #ab0012; color: whitesmoke;" layout="row">
+            <md-icon style="margin-left:4%; margin-right: 10px; color: whitesmoke;"><ng-md-icon icon="shopping_cart" ></ng-md-icon></md-icon>
+            <div layout-align="center center" layout="">SHOPPING BASKET</div>
+        </div>
+        <div style="width: inherit; min-width: 1%; height: 80%">
+            <br><b>Products</b>
+            <p>&nbsp</p>
+            <div>
+                <div ng-repeat="item in $ctrl.basket.items">
+                    <b layout-align="center left">Name: </b> {{item.product.name}}
+                    <b layout-align="center left">Amount: </b> {{item.amount}}
+
+                </div>
+            </div>
+            <p>&nbsp</p>
+            <p>&nbsp</p>
+            <div>
+                <b layout-align="center left">Total Weight: </b> {{$ctrl.basket.totalWeight}}
+                <p></p>
+                <b layout-align="center left">Total Price: </b> {{$ctrl.basket.totalPrice}}
+            </div>
+        </div>
+
+        <md-menu-item style="width: inherit;" layout-no-wrap>
+            <md-button title="Clear your basket" ng-click="" style="color:darkred; padding: 2%" layout-padding>
+                <md-icon><ng-md-icon style="color:darkred; width: 50%;" icon="remove_shopping_cart"></ng-md-icon></md-icon>
+                Clear
+            </md-button>
+            <md-button title="Proceed to Payment" ng-click="" style="color:green; padding: 2%" layout-padding>
+                <md-icon><ng-md-icon style="color:green; width: 50%;" icon="check"></ng-md-icon></md-icon>
+                Payment
+            </md-button>
+        </md-menu-item>
+    </md-card>
+</md-content>
+</div>
