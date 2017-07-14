@@ -31,49 +31,13 @@ class ViewAvailableOrdersComponentController{
     }
 
     $onInit() {
+        let ctrl = this;
         this.register = {};
-        let availableOrders = [
-            {
-                id: "Order 234",
-                totalPrice: 59.99,
-                status: "Pending",
-                district: "Harras",
-                location: "Albert Roßhaupter Str. 14",
-                totalWeight: 15,
-                shop: 1,
-                deliveryTime: "19:26",
-                items: [{
-                    amount: 2,
-                    product: 44
-                },{
-                    amount: 4,
-                    product: 88
-                }],
-                orderer: 12,
-                deliverer: 13
-            }, {
-                id: "Order 235",
-                totalPrice: 49,
-                status: "Pending",
-                district: "Freimann",
-                location: "Karl Köglsperger Str. 9",
-                totalWeight: 27,
-                shop: 2,
-                deliveryTime: "12:45",
-                items: [{
-                    amount: 12,
-                    product: 47
-                },{
-                    amount: 1,
-                    product: 25
-                }],
-                orderer: 10,
-                deliverer: 13
-            }
-        ];
-        this.availableOrders = availableOrders;
-        this.availableOrders2 = this.UserService.getAvailableOrders();
-        console.log(this.availableOrders2);
+        ctrl.availableOrders3 = {};
+        this.availableOrders2 = this.UserService.getAvailableOrders().then(function(response){
+            console.log(response.data);
+            ctrl.availableOrders3 = response.data;
+        });
 
         this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
     }

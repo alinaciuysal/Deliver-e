@@ -12,9 +12,9 @@
         <h2 style="padding-left: 13em;">Available Orders</h2>
         <md-card>
             <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab ng-value="order" ng-repeat="order in $ctrl.availableOrders" label="{{order.id}}">
+                <md-tab ng-value="order" ng-repeat="order in $ctrl.availableOrders3" label="Order {{$index + 1}}">
                     <md-content class="md-padding">
-                        <p>Address:&nbsp;&nbsp;{{order.location}} - {{order.district}}</p>
+                        <p>Address:&nbsp;&nbsp;{{order.district}} / {{order.location}}</p>
                         <p>Shop:&nbsp;&nbsp;{{order.shop}}</p>
                         <p>Weight:&nbsp;&nbsp;{{order.totalWeight}} kg</p>
                         <p>Payment to shop:&nbsp;&nbsp;{{order.totalPrice | number:2}} €</p>
