@@ -37,6 +37,11 @@ class ViewAvailableOrdersComponentController{
                 id: "Order 234",
                 totalPrice: 59.99,
                 status: "Pending",
+                district: "Harras",
+                location: "Albert Roßhaupter Str. 14",
+                totalWeight: 15,
+                shop: 1,
+                deliveryTime: "19:26",
                 items: [{
                     amount: 2,
                     product: 44
@@ -48,21 +53,27 @@ class ViewAvailableOrdersComponentController{
                 deliverer: 13
             }, {
                 id: "Order 235",
-                totalPrice: 69.99,
+                totalPrice: 49,
                 status: "Pending",
+                district: "Freimann",
+                location: "Karl Köglsperger Str. 9",
+                totalWeight: 27,
+                shop: 2,
+                deliveryTime: "12:45",
                 items: [{
-                    amount: 20,
-                    product: 400
+                    amount: 12,
+                    product: 47
                 },{
-                    amount: 30,
-                    product: 900
+                    amount: 1,
+                    product: 25
                 }],
-                orderer: 100,
-                deliverer: 101
+                orderer: 10,
+                deliverer: 13
             }
         ];
         this.availableOrders = availableOrders;
-
+        this.availableOrders2 = this.UserService.getAvailableOrders();
+        console.log(this.availableOrders2);
 
         this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
     }
