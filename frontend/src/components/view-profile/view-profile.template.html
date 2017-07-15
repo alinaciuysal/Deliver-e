@@ -280,6 +280,11 @@
                             </div>
                         </md-input-container>
                         <br>
+                        <b layout-align="center center" >Shop Category:</b>
+                        <md-input-container style="padding-left: 2em"id="shopCategoryField">
+                            <input aria-label="shopCategory" ng-disabled="true" type="text" name="shopCategory" ng-model="$ctrl.shopType">
+                        </md-input-container>
+                        <br>
                         <b layout-align="center center">Shop Address: </b>
                         <md-input-container style="padding-left: 2em" id="shopAddressField">
                             <input aria-label="shopAddressField" type="text" name="shopAddress" ng-model="$ctrl.user.shopAddress" required="" minlength="10">

@@ -111,17 +111,19 @@ class ViewRegisterComponentController{
         let email = ctrl.shopRegister.email;
         let password = ctrl.shopRegister.password;
         let name = ctrl.shopRegister.shopName;
+        let type = ctrl.shopRegister.category;
         let shopAddress = ctrl.shopRegister.shopAddress;
         let shopPhoneNumber = ctrl.shopRegister.shopPhoneNumber;
 
-        this.UserService.registerShop(email, password, name, shopAddress, shopPhoneNumber).then(()=> {
+
+        ctrl.UserService.registerShop(email, password, name, type, shopAddress, shopPhoneNumber).then(()=> {
             alert("Registration is successful");
             // this.$state.go('login',{});
             this.$state.go('shopHomePage',{});
             this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
             console.log(obj);
-            ctrl.shopRegistrationError = "Error: " + obj.data;
+            ctrl.shopRegistrationError = "Error: " + obj.statusText;
         });
     }
 

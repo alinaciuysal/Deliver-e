@@ -1,0 +1,9 @@
+.login-form md-card {
+    padding: 0 !important;
+}
+.login-form md-card md-card-title {
+    background-color: #ab0012;
+}
+.error {
+    color: red;
+}

@@ -50,7 +50,6 @@ class ViewLoginComponentController{
                     ctrl.$state.go('delivererHomePage', {});
                 else if (ctrl.user.type === "shop")
                     ctrl.$state.go('shopHomePage', {});
-                console.log("UserService getCurrentUserDetails ", ctrl.user);
             });
 
         }).catch(function(obj){

@@ -30,6 +30,7 @@ import ViewProductPage from './components/view-product-page/view-product-page';
 import AboutUs from './components/aboutUs/aboutUs';
 import jkAngularCarousel from 'angular-jk-carousel';
 import Faq from './components/faq/faq';
+import ViewBasket from './components/view-basket/view-basket';
 
 let app = angular.module('app', [
         uiRouter,
@@ -50,6 +51,7 @@ let app = angular.module('app', [
         ViewShopPage.name,
         ViewProductPage.name,
         Faq.name,
+        ViewBasket.name,
         jkAngularCarousel,
         ngAria,
         ngFileModel.name

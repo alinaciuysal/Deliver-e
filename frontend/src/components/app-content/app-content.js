@@ -6,14 +6,17 @@ import AppHeader from './../app-header/app-header';
 import AppFooter from './../app-footer/app-footer';
 import LeftMenu from './../left-menu/left-menu';
 import NavMenu from './../nav-menu/nav-menu';
+import LandingPage from './../app-landing-page/app-landing-page';
 
 import AppContentComponent from './app-content.component';
 
-export default angular.module('AppView', [
+export default angular
+    .module('AppView', [
         AppHeader.name,
         AppFooter.name,
         LeftMenu.name,
-        NavMenu.name
+        NavMenu.name,
+        LandingPage.name
     ])
     .component(AppContentComponent.name, new AppContentComponent)
     .filter('range', function() {
@@ -25,5 +28,6 @@ export default angular.module('AppView', [
             }
 
             return input;
-        }
-    });
+        };
+    })
+

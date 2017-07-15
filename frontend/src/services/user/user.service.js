@@ -4,13 +4,14 @@
 export default class UserService {
 
     static get $inject(){
-        return ['$http', '$window','API_URL'];
+        return ['$http', '$window', '$rootScope', 'API_URL'];
     }
 
-    constructor($http,$window,API_URL) {
+    constructor ($http, $window, $rootScope, API_URL) {
         this.$http = $http;
         this.$window = $window;
         this.API_URL = API_URL;
+        this.$rootScope = $rootScope;
         this.user = null;
 
     }
@@ -19,7 +20,7 @@ export default class UserService {
         return 'UserService';
     }
 
-    register(name, surname, email, pass, address, location, district) {
+    register (name, surname, email, pass, address, location, district) {
         return this.$http.post(`${ this.API_URL }/user/signup/customer`, {
             name: name,
             surname: surname,
@@ -31,7 +32,7 @@ export default class UserService {
         });
     }
 
-    registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, preferredLocation, preferredDistricts) {
+    registerDeliverer (email, password, name, surname, birthday, phone, address, maxWeight, preferredLocation, preferredDistricts) {
         return this.$http.post(`${ this.API_URL }/user/signup/deliverer`, {
             email: email,
             password: password,
@@ -46,7 +47,7 @@ export default class UserService {
         });
     }
 
-    registerShop(email, password, shopName, shopAddress, shopPhoneNumber) {
+    registerShop (email, password, shopName, type, shopAddress, shopPhoneNumber) {
         return this.$http.post(`${ this.API_URL }/user/signup/shop`, {
             email: email,
             password: password,
@@ -54,16 +55,24 @@ export default class UserService {
             shop: {
                 // "name": shopName,
                 "address": shopAddress,
-                "phone": shopPhoneNumber
+                "phone": shopPhoneNumber,
+                "type": type
             }
         });
     }
 
-    login(mail, pass) {
+    login (mail, pass) {
+        let ctrl = this;
         return this.$http.post(`${ this.API_URL }/user/login`, {
             email: mail,
             password: pass,
             // name: "test"
+        }).then(function(response){
+            if(response.data) {
+                ctrl.$rootScope.$emit("mainPage-changed");
+            }
+        }).catch(function(err) {
+            return err;
         });
     }
 
@@ -72,6 +81,7 @@ export default class UserService {
         if (this.user) {
             this.user = null;
         }
+        this.$rootScope.$emit("mainPage-changed");
     }
 
     getCurrentUser() {
@@ -99,9 +109,11 @@ export default class UserService {
         return !!this.$window.localStorage['jwtToken'];
     }
 
-    updateUser(user) {
+    updateUser (user) {
         return this.$http.put(`${ this.API_URL }/user/`, user);
     }
 
-
+    getAvailableOrders(){
+        return this.$http.get(`${ this.API_URL }/order`);
+    }
 }
