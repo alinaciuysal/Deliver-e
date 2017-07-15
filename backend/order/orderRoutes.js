@@ -30,6 +30,9 @@ function orderRoutes(passport) {
     router.route('/:order_id/accept')
     	.put(orderController.acceptOrder)
 
+    router.route('/:order_id/reject')
+        .put(orderController.rejectOrder)
+
 
     return router;
 }

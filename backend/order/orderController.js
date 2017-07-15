@@ -123,12 +123,28 @@ exports.acceptOrder = function(req, res) {
     });
 };
 
+exports.rejectOrder = function(req, res) {
+	if (req.user.type != "deliverer"){
+    	res.status(403).send("You need to be a deliverer to accept orders.");
+    	return;
+    }
+	Order.findByIdAndUpdate(req.params.order_id, {$addToSet: {rejecters: req.user} }, { "new": true }, function (err, order) {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+	        res.status(200).json(order);
+	        return;
+
+    });
+};
+
 exports.getAvailableOrders = function(req, res) {
 	if (req.user.type != "deliverer" ){
 		res.status(403).send("You need to be a deliverer to get orders.")
 		return;
 	}
-	Order.find({ status: 'Ordered', totalWeight: { $lte: req.user.maxWeight }, location: req.user.preferredLocation, district: { $in: req.user.preferredDistricts } }).populate('items.product').exec(function(err, orders) {
+	Order.find({ status: 'Ordered', totalWeight: { $lte: req.user.maxWeight }, location: req.user.preferredLocation, district: { $in: req.user.preferredDistricts }, rejecters: { $ne: req.user._id } }).populate('items.product').exec(function(err, orders) {
 		if (err) {
 			res.status(500).send(err);
 			return;
