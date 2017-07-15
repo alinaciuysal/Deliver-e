@@ -67,7 +67,6 @@ class OrderClass {
                 callback(err, null);
                 return;
             }
-            console.log(order)
             console.log(shop)
             if (order.shop && String(order.shop) != String(shop._id)) {
                 callback("Shops are not equal", null);
@@ -85,7 +84,6 @@ class OrderClass {
                 }
                 order.totalPrice += (amount * product.price);
                 order.totalWeight += (amount * product.weight);
-                console.log("a"+order)
                 order.save(function(err, updated_order) {
                         callback(err, updated_order);
                         return;

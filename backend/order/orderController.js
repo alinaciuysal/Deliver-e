@@ -64,6 +64,16 @@ exports.deleteBasket = function(req, res) {
 	});
 };
 
+exports.clearBasket = function(req, res) {
+	Order.findOneAndUpdate({ orderer: req.user, status:'Basket'}, { $set: { totalPrice: 0, totalWeight: 0, items: [] }, $unset: { shop: "" } }, { "new": true },  function(err, basket) {
+		if (err) {
+			res.sendStatus(500);
+			return;
+		}
+		res.status(200).json(basket);
+	});
+};
+
 exports.makeOrder = function(req, res) {
 	Order.findOneAndUpdate({ orderer: req.user, status:'Basket'}, { $set: { status: 'Ordered', district: req.user.district, location: req.user.location } }, { "new": true }, function(err, order) {
 		if (err) {
