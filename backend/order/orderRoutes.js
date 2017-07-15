@@ -20,18 +20,20 @@ function orderRoutes(passport) {
     	.delete(orderController.deleteBasket)
         .get(orderController.getBasket);
 
+    router.route('/basket/clear')
+        .put(orderController.clearBasket);
 
     router.route('/history')
-        .get(orderController.getOrderHistory)
+        .get(orderController.getOrderHistory);
 
     router.route('/:order_id')
     	.get(orderController.getOrder);
 
     router.route('/:order_id/accept')
-    	.put(orderController.acceptOrder)
+    	.put(orderController.acceptOrder);
 
     router.route('/:order_id/reject')
-        .put(orderController.rejectOrder)
+        .put(orderController.rejectOrder);
 
 
     return router;
