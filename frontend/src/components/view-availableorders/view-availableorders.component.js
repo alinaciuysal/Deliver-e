@@ -4,6 +4,7 @@
 'use strict';
 
 import UserService from './../../services/user/user.service';
+import OrderService from './../../services/order/order.service';
 
 import template from './view-availableorders.template.html';
 import './view-availableorders.style.css';
@@ -34,7 +35,7 @@ class ViewAvailableOrdersComponentController{
         let ctrl = this;
         this.register = {};
         ctrl.availableOrders3 = {};
-        this.availableOrders2 = this.UserService.getAvailableOrders().then(function(response){
+        this.availableOrders2 = this.OrderService.getAvailableOrders().then(function(response){
             console.log(response.data);
             ctrl.availableOrders3 = response.data;
         });
@@ -48,7 +49,7 @@ class ViewAvailableOrdersComponentController{
 
     acceptOrder(orderNo){
         console.log(orderNo);
-        this.UserService.acceptOrder(orderNo).then(function(response){
+        this.OrderService.acceptOrder(orderNo).then(function(response){
             console.log(response.data);
             console.log("Accepted");
             location.reload();
