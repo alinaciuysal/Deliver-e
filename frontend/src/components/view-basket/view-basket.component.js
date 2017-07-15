@@ -28,6 +28,9 @@ class ViewBasketComponentController{
         this.$rootScope = $rootScope;
         this.$location = $location;
 
+        this.basket = [];
+        this.getUserBasket();
+
 
         this.$rootScope.$on("mainPage-changed", function(evt, arg) {
             console.log("emit arg ", arg);
@@ -47,7 +50,7 @@ class ViewBasketComponentController{
         let ctrl = this;
         ctrl.showBasket = false;
         this.isUserAuthenticated();
-        ctrl.basket = ctrl.getUserBasket();
+        //ctrl.basket = ctrl.getUserBasket();
     }
 
     isUserAuthenticated() {
@@ -66,13 +69,10 @@ class ViewBasketComponentController{
     }
 
     getUserBasket() {
-        let getBasket =[];
-
         this.OrderService.getBasket().then(basket => {
-            getBasket = basket;
+            this.basket = basket;
             console.log(basket);
         });
-        return getBasket;
 
         // let basket = {
         //     "_id": "5969214bfd9c8616bc3c95f8",
@@ -110,6 +110,11 @@ class ViewBasketComponentController{
         //     "totalWeight": 2,
         //     "totalPrice": 5
         // };
+    }
+
+    addProductToBasket(productId){
+        console.log(productId);
+        console.log("add product to basket");
     }
 
     static get $inject(){

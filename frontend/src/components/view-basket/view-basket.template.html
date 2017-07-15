@@ -9,6 +9,7 @@
             <br><b>Products</b>
             <p>&nbsp</p>
             <div>
+
                 <div ng-repeat="item in $ctrl.basket.items">
                     <b layout-align="center left">Name: </b> {{item.product.name}}
                     <b layout-align="center left">Amount: </b> {{item.amount}}
@@ -29,7 +30,7 @@
                 <md-icon><ng-md-icon style="color:darkred; width: 50%;" icon="remove_shopping_cart"></ng-md-icon></md-icon>
                 Clear
             </md-button>
-            <md-button title="Proceed to Payment" ng-click="" style="color:green; padding: 2%" layout-padding>
+            <md-button title="Proceed to Payment" ui-sref="payment" style="color:green; padding: 2%" layout-padding>
                 <md-icon><ng-md-icon style="color:green; width: 50%;" icon="check"></ng-md-icon></md-icon>
                 Payment
             </md-button>
