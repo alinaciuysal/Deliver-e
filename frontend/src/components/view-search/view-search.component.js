@@ -31,26 +31,19 @@ class ViewSearchController {
         this.photo = 'img/asian/asian1.jpg';
 
         this.search(this.nameToSearch);
-
     }
 
     search(name) {
         this.ShopService.searchProductsInShop(name).then(value => {
-            //this.shopsList = value;
-
-
-        for (var idx in value) {
-            for (var idx2 in value[idx].catalogue) {
-
-                this.products.push(value[idx].catalogue[idx2]);
+            for (var idx in value) {
+                for (var idx2 in value[idx].catalogue) {
+                    this.products.push(value[idx].catalogue[idx2]);
+                }
             }
-        }
 
-        console.log(this.products);
-        this.numCol = this.products.length/4;
-        if(this.products.length%4!=0) this.numCol++;
-
-    });
+            this.numCol = this.products.length/4;
+            if(this.products.length%4!=0) this.numCol++;
+        });
     }
 
     $onInit() {

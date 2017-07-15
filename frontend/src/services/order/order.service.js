@@ -16,7 +16,13 @@ export default class OrderService {
         return 'OrderService';
     }
 
-
+    getBasket() {
+        return this.$http.get(`${ this.API_URL }/order/basket`).then(responce => {
+            return new Promise((resolve, reject) => {
+                resolve(responce.data);
+        });
+    });
+    }
 
 
 
