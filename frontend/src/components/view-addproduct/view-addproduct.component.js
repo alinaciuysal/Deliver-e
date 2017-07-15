@@ -46,14 +46,13 @@ class ViewAddProductComponentController{
         let productStock = this.product.stock;
         //let productStockInf = this.product.selected;
         let productDetails = this.product.productDetails;
-        let productPhoto = this.uploadProductPic();
-
-        console.log(productName + "   " + productCategory + "   " + productWeight + "   " + weightType + "   " + productPrice + "    " + productStock + "   " + productDetails);
+        let productPhoto = "";//this.uploadProductPic();
 
         if(weightType == "gram")
             productWeight = productWeight / 1000;
         // TODO: API call
         this.ShopService.addProduct(productName, productPrice, productCategory, productWeight, productStock, productDetails, productPhoto).then(()=> {
+            console.log("Product added");
             this.$state.go('mainPage',{});
         }).catch(function(obj){
             ctrl.addProductError = "Error: " + obj.data;
