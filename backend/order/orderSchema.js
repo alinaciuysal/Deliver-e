@@ -49,7 +49,11 @@ var orderSchema   = new mongoose.Schema({
     deliverer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    rejecters: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 });
 
 
