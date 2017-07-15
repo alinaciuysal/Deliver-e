@@ -79,6 +79,7 @@ exports.getShop = function(req, res) {
         res.json(shop);
     });
 };
+
 exports.getDetailedShop = function(req, res) {
 
     Shop.findById(req.params.shop_id).populate('catalogue').exec(function(err, shop) {
