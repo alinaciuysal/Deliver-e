@@ -23,33 +23,20 @@ export default class AWSService {
     }
 
     upload(file){
-        var key =  guid();
-        var params = { Bucket: "delivere", Key: key, ContentType: file.type, Body: file.data, ServerSideEncryption: 'AES256' };
- 
-        s3.putObject(params, function(err, data) {
-        if(err) {
-            return err;
-        }
-        else {
-            return key;
-      }
-    })
-
-    }
-
-    register(name, surname, email, pass, address, location, district) {
-        return this.$http.post(`${ this.API_URL }/user/signup/customer`, {
-            name: name,
-            surname: surname,
-            email: email,
-            password: pass,
-            address: address,
-            location: location,
-            district: district
+        return new Promise((resolve, reject) =>{
+            console.log(file);
+            var key =  guid();
+            var params = { Bucket: "delivere", Key: key, Body: file.data, ServerSideEncryption: 'AES256' };
+     
+            this.s3.putObject(params, function(err, data) {
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(key);
+                }
+            });
         });
     }
-
-
 
 
 }

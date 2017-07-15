@@ -82,6 +82,7 @@
                     </md-input-container><br>
 
                 </md-list>
+                <input id="photo" class="ng-hide" accept="image/*" type="file" ng-file-model="$ctrl.product.photo"/>
             </form>
 
             <md-button class="md-raised" ng-click="$ctrl.uploadProductPic()"><md-icon md-svg-icon="upload"></md-icon>&nbsp;Add Photo&nbsp;</md-button>

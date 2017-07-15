@@ -12,6 +12,7 @@ import ngFileModel from 'ng-file-model';
 
 import UserService from './services/user/user';
 import ShopService from './services/shop/shop';
+import AWSService from './services/aws/aws';
 import Routes from './config/routes';
 import Middlewares from './config/middlewares';
 import Icons from './config/icons';
@@ -38,6 +39,7 @@ let app = angular.module('app', [
         ngMdIcons,
         UserService.name,
         ShopService.name,
+        AWSService.name,
         AppContent.name,
         ViewRegister.name,
         ViewProfile.name,
