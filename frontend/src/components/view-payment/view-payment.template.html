@@ -6,14 +6,133 @@
 </head>
 <body>
 <div>&nbsp;</div>
-<div layout="row" layout-align="center center" layout-margin>
+<md-content layout="row" layout-align="center center">
+    <md-card style="width: 700px;">
+        <h2 layout="row" layout-align="center center">Confirm Order - Payment</h2>
+        <form name="userProfileForm">
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <u class="md-headline">1) Shopping Basket</u>
+                    </md-card-title-text>
+                </md-card-title>
 
-    <md-content>
-        <md-card class="md-card" layout-align="center center">
-            <h2>Confirm Order - Payment</h2>
+                <md-card-content>
+                    <div layout="row" layout-align="space-between center">
+                        <p>Name</p>
+                        <p>Price</p>
+                        <p>Quantity</p>
+                    </div>
+                    <md-divider></md-divider>
+                    <div layout="row" layout-align="space-between center" ng-repeat="item in $ctrl.basket.items">
+                        <p>{{item.product.name}}</p>
+                        <p>{{item.amount * item.product.price}} €</p>
+                        <p>{{item.amount}}</p>
+                    </div>
+                    <md-divider></md-divider>
+                    <p layout="row" layout-align="center center">Subtotal:&nbsp;&nbsp;{{$ctrl.basket.totalPrice}} €</p>
+                </md-card-content>
+            </md-card>
+            <br>
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <u class="md-headline">2) Delivery Info</u>
+                    </md-card-title-text>
+                </md-card-title>
 
-        </md-card>
-    </md-content>
-</div>
+                <md-card-content>
+                    <div layout="row" layout-align="start center">
+                        <p>Address:</p>&nbsp;
+                        <md-input-container id="userAddress">
+                            <input aria-label="userAddress" type="text" name="userAddress" ng-model="$ctrl.user.address" required="" minlength="10"/>
+                            <div ng-messages="userProfileForm.userAddress.$error" ng-hide="userProfileForm.userAddress.$valid">
+                                <div ng-message-exp="['required', 'minlength']">
+                                    Addresses generally consist of at least 10 characters
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-align="start center">
+                        <p>Max Delivery Time:</p>&nbsp;
+                        <md-input-container id="deliveryTime" style="width: 25%;">
+                            <input aria-label="deliveryTime" type="number" name="deliveryTime" ng-model="$ctrl.deliveryTime" required="" ng-minlength=1 ng-maxlength=2 />
+                            <div ng-messages="userProfileForm.deliveryTime.$error" ng-hide="userProfileForm.deliveryTime.$valid">
+                                <div ng-message-exp="['required']">
+                                    Max Delivery Time is required.
+                                </div>
+                            </div>
+                        </md-input-container>&nbsp; Hours
+                    </div>
+                    <div layout="row" layout-align="start center">
+                        <p>Delivery Commission:</p>&nbsp; {{$ctrl.basket.totalPrice * 15 / 100}} €
+                    </div>
+                    <div layout="row" layout-align="start center">
+                        <p>Total Cost:</p>&nbsp; {{$ctrl.basket.totalPrice * 115 / 100}} €
+                    </div>
+                </md-card-content>
+            </md-card>
+            <br>
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <u class="md-headline">3) Payment Info</u>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-content>
+                    <div layout="row" layout-align="start center">
+                        <label>Choose your payment method:&nbsp;</label>
+                        <md-select name="paymentChoice" required ng-model="$ctrl.user.paymentChoice" placeholder="Payment method" layout-align="center center">
+                            <md-option value="Visa">Visa</md-option>
+                            <md-option value="Master Card">Master Card</md-option>
+                            <md-option value="American Express">American Express</md-option>
+                            <md-option value="Debit Card">Debit Card</md-option>
+                        </md-select>
+                    </div>
+                    <div layout="row" layout-align="start center">
+                        <label>Card number:&nbsp;</label>
+                        <md-input-container id="cardNumber">
+                            <input aria-label="cardNumber" type="number" name="cardNumber" ng-model="$ctrl.cardNumber" required="" ng-maxlength="16" />
+                            <div ng-messages="userProfileForm.cardNumber.$error" ng-hide="userProfileForm.cardNumber.$valid">
+                                <div ng-message-exp="['required', 'maxlength']">
+                                    Card number is required and should consist of 16 digits.
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-align="start center" style="padding-top: 4px;">
+                        <label>Name on the card:&nbsp;</label>
+                        <md-input-container id="cardName">
+                            <input aria-label="cardName" type="text" name="cardName" ng-model="$ctrl.cardName" required=""/>
+                            <div ng-messages="userProfileForm.cardName.$error" ng-hide="userProfileForm.cardName.$valid">
+                                <div ng-message-exp="['required']">
+                                    Name on the card is required.
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-align="start center" style="padding-top: 4px;">
+                        <label>Security Code (CVC):&nbsp;</label>
+                        <md-input-container id="cardCVC">
+                            <input aria-label="cardCVC" type="number" name="cardCVC" ng-model="$ctrl.cardCVC" required="" ng-minlength="3" ng-maxlength="3"/>
+                            <div ng-messages="userProfileForm.cardCVC.$error" ng-hide="userProfileForm.cardCVC.$valid">
+                                <div ng-message-exp="['required']">
+                                    CVC is required and should consist of 3 digits.
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <br>
+            <div layout="row" layout-align="center center">
+                <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.rejectOrder(order._id)"><md-icon md-svg-icon="cancel"></md-icon>&nbsp;Cancel&nbsp;</md-button>
+                <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.acceptOrder(order._id)"><md-icon md-svg-icon="check"></md-icon>&nbsp;Confirm&nbsp;</md-button>
+            </div>
+            <br>
+        </form>
+    </md-card>
+</md-content>
 </body>
 </html>
