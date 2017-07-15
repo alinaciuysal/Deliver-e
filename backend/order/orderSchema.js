@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Shop = require('../shop/shopSchema');
 
 var itemSchema = new mongoose.Schema({
     amount: { 
@@ -60,20 +61,39 @@ var orderSchema   = new mongoose.Schema({
 
 class OrderClass {
 	addItem(product, amount, callback) {
-        var item = this.items.find( function (item) {
-            return String(item.product) == String(product._id);
+        var order = this;
+        Shop.findOne({ catalogue: { $eq: product } }, function(err, shop){
+            if (err){
+                callback(err, null);
+                return;
+            }
+            console.log(order)
+            console.log(shop)
+            if (order.shop && String(order.shop) != String(shop._id)) {
+                callback("Shops are not equal", null);
+                return;
+            }else{
+                order.shop = shop;
+                var item = order.items.find( function (item) {
+                    return String(item.product) == String(product._id);
+                });
+                if (item == undefined) {
+                    item = {amount: amount, product: product};
+                    order.items.push(item);
+                } else {
+                    item.amount += amount;
+                }
+                order.totalPrice += (amount * product.price);
+                order.totalWeight += (amount * product.weight);
+                console.log("a"+order)
+                order.save(function(err, updated_order) {
+                        callback(err, updated_order);
+                        return;
+                });
+            }
         });
-        if (item == undefined) {
-            item = {amount: amount, product: product};
-            this.items.push(item);
-        } else {
-            item.amount += amount;
-        }
-        this.totalPrice += (amount * product.price);
-        this.totalWeight += (amount * product.weight);
-        this.save(function(err, updated_order) {
-                callback(err, updated_order);
-        });
+        
+
 	}
 	removeItem(product, amount, callback) {
         var item = this.items.find( function (item) {
@@ -88,6 +108,8 @@ class OrderClass {
         } else {
             item.amount -= amount;
         }
+        if (this.items.length < 1)
+            this.shop = undefined;
         this.totalPrice -= (amount * product.price);
         this.totalWeight -= (amount * product.weight);
         this.save(function(err, updated_order) {
