@@ -31,5 +31,8 @@ export default class OrderService {
         });
     }
 
+    clearBasket(){
+        return this.$http.put(`${ this.API_URL }/order/basket/clear`);
+    }
 
 }
