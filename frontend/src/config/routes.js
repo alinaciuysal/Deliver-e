@@ -13,8 +13,7 @@ import ProductPageComponent from './../components/view-product-page/view-product
 import AboutUsComponent from './../components/aboutUs/aboutUs.component';
 import FaqComponent from './../components/faq/faq.component';
 import ViewAddProductComponent from './../components/view-addproduct/view-addproduct.component';
-
-
+import ViewSearchComponent from './../components/view-search/view-search.component';
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
 export default function config ($stateProvider, $urlRouterProvider){
@@ -84,6 +83,16 @@ export default function config ($stateProvider, $urlRouterProvider){
             resolve: {
                 productId: ['$stateParams', function ($stateParams) {
                     return $stateParams.productId;
+                }]
+            }
+        })
+        .state('search', {
+            url: '/search/:search',
+            component: ViewSearchComponent.name,
+            params: { type: null },
+            resolve: {
+                productId: ['$stateParams', function ($stateParams) {
+                    return $stateParams.search;
                 }]
             }
         })
