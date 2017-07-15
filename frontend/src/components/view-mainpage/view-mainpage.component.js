@@ -12,7 +12,6 @@ class ViewMainPageComponent {
     constructor(){
         this.controller = ViewMainPageComponentController;
         this.template = template;
-
     }
 
     static get name() {
@@ -45,7 +44,8 @@ class ViewMainPageComponentController {
 
         //this.photo = 'img/asian/asian1.jpg';
         //this.getProductsList();
-        this.getShopsList()
+        this.search("test");
+        this.getShopsList();
     }
 
     getShopsList() {
@@ -66,8 +66,12 @@ class ViewMainPageComponentController {
     //     });
     // }
 
-    search() {
-        //Search func
+    search(name) {
+        this.ShopService.searchProductsInShop(name).then(value => {
+            console.log(value);
+            console.log(this);
+
+        });
     }
 
     $onInit() {

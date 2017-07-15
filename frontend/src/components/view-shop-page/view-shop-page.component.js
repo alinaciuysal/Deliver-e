@@ -35,9 +35,7 @@ class ViewShopPageController {
         this.photo = 'img/asian/asian1.jpg';
         ///GET SHOP BY ID
         /// /api/shop/:(shop_id)
-        this.getDetailedShopById(this.shopId)
-
-        console.log(this);
+        this.getDetailedShopById(this.shopId);
 
     }
 
@@ -49,7 +47,6 @@ class ViewShopPageController {
             this.phone = this.shop.phone;
 
             this.products = this.shop.catalogue;
-        console.log(this.products);
 
             this.numCol = this.products.length/4;
             if(this.products.length%4!=0) this.numCol++;

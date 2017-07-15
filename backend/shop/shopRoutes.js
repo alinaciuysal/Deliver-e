@@ -30,6 +30,9 @@ function shopRoutes(passport) {
     router.route('/search/:product_name')
         .get(shopController.searchProducts);
 
+    router.route('/searchshop/:product_name')
+        .get(shopController.searchProductsInShop);
+
     router.route('/type/:type')
         .get(shopController.getShopsWithType);
 

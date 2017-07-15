@@ -183,8 +183,26 @@ exports.searchProducts = function(req, res) {
     Product.find({name: {'$regex':req.params.product_name} }, function(err, product){
         if (err) {
             res.status(500).send(err);
-            return
+            return;
         }
         res.json(product);
     });
+};
+
+exports.searchProductsInShop = function(req, res) {
+    Shop.find()
+        .populate({
+            path: 'catalogue',
+            match: { name: {'$regex':req.params.product_name}}
+        })
+        .exec(function(err, shop) {
+        if (err) {
+            res.status(400).send(err)
+            return;
+        };
+
+        res.json(shop);
+    });
+
+
 };

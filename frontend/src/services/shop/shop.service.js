@@ -31,32 +31,32 @@ export default class ShopService {
 
     getShopsList() {
         return this.$http.get(`${ this.API_URL }/shop`).then(responce => {
-                return new Promise((resolve, reject) => {
-                    resolve(responce.data);
+            return new Promise((resolve, reject) => {
+                resolve(responce.data);
             });
         });
     }
 
     getShopsListByType(type) {
         return this.$http.get(`${ this.API_URL }/shop/type/${type}`).then(responce => {
-                return new Promise((resolve, reject) => {
-                    resolve(responce.data);
+            return new Promise((resolve, reject) => {
+                resolve(responce.data);
             });
         });
     }
 
     getShopById(id) {
         return this.$http.get(`${ this.API_URL }/shop/${id}`).then(responce => {
-                return new Promise((resolve, reject) => {
-                    resolve(responce.data);
+            return new Promise((resolve, reject) => {
+                resolve(responce.data);
             });
          });
     }
 
     getDetailedShopById(id) {
         return this.$http.get(`${ this.API_URL }/shop/${id}/details`).then(responce => {
-                return new Promise((resolve, reject) => {
-                    resolve(responce.data);
+            return new Promise((resolve, reject) => {
+                resolve(responce.data);
             });
         });
     }
@@ -77,5 +77,19 @@ export default class ShopService {
         });
      }
 
+    searchProducts(name) {
+        return this.$http.get(`${ this.API_URL }/shop/search/${name}`).then(responce => {
+                return new Promise((resolve, reject) => {
+                    resolve(responce.data);
+            });
+        });
+    }
 
+    searchProductsInShop(name) {
+        return this.$http.get(`${ this.API_URL }/shop/searchshop/${name}`).then(responce => {
+                return new Promise((resolve, reject) => {
+                    resolve(responce.data);
+    });
+    });
+    }
 }
