@@ -6,18 +6,27 @@
             <div layout-align="center center" layout="">SHOPPING BASKET</div>
         </div>
         <div style="width: inherit; min-width: 1%; height: 80%">
-            <br><b>Products</b>
-            <p>&nbsp</p>
-            <div>
+            <md-list style="padding-bottom: 25px" ng-cloak>
+                <md-subheader class="md-no-sticky"><b>Products</b></md-subheader>
+                <md-list-item ng-click="navigateTo(setting.extraScreen, $event)" ng-repeat="item in $ctrl.basket.items">
+                    <md-icon md-svg-icon="{{setting.icon}}"></md-icon>
+                    <p> <b layout-align="center left">Name: </b> {{item.product.name}} </p>
+                    <p> <b <b layout-align="center left">Amount: </b> {{item.amount}} </p>
 
-                <div ng-repeat="item in $ctrl.basket.items">
-                    <b layout-align="center left">Name: </b> {{item.product.name}}
-                    <b layout-align="center left">Amount: </b> {{item.amount}}
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-list>
+            <!--<p>&nbsp</p>-->
+            <!--<div>-->
 
-                </div>
-            </div>
-            <p>&nbsp</p>
-            <p>&nbsp</p>
+                <!--<div ng-repeat="item in $ctrl.basket.items">-->
+                    <!--<b layout-align="center left">Name: </b> {{item.product.name}}-->
+                    <!--<b layout-align="center left">Amount: </b> {{item.amount}}-->
+
+                <!--</div>-->
+            <!--</div>-->
+            <!--<p>&nbsp</p>-->
+            <!--<p>&nbsp</p>-->
             <div>
                 <b layout-align="center left">Total Weight: </b> {{$ctrl.basket.totalWeight}}
                 <p></p>

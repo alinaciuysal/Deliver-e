@@ -20,13 +20,16 @@ export default class OrderService {
         return this.$http.get(`${ this.API_URL }/order/basket`).then(responce => {
             return new Promise((resolve, reject) => {
                 resolve(responce.data);
+            });
         });
-    });
     }
 
-
-
-
+    addProductToBasket(productId, productAmount){
+        return this.$http.post(`${ this.API_URL }/order/basket`, {
+            product: productId,
+            amount: productAmount
+        });
+    }
 
 
 }
