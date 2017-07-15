@@ -1,7 +1,6 @@
 'use strict';
 
 export default class OrderService {
-
     static get $inject(){
         return ['$http', '$window','API_URL'];
     }
@@ -10,10 +9,15 @@ export default class OrderService {
         this.$http = $http;
         this.$window = $window;
         this.API_URL = API_URL;
+        this.reload = false;
     }
 
     static get name(){
         return 'OrderService';
+    }
+
+    reloaded() {
+        this.reload = false;
     }
 
     getBasket() {
@@ -28,11 +32,15 @@ export default class OrderService {
         return this.$http.post(`${ this.API_URL }/order/basket`, {
             product: productId,
             amount: productAmount
+        }).then(responce => {
+            this.reload = true;
         });
     }
 
     clearBasket(){
-        return this.$http.put(`${ this.API_URL }/order/basket/clear`);
+        return this.$http.put(`${ this.API_URL }/order/basket/clear`).then(responce => {
+            this.reload = true;
+        });
     }
 
 }

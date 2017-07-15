@@ -19,6 +19,7 @@ class ViewBasketComponent {
 }
 
 class ViewBasketComponentController{
+
     constructor($state, UserService, OrderService, $rootScope, $location){
         let ctrl = this;
         this.$state = $state;
@@ -27,22 +28,34 @@ class ViewBasketComponentController{
         this.$rootScope = $rootScope;
         this.$location = $location;
 
-        this.basket = [];
+        //this.basket = [];
+        this.$rootScope.basket = [];
         this.getUserBasket();
 
-
-        this.$rootScope.$on("mainPage-changed", function(evt, arg) {
-            console.log("emit arg ", arg);
-
-            // if incoming arg is false, then it means that basket should not be shown
-            if (!arg) {
-                ctrl.showBasket = arg;
-                console.log("ctrl showBasket updated to ", ctrl.showBasket);
-            } else {
-                ctrl.isUserAuthenticated();
+        this.$rootScope.$watch(
+            function(){return OrderService.reload;},
+            function(newVal, oldVal){
+                if(newVal){
+                    OrderService.reloaded();
+                    OrderService.getBasket().then(basket => {
+                        $rootScope.basket = basket;
+                    });
+                }
             }
+        );
 
-        });
+        // this.$rootScope.$on("mainPage-changed", function(evt, arg) {
+        //     console.log("emit arg ", arg);
+        //
+        //     // if incoming arg is false, then it means that basket should not be shown
+        //     if (!arg) {
+        //         ctrl.showBasket = arg;
+        //         console.log("ctrl showBasket updated to ", ctrl.showBasket);
+        //     } else {
+        //         ctrl.isUserAuthenticated();
+        //     }
+        //
+        // });
     }
 
     $onInit() {
@@ -69,8 +82,9 @@ class ViewBasketComponentController{
 
     getUserBasket() {
         this.OrderService.getBasket().then(basket => {
-            this.basket = basket;
-            console.log(basket);
+            //this.basket = basket;
+            this.$rootScope.basket = basket;
+            console.log(this.$rootScope.basket);
         });
 
         // let basket = {
