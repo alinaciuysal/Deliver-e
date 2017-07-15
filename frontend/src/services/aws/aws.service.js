@@ -23,14 +23,15 @@ export default class AWSService {
     }
 
     upload(file){
-        var params = { Bucket: "delivere", Key: photo.name, ContentType: file.type, Body: file.data, ServerSideEncryption: 'AES256' };
+        var key =  guid();
+        var params = { Bucket: "delivere", Key: key, ContentType: file.type, Body: file.data, ServerSideEncryption: 'AES256' };
  
         s3.putObject(params, function(err, data) {
         if(err) {
-            return null;
+            return err;
         }
         else {
-            console.log(data);
+            return key;
       }
     })
 
@@ -50,4 +51,15 @@ export default class AWSService {
 
 
 
+
+}
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
 }
