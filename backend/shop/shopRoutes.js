@@ -27,6 +27,12 @@ function shopRoutes(passport) {
         .put(shopController.putProduct)
         .delete(shopController.deleteProduct);
 
+    router.route('/search/:product_name')
+        .get(shopController.searchProducts);
+
+    router.route('/searchshop/:product_name')
+        .get(shopController.searchProductsInShop);
+
     router.route('/type/:type')
         .get(shopController.getShopsWithType);
 

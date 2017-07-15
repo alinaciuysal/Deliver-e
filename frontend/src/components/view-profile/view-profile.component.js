@@ -313,6 +313,8 @@ class ViewProfileController {
 
     $onInit() {
         this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
+        let showBasket = this.$state.params.showBasket;
+        this.$rootScope.$emit("mainPage-changed", showBasket);
     }
 
     checkFieldsShop(user) {

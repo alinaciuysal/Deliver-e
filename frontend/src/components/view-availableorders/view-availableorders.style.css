@@ -4,9 +4,6 @@ h1 {
 .md-tab{
     text-transform: none
 }
-p{
-    width: 800px;
-}
 .tabsdemoDynamicHeight md-content {
     background-color: transparent !important; }
 .tabsdemoDynamicHeight md-content md-tabs {

@@ -12,7 +12,6 @@ class ViewMainPageComponent {
     constructor(){
         this.controller = ViewMainPageComponentController;
         this.template = template;
-
     }
 
     static get name() {
@@ -45,7 +44,8 @@ class ViewMainPageComponentController {
 
         //this.photo = 'img/asian/asian1.jpg';
         //this.getProductsList();
-        this.getShopsList()
+        this.search("test");
+        this.getShopsList();
     }
 
     getShopsList() {
@@ -66,13 +66,19 @@ class ViewMainPageComponentController {
     //     });
     // }
 
-    search() {
-        //Search func
+    search(name) {
+        this.ShopService.searchProductsInShop(name).then(value => {
+            console.log(value);
+            console.log(this);
+
+        });
     }
 
     $onInit() {
         var ctrl = this;
         ctrl.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
+        // just send true to basket component, the rest is handled by that
+        ctrl.$rootScope.$emit("mainPage-changed", true);
     }
 
 
