@@ -53,7 +53,7 @@ class ViewAddProductComponentController{
         // TODO: API call
         this.ShopService.addProduct(productName, productPrice, productCategory, productWeight, productStock, productDetails, productPhoto).then(()=> {
             console.log("Product added");
-            this.$state.go('mainPage',{});
+            this.$state.go('shopHomePage',{});
         }).catch(function(obj){
             ctrl.addProductError = "Error: " + obj.data;
         });
