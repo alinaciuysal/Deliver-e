@@ -6,6 +6,7 @@ import RegisterComponent from './../components/view-register/view-register.compo
 import AddProductComponent from './../components/view-addproduct/view-addproduct.component';
 import ProfileComponent from './../components/view-profile/view-profile.component';
 import AvailableOrdersComponent from './../components/view-availableorders/view-availableorders.component';
+import PaymentComponent from './../components/view-payment/view-payment.component';
 import ShopsListComponent from '../components/view-shops-list/view-shops-list.component';
 import ShopPageComponent from './../components/view-shop-page/view-shop-page.component';
 import ProductPageComponent from './../components/view-product-page/view-product-page.component';
@@ -44,6 +45,10 @@ export default function config ($stateProvider, $urlRouterProvider){
         .state('availableorders', {
             url: '/availableorders',
             component: AvailableOrdersComponent.name
+        })
+        .state('payment', {
+            url: '/payment',
+            component: PaymentComponent.name
         })
         .state('login', {
             url: '/login',

@@ -93,7 +93,6 @@ exports.getDetailedShop = function(req, res) {
 };
 
 exports.getProduct = function(req, res) {
-
     Product.findById(req.params.product_id, function(err, product) {
         if (err) {
             res.status(400).send(err)
@@ -177,5 +176,15 @@ exports.deleteProduct = function(req, res) {
         }
         product.remove();
         res.sendStatus(200);
+    });
+};
+
+exports.searchProducts = function(req, res) {
+    Product.find({name: {'$regex':req.params.product_name} }, function(err, product){
+        if (err) {
+            res.status(500).send(err);
+            return
+        }
+        res.json(product);
     });
 };
