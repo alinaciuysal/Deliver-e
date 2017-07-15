@@ -68,8 +68,6 @@ class ViewShopPageController {
 
     addProductToBasket(productId){
         this.OrderService.addProductToBasket(productId, 1);
-        console.log(productId);
-        console.log("add product to basket");
     }
 
     $onInit() {

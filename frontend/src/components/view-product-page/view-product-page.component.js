@@ -4,6 +4,7 @@
 import template from './view-product-page.html';
 import UserService from './../../services/user/user.service';
 import ShopService from './../../services/shop/shop.service';
+import OrderService from './../../services/order/order.service';
 
 class ViewProductPageComponent {
     constructor(){
@@ -18,12 +19,13 @@ class ViewProductPageComponent {
 
 class ViewProductPageController {
 
-    constructor($state,  $rootScope, $location, UserService, ShopService){
+    constructor($state,  $rootScope, $location, UserService, ShopService, OrderService){
         this.$state = $state;
         this.$rootScope = $rootScope;
         this.$location = $location;
         this.UserService = UserService;
         this.ShopService = ShopService;
+        this.OrderService = OrderService;
 
         this.productId = this.$state.params.productId;
 
@@ -54,12 +56,16 @@ class ViewProductPageController {
         });
     }
 
+    addProductToBasket(productId){
+        this.OrderService.addProductToBasket(productId, 1);
+    }
+
     $onInit() {
         this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
     }
 
     static get $inject(){
-        return ['$state', '$rootScope', '$location', UserService.name, ShopService.name, '$http'];
+        return ['$state', '$rootScope', '$location', UserService.name, ShopService.name, OrderService.name];
     }
 }
 
