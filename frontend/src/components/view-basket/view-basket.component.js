@@ -16,7 +16,6 @@ class ViewBasketComponent {
     static get name() {
         return 'viewBasket';
     }
-
 }
 
 class ViewBasketComponentController{
@@ -112,9 +111,8 @@ class ViewBasketComponentController{
         // };
     }
 
-    addProductToBasket(productId){
-        console.log(productId);
-        console.log("add product to basket");
+    clearBasket(){
+        this.OrderService.clearBasket();
     }
 
     static get $inject(){
