@@ -16,17 +16,6 @@ export default class OrderService {
         return 'OrderService';
     }
 
-    getAvailableOrders(){
-        return this.$http.get(`${ this.API_URL }/order`);
-    }
-
-    acceptOrder(orderId){
-        return this.$http.put(`${ this.API_URL }/order/${orderId}/accept`);
-    }
-
-    rejectOrder(orderId){
-        return this.$http.put(`${ this.API_URL }/order/${orderId}/reject`);
-    }
 
 
 
