@@ -8,6 +8,7 @@ import angularMaterial from 'angular-material';
 import 'angular-material/angular-material.css';
 
 import ngMdIcons from 'angular-material-icons';
+import ngFileModel from 'ng-file-model';
 
 import UserService from './services/user/user';
 import ShopService from './services/shop/shop';
@@ -50,7 +51,9 @@ let app = angular.module('app', [
         ViewProductPage.name,
         Faq.name,
         jkAngularCarousel,
-        ngAria
+        ngAria,
+        ngFileModel.name
+
 ]).run(() => {
     console.log(`Starting the angular module`);
 });
