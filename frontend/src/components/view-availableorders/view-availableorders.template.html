@@ -20,7 +20,7 @@
                         <p>Payment to shop:&nbsp;&nbsp;{{order.totalPrice | number:2}} €</p>
                         <p>Total payment:&nbsp;&nbsp;{{order.totalPrice * 115 / 100 | number:2}} €</p>
                         <p>Profit:&nbsp;&nbsp;{{order.totalPrice * 15 / 100 | number:2}} €</p>
-                        <p>Latest Delivery time:&nbsp;&nbsp;{{order.deliveryTime}}</p><br>
+                        <p>Latest Delivery Time:&nbsp;&nbsp;{{order.deliveryTime}}</p><br>
                         <md-button class="md-raised" layout-align="center center" ng-click="ifVisible = !ifVisible;">&nbsp;See items&nbsp;</md-button>
                     </md-content>
                     <div ng-if="ifVisible" style="width: 832px;">
@@ -30,7 +30,8 @@
                                     <md-subheader class="md-no-sticky">Items</md-subheader>
                                     <md-divider></md-divider>
                                     <md-list-item ng-model="order.items" ng-repeat="item in order.items" ng-click="null">
-                                        <p>Item:&nbsp;&nbsp;{{item.product}}</p>
+                                        <p>Item:&nbsp;&nbsp;{{item.product.name}}</p>
+                                        <p>Price:&nbsp;&nbsp;{{item.amount * item.product.price}} €</p>
                                         <p>Amount:&nbsp;&nbsp;{{item.amount}}</p>
                                         <md-divider ng-if='!$last'></md-divider>
                                     </md-list-item>
@@ -39,8 +40,8 @@
                         </md-card>
                     </div>
                     <br>
-                    <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.rejectOrder(order.id)"><md-icon md-svg-icon="cancel"></md-icon>&nbsp;Reject&nbsp;</md-button>
-                    <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.acceptOrder(order.id)"><md-icon md-svg-icon="check"></md-icon>&nbsp;Accept&nbsp;</md-button>
+                    <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.rejectOrder(order._id)"><md-icon md-svg-icon="cancel"></md-icon>&nbsp;Reject&nbsp;</md-button>
+                    <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.acceptOrder(order._id)"><md-icon md-svg-icon="check"></md-icon>&nbsp;Accept&nbsp;</md-button>
                 </md-tab>
             </md-tabs>
         </md-card>

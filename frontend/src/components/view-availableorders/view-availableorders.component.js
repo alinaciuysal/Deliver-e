@@ -47,7 +47,12 @@ class ViewAvailableOrdersComponentController{
     }
 
     acceptOrder(orderNo){
-        // TODO: API calls
+        console.log(orderNo);
+        this.UserService.acceptOrder(orderNo).then(function(response){
+            console.log(response.data);
+            console.log("Accepted");
+            location.reload();
+        });
     }
 
     static get $inject(){

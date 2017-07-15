@@ -37,9 +37,9 @@ class ViewShopsListController {
             this.name = "Asian Shops";
             this.getShopsListByType('asian');
         }
-        else if(this.type == 'getranke') {
+        else if(this.type == 'getrankemarkt') {
             this.name = "Getrankemarkts"
-            this.getShopsListByType('getranke');
+            this.getShopsListByType('getrankemarkt');
         }
         else if(this.type == 'turkish') {
             this.name = "Turkish Shops"

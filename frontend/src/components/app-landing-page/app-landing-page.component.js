@@ -26,15 +26,6 @@ class AppLandingPageComponentController{
         this.$scope.status = '  ';
         this.$scope.customFullscreen = this.$mdMedia('xs') || this.$mdMedia('sm');
     }
-
-    showTabDialog(ev) {
-        this.$mdDialog.show({
-            templateUrl: 'dialog.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose:true
-        })
-    };
 }
 
 export default AppLandingPageComponent;

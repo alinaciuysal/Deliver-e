@@ -23,6 +23,7 @@ import ViewRegister from './components/view-register/view-register';
 import ViewAddProduct from './components/view-addproduct/view-addproduct';
 import ViewProfile from './components/view-profile/view-profile';
 import ViewAvailableOrders from './components/view-availableorders/view-availableorders';
+import ViewPayment from './components/view-payment/view-payment';
 import ViewMainPage from './components/view-mainpage/view-mainpage';
 import LeftMenu from './components/left-menu/left-menu';
 import ViewShopsList from './components/view-shops-list/view-shops-list';
@@ -44,6 +45,7 @@ let app = angular.module('app', [
         ViewRegister.name,
         ViewProfile.name,
         ViewLogin.name,
+        ViewPayment.name,
         ViewMainPage.name,
         ViewAddProduct.name,
         ViewAvailableOrders.name,
