@@ -41,7 +41,8 @@ var orderSchema   = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Shop'
     },
-    deliveryTime: String,
+    orderTime: Date,
+    deliveryTime: Date,
     items: [itemSchema],
     orderer: {
         type: mongoose.Schema.Types.ObjectId,
@@ -67,7 +68,6 @@ class OrderClass {
                 callback(err, null);
                 return;
             }
-            console.log(shop)
             if (order.shop && String(order.shop) != String(shop._id)) {
                 callback("Shops are not equal", null);
                 return;

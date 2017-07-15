@@ -75,9 +75,10 @@ exports.clearBasket = function(req, res) {
 };
 
 exports.makeOrder = function(req, res) {
-	Order.findOneAndUpdate({ orderer: req.user, status:'Basket'}, { $set: { status: 'Ordered', district: req.user.district, location: req.user.location } }, { "new": true }, function(err, order) {
+	var deliveryTime = req.body.deliveryTime ? req.body.deliveryTime : 0
+	Order.findOneAndUpdate({ orderer: req.user, status:'Basket'}, { $set: { status: 'Ordered', district: req.user.district, location: req.user.location, orderTime: Date.now(), deliveryTime: Date.now() + deliveryTime * 60000 } }, { "new": true }, function(err, order) {
 		if (err) {
-			res.sendStatus(500);
+			res.status(500).send(err);
 			return;
 		}
 		var basket = new Order({
