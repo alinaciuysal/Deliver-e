@@ -5,6 +5,7 @@
 'use strict';
 
 import ShopService from './../../services/shop/shop.service';
+import AWSService from './../../services/aws/aws.service';
 
 import template from './view-addproduct.template.html';
 import './view-addproduct.style.css';
@@ -21,10 +22,14 @@ class ViewAddProductComponent {
 }
 
 class ViewAddProductComponentController{
-    constructor($state, $element, ShopService){
+    constructor($state, $element, ShopService, AWSService){
         this.$element = $element;
         this.$state = $state;
         this.ShopService = ShopService;
+        this.AWSService = AWSService;
+
+        console.log(this.ShopService);
+        console.log(this.AWSService);
     }
 
     $onInit() {
@@ -33,8 +38,7 @@ class ViewAddProductComponentController{
     }
 
     uploadProductPic(){
-        // TODO: Upload pic
-        return "";
+        document.querySelector('#photo').click();
     }
 
     submitNewProduct(){
@@ -46,21 +50,24 @@ class ViewAddProductComponentController{
         let productStock = this.product.stock;
         //let productStockInf = this.product.selected;
         let productDetails = this.product.productDetails;
-        let productPhoto = "";//this.uploadProductPic();
-
-        if(weightType == "gram")
-            productWeight = productWeight / 1000;
-        // TODO: API call
-        this.ShopService.addProduct(productName, productPrice, productCategory, productWeight, productStock, productDetails, productPhoto).then(()=> {
-            console.log("Product added");
-            this.$state.go('shopHomePage',{});
-        }).catch(function(obj){
-            ctrl.addProductError = "Error: " + obj.data;
+        this.AWSService.upload(this.product.photo).then(photo => {
+            let productPhoto = photo;
+            if(weightType == "gram")
+                productWeight = productWeight / 1000;
+            // TODO: API call
+            this.ShopService.addProduct(productName, productPrice, productCategory, productWeight, productStock, productDetails, productPhoto).then(()=> {
+                console.log("Product added");
+                this.$state.go('mainPage',{});
+            }).catch(function(obj){
+                ctrl.addProductError = "Error: " + obj.data;
+            });
         });
+
+        
     }
 
     static get $inject(){
-        return ['$state', '$element', ShopService.name];
+        return ['$state', '$element', ShopService.name, AWSService.name];
     }
 }
 
