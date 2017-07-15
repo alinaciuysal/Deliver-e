@@ -28,7 +28,7 @@ function orderRoutes(passport) {
     	.get(orderController.getOrder);
 
     router.route('/:order_id/accept')
-    	.post(orderController.acceptOrder)
+    	.put(orderController.acceptOrder)
 
 
     return router;
