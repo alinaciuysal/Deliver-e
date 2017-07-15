@@ -40,7 +40,9 @@
     "angular-material": "^1.1.0",
     "angular-material-icons": "^0.7.1",
     "angular-messages": "^1.5.8",
-    "copy-webpack-plugin": "^4.0.1"
+    "copy-webpack-plugin": "^4.0.1",
+    "aws-sdk": "^2.81.0",
+    "ng-file-model": "*"
   },
   "engines": {
     "node": ">=4.3"
