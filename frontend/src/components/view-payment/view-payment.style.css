@@ -7,16 +7,8 @@ h1 {
 .md-card{
     width: 700px;
 }
-.tabsdemoDynamicHeight md-content {
-    background-color: transparent !important;
-}
-.tabsdemoDynamicHeight md-content md-tabs {
-    background: #f6f6f6;
-    border: 5px solid #e1e1e1;
-}
-.tabsdemoDynamicHeight md-content md-tabs md-tabs-wrapper {
-    background: white;
-}
-.tabsdemoDynamicHeight md-content h1:first-child {
-    margin-top: 10;
+md-input-container .md-input-message-animation:not(.ng-animate) {
+    opacity: 0;
+    margin-top: -200px;
+    max-width: 100%;
 }
