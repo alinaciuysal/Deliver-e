@@ -12,25 +12,17 @@ given ng-controller name here must be same with the one in respective component'
                 <md-card-title-text >
 
                     <md-card-actions layout="row" layout-align="center center">
-                        <md-input-container layout="row" style="max-width:100%; width:100%" flex>
-                            <input  type="text" ng-model="searchName" placeholder="Search products" >
+                        <md-input-container layout="row" ng-model="search" style="max-width:100%; width:100%" flex>
+                            <input  ng-model="search" placeholder="Search products" placeholder="enter search">
                         </md-input-container>
-                        <md-button layout="row" aria-label="Search" ui-sref="search({search: searchName })">
+                        <md-button layout="row" aria-label="Search" ng-click="$ctrl.search()">
                             <ng-md-icon icon="search" ></ng-md-icon>
                         </md-button>
                     </md-card-actions>
 
-                    <div class="pageShopTitle" style="padding-top: 25px"><b>
-                        {{$ctrl.name}}:
-                    </b></div>
-
-                    <div style="padding-top: 15px">
-                        <b>Phone Number: </b>{{$ctrl.phone}}
-                    </div>
-                    <div style="padding-top: 15px">
-                        <b>Address: </b>{{$ctrl.address}}
-                    </div>
-
+                    <div style="padding-top: 25px;">
+                        <b style="color: #ab0012;">You searched for: </b>{{$ctrl.nameToSearch}}
+                   </div>
                 </md-card-title-text>
             </md-card-title>
 

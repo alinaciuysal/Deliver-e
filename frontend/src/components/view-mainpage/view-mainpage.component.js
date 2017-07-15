@@ -44,7 +44,6 @@ class ViewMainPageComponentController {
 
         //this.photo = 'img/asian/asian1.jpg';
         //this.getProductsList();
-        this.search("test");
         this.getShopsList();
     }
 
@@ -66,13 +65,6 @@ class ViewMainPageComponentController {
     //     });
     // }
 
-    search(name) {
-        this.ShopService.searchProductsInShop(name).then(value => {
-            console.log(value);
-            console.log(this);
-
-        });
-    }
 
     $onInit() {
         var ctrl = this;
