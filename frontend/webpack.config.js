@@ -55,11 +55,6 @@ module.exports = {
             template: 'src/assets/carousel.html'
         }),
 
-        new HtmlWebpackPlugin({
-            filename: 'dialog.html',
-            template: 'src/assets/dialog.html'
-        }),
-
         new CopyWebpackPlugin([
             { from: 'src/assets/img', to: 'img' }
         ])
