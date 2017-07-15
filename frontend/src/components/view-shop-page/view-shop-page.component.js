@@ -4,6 +4,7 @@
 import template from './view-shop-page.html';
 import UserService from './../../services/user/user.service';
 import ShopService from './../../services/shop/shop.service';
+import OrderService from './../../services/order/order.service';
 
 class ViewShopPageComponent {
     constructor(){
@@ -18,10 +19,11 @@ class ViewShopPageComponent {
 
 class ViewShopPageController {
 
-    constructor($state, UserService, ShopService, $stateParams){
+    constructor($state, UserService, ShopService, OrderService, $stateParams){
         this.$state = $state;
         this.UserService = UserService;
         this.ShopService = ShopService;
+        this.OrderService = OrderService;
 
         this.shopId = this.$state.params.shopId;
 
@@ -64,12 +66,18 @@ class ViewShopPageController {
         });
     }
 
+    addProductToBasket(productId){
+        this.OrderService.addProductToBasket(productId, 1);
+        console.log(productId);
+        console.log("add product to basket");
+    }
+
     $onInit() {
         console.log("ViewShopPageController onInit works");
     }
 
     static get $inject(){
-        return ['$state', UserService.name, ShopService.name, '$stateParams', '$http'];
+        return ['$state', UserService.name, ShopService.name, OrderService.name, '$stateParams', '$http'];
     }
 }
 
