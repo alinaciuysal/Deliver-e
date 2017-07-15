@@ -43,4 +43,13 @@ export default class OrderService {
         });
     }
 
+    removeProductFromBasket(productId, productAmount){
+
+        // return this.$http.delete(`${ this.API_URL }/order/basket`,
+        // {
+        //     product: productId,
+        //     amount: productAmount
+        // });
+    }
+
 }

@@ -89,7 +89,7 @@ export default class ShopService {
         return this.$http.get(`${ this.API_URL }/shop/searchshop/${name}`).then(responce => {
                 return new Promise((resolve, reject) => {
                     resolve(responce.data);
-    });
-    });
+            });
+        });
     }
 }

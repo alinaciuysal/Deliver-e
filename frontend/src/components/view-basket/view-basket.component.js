@@ -20,13 +20,14 @@ class ViewBasketComponent {
 
 class ViewBasketComponentController{
 
-    constructor($state, UserService, OrderService, $rootScope, $location){
+    constructor($state, UserService, OrderService, $rootScope, $location, $mdMenu){
         let ctrl = this;
         this.$state = $state;
         this.UserService = UserService;
         this.OrderService = OrderService;
         this.$rootScope = $rootScope;
         this.$location = $location;
+        this.$mdMenu = $mdMenu;
 
         //this.basket = [];
         this.$rootScope.basket = [];
@@ -44,18 +45,18 @@ class ViewBasketComponentController{
             }
         );
 
-        // this.$rootScope.$on("mainPage-changed", function(evt, arg) {
-        //     console.log("emit arg ", arg);
-        //
-        //     // if incoming arg is false, then it means that basket should not be shown
-        //     if (!arg) {
-        //         ctrl.showBasket = arg;
-        //         console.log("ctrl showBasket updated to ", ctrl.showBasket);
-        //     } else {
-        //         ctrl.isUserAuthenticated();
-        //     }
-        //
-        // });
+        this.$rootScope.$on("mainPage-changed", function(evt, arg) {
+            console.log("emit arg ", arg);
+
+            // if incoming arg is false, then it means that basket should not be shown
+            if (!arg) {
+                ctrl.showBasket = arg;
+                console.log("ctrl showBasket updated to ", ctrl.showBasket);
+            } else {
+                ctrl.isUserAuthenticated();
+            }
+
+        });
     }
 
     $onInit() {
@@ -84,7 +85,6 @@ class ViewBasketComponentController{
         this.OrderService.getBasket().then(basket => {
             //this.basket = basket;
             this.$rootScope.basket = basket;
-            console.log(this.$rootScope.basket);
         });
 
         // let basket = {
@@ -129,8 +129,12 @@ class ViewBasketComponentController{
         this.OrderService.clearBasket();
     }
 
+    removeProduct(productId, productAmount){
+        this.OrderService.removeProductFromBasket(productId, productAmount);
+    }
+
     static get $inject(){
-        return ['$state', UserService.name, OrderService.name, '$rootScope', '$location'];
+        return ['$state', UserService.name, OrderService.name, '$rootScope', '$location', '$mdMenu'];
     }
 }
 
