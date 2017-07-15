@@ -118,7 +118,7 @@ export default class UserService {
     }
 
     acceptOrder(orderId){
-        return this.$http.post(`${ this.API_URL }/order/${orderId}/accept`);
+        return this.$http.put(`${ this.API_URL }/order/${orderId}/accept`);
     }
 
     rejectOrder(orderId){
