@@ -26,27 +26,40 @@ class ViewBasketComponentController{
         this.$rootScope = $rootScope;
         this.$location = $location;
 
+
         this.$rootScope.$on("mainPage-changed", function(evt, arg) {
-            ctrl.isUserAuthenticated();
+            console.log("emit arg ", arg);
+
+            // if incoming arg is false, then it means that basket should not be shown
+            if (!arg) {
+                ctrl.showBasket = arg;
+                console.log("ctrl showBasket updated to ", ctrl.showBasket);
+            } else {
+                ctrl.isUserAuthenticated();
+            }
+
         });
     }
 
     $onInit() {
         let ctrl = this;
+        ctrl.showBasket = false;
         this.isUserAuthenticated();
         ctrl.basket = ctrl.getUserBasket();
-        console.log(ctrl.basket);
     }
 
     isUserAuthenticated() {
         let ctrl = this;
         let isAuthenticated = ctrl.UserService.isAuthenticated();
-        ctrl.isAuthenticatedAndIsUser = null;
+        ctrl.showBasket = null;
         if (isAuthenticated) {
             ctrl.UserService.getCurrentUserDetails().then(function (response) {
-                if(response.data.type == "customer")
-                    ctrl.isAuthenticatedAndIsUser = true;
+                if (response.data.type == "customer") {
+                    ctrl.showBasket = true;
+                }
             });
+        } else {
+            ctrl.showBasket = false;
         }
     }
 

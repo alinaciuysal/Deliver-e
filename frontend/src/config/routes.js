@@ -24,7 +24,7 @@ export default function config ($stateProvider, $urlRouterProvider){
     $stateProvider
         .state('mainPage', {
             url: '/mainPage',
-            component: MainPageComponent.name,
+            component: MainPageComponent.name
         })
         .state('register', {
             url: '/register',
@@ -36,7 +36,10 @@ export default function config ($stateProvider, $urlRouterProvider){
         })
         .state('profile', {
             url: '/profile',
-            component: ProfileComponent.name
+            component: ProfileComponent.name,
+            params: {
+                showBasket: false
+            }
         })
         .state('availableorders', {
             url: '/availableorders',
@@ -44,7 +47,10 @@ export default function config ($stateProvider, $urlRouterProvider){
         })
         .state('login', {
             url: '/login',
-            component: LoginComponent.name
+            component: LoginComponent.name,
+            params: {
+                basketIsNotShown: true
+            }
         })
         .state('shops', {
             url: '/shops/:type',

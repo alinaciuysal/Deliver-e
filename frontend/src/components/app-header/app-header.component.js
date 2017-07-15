@@ -85,7 +85,7 @@ class AppHeaderComponentController {
         this.$state.go('mainPage',{});
     }
 
-    login(){
+    login() {
         this.$state.go('login',{});
     }
 
@@ -98,7 +98,7 @@ class AppHeaderComponentController {
         this.$state.go('mainPage',{});
     }
 
-    goToProfilePage(){
+    goToProfilePage() {
         this.$state.go('profile',{});
     }
 

@@ -73,6 +73,8 @@ class ViewMainPageComponentController {
     $onInit() {
         var ctrl = this;
         ctrl.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
+        // just send true to basket component, the rest is handled by that
+        ctrl.$rootScope.$emit("mainPage-changed", true);
     }
 
 

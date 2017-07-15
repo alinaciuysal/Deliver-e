@@ -63,25 +63,20 @@ export default class UserService {
 
     login (mail, pass) {
         let ctrl = this;
-        return this.$http.post(`${ this.API_URL }/user/login`, {
+        return ctrl.$http.post(`${ this.API_URL }/user/login`, {
             email: mail,
             password: pass,
             // name: "test"
-        }).then(function(response){
-            if(response.data) {
-                ctrl.$rootScope.$emit("mainPage-changed");
-            }
-        }).catch(function(err) {
-            return err;
         });
     }
 
     logout() {
-        this.$window.localStorage.removeItem('jwtToken');
-        if (this.user) {
-            this.user = null;
+        let ctrl = this;
+        ctrl.$window.localStorage.removeItem('jwtToken');
+        if (ctrl.user) {
+            ctrl.user = null;
         }
-        this.$rootScope.$emit("mainPage-changed");
+        ctrl.$rootScope.$emit("mainPage-changed", true);
     }
 
     getCurrentUser() {
@@ -108,6 +103,7 @@ export default class UserService {
     isAuthenticated() {
         return !!this.$window.localStorage['jwtToken'];
     }
+
 
     updateUser (user) {
         return this.$http.put(`${ this.API_URL }/user/`, user);

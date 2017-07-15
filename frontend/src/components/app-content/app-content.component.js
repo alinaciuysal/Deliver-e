@@ -14,8 +14,18 @@ class AppContentComponent {
     }
 }
 
-class AppContentComponentController{
-    constructor(){
+class AppContentComponentController {
+
+    constructor($location, $rootScope){
+        this.$rootScope = $rootScope;
+        this.$location = $location;
+    }
+
+    static get $inject(){
+        return ['$location', '$rootScope'];
+    }
+
+    $onInit() {
     }
 }
 

@@ -31,6 +31,9 @@ class ViewLoginComponentController{
         this.loginError = {};
         this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
 
+        let noBasket = this.$state.params.basketIsNotShown;
+        this.$rootScope.$emit("mainPage-changed", noBasket);
+
         if(this.loginError !== undefined)
             this.loginError = undefined;
     }
@@ -44,8 +47,13 @@ class ViewLoginComponentController{
             ctrl.UserService.getCurrentUserDetails().then( function(resp) {
                 ctrl.user = resp.data;
                 ctrl.$rootScope.$emit("navbar-changed", {});
-                if (ctrl.user.type === "customer")
+
+                if (ctrl.user.type === "customer") {
                     ctrl.$state.go('mainPage',{});
+
+                    let noBasket = false; // means that basket should be shown only to the user after login
+                    ctrl.$rootScope.$emit("mainPage-changed", noBasket);
+                }
                 else if (ctrl.user.type === "deliverer")
                     ctrl.$state.go('delivererHomePage', {});
                 else if (ctrl.user.type === "shop")
