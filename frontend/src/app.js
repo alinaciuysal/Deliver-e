@@ -8,7 +8,6 @@ import angularMaterial from 'angular-material';
 import 'angular-material/angular-material.css';
 
 import ngMdIcons from 'angular-material-icons';
-import ngFileModel from 'ng-file-model';
 
 import UserService from './services/user/user';
 import ShopService from './services/shop/shop';
@@ -57,8 +56,7 @@ let app = angular.module('app', [
         Faq.name,
         ViewBasket.name,
         jkAngularCarousel,
-        ngAria,
-        ngFileModel.name
+        ngAria
 
 ]).run(() => {
     console.log(`Starting the angular module`);
@@ -68,6 +66,31 @@ app.constant('API_URL', 'http://localhost:3000/api');
 app.config(Routes);
 app.config(Middlewares);
 app.config(Icons);
+app.directive("ngFileModel", [function () {
+    return {
+        scope: {
+            ngFileModel: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.ngFileModel = {
+                            lastModified: changeEvent.target.files[0].lastModified,
+                            lastModifiedDate: changeEvent.target.files[0].lastModifiedDate,
+                            name: changeEvent.target.files[0].name,
+                            size: changeEvent.target.files[0].size,
+                            type: changeEvent.target.files[0].type,
+                            data: loadEvent.target.result
+                        };
+                    });
+                }
+                reader.readAsArrayBuffer(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);
 
 angular.element(document).ready(function() {
     return angular.bootstrap(document.body, [app.name], {

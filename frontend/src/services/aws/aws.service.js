@@ -24,20 +24,18 @@ export default class AWSService {
 
     upload(file){
         return new Promise((resolve, reject) =>{
-            console.log(file);
             var key =  guid();
-            var params = { Bucket: "delivere", Key: key, Body: file.data, ServerSideEncryption: 'AES256' };
+            var params = { Bucket: "delivere", Key: key, Body: file.data, ContentType: file.type, ServerSideEncryption: 'AES256' };
      
             this.s3.putObject(params, function(err, data) {
                 if(err){
                     reject(err);
                 }else{
-                    resolve(key);
+                    resolve("https://s3.eu-central-1.amazonaws.com/delivere/" + key);
                 }
             });
         });
     }
-
 
 }
 
