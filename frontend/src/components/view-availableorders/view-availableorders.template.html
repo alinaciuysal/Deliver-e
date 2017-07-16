@@ -7,12 +7,9 @@
 <body>
 <div>&nbsp;</div>
 <div layout="row" layout-align="center center" layout-margin ng-init="$ctrl.$onInit()">
-
     <md-content>
         <h2>Available Orders</h2>
-        <md-card ng-if="!$ctrl.showTabs">
-            <p layout="row" layout-align="center center">There is no available order for you right now.</p>
-        </md-card>
+        <p ng-if="!$ctrl.showTabs" layout="row" layout-align="center center">There is no available order for you right now.</p>
         <md-card ng-if="$ctrl.showTabs">
             <md-tabs md-dynamic-height md-border-bottom>
                 <md-tab ng-value="order" ng-repeat="order in $ctrl.availableOrders3" label="Order {{$index + 1}}">
@@ -23,7 +20,7 @@
                         <p>Payment to shop:&nbsp;&nbsp;{{order.totalPrice | number:2}} €</p>
                         <p>Total payment:&nbsp;&nbsp;{{order.totalPrice * 115 / 100 | number:2}} €</p>
                         <p>Profit:&nbsp;&nbsp;{{order.totalPrice * 15 / 100 | number:2}} €</p>
-                        <p>Latest Delivery Time:&nbsp;&nbsp;{{order.deliveryTime}}</p><br>
+                        <p>Latest Delivery Time:&nbsp;&nbsp;{{order.deliveryTime | date: "HH:mm - dd.MM.y"}}</p><br>
                         <md-button class="md-raised" layout-align="center center" ng-click="ifVisible = !ifVisible;">&nbsp;See items&nbsp;</md-button>
                     </md-content>
                     <div ng-if="ifVisible" style="width: 832px;">
