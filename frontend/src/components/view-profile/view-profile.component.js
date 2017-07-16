@@ -30,6 +30,7 @@ class ViewProfileController {
         this.UserService = UserService;
         this.$filter = $filter;
         this.$window = $window;
+        this.$rootScope.$emit("mainPage-changed", false);
     }
 
     initializeController() {

@@ -21,9 +21,9 @@ export default class OrderService {
     }
 
     getBasket() {
-        return this.$http.get(`${ this.API_URL }/order/basket`).then(responce => {
+        return this.$http.get(`${ this.API_URL }/order/basket`).then(response => {
             return new Promise((resolve, reject) => {
-                resolve(responce.data);
+                resolve(response.data);
             });
         });
     }

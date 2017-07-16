@@ -47,7 +47,10 @@ export default function config ($stateProvider, $urlRouterProvider){
         })
         .state('payment', {
             url: '/payment',
-            component: PaymentComponent.name
+            component: PaymentComponent.name,
+            params: {
+                showBasket: false
+            }
         })
         .state('login', {
             url: '/login',

@@ -1,4 +1,4 @@
-<div ng-show="$ctrl.showBasket">
+<div ng-show="$ctrl.showBasket" ng-init="$ctrl.$onInit()">
 <md-content layout="row" style="overflow: hidden;">
     <md-card style="width: 100%; min-width: 1%; height: 100%"  layout="column" layout-align="start start">
         <div style="width: 100%; min-width: 1%; height: 15%; background-color: #ab0012; color: whitesmoke;" layout="row">
@@ -30,7 +30,7 @@
                 <md-icon><ng-md-icon style="color:darkred; width: 50%;" icon="remove_shopping_cart"></ng-md-icon></md-icon>
                 Clear
             </md-button>
-            <md-button title="Proceed to Payment" ui-sref="payment" style="color:green; padding: 2%" layout-padding>
+            <md-button title="Proceed to Payment" style="color:green; padding: 2%" layout-padding ng-click="$ctrl.goPaymentPage()">
                 <md-icon><ng-md-icon style="color:green; width: 50%;" icon="check"></ng-md-icon></md-icon>
                 Payment
             </md-button>
