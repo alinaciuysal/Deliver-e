@@ -31,7 +31,7 @@ class ViewSearchController {
         this.shopsList = [];
         this.numCol = 0;
 
-        //this.photo = 'img/asian/asian1.jpg';
+        this.photo = 'img/asian/asian1.jpg';
 
         this.search(this.nameToSearch);
     }
