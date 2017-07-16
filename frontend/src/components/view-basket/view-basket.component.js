@@ -92,7 +92,13 @@ class ViewBasketComponentController{
     }
 
     removeProduct(productId, productAmount){
-        this.OrderService.removeProductFromBasket(productId, productAmount);
+
+        let ctrl = this;
+        this.OrderService.removeProductFromBasket(productId, productAmount).then(function(response){
+            if(response.data) {
+                ctrl.getUserBasket();
+            }
+        });
     }
 
     static get $inject(){

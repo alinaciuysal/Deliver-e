@@ -33,7 +33,7 @@ class ViewPaymentComponentController{
     $onInit() {
         let ctrl = this;
         ctrl.basket = ctrl.getUserBasket();
-        console.log(ctrl.basket);
+
         ctrl.$rootScope.$emit("mainPage-changed", false);
         ctrl.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
         console.log(ctrl.$rootScope);

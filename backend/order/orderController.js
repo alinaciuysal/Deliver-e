@@ -54,15 +54,18 @@ exports.deleteBasket = function(req, res) {
 			res.sendStatus(500);
 			return;
 		}
-		Product.findById(req.body.product, function(err, product) {
-				basket.removeItem(product, req.body.amount, function(err, basket) {
-					if (err) {
-						res.status(500).send(err);
-						return;
-					}
-					res.status(200).json(basket);
-			});
-		});
+		if(req.body.product) {
+            Product.findById(req.body.product, function(err, product) {
+                console.log(product);
+                basket.removeItem(product, req.body.amount, function(err, basket) {
+                    if (err) {
+                        res.status(500).send(err);
+                        return;
+                    }
+                    res.status(200).json(basket);
+                });
+            });
+		}
 	});
 };
 
