@@ -225,10 +225,27 @@ module.exports.editUser = function(req, res) {
                 return;
             }
             if(hash) req.body.password = hash;
-            User.findByIdAndUpdate(req.user._id, req.body, function(err, user) {
-                delete user._doc.password;
-                res.status(200).json(user);
-                return;
+            User.findByIdAndUpdate(req.user._id, req.body, { "new": true} function(err, user) {
+                if(err) {
+                    res.status(500).send(err);
+                    return;
+                }
+                if(req.user.type == "shop") {
+                    var newShop = {};
+                    if(req.body.name) newShop.name = req.body.name;
+                    if(req.body.address) newShop.address = req.body.address;
+                    if(req.body.phone) newShop.phone = req.body.phone;
+                    if(req.body.type) newShop.type = req.body.type;
+                    Shop.findByIdAndUpdate(req.user.shop, newShop, function(err, shop){
+                        if(err) {
+                            res.status(500).send(err);
+                            return;
+                        }
+                        delete user._doc.password;
+                        res.status(200).json(user);
+                        return;
+                    })
+                }
             });
         })
     });
