@@ -65,7 +65,9 @@ class ViewProfileController {
 
         ctrl.UserService.getCurrentUserDetails().then( function(response) {
             let retrievedUser = response.data;
+/*
             console.log("ViewProfileController $onInit ", retrievedUser);
+*/
             ctrl.user.email = retrievedUser.email;
             ctrl.user.type = retrievedUser.type;
 
@@ -237,7 +239,6 @@ class ViewProfileController {
             }
         }
 
-        console.log("deliverer to be submitted ", deliverer);
 
         // send a request for update
         ctrl.UserService.updateUser(deliverer).then( function(response) {
@@ -265,17 +266,14 @@ class ViewProfileController {
         let ctrl = this;
         ctrl.resetMessages(ctrl);
 
-
         let invalidPw = ctrl.checkPasswordValidity(ctrl.user);
         if (invalidPw !== null) {
-            console.log("1");
             ctrl.profileUpdateErrorShop = invalidPw;
             return;
         }
 
         let fieldsAreRequired = ctrl.checkFieldsShop(ctrl.user);
         if (fieldsAreRequired !== null) {
-            console.log("2");
             ctrl.profileUpdateErrorShop = fieldsAreRequired;
             return;
         }
@@ -291,7 +289,6 @@ class ViewProfileController {
         shop.new_password = ctrl.user.newPassword;
         shop.phone = ctrl.user.phone;
 
-        console.log("shop to be submitted ", shop);
 
         // send a request for update
         ctrl.UserService.updateUser(shop).then( function(response) {
@@ -344,7 +341,6 @@ class ViewProfileController {
 
     checkPasswordValidity(user) {
         let result = null;
-        console.log("checkPasswordValidity ", user);
 
         if (user.oldPassword === undefined || user.oldPassword.length === 0) {
             result = "Please provide your old password to make changes";

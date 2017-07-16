@@ -27,9 +27,6 @@ class ViewAddProductComponentController{
         this.$state = $state;
         this.ShopService = ShopService;
         this.AWSService = AWSService;
-
-        console.log(this.ShopService);
-        console.log(this.AWSService);
     }
 
     $onInit() {
@@ -42,6 +39,7 @@ class ViewAddProductComponentController{
     }
 
     submitNewProduct(){
+        let ctrl = this;
         let productName = this.product.name;
         let productCategory = this.product.category;
         let productWeight = this.product.weight;
@@ -52,11 +50,10 @@ class ViewAddProductComponentController{
         let productDetails = this.product.productDetails;
         this.AWSService.upload(this.product.photo).then(photo => {
             let productPhoto = photo;
-            if(weightType == "gram")
+            if(weightType === "gram")
                 productWeight = productWeight / 1000;
             // TODO: API call
             this.ShopService.addProduct(productName, productPrice, productCategory, productWeight, productStock, productDetails, productPhoto).then(()=> {
-                console.log("Product added");
                 this.$state.go('mainPage',{});
             }).catch(function(obj){
                 ctrl.addProductError = "Error: " + obj.data;

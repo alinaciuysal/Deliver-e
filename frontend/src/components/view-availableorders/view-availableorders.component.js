@@ -39,7 +39,6 @@ class ViewAvailableOrdersComponentController{
         ctrl.showTabs = false;
         ctrl.currentShop = "asdasd";
         this.availableOrders2 = this.UserService.getAvailableOrders().then(function(response){
-            console.log(response.data);
             ctrl.availableOrders3 = response.data;
             if(ctrl.availableOrders3.length !== 0)
                 ctrl.showTabs = true;
@@ -49,7 +48,6 @@ class ViewAvailableOrdersComponentController{
     }
 
     rejectOrder(orderNo){
-        console.log(orderNo);
         this.UserService.rejectOrder(orderNo).then(function(response){
             console.log(response.data);
             console.log("Rejected");
@@ -58,7 +56,6 @@ class ViewAvailableOrdersComponentController{
     }
 
     acceptOrder(orderNo){
-        console.log(orderNo);
         this.UserService.acceptOrder(orderNo).then(function(response){
             console.log(response.data);
             console.log("Accepted");

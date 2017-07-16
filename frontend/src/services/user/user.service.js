@@ -91,7 +91,6 @@ export default class UserService {
     }
 
     getCurrentUserDetails() {
-
         if (!this.user) {
             this.user = this.$http.get(`${ this.API_URL }/user`);
             return this.user;

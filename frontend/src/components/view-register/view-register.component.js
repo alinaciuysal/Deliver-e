@@ -71,11 +71,9 @@ class ViewRegisterComponentController{
 
         this.UserService.register(name, surname, email, password, address, location, district).then(()=> {
             alert("Registration is successful");
-            // this.$state.go('login',{});
             this.$state.go('mainPage',{});
             this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
-            console.log(obj);
             ctrl.userRegistrationError = "Error: " + obj.data;
         });
     }
@@ -96,11 +94,9 @@ class ViewRegisterComponentController{
 
         this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedLocation, selectedDistricts).then(()=> {
             alert("Registration is successful");
-            // this.$state.go('login',{});
             this.$state.go('delivererHomePage',{});
             this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
-            console.log(obj);
             ctrl.delivererRegistrationError = "Error: " + obj;
         });
     }
@@ -118,11 +114,9 @@ class ViewRegisterComponentController{
 
         ctrl.UserService.registerShop(email, password, name, type, shopAddress, shopPhoneNumber).then(()=> {
             alert("Registration is successful");
-            // this.$state.go('login',{});
             this.$state.go('shopHomePage',{});
             this.$rootScope.$emit("navbar-changed", {});
         }).catch(function(obj){
-            console.log(obj);
             ctrl.shopRegistrationError = "Error: " + obj.statusText;
         });
     }

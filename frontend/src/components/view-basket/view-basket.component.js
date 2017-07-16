@@ -51,7 +51,6 @@ class ViewBasketComponentController{
             // if incoming arg is false, then it means that basket should not be shown
             if (!arg) {
                 ctrl.showBasket = arg;
-                console.log(ctrl.showBasket);
             } else {
                 ctrl.isUserAuthenticated();
             }

@@ -225,12 +225,12 @@ module.exports.editUser = function(req, res) {
                 return;
             }
             if(hash) req.body.password = hash;
-            User.findByIdAndUpdate(req.user._id, req.body, { "new": true} function(err, user) {
+            User.findByIdAndUpdate(req.user._id, req.body, { "new": true}, function(err, user) {
                 if(err) {
                     res.status(500).send(err);
                     return;
                 }
-                if(req.user.type == "shop") {
+                if(req.user.type === "shop") {
                     var newShop = {};
                     if(req.body.name) newShop.name = req.body.name;
                     if(req.body.address) newShop.address = req.body.address;

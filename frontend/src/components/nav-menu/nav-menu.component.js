@@ -25,7 +25,6 @@ class NavMenuController {
         this.$location = $location;
         this.$rootScope = $rootScope;
         this.$rootScope.$on("menu-changed", function(evt, arg) {
-            console.log("menu-changed ", arg);
             ctrl.initializeNavBar(arg);
         });
     }

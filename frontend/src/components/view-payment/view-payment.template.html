@@ -9,7 +9,7 @@
 <md-content layout="row" layout-align="center center">
     <md-card style="width: 700px;">
         <h2 layout="row" layout-align="center center">Confirm Order - Payment</h2>
-        <form name="userProfileForm">
+        <form name="paymentForm">
             <md-card>
                 <md-card-title>
                     <md-card-title-text>
@@ -46,7 +46,7 @@
                         <p>Address:</p>&nbsp;
                         <md-input-container id="userAddress">
                             <input aria-label="userAddress" type="text" name="userAddress" ng-model="$ctrl.newAddress" required="" minlength="10"/>
-                            <div ng-messages="userProfileForm.userAddress.$error" ng-hide="userProfileForm.userAddress.$valid">
+                            <div ng-messages="paymentForm.userAddress.$error" ng-hide="paymentForm.userAddress.$valid">
                                 <div ng-message-exp="['required', 'minlength']">
                                     Addresses generally consist of at least 10 characters
                                 </div>
@@ -57,7 +57,7 @@
                         <p>Max Delivery Time:</p>&nbsp;
                         <md-input-container id="deliveryTime" style="width: 25%;">
                             <input aria-label="deliveryTime" type="number" name="deliveryTime" ng-model="$ctrl.deliveryTime" required="" ng-minlength=1 ng-maxlength=2 />
-                            <div ng-messages="userProfileForm.deliveryTime.$error" ng-hide="userProfileForm.deliveryTime.$valid">
+                            <div ng-messages="paymentForm.deliveryTime.$error" ng-hide="paymentForm.deliveryTime.$valid">
                                 <div ng-message-exp="['required']">
                                     Max Delivery Time is required.
                                 </div>
@@ -94,7 +94,7 @@
                         <label>Card number:&nbsp;</label>
                         <md-input-container id="cardNumber">
                             <input aria-label="cardNumber" type="number" name="cardNumber" ng-model="$ctrl.cardNumber" required="" ng-maxlength="16" />
-                            <div ng-messages="userProfileForm.cardNumber.$error" ng-hide="userProfileForm.cardNumber.$valid">
+                            <div ng-messages="paymentForm.cardNumber.$error" ng-hide="paymentForm.cardNumber.$valid">
                                 <div ng-message-exp="['required', 'maxlength']">
                                     Card number is required and should consist of 16 digits.
                                 </div>
@@ -105,7 +105,7 @@
                         <label>Name on the card:&nbsp;</label>
                         <md-input-container id="cardName">
                             <input aria-label="cardName" type="text" name="cardName" ng-model="$ctrl.cardName" required=""/>
-                            <div ng-messages="userProfileForm.cardName.$error" ng-hide="userProfileForm.cardName.$valid">
+                            <div ng-messages="paymentForm.cardName.$error" ng-hide="paymentForm.cardName.$valid">
                                 <div ng-message-exp="['required']">
                                     Name on the card is required.
                                 </div>
@@ -116,7 +116,7 @@
                         <label>Security Code (CVC):&nbsp;</label>
                         <md-input-container id="cardCVC">
                             <input aria-label="cardCVC" type="number" name="cardCVC" ng-model="$ctrl.cardCVC" required="" ng-minlength="3" ng-maxlength="3"/>
-                            <div ng-messages="userProfileForm.cardCVC.$error" ng-hide="userProfileForm.cardCVC.$valid">
+                            <div ng-messages="paymentForm.cardCVC.$error" ng-hide="paymentForm.cardCVC.$valid">
                                 <div ng-message-exp="['required']">
                                     CVC is required and should consist of 3 digits.
                                 </div>

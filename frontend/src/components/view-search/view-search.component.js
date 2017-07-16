@@ -69,12 +69,10 @@ class ViewSearchController {
     }
 
     addProductToBasket(productId){
-        console.log(productId);
         this.OrderService.addProductToBasket(productId, 1);
     }
 
     $onInit() {
-        console.log("ViewSearchController onInit works");
     }
 
     static get $inject(){
