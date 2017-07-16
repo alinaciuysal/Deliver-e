@@ -21,9 +21,9 @@ export default class OrderService {
     }
 
     getBasket() {
-        return this.$http.get(`${ this.API_URL }/order/basket`).then(responce => {
+        return this.$http.get(`${ this.API_URL }/order/basket`).then(response => {
             return new Promise((resolve, reject) => {
-                resolve(responce.data);
+                resolve(response.data);
             });
         });
     }
@@ -43,13 +43,24 @@ export default class OrderService {
         });
     }
 
-    removeProductFromBasket(productId, productAmount){
+    // https://stackoverflow.com/questions/29791003/angular-http-delete-request-with-body
+    removeProductFromBasket (productId, productAmount){
+        let ctrl = this;
 
-        // return this.$http.delete(`${ this.API_URL }/order/basket`,
-        // {
-        //     product: productId,
-        //     amount: productAmount
-        // });
+        return ctrl.$http({
+            method: 'DELETE',
+            url: `${ this.API_URL }/order/basket`,
+            data: {
+                product: productId,
+                amount: productAmount
+            },
+            headers: {'Content-Type': 'application/json;charset=utf-8'}
+        });
     }
 
+    makeOrder(inputTime){
+        return this.$http.post(`${ this.API_URL }/order/`, {
+            deliveryTime: inputTime
+        });
+    }
 }

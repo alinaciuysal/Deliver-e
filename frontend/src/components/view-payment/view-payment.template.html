@@ -30,7 +30,7 @@
                         <p>{{item.amount}}</p>
                     </div>
                     <md-divider></md-divider>
-                    <p layout="row" layout-align="center center">Subtotal:&nbsp;&nbsp;{{$ctrl.basket.totalPrice}} €</p>
+                    <b style="padding-top: 15px;" layout="row" layout-align="center center">Subtotal:&nbsp;&nbsp;{{$ctrl.basket.totalPrice}} €</b>
                 </md-card-content>
             </md-card>
             <br>
@@ -45,7 +45,7 @@
                     <div layout="row" layout-align="start center">
                         <p>Address:</p>&nbsp;
                         <md-input-container id="userAddress">
-                            <input aria-label="userAddress" type="text" name="userAddress" ng-model="$ctrl.user.address" required="" minlength="10"/>
+                            <input aria-label="userAddress" type="text" name="userAddress" ng-model="$ctrl.newAddress" required="" minlength="10"/>
                             <div ng-messages="userProfileForm.userAddress.$error" ng-hide="userProfileForm.userAddress.$valid">
                                 <div ng-message-exp="['required', 'minlength']">
                                     Addresses generally consist of at least 10 characters
@@ -83,7 +83,7 @@
                 <md-card-content>
                     <div layout="row" layout-align="start center">
                         <label>Choose your payment method:&nbsp;</label>
-                        <md-select name="paymentChoice" required ng-model="$ctrl.user.paymentChoice" placeholder="Payment method" layout-align="center center">
+                        <md-select name="paymentChoice" required ng-model="$ctrl.paymentChoice" placeholder="Payment method" layout-align="center center">
                             <md-option value="Visa">Visa</md-option>
                             <md-option value="Master Card">Master Card</md-option>
                             <md-option value="American Express">American Express</md-option>
@@ -127,8 +127,8 @@
             </md-card>
             <br>
             <div layout="row" layout-align="center center">
-                <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.rejectOrder(order._id)"><md-icon md-svg-icon="cancel"></md-icon>&nbsp;Cancel&nbsp;</md-button>
-                <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.acceptOrder(order._id)"><md-icon md-svg-icon="check"></md-icon>&nbsp;Confirm&nbsp;</md-button>
+                <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.cancelPayment(order._id)"><md-icon md-svg-icon="cancel"></md-icon>&nbsp;Cancel&nbsp;</md-button>
+                <md-button class="md-raised" layout-align="center center" ng-click="$ctrl.confirmPayment(order._id)"><md-icon md-svg-icon="check"></md-icon>&nbsp;Confirm&nbsp;</md-button>
             </div>
             <br>
         </form>

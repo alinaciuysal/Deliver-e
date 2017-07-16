@@ -34,7 +34,7 @@ class ViewShopPageController {
         this.products = [];
         this.numCol = 0;
 
-        this.photo = 'img/asian/asian1.jpg';
+        //this.photo = 'img/asian/asian1.jpg';
         ///GET SHOP BY ID
         /// /api/shop/:(shop_id)
         this.getDetailedShopById(this.shopId);

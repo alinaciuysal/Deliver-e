@@ -29,7 +29,7 @@ class ViewProductPageController {
 
         this.productId = this.$state.params.productId;
 
-        this.photo = 'img/asian/asian1.jpg';
+        this.photo = null;
         this.name = "";
         this.category = "";
         this.price = "";
@@ -46,7 +46,7 @@ class ViewProductPageController {
 
     getProductById(id) {
         this.ShopService.getProductById(id).then(value => {
-            //this.photo = value.photo;
+            this.photo = value.photo;
             this.name = value.name;
             this.category = value.category;
             this.price = value.price;
