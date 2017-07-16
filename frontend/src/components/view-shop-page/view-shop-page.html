@@ -37,8 +37,8 @@ given ng-controller name here must be same with the one in respective component'
             <md-card-content  layout="row" layout-align="left start" ng-if="$ctrl.products" ng-repeat="col in [] | range:$ctrl.numCol" flex>
 
                 <md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="$ctrl.products[4*col+row]" style="padding-top:15px; padding-bottom:15px" >
-                    <!--<img ng-src="{{$ctrl.products[4*col+row].photo}}">-->
-                    <img ng-src="{{$ctrl.photo}}">
+                    <img ng-src="{{$ctrl.products[4*col+row].photo}}" width="100" height="100">
+                    <!--<img ng-src="{{$ctrl.photo}}">-->
                     <md-card-content >
                         <h2>{{$ctrl.products[4*col+row].name}}</h2>
                         <p><b>Category: </b>{{$ctrl.products[4*col+row].category}}</p>

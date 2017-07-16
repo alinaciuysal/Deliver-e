@@ -36,9 +36,10 @@ given ng-controller name here must be same with the one in respective component'
                             </md-card-title-text>
                         </md-card-title>
 
-                        <md-card  flex="25" ng-repeat="row in [] | range:4" ng-if="productList.catalogue[4*col+row]" style="padding-top:15px; padding-bottom:15px" >
-                            <!--<img ng-src="{{$ctrl.products[4*col+row].photo}}">-->
-                            <img ng-src="{{$ctrl.photo}}">
+                        <md-card flex="25" ng-repeat="row in [] | range:4" ng-if="productList.catalogue[4*col+row]"
+                                 style="padding-top:15px; padding-bottom:15px" >
+                            <img ng-src="{{$ctrl.products[4*col+row].photo}}">
+                            <!--<img ng-src="{{$ctrl.photo}}">-->
                             <md-card-content >
                                 <h2>{{productList.catalogue[4*col+row].name}}</h2>
                                 <p><b>Category: </b>{{productList.catalogue[4*col+row].category}}</p>
