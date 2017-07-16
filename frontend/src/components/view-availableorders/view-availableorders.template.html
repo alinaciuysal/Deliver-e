@@ -9,8 +9,11 @@
 <div layout="row" layout-align="center center" layout-margin ng-init="$ctrl.$onInit()">
 
     <md-content>
-        <h2 style="padding-left: 13em;">Available Orders</h2>
-        <md-card>
+        <h2>Available Orders</h2>
+        <md-card ng-if="!$ctrl.showTabs">
+            <p layout="row" layout-align="center center">There is no available order for you right now.</p>
+        </md-card>
+        <md-card ng-if="$ctrl.showTabs">
             <md-tabs md-dynamic-height md-border-bottom>
                 <md-tab ng-value="order" ng-repeat="order in $ctrl.availableOrders3" label="Order {{$index + 1}}">
                     <md-content class="md-padding">
