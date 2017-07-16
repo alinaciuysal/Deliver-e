@@ -34,9 +34,12 @@ class ViewAvailableOrdersComponentController{
         let ctrl = this;
         this.register = {};
         ctrl.availableOrders3 = {};
+        ctrl.showTabs = false;
         this.availableOrders2 = this.UserService.getAvailableOrders().then(function(response){
             console.log(response.data);
             ctrl.availableOrders3 = response.data;
+            if(ctrl.availableOrders3.length !== 0)
+                ctrl.showTabs = true;
         });
 
         this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
