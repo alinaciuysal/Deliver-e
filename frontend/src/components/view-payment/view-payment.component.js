@@ -51,6 +51,27 @@ class ViewPaymentComponentController{
         });
     }
 
+    confirmPayment(id){
+        let ctrl = this;
+        let newTime = 60 * ctrl.deliveryTime;
+        this.OrderService.makeOrder(newTime).then(()=> {
+            this.OrderService.clearBasket().then(()=> {
+                console.log("Payment Confirmed and Basket Cleared");
+                this.$state.go('mainPage',{});
+            }).catch(function(obj){
+                ctrl.clearBasketError = "Error: " + obj.data;
+            });
+        }).catch(function(obj){
+            ctrl.makeOrderError = "Error: " + obj.data;
+        });
+    }
+
+    cancelPayment(id){
+        console.log("Payment Rejected and User Redirected to Main Page");
+        this.$state.go('mainPage',{});
+    }
+
+
     static get $inject(){
         return ['$rootScope', '$state', '$element', '$location', UserService.name, OrderService.name];
     }

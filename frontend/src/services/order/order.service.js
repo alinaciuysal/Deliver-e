@@ -52,4 +52,9 @@ export default class OrderService {
         // });
     }
 
+    makeOrder(inputTime){
+        return this.$http.post(`${ this.API_URL }/order/`, {
+            deliveryTime: inputTime
+        });
+    }
 }
