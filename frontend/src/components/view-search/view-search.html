@@ -40,15 +40,15 @@ given ng-controller name here must be same with the one in respective component'
                             <!--<img ng-src="{{$ctrl.products[4*col+row].photo}}">-->
                             <img ng-src="{{$ctrl.photo}}">
                             <md-card-content >
-                                <h2>{{$ctrl.products[4*col+row].name}}</h2>
-                                <p><b>Category: </b>{{$ctrl.products[4*col+row].category}}</p>
-                                <p><b>Price: </b>{{$ctrl.products[4*col+row].price}} €</p>
-                                <p><b>Stock: </b>{{$ctrl.products[4*col+row].stock}}</p>
-                                <p><b>Weight: </b>{{$ctrl.products[4*col+row].weight}} kg</p>
-                                <p><b>Details: </b>{{$ctrl.products[4*col+row].details}}</p>
+                                <h2>{{productList.catalogue[4*col+row].name}}</h2>
+                                <p><b>Category: </b>{{productList.catalogue[4*col+row].category}}</p>
+                                <p><b>Price: </b>{{productList.catalogue[4*col+row].price}} €</p>
+                                <p><b>Stock: </b>{{productList.catalogue[4*col+row].stock}}</p>
+                                <p><b>Weight: </b>{{productList.catalogue[4*col+row].weight}} kg</p>
+                                <p><b>Details: </b>{{productList.catalogue[4*col+row].details}}</p>
                             </md-card-content>
-                            <md-button class="md-raised" style="width: 92%" ui-sref="product({productId:'{{$ctrl.products[4*col+row]._id}}' })">View Product</md-button>
-                            <md-button class="md-raised" style="width: 92%" ng-click="$ctrl.addProductToBasket($ctrl.products[4*col+row]._id)">Add to Basket</md-button>
+                            <md-button class="md-raised" style="width: 92%" ui-sref="product({productId:'{{productList.catalogue[4*col+row]._id}}' })">View Product</md-button>
+                            <md-button class="md-raised" style="width: 92%" ng-click="$ctrl.addProductToBasket(productList.catalogue[4*col+row]._id)">Add to Basket</md-button>
                         </md-card>
                     </md-card-content>
                 </md-card>
