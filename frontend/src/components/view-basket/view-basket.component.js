@@ -31,7 +31,13 @@ class ViewBasketComponentController{
 
         //this.basket = [];
         this.$rootScope.basket = [];
-        this.getUserBasket();
+
+        this.showBasket = false;
+        this.isUserAuthenticated();
+
+        // if(this.showBasket) {
+        //     this.getUserBasket();
+        // }
 
         this.$rootScope.$watch(
             function(){return OrderService.reload;},
@@ -67,17 +73,17 @@ class ViewBasketComponentController{
     }
 
     isUserAuthenticated() {
-        let ctrl = this;
-        let isAuthenticated = ctrl.UserService.isAuthenticated();
-        ctrl.showBasket = null;
+        let isAuthenticated = this.UserService.isAuthenticated();
+
         if (isAuthenticated) {
-            ctrl.UserService.getCurrentUserDetails().then(function (response) {
+            this.UserService.getCurrentUserDetails().then((response) => {
                 if (response.data.type == "customer") {
-                    ctrl.showBasket = true;
+                    this.showBasket = true;
+                    this.getUserBasket();
                 }
             });
         } else {
-            ctrl.showBasket = false;
+            this.showBasket = false;
         }
     }
 
@@ -86,43 +92,6 @@ class ViewBasketComponentController{
             //this.basket = basket;
             this.$rootScope.basket = basket;
         });
-
-        // let basket = {
-        //     "_id": "5969214bfd9c8616bc3c95f8",
-        //     "status": "Basket",
-        //     "orderer": "5969214afd9c8616bc3c95f7",
-        //     "__v": 2,
-        //     "items": [
-        //         {
-        //             "product": {
-        //                 "_id": "596922a0fd9c8616bc3c95f9",
-        //                 "name": "Small Water",
-        //                 "price": 2,
-        //                 "category": "Liquid",
-        //                 "weight": 1,
-        //                 "stock": 100,
-        //                 "__v": 0
-        //             },
-        //             "_id": "596922eafd9c8616bc3c95e0",
-        //             "amount": 1
-        //         },
-        //         {
-        //             "product": {
-        //                 "_id": "5969235dfd9c8616bc3c95fb",
-        //                 "name": "Large Water",
-        //                 "price": 3,
-        //                 "category": "Liquid",
-        //                 "weight": 1,
-        //                 "stock": 50,
-        //                 "__v": 0
-        //             },
-        //             "_id": "59692386fd9c8616bc3c95fc",
-        //             "amount": 1
-        //         }
-        //     ],
-        //     "totalWeight": 2,
-        //     "totalPrice": 5
-        // };
     }
 
     clearBasket(){
