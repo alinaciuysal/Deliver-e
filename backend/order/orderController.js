@@ -3,24 +3,26 @@ var Order = require('./orderSchema');
 var Product = require('../shop/productSchema');
 
 exports.getBasket = function(req, res) {
+
 	Order.findOne({ orderer: req.user, status:'Basket'}).populate('items.product').exec(function(err, basket) {
 		if (err) {
-			res.sendStatus(500);
-			return;
+            res.status(500).send(err);
+            return;
 		}
-		if (basket == null){
+		if (basket === null){
 			var basket = new Order({
 		        status: "Basket",
 		        orderer: req.user
 		    });
 		    basket.save(function(err, basket) {
 		    	if (err) {
-		    		res.sendStatus(500);
-		    		return;
-		    	}
+                    res.status(500).send(err);
+                    return;
+		    	} else {
 
-				res.status(200).json(basket);
-				return;
+				}
+
+
 		    });
 		}
 		res.status(200).json(basket);
@@ -75,7 +77,7 @@ exports.clearBasket = function(req, res) {
 };
 
 exports.makeOrder = function(req, res) {
-	var deliveryTime = req.body.deliveryTime ? req.body.deliveryTime : 0
+	var deliveryTime = req.body.deliveryTime ? req.body.deliveryTime : 0;
 	Order.findOneAndUpdate({ orderer: req.user, status:'Basket'}, { $set: { status: 'Ordered', district: req.user.district, location: req.user.location, orderTime: Date.now(), deliveryTime: Date.now() + deliveryTime * 60000 } }, { "new": true }, function(err, order) {
 		if (err) {
 			res.status(500).send(err);
@@ -87,7 +89,7 @@ exports.makeOrder = function(req, res) {
 		    });
 		    basket.save(function(err, basket) {
 		    	if (err) {
-		    		res.sendStatus(500);
+                    res.status(500).send(err);
 		    		return;
 		    	}
 
@@ -113,10 +115,10 @@ exports.acceptOrder = function(req, res) {
             res.status(500).send(err);
             return;
         }
-        if (req.user.type != "deliverer"){
+        if (req.user.type !== "deliverer"){
         	res.status(403).send("You need to be a deliverer to accept orders.");
         	return;
-        } else if ( order.status != "Ordered" ){
+        } else if ( order.status !== "Ordered" ){
         	res.status(400).send("The order is already assigned");
         	return;
         }
@@ -153,11 +155,11 @@ exports.rejectOrder = function(req, res) {
 };
 
 exports.getAvailableOrders = function(req, res) {
-	if (req.user.type != "deliverer" ){
-		res.status(403).send("You need to be a deliverer to get orders.")
+	if (req.user.type !== "deliverer" ){
+		res.status(403).send("You need to be a deliverer to get orders.");
 		return;
 	}
-	Order.find({ status: 'Ordered', totalWeight: { $lte: req.user.maxWeight }, location: req.user.preferredLocation, district: { $in: req.user.preferredDistricts }, rejecters: { $ne: req.user._id } }).populate('items.product').exec(function(err, orders) {
+	Order.find({ status: 'Ordered', totalWeight: { $lte: req.user.maxWeight }, location: req.user.preferredLocation, district: { $in: req.user.preferredDistricts }, rejecters: { $ne: req.user._id } }).populate('shop').populate('items.product').exec(function(err, orders) {
 		if (err) {
 			res.status(500).send(err);
 			return;

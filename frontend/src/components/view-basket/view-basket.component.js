@@ -29,15 +29,11 @@ class ViewBasketComponentController{
         this.$location = $location;
         this.$mdMenu = $mdMenu;
 
-        //this.basket = [];
         this.$rootScope.basket = [];
 
         this.showBasket = false;
         this.isUserAuthenticated();
 
-        // if(this.showBasket) {
-        //     this.getUserBasket();
-        // }
 
         this.$rootScope.$watch(
             function(){return OrderService.reload;},
@@ -52,12 +48,10 @@ class ViewBasketComponentController{
         );
 
         this.$rootScope.$on("mainPage-changed", function(evt, arg) {
-            console.log("emit arg ", arg);
-
             // if incoming arg is false, then it means that basket should not be shown
             if (!arg) {
                 ctrl.showBasket = arg;
-                console.log("ctrl showBasket updated to ", ctrl.showBasket);
+                console.log(ctrl.showBasket);
             } else {
                 ctrl.isUserAuthenticated();
             }
@@ -77,7 +71,7 @@ class ViewBasketComponentController{
 
         if (isAuthenticated) {
             this.UserService.getCurrentUserDetails().then((response) => {
-                if (response.data.type == "customer") {
+                if (response.data.type === "customer") {
                     this.showBasket = true;
                     this.getUserBasket();
                 }
@@ -89,7 +83,6 @@ class ViewBasketComponentController{
 
     getUserBasket() {
         this.OrderService.getBasket().then(basket => {
-            //this.basket = basket;
             this.$rootScope.basket = basket;
         });
     }
@@ -104,6 +97,11 @@ class ViewBasketComponentController{
 
     static get $inject(){
         return ['$state', UserService.name, OrderService.name, '$rootScope', '$location', '$mdMenu'];
+    }
+
+    goPaymentPage() {
+        let ctrl = this;
+        ctrl.$state.go('payment',{});
     }
 }
 

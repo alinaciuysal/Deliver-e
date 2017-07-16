@@ -4,6 +4,7 @@
 'use strict';
 
 import UserService from './../../services/user/user.service';
+import ShopService from './../../services/shop/shop.service';
 
 import template from './view-availableorders.template.html';
 import './view-availableorders.style.css';
@@ -22,11 +23,12 @@ class ViewAvailableOrdersComponent {
 }
 
 class ViewAvailableOrdersComponentController{
-    constructor($state, $rootScope, $location, UserService){
+    constructor($state, $rootScope, $location, UserService, ShopService){
         this.$state = $state;
         this.$rootScope = $rootScope;
         this.$location = $location;
         this.UserService = UserService;
+        this.ShopService = ShopService;
         angular.module('tabsDemoDynamicHeight', ['ngMaterial']);
     }
 
@@ -35,6 +37,7 @@ class ViewAvailableOrdersComponentController{
         this.register = {};
         ctrl.availableOrders3 = {};
         ctrl.showTabs = false;
+        ctrl.currentShop = "asdasd";
         this.availableOrders2 = this.UserService.getAvailableOrders().then(function(response){
             console.log(response.data);
             ctrl.availableOrders3 = response.data;
@@ -63,8 +66,14 @@ class ViewAvailableOrdersComponentController{
         });
     }
 
+    getShopName(shopId){
+        this.ShopService.getShopById(shopId).then(function(response){
+            ctrl.currentShop = response.data.name;
+        });
+    }
+
     static get $inject(){
-        return ['$state', '$rootScope', '$location', UserService.name];
+        return ['$state', '$rootScope', '$location', UserService.name, ShopService.name];
     }
 }
 
