@@ -159,7 +159,7 @@ exports.getAvailableOrders = function(req, res) {
 		res.status(403).send("You need to be a deliverer to get orders.");
 		return;
 	}
-	Order.find({ status: 'Ordered', totalWeight: { $lte: req.user.maxWeight }, location: req.user.preferredLocation, district: { $in: req.user.preferredDistricts }, rejecters: { $ne: req.user._id } }).populate('items.product').exec(function(err, orders) {
+	Order.find({ status: 'Ordered', totalWeight: { $lte: req.user.maxWeight }, location: req.user.preferredLocation, district: { $in: req.user.preferredDistricts }, rejecters: { $ne: req.user._id } }).populate('shop').populate('items.product').exec(function(err, orders) {
 		if (err) {
 			res.status(500).send(err);
 			return;
