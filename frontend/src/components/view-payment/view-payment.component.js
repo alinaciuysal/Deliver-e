@@ -4,6 +4,7 @@
 'use strict';
 
 import UserService from './../../services/user/user.service';
+import OrderService from './../../services/order/order.service';
 
 import template from './view-payment.template.html';
 import './view-payment.style.css';
@@ -20,10 +21,11 @@ class ViewPaymentComponent {
 }
 
 class ViewPaymentComponentController{
-    constructor($state, $element, UserService){
+    constructor($state, $element, UserService, OrderService){
         this.$element = $element;
         this.$state = $state;
         this.UserService = UserService;
+        this.OrderService = OrderService;
     }
 
     $onInit() {
@@ -72,8 +74,23 @@ class ViewPaymentComponentController{
         return basket;
     }
 
+    confirmPayment(id){
+        let ctrl = this;
+        this.OrderService.clearBasket().then(()=> {
+            console.log("Payment Confirmed and Basket Cleared");
+            this.$state.go('mainPage',{});
+        }).catch(function(obj){
+            ctrl.addProductError = "Error: " + obj.data;
+        });
+    }
+
+    cancelPayment(id){
+        console.log("Payment Rejected and User Redirected to Main Page");
+        this.$state.go('mainPage',{});
+    }
+
     static get $inject(){
-        return ['$state', '$element', UserService.name];
+        return ['$state', '$element', UserService.name, OrderService.name];
     }
 }
 
