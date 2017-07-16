@@ -43,7 +43,12 @@ class ViewAvailableOrdersComponentController{
     }
 
     rejectOrder(orderNo){
-        // TODO: API calls
+        console.log(orderNo);
+        this.UserService.rejectOrder(orderNo).then(function(response){
+            console.log(response.data);
+            console.log("Rejected");
+            location.reload();
+        });
     }
 
     acceptOrder(orderNo){
