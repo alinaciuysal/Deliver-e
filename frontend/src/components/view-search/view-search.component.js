@@ -27,7 +27,8 @@ class ViewSearchController {
 
         this.nameToSearch = this.$state.params.search;
 
-        this.products = [];
+        //this.products = [];
+        this.shopsList = [];
         this.numCol = 0;
 
         this.photo = 'img/asian/asian1.jpg';
@@ -37,15 +38,34 @@ class ViewSearchController {
 
     search(name) {
         this.ShopService.searchProductsInShop(name).then(value => {
+            this.shopsList = [];
+
             for (var idx in value) {
-                for (var idx2 in value[idx].catalogue) {
-                    this.products.push(value[idx].catalogue[idx2]);
+                if (value[idx].catalogue.length > 0) {
+
+                    value[idx].numCol = value[idx].catalogue.length/4;
+                    if(value[idx].catalogue.length%4!=0) value[idx].numCol++;
+
+                    this.shopsList.push(value[idx]);
                 }
+
+                this.numCol = this.shopsList.length / 4;
+                if (this.shopsList.length % 4 != 0) this.numCol++;
             }
 
-            this.numCol = this.products.length/4;
-            if(this.products.length%4!=0) this.numCol++;
+            console.log(this.shopsList);
+
         });
+        // this.ShopService.searchProductsInShop(name).then(value => {
+        //     for (var idx in value) {
+        //         for (var idx2 in value[idx].catalogue) {
+        //             this.products.push(value[idx].catalogue[idx2]);
+        //         }
+        //     }
+        //
+        //     this.numCol = this.products.length/4;
+        //     if(this.products.length%4!=0) this.numCol++;
+        // });
     }
 
     addProductToBasket(productId){
