@@ -37,6 +37,11 @@ class ViewPaymentComponentController{
         ctrl.$rootScope.$emit("mainPage-changed", false);
         ctrl.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
         console.log(ctrl.$rootScope);
+        this.UserService.getCurrentUserDetails().then(function(response){
+            ctrl.user = response.data;
+            ctrl.newAddress = ctrl.user.address + " - " + ctrl.user.location;
+        });
+        ctrl.deliveryTime = 3;
     }
 
     getUserBasket() {
