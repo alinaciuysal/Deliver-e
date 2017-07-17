@@ -2,13 +2,14 @@
 
 export default class OrderService {
     static get $inject(){
-        return ['$http', '$window','API_URL'];
+        return ['$http', '$window','API_URL', '$mdDialog'];
     }
 
-    constructor($http,$window,API_URL) {
+    constructor($http,$window,API_URL, $mdDialog) {
         this.$http = $http;
         this.$window = $window;
         this.API_URL = API_URL;
+        this.$mdDialog = $mdDialog;
         this.reload = false;
     }
 
@@ -29,11 +30,17 @@ export default class OrderService {
     }
 
     addProductToBasket(productId, productAmount){
+        let ctrl = this;
         return this.$http.post(`${ this.API_URL }/order/basket`, {
             product: productId,
             amount: productAmount
-        }).then(responce => {
+        }).then(response => {
             this.reload = true;
+        }).catch(function(e){
+            if (e.data === "Shops are not equal") {
+                ctrl.showAlert("You cannot add different products from different shops");
+            }
+
         });
     }
 
@@ -41,6 +48,21 @@ export default class OrderService {
         return this.$http.put(`${ this.API_URL }/order/basket/clear`).then(responce => {
             this.reload = true;
         });
+    }
+
+    showAlert(textContent) {
+        let ctrl = this;
+        let alert = ctrl.$mdDialog.alert({
+            title: 'Please be advised',
+            textContent: textContent,
+            ok: 'Close'
+        });
+
+        ctrl.$mdDialog
+            .show(alert)
+            .finally(function() {
+                alert = undefined;
+            });
     }
 
     // https://stackoverflow.com/questions/29791003/angular-http-delete-request-with-body
