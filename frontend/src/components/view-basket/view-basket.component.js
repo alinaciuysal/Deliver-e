@@ -72,10 +72,13 @@ class ViewBasketComponentController{
         let ctrl = this;
         if (isAuthenticated) {
             this.UserService.getCurrentUserDetails().then((response) => {
-                if (response.data.type === "customer" && ctrl.$state.current.name != "profile") {
-                    ctrl.showBasket = true;
+                if (response.data.type === "customer" && ctrl.$state.current.name !== "profile") {
+                    this.showBasket = true;
                     this.getUserBasket();
                 }
+            }).catch(function(err) {
+                console.log(err);
+                return false;
             });
         } else {
             this.showBasket = false;
