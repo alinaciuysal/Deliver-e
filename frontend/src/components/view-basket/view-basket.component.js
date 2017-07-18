@@ -3,6 +3,7 @@
 
 import UserService from './../../services/user/user.service';
 import OrderService from './../../services/order/order.service';
+import ShopService from './../../services/shop/shop.service';
 
 import template from './view-basket.template.html';
 import './view-basket.style.css';
@@ -20,14 +21,16 @@ class ViewBasketComponent {
 
 class ViewBasketComponentController{
 
-    constructor($state, UserService, OrderService, $rootScope, $location, $mdMenu){
+    constructor($state, UserService, OrderService, ShopService, $rootScope, $location, $mdMenu, $mdDialog){
         let ctrl = this;
         this.$state = $state;
         this.UserService = UserService;
         this.OrderService = OrderService;
+        this.ShopService = ShopService;
         this.$rootScope = $rootScope;
         this.$location = $location;
         this.$mdMenu = $mdMenu;
+        this.$mdDialog = $mdDialog;
 
         this.$rootScope.basket = [];
 
@@ -81,13 +84,32 @@ class ViewBasketComponentController{
     }
 
     getUserBasket() {
+        let ctrl = this;
         this.OrderService.getBasket().then(basket => {
-            this.$rootScope.basket = basket;
+            ctrl.$rootScope.basket = basket;
+            ctrl.ShopService.getShopById(basket.shop).then(shop => {
+                ctrl.$rootScope.shop = shop;
+            });
         });
     }
 
     clearBasket(){
         this.OrderService.clearBasket();
+    }
+
+    showConfirm() {
+        let ctrl = this;
+        // Appending dialog to document.body to cover sidenav in docs app
+        let confirm = ctrl.$mdDialog.confirm()
+            .title('Would you like to delete all items in your basket?')
+            .ok('Confirm')
+            .cancel('Back');
+
+        ctrl.$mdDialog.show(confirm).then(function() {
+            ctrl.clearBasket();
+        }, function() {
+            // do nothing here
+        });
     }
 
     removeProduct(productId, productAmount){
@@ -101,7 +123,7 @@ class ViewBasketComponentController{
     }
 
     static get $inject(){
-        return ['$state', UserService.name, OrderService.name, '$rootScope', '$location', '$mdMenu'];
+        return ['$state', UserService.name, OrderService.name, ShopService.name, '$rootScope', '$location', '$mdMenu', '$mdDialog'];
     }
 
     goPaymentPage() {

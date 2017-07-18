@@ -19,6 +19,7 @@ class AboutUsComponentController{
     constructor($rootScope, $location){
         this.$rootScope = $rootScope;
         this.$location = $location;
+        this.$rootScope.$emit("mainPage-changed", false);
     }
 
     $onInit() {
