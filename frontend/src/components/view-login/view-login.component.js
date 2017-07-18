@@ -58,6 +58,8 @@ class ViewLoginComponentController{
                     ctrl.$state.go('delivererHomePage', {});
                 else if (ctrl.user.type === "shop")
                     ctrl.$state.go('shopHomePage', {});
+            }).catch(function (err) {
+                console.log("login component err ", err);
             });
 
         }).catch(function(obj){

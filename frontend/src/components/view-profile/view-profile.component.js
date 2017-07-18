@@ -55,19 +55,40 @@ class ViewProfileController {
         let availableLocations = [
             {
                 name: 'Munich',
-                districts: ["Ludwigsvorstadt-Isarvorstadt", "Schwabing-West", "Am-Hart", "Schwanthalerhöhe", "Sendling", "Am Laim"]
+                districts: ["Am Hart",
+                    "Am Laim",
+                    "Bogenhausen",
+                    "Garching",
+                    "Lehel",
+                    "Ludwigsvorstadt-Isarvorstadt",
+                    "Neuhausen",
+                    "Perlach",
+                    "Schwabing-West",
+                    "Schwanthalerhöhe",
+                    "Sendling",
+                    "Solln",
+                    "Westend"]
             }, {
                 name: 'Berlin',
-                districts: ["Mitte", "Kreuzberg", "Schönerberg"]
+                districts: ["Charlottenburg-Wilmersdorf",
+                    "Friedrichshain-Kreuzberg",
+                    "Lichtenberg",
+                    "Marzahn-Hellersdorf",
+                    "Mitte",
+                    "Neukölln",
+                    "Pankow",
+                    "Reinickendorf",
+                    "Spandau",
+                    "Steglitz-Zehlendorf",
+                    "Tempelhof-Schöneberg",
+                    "Treptow-Köpenick"]
             }
         ];
         ctrl.availableLocations = availableLocations;
 
         ctrl.UserService.getCurrentUserDetails().then( function(response) {
             let retrievedUser = response.data;
-/*
             console.log("ViewProfileController $onInit ", retrievedUser);
-*/
             ctrl.user.email = retrievedUser.email;
             ctrl.user.type = retrievedUser.type;
 
@@ -239,7 +260,6 @@ class ViewProfileController {
             }
         }
 
-
         // send a request for update
         ctrl.UserService.updateUser(deliverer).then( function(response) {
             if(response.status === 200) {
@@ -288,19 +308,21 @@ class ViewProfileController {
         shop.old_password = ctrl.user.oldPassword;
         shop.new_password = ctrl.user.newPassword;
         shop.phone = ctrl.user.phone;
+        shop.shopType = ctrl.shopType;
+        console.log("shop before request: ", shop);
 
 
         // send a request for update
         ctrl.UserService.updateUser(shop).then( function(response) {
             if(response.status === 200) {
-                // now reflect the submitted changes in UI
-                ctrl.user.shopName = shop.name;
+                /*ctrl.user.shopName = shop.name;
                 ctrl.user.type = shop.type;
                 ctrl.user.shopAddress = shop.address;
                 ctrl.user.email = shop.email;
-                ctrl.$window.location.reload();
+                ctrl.shop.type = shop.shopType;*/
+
                 alert("Changes have been made successfully");
-                // refresh header component by broadcasting
+                ctrl.$window.location.reload();
                 this.$rootScope.$emit("navbar-changed", {});
             }
         }).catch(function(response) {
