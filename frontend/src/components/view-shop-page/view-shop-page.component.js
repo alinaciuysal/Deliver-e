@@ -71,7 +71,7 @@ class ViewShopPageController {
     }
 
     $onInit() {
-        console.log("ViewShopPageController onInit works");
+        this.isAuthenticated = this.UserService.isAuthenticated();
     }
 
     static get $inject(){

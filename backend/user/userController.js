@@ -67,7 +67,7 @@ module.exports.customerSignup = function(req, res){
     if(req.body.address) user.address = req.body.address;
     if(req.body.phone) user.phone = req.body.phone;
     if(req.body.birthday) user.birthday = req.body.birthday;
-    
+
     user.save(function(err) {
         if (err) {
             res.status(500).send(err);

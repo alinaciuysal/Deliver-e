@@ -73,6 +73,7 @@ class ViewSearchController {
     }
 
     $onInit() {
+        this.isAuthenticated = this.UserService.isAuthenticated();
     }
 
     static get $inject(){
