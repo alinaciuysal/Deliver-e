@@ -61,8 +61,7 @@ class AppHeaderComponentController {
             let userType = ctrl.initialUser.type;
             if(userType !== null) {
                 if (userType === "customer") {
-                    // TODO
-                    //ctrl.$state.go('myOrders',{});
+                    ctrl.$state.go('myOrders',{});
                 } else if (userType === "deliverer") {
                     ctrl.$state.go('delivererHomePage',{});
                 } else if (userType === "shop") {

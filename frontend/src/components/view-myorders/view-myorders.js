@@ -6,7 +6,7 @@
 
 import angular from 'angular';
 
-import ViewAvailableOrdersComponent from './view-availableorders.component.js';
+import ViewMyOrdersComponent from './view-myorders.component.js';
 
-export default angular.module('ViewAvailableOrders', [])
-    .component(ViewAvailableOrdersComponent.name, new ViewAvailableOrdersComponent);
+export default angular.module('ViewMyOrders', [])
+    .component(ViewMyOrdersComponent.name, new ViewMyOrdersComponent);

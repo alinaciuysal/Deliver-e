@@ -1,6 +1,3 @@
-/**
- * Created by Melih Berçin on 6/17/2017.
- */
 'use strict';
 
 import UserService from './../../services/user/user.service';
@@ -37,11 +34,14 @@ class ViewMyOrdersComponentController{
         this.register = {};
         ctrl.availableOrders3 = {};
         ctrl.showTabs = false;
-        this.availableOrders2 = this.UserService.getAvailableOrders().then(function(response){
+        this.availableOrders2 = this.UserService.getMyOrders().then(function(response){
             ctrl.availableOrders3 = response.data;
             if(ctrl.availableOrders3.length !== 0)
                 ctrl.showTabs = true;
         });
+
+        let showBasket = this.$state.params.showBasket;
+        this.$rootScope.$emit("mainPage-changed", showBasket);
 
         this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
     }

@@ -14,6 +14,8 @@ import AboutUsComponent from './../components/aboutUs/aboutUs.component';
 import FaqComponent from './../components/faq/faq.component';
 import ViewAddProductComponent from './../components/view-addproduct/view-addproduct.component';
 import ViewSearchComponent from './../components/view-search/view-search.component';
+import ViewMyOrdersComponent from './../components/view-myorders/view-myorders.component';
+
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
 export default function config ($stateProvider, $urlRouterProvider){
@@ -111,10 +113,16 @@ export default function config ($stateProvider, $urlRouterProvider){
             url: '/availableOrders',
             component: AvailableOrdersComponent.name
         })
-        // TODO: url in the following state can be changed
         .state('shopHomePage', {
             url: '/addProduct',
             component: ViewAddProductComponent.name
+        })
+        .state('myOrders', {
+            url: '/myOrders',
+            component: ViewMyOrdersComponent.name,
+            params: {
+                showBasket: false
+            }
         })
 
 

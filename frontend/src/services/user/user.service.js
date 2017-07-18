@@ -118,6 +118,10 @@ export default class UserService {
         return this.$http.get(`${ this.API_URL }/order`);
     }
 
+    getMyOrders(){
+        return this.$http.get(`${ this.API_URL }/order/history`);
+    }
+
     acceptOrder(orderId){
         return this.$http.put(`${ this.API_URL }/order/${orderId}/accept`);
     }
