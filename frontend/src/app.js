@@ -35,6 +35,7 @@ import jkAngularCarousel from 'angular-jk-carousel';
 import Faq from './components/faq/faq';
 import ViewBasket from './components/view-basket/view-basket';
 import ViewMyOrders from './components/view-myorders/view-myorders';
+import ViewAcceptedOrders from './components/view-acceptedorders/view-acceptedorders';
 
 let app = angular.module('app', [
         uiRouter,
@@ -58,6 +59,7 @@ let app = angular.module('app', [
         ViewShopPage.name,
         ViewProductPage.name,
         ViewMyOrders.name,
+        ViewAcceptedOrders.name,
         Faq.name,
         ViewBasket.name,
         ViewSearch.name,

@@ -15,6 +15,7 @@ import FaqComponent from './../components/faq/faq.component';
 import ViewAddProductComponent from './../components/view-addproduct/view-addproduct.component';
 import ViewSearchComponent from './../components/view-search/view-search.component';
 import ViewMyOrdersComponent from './../components/view-myorders/view-myorders.component';
+import ViewAcceptedOrdersComponent from './../components/view-acceptedorders/view-acceptedorders.component';
 
 
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
@@ -103,11 +104,17 @@ export default function config ($stateProvider, $urlRouterProvider){
         })
         .state('about', {
             url: '/aboutUs',
-            component: AboutUsComponent.name
+            component: AboutUsComponent.name,
+            params: {
+                showBasket: false
+            }
         })
         .state('faq', {
             url: '/faq',
-            component: FaqComponent.name
+            component: FaqComponent.name,
+            params: {
+                showBasket: false
+            }
         })
         .state('delivererHomePage', {
             url: '/availableOrders',
@@ -120,6 +127,13 @@ export default function config ($stateProvider, $urlRouterProvider){
         .state('myOrders', {
             url: '/myOrders',
             component: ViewMyOrdersComponent.name,
+            params: {
+                showBasket: false
+            }
+        })
+        .state('acceptedOrders', {
+            url: '/acceptedOrders',
+            component: ViewAcceptedOrdersComponent.name,
             params: {
                 showBasket: false
             }

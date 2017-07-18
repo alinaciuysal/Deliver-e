@@ -42,6 +42,7 @@ class AppHeaderComponentController {
                     ctrl.userRedirectMsg = "My Orders";
                 } else if (userType === "deliverer") {
                     ctrl.userRedirectMsg = "Available Orders";
+                    ctrl.delivererRedirectMsg = "My Orders";
                 } else if (userType === "shop") {
                     ctrl.userRedirectMsg = "Add Product";
                 }
@@ -68,6 +69,38 @@ class AppHeaderComponentController {
                     ctrl.$state.go('shopHomePage',{});
                 }
             }
+        }
+    }
+
+    goToAcceptedOrdersPage() {
+        let ctrl = this;
+        if(ctrl.initialUser !== null) {
+            let userType = ctrl.initialUser.type;
+            if(userType !== null) {
+                if (userType === "deliverer") {
+                    ctrl.$state.go('acceptedOrders',{});
+                }
+            }
+        }
+    }
+
+    isAuthenticatedDeliverer() {
+        let ctrl = this;
+        if(ctrl.isAuthenticated()) {
+            ctrl.UserService.getCurrentUserDetails().then(function(response) {
+                let user = response.data;
+                let userType = user.type;
+                if (userType === "deliverer") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }).catch(function(err){
+                console.log(err);
+                return false;
+            });
+        } else {
+            return false;
         }
     }
 

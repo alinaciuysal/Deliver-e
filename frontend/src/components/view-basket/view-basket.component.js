@@ -75,7 +75,11 @@ class ViewBasketComponentController{
                 if (response.data.type === "customer"
                     && ctrl.$state.current.name !== "profile"
                     && ctrl.$state.current.name !== "myOrders"
-                    && ctrl.$state.current.name !== "payment" ) {
+                    && ctrl.$state.current.name !== "payment"
+                    && ctrl.$state.current.name !== "acceptedOrders"
+                    && ctrl.$state.current.name !== "faq"
+                    && ctrl.$state.current.name !== "about")
+                {
                     this.showBasket = true;
                     this.getUserBasket();
                 }
