@@ -145,6 +145,38 @@ exports.acceptOrder = function(req, res) {
     });
 };
 
+exports.doneOrder = function(req, res) {
+	Order.findById(req.params.order_id, function (err, order) {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+        if (req.user.type !== "deliverer"){
+        	res.status(403).send("You need to be a deliverer to accept orders.");
+        	return;
+        } else if ( order.status !== "Assigned" ){
+        	res.status(400).send("The order is already done");
+        	return;
+        }
+        if( String(order.deliverer) !== String(req.user._id) ){
+        	res.status(400).send("This is not your order");
+        	return;
+        }
+
+        order.status = "Done";
+
+        order.save(function (err, order) {
+        	if (err) {
+        		res.status(500).send(err);
+        		return
+        	}
+	        res.status(200).json(order);
+	        return;
+        });
+
+    });
+};
+
 exports.rejectOrder = function(req, res) {
 	if (req.user.type != "deliverer"){
     	res.status(403).send("You need to be a deliverer to accept orders.");

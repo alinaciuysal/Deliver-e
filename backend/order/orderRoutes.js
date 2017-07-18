@@ -38,6 +38,9 @@ function orderRoutes(passport) {
     router.route('/:order_id/reject')
         .put(orderController.rejectOrder);
 
+    router.route('/:order_id/done')
+        .put(orderController.doneOrder);
+
 
     return router;
 }
