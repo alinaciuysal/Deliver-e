@@ -67,11 +67,11 @@ class ViewBasketComponentController{
 
     isUserAuthenticated() {
         let isAuthenticated = this.UserService.isAuthenticated();
-
+        let ctrl = this;
         if (isAuthenticated) {
             this.UserService.getCurrentUserDetails().then((response) => {
-                if (response.data.type === "customer") {
-                    this.showBasket = true;
+                if (response.data.type === "customer" && ctrl.$state.current.name != "profile") {
+                    ctrl.showBasket = true;
                     this.getUserBasket();
                 }
             });

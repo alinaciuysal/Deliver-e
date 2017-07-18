@@ -246,6 +246,9 @@ module.exports.editUser = function(req, res) {
                         return;
                     })
                 }
+                delete user._doc.password;
+                res.status(200).json(user);
+                return;
             });
         })
     });
