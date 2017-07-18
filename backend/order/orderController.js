@@ -175,6 +175,20 @@ exports.getAvailableOrders = function(req, res) {
 	});
 };
 
+exports.getAcceptedOrders = function(req, res) {
+	if (req.user.type !== "deliverer" ){
+		res.status(403).send("You need to be a deliverer to get orders.");
+		return;
+	}
+	Order.find({ status: 'Assigned', deliverer: req.user }).populate('shop').populate('items.product').exec(function(err, orders) {
+		if (err) {
+			res.status(500).send(err);
+			return;
+		}
+		res.status(200).json(orders);
+	});
+};
+
 exports.getOrder = function(req, res) {
 	Order.findById(req.params.order_id).populate('items.product').exec(function (err, order) {
         if (err) {
