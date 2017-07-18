@@ -33,7 +33,8 @@ class AppHeaderComponentController {
 
     $onInit() {
         let ctrl = this;
-
+        ctrl.isDeliverer = false;
+        
         if(ctrl.isAuthenticated()) {
             ctrl.UserService.getCurrentUserDetails().then(function(response) {
                 ctrl.initialUser = response.data;
@@ -41,6 +42,7 @@ class AppHeaderComponentController {
                 if (userType === "customer") {
                     ctrl.userRedirectMsg = "My Orders";
                 } else if (userType === "deliverer") {
+                    ctrl.isDeliverer = true;
                     ctrl.userRedirectMsg = "Available Orders";
                     ctrl.delivererRedirectMsg = "My Orders";
                 } else if (userType === "shop") {

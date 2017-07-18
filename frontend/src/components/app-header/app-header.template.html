@@ -32,7 +32,7 @@
                         {{$ctrl.userRedirectMsg}}
                     </md-button>
                 </md-menu-item>
-                <md-menu-item ng-if="ctrl.initialUser.type !== 'deliverer'">
+                <md-menu-item ng-if="$ctrl.isAuthenticated()" ng-show="$ctrl.isDeliverer">
                     <md-button ng-click="$ctrl.goToAcceptedOrdersPage()">
                         <md-icon md-menu-align-target><ng-md-icon icon="check" ></ng-md-icon></md-icon>
                         {{$ctrl.delivererRedirectMsg}}
