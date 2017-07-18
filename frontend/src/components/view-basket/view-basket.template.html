@@ -10,7 +10,6 @@
 
     <md-content style="height: auto;">
         <section>
-            <md-subheader class="md-primary">{{$ctrl.$rootScope.shop.name}}</md-subheader>
             <md-list layout-padding>
                 <md-list-item class="md-3-line" ng-repeat="item in $ctrl.$rootScope.basket.items">
                     <img ng-src="{{item.product.photo}}" class="md-avatar" alt="{{item.product}}">

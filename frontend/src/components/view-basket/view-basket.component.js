@@ -31,7 +31,6 @@ class ViewBasketComponentController{
         this.$location = $location;
         this.$mdMenu = $mdMenu;
         this.$mdDialog = $mdDialog;
-
         this.$rootScope.basket = [];
 
         this.showBasket = false;
@@ -87,9 +86,6 @@ class ViewBasketComponentController{
         let ctrl = this;
         this.OrderService.getBasket().then(basket => {
             ctrl.$rootScope.basket = basket;
-            ctrl.ShopService.getShopById(basket.shop).then(shop => {
-                ctrl.$rootScope.shop = shop;
-            });
         });
     }
 
@@ -103,7 +99,7 @@ class ViewBasketComponentController{
         let confirm = ctrl.$mdDialog.confirm()
             .title('Would you like to delete all items in your basket?')
             .ok('Confirm')
-            .cancel('Back');
+            .cancel('Return back');
 
         ctrl.$mdDialog.show(confirm).then(function() {
             ctrl.clearBasket();

@@ -66,9 +66,8 @@ module.exports.customerSignup = function(req, res){
     user.location = req.body.location;
     if(req.body.address) user.address = req.body.address;
     if(req.body.phone) user.phone = req.body.phone;
-    if(req.body.birthday) user.birthday = Date(req.body.birthday);
-
-
+    if(req.body.birthday) user.birthday = req.body.birthday;
+    
     user.save(function(err) {
         if (err) {
             res.status(500).send(err);
@@ -118,8 +117,9 @@ module.exports.delivererSignup = function(req, res){
     if(req.body.surname) user.surname = req.body.surname;
     if(req.body.address) user.address = req.body.address;
     if(req.body.phone) user.phone = req.body.phone;
-    if(req.body.birthday) user.birthday = Date(req.body.birthday);
+    if(req.body.birthday) user.birthday = req.body.birthday;
 
+    console.log("deliverer birthday ", user.birthday);
 
 
     user.save(function(err) {
