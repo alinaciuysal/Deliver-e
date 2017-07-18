@@ -3,7 +3,9 @@
         <div ng-repeat="element in $ctrl.navigationElements">
             <a style="padding-left: 25px; color: black; font-weight: bold; font-size: 10px;" ng-show="$first" ng-href="#!/{{element}}">{{element}}</a>
             <a style="padding-left: 4px; color: black; font-weight: bold; font-size: 10px;" ng-show="!$first" ng-href="#!/{{element}}">{{element}}</a>
-            <span style="color: black; font-weight: bold; font-size: 10px;" ng-show="!$last">&nbsp; >> &nbsp;</span>
+            <span style="color: black; font-weight: bold; font-size: 10px;" ng-show="!$last">&nbsp;
+                <md-icon><ng-md-icon icon="chevron_right" style="color: black;" size="20"></ng-md-icon></md-icon>
+            &nbsp;</span>
         </div>
     </div>
 </navmenu>

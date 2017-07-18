@@ -14,7 +14,8 @@
                 <form name="userProfileForm">
                     <md-list>
                         <b layout-align="center center" >Name:</b>
-                        <md-input-container style="padding-left: 2em">
+                        <md-input-container class="md-icon-float md-block" flex-gt-sm>
+                            <md-icon aria-label="person"><ng-md-icon icon="person" ></ng-md-icon></md-icon>
                             <input aria-label="userName" type="text" name="userName" ng-model="$ctrl.user.name" ng-pattern="/^[a-zA-Z\s]*$/" required/>
                             <div ng-messages="userProfileForm.userName.$error" ng-hide="userProfileForm.userName.$valid">
                                 <div ng-message-exp="['required', 'pattern']">
@@ -24,7 +25,8 @@
                         </md-input-container>
                         <br>
                         <b layout-align="center center">Surname: </b>
-                        <md-input-container style="padding-left: 2em" id="userSurnameField">
+                        <md-input-container class="md-block" flex-gt-sm id="userSurnameField">
+                            <md-icon aria-label="customerSurNam"><ng-md-icon icon="person" ></ng-md-icon></md-icon>
                             <input aria-label="userSurnameField" type="text" name="userSurname" ng-model="$ctrl.user.surname" required="" ng-pattern="/^[a-zA-Z\s]*$/" required/>
                             <div ng-messages="userProfileForm.userSurname.$error" ng-hide="userProfileForm.userSurname.$valid">
                                 <div ng-message-exp="['required', 'pattern']">
@@ -34,7 +36,8 @@
                         </md-input-container>
                         <br>
                         <b layout-align="center center">E-mail: </b>
-                        <md-input-container style="padding-left: 2em" id="userEmailField">
+                        <md-input-container class="md-block" flex-gt-sm id="userEmailField">
+                            <md-icon aria-label="email"><ng-md-icon icon="email" ></ng-md-icon></md-icon>
                             <input aria-label="userEmailField" type="email" name="userEmail" ng-model="$ctrl.user.email" required="" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
                             <div ng-messages="userProfileForm.userEmail.$error" ng-hide="userProfileForm.userEmail.$valid">
                                 <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
@@ -45,7 +48,8 @@
                         <br>
 
                         <b layout-align="center center">Address</b>
-                        <md-input-container style="padding-left: 2em" id="userAddress">
+                        <md-input-container class="md-block" flex-gt-sm id="userAddress">
+                            <md-icon aria-label="address"><ng-md-icon icon="store_mall_directory" ></ng-md-icon></md-icon>
                             <input aria-label="userAddress" type="text" name="userAddress" ng-model="$ctrl.user.address" required="" minlength="10"/>
                             <div ng-messages="userProfileForm.userAddress.$error" ng-hide="userProfileForm.userAddress.$valid">
                                 <div ng-message-exp="['required', 'minlength']">
@@ -56,16 +60,18 @@
                         <br>
 
                         <b layout-align="center center">Location</b>
-                        <md-input-container style="padding-left: 2em" id="previousLocationField">
+                        <md-input-container class="md-block" flex-gt-sm id="previousLocationField">
+                            <md-icon aria-label="prevLoc"><ng-md-icon icon="location_off" ></ng-md-icon></md-icon>
                             <input aria-label="previousLocationField" type="text" name="previousLocation" disabled aria-disabled="true" ng-model="$ctrl.user.initialLocation">
                         </md-input-container>
                         <br>
 
                         <b layout-align="center center"></b>
-                        <md-input-container class="md-block">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <md-icon aria-label="editLoc"><ng-md-icon icon="edit_location" ></ng-md-icon></md-icon>
                             <label>New Location</label>
                             <md-select ng-model="$ctrl.userProfile.selectedLocationUser" name="selectedLocationUser"
-                            ng-change="$ctrl.changeDistrictsUser()">
+                                       ng-change="$ctrl.changeDistrictsUser()">
                                 <md-optgroup>
                                     <md-option ng-value="location"
                                                ng-repeat="location in $ctrl.availableLocations">{{location.name}}
@@ -76,17 +82,20 @@
                         <br>
 
                         <b layout-align="center center">District</b>
-                        <md-input-container style="padding-left: 2em" id="previousDistrictField">
+                        <md-input-container class="md-block" flex-gt-sm id="previousDistrictField">
+                            <md-icon aria-label="prevLoc"><ng-md-icon icon="location_disabled" ></ng-md-icon></md-icon>
                             <input aria-label="previousDistrictField" type="text" name="previousDistrict" disabled aria-disabled="true" ng-model="$ctrl.user.initialDistrict">
                         </md-input-container>
                         <br>
 
                         <b layout-align="center center"></b>
-                        <md-input-container class="md-block">
-                            <label>New District</label>
-                            <md-select name="selectedDistrictUser"
-                                       ng-model="$ctrl.userProfile.selectedDistrictUser"
-                                       single>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <md-icon><ng-md-icon icon="location_searching" ></ng-md-icon></md-icon>
+                            <md-select
+                                    aria-label="editDistr"
+                                    name="selectedDistrictUser"
+                                    ng-model="$ctrl.userProfile.selectedDistrictUser"
+                                    single>
                                 <md-optgroup>
                                     <md-option ng-value="district" ng-repeat="district in $ctrl.userProfile.selectedLocationUser.districts">{{district}}</md-option>
                                 </md-optgroup>
@@ -96,12 +105,14 @@
 
 
                         <b layout-align="center center">Old Password: </b>
-                        <md-input-container style="padding-left: 2em" id="userOldPasswordField">
+                        <md-input-container class="md-block" flex-gt-sm id="userOldPasswordField">
+                            <md-icon aria-label="oldPw"><ng-md-icon icon="security" ></ng-md-icon></md-icon>
                             <input aria-label="userOldPasswordField" type="password" name="delivererOldPassword" ng-model="$ctrl.user.oldPassword">
                         </md-input-container>
                         <br>
                         <b layout-align="center center">New Password </b>
-                        <md-input-container style="padding-left: 2em" id="userNewPasswordField">
+                        <md-input-container class="md-block" flex-gt-sm id="userNewPasswordField">
+                            <md-icon aria-label="editPw"><ng-md-icon icon="mode_edit" ></ng-md-icon></md-icon>
                             <input aria-label="userNewPasswordField"
                                    type="password"
                                    name="userNewPassword"
@@ -109,15 +120,19 @@
                         </md-input-container>
                         <br>
                         <b layout-align="center center">New Password (Again): </b>
-                        <md-input-container style="padding-left: 2em" id="userNewPasswordFieldAgain">
+                        <md-input-container class="md-block" flex-gt-sm id="userNewPasswordFieldAgain">
+                            <md-icon aria-label="editPwRe"><ng-md-icon icon="mode_edit" ></ng-md-icon></md-icon>
                             <input aria-label="userNewPasswordFieldAgain"
                                    type="password"
                                    name="userNewPasswordAgain"
                                    ng-model="$ctrl.user.newPasswordAgain">
                         </md-input-container>
                         <br>
-                        <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorUser !== undefined">Error: </b>
-                            <span style="color: red">{{$ctrl.profileUpdateErrorUser}}</span>
+                        <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorUser !== undefined">
+                            <md-icon aria-label="errorUserForm"><ng-md-icon icon="error" style="color: red" ></ng-md-icon></md-icon>
+                            Error:
+                        </b>
+                        <span style="color: red">{{$ctrl.profileUpdateErrorUser}}</span>
                         <br>
 
                     </md-list>
@@ -130,134 +145,151 @@
 
             <div id="delivererProfile" ng-show="$ctrl.user.type==='deliverer'">
                 <form name="delivererProfileForm">
-                <md-list>
-                    <b layout-align="center center" >Name:</b>
-                    <md-input-container style="padding-left: 2em"id="delivererNameField">
-                        <input aria-label="delivererNameField" type="text" name="delivererName" ng-model="$ctrl.user.name" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
-                        <div ng-messages="delivererProfileForm.delivererName.$invalid   " ng-hide="delivererProfileForm.delivererName.$valid">
-                            <div ng-message-exp="['pattern']">
-                                Valid username is required for update.
+                    <md-list>
+                        <b layout-align="center center" >Name:</b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererNameField">
+                            <md-icon aria-label="delivererNam"><ng-md-icon icon="person" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererNameField" type="text" name="delivererName" ng-model="$ctrl.user.name" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
+                            <div ng-messages="delivererProfileForm.delivererName.$invalid   " ng-hide="delivererProfileForm.delivererName.$valid">
+                                <div ng-message-exp="['pattern']">
+                                    Valid username is required for update.
+                                </div>
                             </div>
-                        </div>
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">Surname: </b>
-                    <md-input-container style="padding-left: 2em" id="delivererSurnameField">
-                        <input aria-label="delivererSurnameField" type="text" name="delivererSurname" ng-model="$ctrl.user.surname" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
-                        <div ng-messages="delivererProfileForm.delivererSurname.$error" ng-hide="delivererProfileForm.delivererSurname.$valid">
-                            <div ng-message-exp="['required', 'pattern']">
-                                Valid surname is required for update.
+                        </md-input-container>
+                        <br>
+                        <b layout-align="center center">Surname: </b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererSurnameField">
+                            <md-icon aria-label="delivererSurNam"><ng-md-icon icon="person" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererSurnameField" type="text" name="delivererSurname" ng-model="$ctrl.user.surname" required="" ng-pattern="/^[a-zA-Z\s]*$/"/>
+                            <div ng-messages="delivererProfileForm.delivererSurname.$error" ng-hide="delivererProfileForm.delivererSurname.$valid">
+                                <div ng-message-exp="['required', 'pattern']">
+                                    Valid surname is required for update.
+                                </div>
                             </div>
-                        </div>
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">E-mail: </b>
-                    <md-input-container style="padding-left: 2em" id="delivererEmailField">
-                        <input aria-label="delivererEmailField" type="email" name="delivererEmail" ng-model="$ctrl.user.email" required="" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
-                        <div ng-messages="delivererProfileForm.delivererEmail.$error" ng-hide="delivererProfileForm.delivererEmail.$valid">
-                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                                Your email must be between 10 and 100 characters long and look like an e-mail address.
+                        </md-input-container>
+                        <br>
+                        <b layout-align="center center">E-mail: </b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererEmailField">
+                            <md-icon aria-label="delivererEm"><ng-md-icon icon="email" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererEmailField" type="email" name="delivererEmail" ng-model="$ctrl.user.email" required="" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/"/>
+                            <div ng-messages="delivererProfileForm.delivererEmail.$error" ng-hide="delivererProfileForm.delivererEmail.$valid">
+                                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                    Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                </div>
                             </div>
-                        </div>
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">Address: </b>
-                    <md-input-container style="padding-left: 2em" id="delivererAddressField">
-                        <input aria-label="delivererAddressField" type="text" name="delivererAddress" ng-model="$ctrl.user.address" required="" minlength="10"/>
-                        <div ng-messages="delivererProfileForm.delivererAddress.$error" ng-hide="delivererProfileForm.delivererAddress.$valid">
-                            <div ng-message-exp="['required', 'minlength']">
-                                Addresses generally consist of at least 10 characters
+                        </md-input-container>
+                        <br>
+                        <b layout-align="center center">Address: </b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererAddressField">
+                            <md-icon aria-label="delivererAddr"><ng-md-icon icon="store_mall_directory" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererAddressField" type="text" name="delivererAddress" ng-model="$ctrl.user.address" required="" minlength="10"/>
+                            <div ng-messages="delivererProfileForm.delivererAddress.$error" ng-hide="delivererProfileForm.delivererAddress.$valid">
+                                <div ng-message-exp="['required', 'minlength']">
+                                    Addresses generally consist of at least 10 characters
+                                </div>
                             </div>
+                        </md-input-container>
+                        <br>
+
+                        <b layout-align="center center">Birth Date: </b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererBirthDateField">
+                            <md-icon aria-label="delivererBirth"><ng-md-icon icon="cake" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererBirthDateField" type="text" name="delivererBirthDate" disabled aria-disabled="true" ng-model="$ctrl.user.birthday">
+                        </md-input-container>
+                        <br>
+
+                        <b layout-align="center center">Phone Number: </b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererPhoneNumberField">
+                            <md-icon aria-label="delivererPhon"><ng-md-icon icon="phone" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererPhoneNumberField" type="tel" name="delivererPhoneNumber" ng-model="$ctrl.user.phone">
+                        </md-input-container>
+                        <br>
+                        <b layout-align="center center">Maximum Delivery Weight (kg): </b>
+                        <md-input-container class="md-block" flex-gt-smid="delivererMaxWeightField">
+                            <md-icon aria-label="delivererWeigh"><ng-md-icon icon="work" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererMaxWeightField" type="number" name="delivererMaxWeight" ng-model="$ctrl.user.maxWeight">
+                        </md-input-container>
+                        <br>
+
+
+                        <b layout-align="center center">Currently Preferred Location </b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererOldLocationField">
+                            <input aria-label="delivererOldLocationField" type="text" name="delivererInitialLocation" disabled aria-disabled="true" ng-model="$ctrl.user.initialLocation">
+                        </md-input-container>
+                        <br>
+
+
+                        <b layout-align="center center"></b>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <md-icon aria-label="editLocDel"><ng-md-icon icon="edit_location" ></ng-md-icon></md-icon>
+                            <label>New Location</label>
+                            <md-select ng-model="$ctrl.userProfile.selectedLocationDeliverer"
+                                       name="selectedLocationDeliverer"
+                                       ng-change="$ctrl.changeDistrictsDeliverer()">
+                                <md-optgroup>
+                                    <md-option ng-value="location" ng-repeat="location in $ctrl.availableLocations">
+                                        {{location.name}}
+                                    </md-option>
+                                </md-optgroup>
+                            </md-select>
+                        </md-input-container>
+                        <br>
+
+                        <div style="border-bottom: 1px dashed;">
+                            <b layout-align="center center">Currently Preferred Districts </b>
                         </div>
-                    </md-input-container>
-                    <br>
-
-                    <b layout-align="center center">Birth Date: </b>
-                    <md-input-container style="padding-left: 2em" id="delivererBirthDateField">
-                        <input aria-label="delivererBirthDateField" type="text" name="delivererBirthDate" disabled aria-disabled="true" ng-model="$ctrl.user.birthday">
-                    </md-input-container>
-                    <br>
-
-                    <b layout-align="center center">Phone Number: </b>
-                    <md-input-container style="padding-left: 2em" id="delivererPhoneNumberField">
-                        <input aria-label="delivererPhoneNumberField" type="tel" name="delivererPhoneNumber" ng-model="$ctrl.user.phone">
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">Maximum Delivery Weight (kg): </b>
-                    <md-input-container style="padding-left: 2em" id="delivererMaxWeightField">
-                        <input aria-label="delivererMaxWeightField" type="number" name="delivererMaxWeight" ng-model="$ctrl.user.maxWeight">
-                    </md-input-container>
-                    <br>
-
-
-                    <b layout-align="center center">Currently Preferred Location </b>
-                    <md-input-container style="padding-left: 2em" id="delivererOldLocationField">
-                        <input aria-label="delivererOldLocationField" type="text" name="delivererInitialLocation" disabled aria-disabled="true" ng-model="$ctrl.user.initialLocation">
-                    </md-input-container>
-                    <br>
-
-
-                    <b layout-align="center center"></b>
-                    <md-input-container class="md-block">
-                        <label>New Location</label>
-                        <md-select ng-model="$ctrl.userProfile.selectedLocationDeliverer"
-                                   name="selectedLocationDeliverer"
-                                    ng-change="$ctrl.changeDistrictsDeliverer()">
-                            <md-optgroup>
-                                <md-option ng-value="location" ng-repeat="location in $ctrl.availableLocations">
-                                    {{location.name}}
-                                </md-option>
-                            </md-optgroup>
-                        </md-select>
-                    </md-input-container>
-                    <br>
-
-                    <b layout-align="center center">Currently Preferred Districts </b>
-                        <div ng-repeat="district in $ctrl.user.initialDistricts">
+                        <div style="border-bottom: 1px dashed;" ng-repeat="district in $ctrl.user.initialDistricts">
                             {{district}}
                         </div>
-                    <br>
+                        <br>
 
-                    <b layout-align="center center"></b>
-                    <md-input-container class="md-block">
-                        <label>New Districts</label>
-                        <md-select name="selectedDistrict"
-                                   ng-model="$ctrl.userProfile.selectedDistricts"
-                                   multiple>
-                            <md-optgroup label="districts">
-                                <md-option ng-value="district" ng-repeat="district in $ctrl.userProfile.selectedLocationDeliverer.districts">{{district}}</md-option>
-                            </md-optgroup>
-                        </md-select>
-                    </md-input-container>
-                    <br>
+                        <b layout-align="center center"></b>
+                        <md-input-container class="md-block" flex-gt-sm >
+                            <md-icon aria-label="editLocDel"><ng-md-icon icon="location_searching" ></ng-md-icon></md-icon>
+                            <label>New Districts</label>
+                            <md-select name="selectedDistrict"
+                                       ng-model="$ctrl.userProfile.selectedDistricts"
+                                       multiple>
+                                <md-optgroup label="districts">
+                                    <md-option ng-value="district" ng-repeat="district in $ctrl.userProfile.selectedLocationDeliverer.districts">{{district}}</md-option>
+                                </md-optgroup>
+                            </md-select>
+                        </md-input-container>
+                        <br>
 
-                    <b layout-align="center center">Old Password: </b>
-                    <md-input-container style="padding-left: 2em" id="delivererOldPasswordField">
-                        <input aria-label="delivererOldPasswordField" type="password" name="userPassword" ng-model="$ctrl.user.oldPassword"/>
-                    </md-input-container>
+                        <b layout-align="center center">Old Password: </b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererOldPasswordField">
+                            <md-icon aria-label="oldPwDel"><ng-md-icon icon="security" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererOldPasswordField" type="password" name="userPassword" ng-model="$ctrl.user.oldPassword"/>
+                        </md-input-container>
 
-                    <br>
-                    <b layout-align="center center">New Password </b>
-                    <md-input-container style="padding-left: 2em" id="delivererNewPasswordField">
-                        <input aria-label="delivererNewPasswordField"
-                               type="password"
-                               name="delivererNewPassword"
-                               ng-model="$ctrl.user.newPassword">
-                    </md-input-container>
-                    <br>
-                    <b layout-align="center center">New Password (Again): </b>
-                    <md-input-container style="padding-left: 2em" id="delivererNewPasswordFieldAgain">
-                        <input aria-label="delivererNewPasswordFieldAgain"
-                               type="password"
-                               name="delivererNewPasswordAgain"
-                               ng-model="$ctrl.user.newPasswordAgain">
-                    </md-input-container>
-                    <br>
-                    <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorDeliverer !== undefined">Error: </b>
+                        <br>
+                        <b layout-align="center center">New Password </b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererNewPasswordField">
+                            <md-icon aria-label="newPwDel"><ng-md-icon icon="edit" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererNewPasswordField"
+                                   type="password"
+                                   name="delivererNewPassword"
+                                   ng-model="$ctrl.user.newPassword">
+                        </md-input-container>
+                        <br>
+                        <b layout-align="center center">New Password (Again): </b>
+                        <md-input-container class="md-block" flex-gt-sm id="delivererNewPasswordFieldAgain">
+                            <md-icon aria-label="newPwDel2"><ng-md-icon icon="edit" ></ng-md-icon></md-icon>
+                            <input aria-label="delivererNewPasswordFieldAgain"
+                                   type="password"
+                                   name="delivererNewPasswordAgain"
+                                   ng-model="$ctrl.user.newPasswordAgain">
+                        </md-input-container>
+                        <br>
+                        <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorDeliverer !== undefined">
+                            <md-icon aria-label="errorDelivererForm"><ng-md-icon icon="error" style="color: red" ></ng-md-icon></md-icon>
+                            Error:
+                        </b>
                         <span style="color: red">{{$ctrl.profileUpdateErrorDeliverer}}</span>
-                    <br>
+                        <br>
 
-                </md-list>
+                    </md-list>
                 </form>
                 <md-button type="submit" class="md-raised"
                            ng-click="$ctrl.changeDelivererProfile()" style="display: block; margin: 0 auto;">
@@ -271,7 +303,8 @@
                 <form name="shopProfileForm">
                     <md-list>
                         <b layout-align="center center" >Shop Name:</b>
-                        <md-input-container style="padding-left: 2em"id="shopNameField">
+                        <md-input-container class="md-block" flex-gt-sm id="shopNameField">
+                            <md-icon aria-label="shopNam"><ng-md-icon icon="store_mall_directory"></ng-md-icon></md-icon>
                             <input aria-label="shopNameField" type="text" name="shopName" ng-model="$ctrl.user.shopName" required="" ng-pattern="/^[a-zA-Z0-9\s]*$/"/>
                             <div ng-messages="shopProfileForm.shopName.$invalid" ng-hide="shopProfileForm.shopName.$valid">
                                 <div ng-message-exp="['required', 'pattern']">
@@ -281,12 +314,14 @@
                         </md-input-container>
                         <br>
                         <b layout-align="center center" >Shop Category:</b>
-                        <md-input-container style="padding-left: 2em"id="shopCategoryField">
+                        <md-input-container class="md-block" flex-gt-sm id="shopCategoryField">
+                            <md-icon aria-label="shopCat"><ng-md-icon icon="local_grocery_store"></ng-md-icon></md-icon>
                             <input aria-label="shopCategory" ng-disabled="true" type="text" name="shopCategory" ng-model="$ctrl.shopType">
                         </md-input-container>
                         <br>
                         <b layout-align="center center">Shop Address: </b>
-                        <md-input-container style="padding-left: 2em" id="shopAddressField">
+                        <md-input-container class="md-block" flex-gt-sm  id="shopAddressField">
+                            <md-icon aria-label="shopCat"><ng-md-icon icon="directions"></ng-md-icon></md-icon>
                             <input aria-label="shopAddressField" type="text" name="shopAddress" ng-model="$ctrl.user.shopAddress" required="" minlength="10">
                             <div ng-messages="shopProfileForm.shopAddress.$error" ng-hide="shopProfileForm.shopAddress.$valid">
                                 <div ng-message-exp="['required', 'minlength']">
@@ -296,7 +331,8 @@
                         </md-input-container>
                         <br>
                         <b layout-align="center center">E-mail: </b>
-                        <md-input-container style="padding-left: 2em" id="shopEmailField">
+                        <md-input-container class="md-block" flex-gt-sm id="shopEmailField">
+                            <md-icon aria-label="shopEm"><ng-md-icon icon="email"></ng-md-icon></md-icon>
                             <input aria-label="shopEmailField" type="email" name="shopEmail" ng-model="$ctrl.user.email" required="" minlength="10" maxlength="50" ng-pattern="/^.+@.+\..+$/"/>
                             <div ng-messages="shopProfileForm.userEmail.$error" ng-hide="shopProfileForm.userEmail.$valid">
                                 <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
@@ -306,18 +342,21 @@
                         </md-input-container>
                         <br>
                         <b layout-align="center center">Phone Number: </b>
-                        <md-input-container style="padding-left: 2em" id="shopPhoneNumberField">
+                        <md-input-container class="md-block" flex-gt-sm id="shopPhoneNumberField">
+                            <md-icon aria-label="shopEm"><ng-md-icon icon="phone"></ng-md-icon></md-icon>
                             <input aria-label="shopPhoneNumberField" type="tel" name="shopPhoneNumber" ng-model="$ctrl.user.phone">
                         </md-input-container>
                         <br>
 
                         <b layout-align="center center">Old Password: </b>
-                        <md-input-container style="padding-left: 2em" id="shopOldPasswordField">
+                        <md-input-container class="md-block" flex-gt-sm id="shopOldPasswordField">
+                            <md-icon aria-label="shopPass"><ng-md-icon icon="security"></ng-md-icon></md-icon>
                             <input aria-label="shopOldPasswordField" type="password" name="shopOldPassword" ng-model="$ctrl.user.oldPassword" >
                         </md-input-container>
                         <br>
                         <b layout-align="center center">New Password </b>
-                        <md-input-container style="padding-left: 2em" id="shopNewPasswordField">
+                        <md-input-container class="md-block" flex-gt-sm id="shopNewPasswordField">
+                            <md-icon aria-label="shopPassNew"><ng-md-icon icon="edit"></ng-md-icon></md-icon>
                             <input aria-label="shopNewPasswordField"
                                    type="password"
                                    name="shopNewPassword"
@@ -325,7 +364,8 @@
                         </md-input-container>
                         <br>
                         <b layout-align="center center">New Password (Again): </b>
-                        <md-input-container style="padding-left: 2em" id="shopNewPasswordFieldAgain">
+                        <md-input-container class="md-block" flex-gt-sm id="shopNewPasswordFieldAgain">
+                            <md-icon aria-label="shopPassNew2"><ng-md-icon icon="edit"></ng-md-icon></md-icon>
                             <input aria-label="shopNewPasswordFieldAgain"
                                    type="password"
                                    name="shopNewPasswordAgain"
@@ -333,8 +373,11 @@
                             >
                         </md-input-container>
                         <br>
-                        <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorShop !== undefined">Error: </b>
-                            <span style="color: red">{{$ctrl.profileUpdateErrorShop}}</span>
+                        <b style="color: red" layout-align="center center" ng-show="$ctrl.profileUpdateErrorShop !== undefined">
+                            <md-icon aria-label="errorShopForm"><ng-md-icon icon="error" style="color: red" ></ng-md-icon></md-icon>
+                            Error:
+                        </b>
+                        <span style="color: red">{{$ctrl.profileUpdateErrorShop}}</span>
                         <br>
                     </md-list>
                 </form>
