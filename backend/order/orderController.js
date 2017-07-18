@@ -107,7 +107,7 @@ exports.makeOrder = function(req, res) {
 };
 
 exports.getOrderHistory = function(req, res) {
-	Order.find({ orderer: req.user, status: { '$ne': 'Basket' } }, function(err, orders) {
+	Order.find({ orderer: req.user, status: { '$ne': 'Basket' } }).populate('shop').populate('items.product').exec(function(err, orders) {
 		if (err) {
 			res.status(500).send(err);
 			return;
