@@ -62,6 +62,7 @@ class ViewProductPageController {
 
     $onInit() {
         this.$rootScope.$emit("menu-changed", this.$location.url().toString().substr(1));
+        this.isAuthenticated = this.UserService.isAuthenticated();
     }
 
     static get $inject(){

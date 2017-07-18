@@ -1,4 +1,59 @@
-<div ng-show="$ctrl.showBasket" ng-init="$ctrl.$onInit()">
+<div ng-show="$ctrl.showBasket" ng-init="$ctrl.$onInit()" style="padding-right: 2%">
+    <md-toolbar md-scroll-shrink>
+        <div class="md-toolbar-tools" style="background-color: #ab0012; color: whitesmoke;">
+            <md-icon aria-label="shopping_cart" style="margin-left:4%; margin-right: 10px; color: whitesmoke;">
+                <ng-md-icon icon="shopping_cart" ></ng-md-icon>
+            </md-icon>
+            Shopping Basket
+        </div>
+    </md-toolbar>
+
+    <md-content style="height: auto;">
+        <section>
+            <md-list layout-padding>
+                <md-list-item class="md-3-line" ng-repeat="item in $ctrl.$rootScope.basket.items">
+                    <img ng-src="{{item.product.photo}}" class="md-avatar" alt="{{item.product}}">
+                    <div class="md-list-item-text">
+                        <h4>Name: {{item.product.name}}</h4>
+                        <h4>Amount: {{item.amount}}</h4>
+                        <md-button class="md-secondary md-icon-button" ng-click="$ctrl.removeProduct(item.product._id, item.amount)" aria-label="remove">
+                            <ng-md-icon icon="clear" ></ng-md-icon>
+                        </md-button>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+                <md-list-item class="md-6-line">
+                    <div class="md-list-item-text" style="text-align: center">
+                        <h3>Total Weight: {{$ctrl.$rootScope.basket.totalWeight}} kg</h3>
+                        <h3>Total Price: {{$ctrl.$rootScope.basket.totalPrice}} €</h3>
+                    </div>
+                </md-list-item>
+
+                <md-button title="Clear your basket" ng-click="$ctrl.showConfirm()" style="color:darkred; max-width: 75%; margin-bottom: 4%;">
+                    <md-icon><ng-md-icon style="color:darkred;" icon="remove_shopping_cart"></ng-md-icon></md-icon>
+                    Clear
+                </md-button>
+                <md-button title="Proceed to Payment" ng-click="$ctrl.goPaymentPage()" style="color:green; max-width: 75%; margin-bottom: 4%;">
+                    <md-icon><ng-md-icon style="color:green;" icon="check"></ng-md-icon></md-icon>
+                    Payment
+                </md-button>
+
+            </md-list>
+            <!--<md-menu-item style="width: inherit;" layout-no-wrap>
+                <md-button title="Clear your basket" ng-click="$ctrl.clearBasket()" style="color:darkred; padding: 2%" layout-padding>
+                    <md-icon><ng-md-icon style="color:darkred; width: 50%;" icon="remove_shopping_cart"></ng-md-icon></md-icon>
+                    Clear
+                </md-button>
+                <md-button title="Proceed to Payment" style="color:green; padding: 2%" layout-padding ng-click="$ctrl.goPaymentPage()">
+                    <md-icon><ng-md-icon style="color:green; width: 50%;" icon="check"></ng-md-icon></md-icon>
+                    Payment
+                </md-button>
+            </md-menu-item>-->
+        </section>
+
+    </md-content>
+</div>
+<!--
 <md-content layout="row" style="overflow: hidden;">
     <md-card style="width: 100%; min-width: 1%; height: 100%"  layout="column" layout-align="start start">
         <div style="width: 100%; min-width: 1%; height: 15%; background-color: #ab0012; color: whitesmoke;" layout="row">
@@ -37,4 +92,4 @@
         </md-menu-item>
     </md-card>
 </md-content>
-</div>
+</div>-->

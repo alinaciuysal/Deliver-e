@@ -38,10 +38,33 @@ class ViewRegisterComponentController{
         let availableLocations = [
             {
                 name: 'Munich',
-                districts: ["Ludwigsvorstadt-Isarvorstadt", "Schwabing-West", "Am-Hart", "Schwanthalerhöhe", "Sendling", "Am Laim"]
+                districts: ["Am Hart",
+                    "Am Laim",
+                    "Bogenhausen",
+                    "Garching",
+                    "Lehel",
+                    "Ludwigsvorstadt-Isarvorstadt",
+                    "Neuhausen",
+                    "Perlach",
+                    "Schwabing-West",
+                    "Schwanthalerhöhe",
+                    "Sendling",
+                    "Solln",
+                    "Westend"]
             }, {
                 name: 'Berlin',
-                districts: ["Mitte", "Kreuzberg", "Schönerberg"]
+                districts: ["Charlottenburg-Wilmersdorf",
+                    "Friedrichshain-Kreuzberg",
+                    "Lichtenberg",
+                    "Marzahn-Hellersdorf",
+                    "Mitte",
+                    "Neukölln",
+                    "Pankow",
+                    "Reinickendorf",
+                    "Spandau",
+                    "Steglitz-Zehlendorf",
+                    "Tempelhof-Schöneberg",
+                    "Treptow-Köpenick"]
             }
         ];
         ctrl.availableLocations = availableLocations;
@@ -84,15 +107,14 @@ class ViewRegisterComponentController{
         let password = ctrl.delivererRegister.password;
         let surname = ctrl.delivererRegister.surname;
         let email = ctrl.delivererRegister.email;
-        let birthday = ctrl.delivererRegister.birthday;
         let phone = ctrl.delivererRegister.phoneNumber;
         let maxWeight = ctrl.delivererRegister.maxWeight;
         let address = ctrl.delivererRegister.address;
         let selectedDistricts = ctrl.delivererRegister.selectedDistricts;
         let selectedLocation = ctrl.delivererRegister.selectedLocation.name;
-        let date = new Date(birthday);
+        let date = new Date(ctrl.delivererRegister.birthday);
 
-        this.UserService.registerDeliverer(email, password, name, surname, birthday, phone, address, maxWeight, selectedLocation, selectedDistricts).then(()=> {
+        this.UserService.registerDeliverer(email, password, name, surname, date, phone, address, maxWeight, selectedLocation, selectedDistricts).then(()=> {
             alert("Registration is successful");
             this.$state.go('delivererHomePage',{});
             this.$rootScope.$emit("navbar-changed", {});

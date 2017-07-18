@@ -35,16 +35,20 @@ exports.addBasket = function(req, res) {
 			res.sendStatus(500);
 			return;
 		}
-		Product.findById(req.body.product, function(err, product) {
-				basket.addItem(product, req.body.amount, function(err, basket) {
-					if (err) {
-						res.status(500).send(err);
-						return;
-					}
-					res.status(200).json(basket);
-					return;
-			});
-		});
+		// safeguard against adding product by shops etc.
+		if(basket !== null) {
+            Product.findById(req.body.product, function(err, product) {
+                basket.addItem(product, req.body.amount, function(err, basket) {
+                    if (err) {
+                        res.status(500).send(err);
+                        return;
+                    }
+                    res.status(200).json(basket);
+                    return;
+                });
+            });
+		}
+
 	});
 };
 
