@@ -235,7 +235,7 @@ module.exports.editUser = function(req, res) {
                     if(req.body.name) newShop.name = req.body.name;
                     if(req.body.address) newShop.address = req.body.address;
                     if(req.body.phone) newShop.phone = req.body.phone;
-                    if(req.body.type) newShop.type = req.body.type;
+                    if(req.body.type) newShop.type = req.body.shopType;
                     Shop.findByIdAndUpdate(req.user.shop, newShop, function(err, shop){
                         if(err) {
                             res.status(500).send(err);
@@ -245,10 +245,11 @@ module.exports.editUser = function(req, res) {
                         res.status(200).json(user);
                         return;
                     })
+                }else{
+                    delete user._doc.password;
+                    res.status(200).json(user);
+                    return;
                 }
-                delete user._doc.password;
-                res.status(200).json(user);
-                return;
             });
         })
     });
