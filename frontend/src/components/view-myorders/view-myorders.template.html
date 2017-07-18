@@ -6,9 +6,10 @@
 </head>
 <body>
 <div>&nbsp;</div>
+<div style="padding-left: 20%">
 <div layout="row" layout-align="center center" layout-margin ng-init="$ctrl.$onInit()">
     <md-content>
-        <h2>My Orders</h2>
+        <h2 style="padding-left: 3%">My Orders</h2>
         <p ng-if="!$ctrl.showTabs" layout="row" layout-align="center center">You do not have any orders right now.</p>
         <md-card ng-if="$ctrl.showTabs" style="width: 750px;">
             <md-tabs md-dynamic-height md-border-bottom>
@@ -45,6 +46,7 @@
             </md-tabs>
         </md-card>
     </md-content>
+</div>
 </div>
 </body>
 </html>
