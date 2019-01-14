@@ -12,7 +12,7 @@ export default class AWSService {
         this.$window = $window;
         this.API_URL = API_URL;
         this.AWS = require('aws-sdk');
-        this.AWS.config.update({ accessKeyId: 'AKIAIC2KHRKPKSVPW4QQ', secretAccessKey: '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' });
+        this.AWS.config.update({ accessKeyId: '', secretAccessKey: '' });
         this.AWS.config.region = 'eu-central-1';
         this.s3 = new AWS.S3();
 
